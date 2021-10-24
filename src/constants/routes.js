@@ -10,45 +10,45 @@ export const MAIN_PAGES = [
     exact: true,
     main: () => <HomePage />,
   },
-  {
-    name: "Đăng nhập",
-    path: "/login",
-    exact: false,
-    main: () => <Auth />,
-  },
-  {
-    name: "Đăng Ký",
-    path: "/register",
-    exact: false,
-    main: () => <Register />,
-  },
-  {
-    name: "Quên Mật Khẩu",
-    path: "/forgot-password",
-    exact: false,
-    main: () => <Forgot_Password />,
-  },
-];
-
-export const AUTH_USER_ROUTES = [
   // {
   //   name: "Đăng nhập",
   //   path: "/login",
   //   exact: false,
-  //   main: () => "Trang Đăng Nhập",
+  //   main: () => <Auth />,
   // },
   // {
   //   name: "Đăng Ký",
   //   path: "/register",
   //   exact: false,
-  //   main: () => "Trang Đăng Ký",
+  //   main: () => <Register />,
   // },
   // {
   //   name: "Quên Mật Khẩu",
   //   path: "/forgot-password",
   //   exact: false,
-  //   main: () => "Trang Tìm Lại Mật Khẩu",
+  //   main: () => <Forgot_Password />,
   // },
+];
+
+export const AUTH_USER_ROUTES = [
+  {
+    name: "Đăng nhập",
+    path: "/login",
+    exact: false,
+    main: () => "Trang Đăng Nhập",
+  },
+  {
+    name: "Đăng Ký",
+    path: "/register",
+    exact: false,
+    main: () => "Trang Đăng Ký",
+  },
+  {
+    name: "Quên Mật Khẩu",
+    path: "/forgot-password",
+    exact: false,
+    main: () => "Trang Tìm Lại Mật Khẩu",
+  },
 ];
 
 export const AUTH_ADMIN_ROUTES = [

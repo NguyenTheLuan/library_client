@@ -1,24 +1,30 @@
-import {
-  ADMIN_DASHBOARD_ROUTES,
-  ADMIN_DASHBOARD_USER,
-  MAIN_PAGES,
-} from "constants/routes";
+import Forgot_Password from "components/Auth/Forgot-Password/Forgot_Password";
+import Register from "components/Auth/Register/Register";
+import Auth from "containers/Auth/Auth";
+import HomePage from "containers/HomePage/HomePage";
 import React from "react";
-import { BrowserRouter, Switch } from "react-router-dom";
-import { showRoutes } from "routes/customRoutes";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 function App() {
-  // let match = useRouteMatch();
-  // console.log({ match });
   return (
     <BrowserRouter>
-      <Switch>{showRoutes(MAIN_PAGES)}</Switch>
+      <Switch>
+        <Redirect from="/" to="/home" exact />
+        <Route path="/home">
+          <HomePage />
+        </Route>
 
-      {/* <Switch> */}
-      {/* admin route */}
-      {showRoutes(ADMIN_DASHBOARD_ROUTES)}
-      {showRoutes(ADMIN_DASHBOARD_USER)}
-      {/* </Switch> */}
+        {/* Login form */}
+        <Route path="/login">
+          <Auth />
+        </Route>
+        <Route path="/register">
+          <Register />
+        </Route>
+        <Route path="/forgot-password">
+          <Forgot_Password />
+        </Route>
+      </Switch>
     </BrowserRouter>
   );
 }

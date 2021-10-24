@@ -6,7 +6,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  .logoHeader {
+  &_logo {
     flex: 3;
     text-align: center;
     a {
@@ -16,12 +16,15 @@
         width: 160px;
       }
       span {
-        font-size: 30px;
-        font-weight: 700;
+        font-size: 40px;
+        font-weight: 300;
+      }
+      &:hover {
+        color: rgb(255, 255, 255);
       }
     }
   }
-  .searchHeader {
+  &_search {
     flex: 6;
     display: flex;
     justify-content: center;
@@ -31,25 +34,29 @@
       flex-direction: row;
       .formInput {
         flex: 5;
+        &:focus {
+          box-shadow: none;
+        }
       }
       .formSearch {
         flex: 1;
+        &:focus {
+          box-shadow: none;
+        }
       }
     }
   }
-  .userLogin {
+  &_btn {
     flex: 3;
     font-size: 20px;
     font-weight: 200;
 
-    a {
-      text-decoration: none;
+    .icon {
+      font-size: 40px;
       color: white;
-      line-height: 40px;
-      .icon {
-        font-size: 40px;
-      }
+      cursor: pointer;
     }
+
     .logged {
       display: flex;
       flex-direction: row;
