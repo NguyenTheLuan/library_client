@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import "./Navigation.scss";
 
 function Navigation({ url }) {
-  console.log("hàm con", url);
+  // console.log("hàm con", url);
   return (
     <ul className="listItems">
       <li className="list">

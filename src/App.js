@@ -3,13 +3,13 @@ import Register from "components/Auth/Register/Register";
 import Auth from "containers/Auth/Auth";
 import HomePage from "containers/HomePage/HomePage";
 import React from "react";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 
 function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Redirect from="/" to="/home" exact />
+        <Redirect from="/" to="/home" exact={true} />
         <Route path="/home">
           <HomePage />
         </Route>

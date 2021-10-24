@@ -1,0 +1,14 @@
+.list_Items {
+  //   display: flex;
+  //   flex-direction: row;
+  //   flex-wrap: wrap;
+
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+
+  gap: 10px 10px;
+  height: 120vh;
+  .card {
+    height: 50%;
+  }
+}
