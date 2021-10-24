@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import {
+  ADMIN_DASHBOARD_ROUTES,
+  ADMIN_DASHBOARD_USER,
+  MAIN_PAGES,
+} from "constants/routes";
+import React from "react";
+import { BrowserRouter, Switch } from "react-router-dom";
+import { showRoutes } from "routes/customRoutes";
 
 function App() {
+  // let match = useRouteMatch();
+  // console.log({ match });
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Switch>{showRoutes(MAIN_PAGES)}</Switch>
+
+      {/* <Switch> */}
+      {/* admin route */}
+      {showRoutes(ADMIN_DASHBOARD_ROUTES)}
+      {showRoutes(ADMIN_DASHBOARD_USER)}
+      {/* </Switch> */}
+    </BrowserRouter>
   );
 }
 

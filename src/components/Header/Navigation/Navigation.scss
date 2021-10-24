@@ -1,0 +1,16 @@
+.listItems {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+  .list {
+    a {
+      text-decoration: none;
+      color: rgb(107, 51, 51);
+      flex: 2;
+    }
+    a.active {
+      border-bottom: 1px solid blanchedalmond;
+    }
+  }
+}
