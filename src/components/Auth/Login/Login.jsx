@@ -1,22 +1,59 @@
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+
+import accountApi from "apis/authApi";
+//redux
+import { loginIn } from "reducers/userSlice";
+import { useDispatch } from "react-redux";
+
+import { AiOutlineHome } from "react-icons/ai";
 import "../StyleForm.scss";
 
 function Login() {
   const [userLogin, setUserLogin] = useState({});
   const [err, setErr] = useState("");
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  const Login = async () => {
+    const dataLogin = { ...userLogin };
+    try {
+      const response = await accountApi.postLogin(dataLogin);
+      // console.log("success", response);
+      //Trả về user, access-token, refresh token
+      const { user, tokens } = response;
+      const { access, refresh } = tokens;
+      //Chuyển vào redux store
+      dispatch(loginIn(user));
+      //Lưu vào local-storage
+      user && localStorage.setItem("user", JSON.stringify(user));
+      access && localStorage.setItem("access", JSON.stringify(access));
+      refresh && localStorage.setItem("refresh", JSON.stringify(refresh));
+
+      setErr("Đăng Nhập Thành Công");
+    } catch (error) {
+      // console.log("err", error.response);
+      setErr(error.response.data.message);
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setErr("nhập email và mk");
+    Login();
   };
 
   return (
     <div className="formMain">
       <div className="formMain_container">
         <Form className="formMenu" onSubmit={handleSubmit}>
-          <legend className="formMenu_title">Đăng nhập tài khoản</legend>
+          <div className="mb-3 formMenu_title">
+            <AiOutlineHome
+              className="icon"
+              onClick={() => history.push("/home")}
+            />
+            <legend className="title">Đăng nhập tài khoản</legend>
+          </div>
           <Form.Group
             className="mb-3 formMenu_items"
             controlId="formBasicEmail"

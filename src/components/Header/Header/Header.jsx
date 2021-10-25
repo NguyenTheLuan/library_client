@@ -1,11 +1,14 @@
-import LogoMenu from "assets/icons/LogoMenu.gif";
+// import LogoMenu from "assets/icons/LogoMenu.gif";
+import LogoMenu from "assets/icons/logo.png";
 import React from "react";
 import { Button, Form } from "react-bootstrap";
-import { BsFillPersonFill } from "react-icons/bs";
 import { GoSearch } from "react-icons/go";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
+
+import { BsFillPersonFill } from "react-icons/bs";
 import "./Header.scss";
+
 function Header() {
   const history = useHistory();
 
@@ -32,7 +35,7 @@ function Header() {
         </Form.Group>
       </div>
       <div className="header_btn">
-        <span>
+        <span onClick={() => history.replace("/login")}>
           <BsFillPersonFill className="icon" />
         </span>
         <Button variant="primary" onClick={() => history.replace("/login")}>

@@ -1,0 +1,31 @@
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .contain {
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    &_img {
+      img {
+        width: 340px;
+        height: 500px;
+      }
+    }
+    &_contents {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      &_title {
+        font-size: 30px;
+        font-weight: 400;
+      }
+      &_btn {
+        &:focus {
+          box-shadow: none;
+        }
+      }
+    }
+  }
+}

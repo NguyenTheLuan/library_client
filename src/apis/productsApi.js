@@ -6,6 +6,11 @@ const productsApi = {
     const url = "/books";
     return axiosClient.get(url);
   },
+  //get books by Id
+  getBooksById: (id) => {
+    const url = `/books/${id}`;
+    return axiosClient.get(url);
+  },
 };
 
 export default productsApi;

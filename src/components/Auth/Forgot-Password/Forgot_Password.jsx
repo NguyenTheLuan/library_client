@@ -1,21 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useHistory } from "react-router";
+import { AiOutlineHome } from "react-icons/ai";
 import "../StyleForm.scss";
+import accountApi from "apis/authApi";
+import { Link } from "react-router-dom";
 function Forgot_Password() {
   const history = useHistory();
+  const [email, setEmail] = useState("");
+  const [err, setErr] = useState("");
+  const Forgot_Password = async () => {
+    const dataResetPassword = { ...email };
+    try {
+      await accountApi.postForgotPasword(dataResetPassword);
+      setErr("Lấy mật khẩu thành công, vui lòng kiểm tra email");
+    } catch (error) {
+      setErr(error.response.data.message);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // alert("ok");
+    Forgot_Password();
   };
-  const handleTurnBack = () => {
-    history.push("/login");
-  };
+
   return (
     <div className="formMain">
       <div className="formMain_container">
         <Form className="formMenu" onSubmit={handleSubmit}>
-          <legend className="formMenu_title">Quên mật khẩu</legend>
+          <div
+            className="mb-3 formMenu_title"
+            onClick={() => history.push("/home")}
+          >
+            <AiOutlineHome className="icon" />
+            <legend className="title">Quên mật khẩu</legend>
+          </div>
           <Form.Group className="mb-3 formMenu_items" controlId="formBasicName">
             <Form.Label className="mb-3 formMenu_items_name">
               Địa chỉ email
@@ -23,15 +42,25 @@ function Forgot_Password() {
             <Form.Control
               name="email"
               className="mb-3 formMenu_items_value"
-              type="text"
+              type="email"
               placeholder="Nhập địa chỉ email đăng ký tài khoản"
+              onChange={(e) => setEmail({ [e.target.name]: e.target.value })}
             />
           </Form.Group>
+          <div className=" mb-3 formMenu_items_link">
+            <p>
+              {err && (
+                <span>
+                  {err} <Link to="/login">Quay Lại Đăng Nhập?</Link>
+                </span>
+              )}
+            </p>
+          </div>
           <div className="formMenu_extraLinks">
             <Button
               className="turnBack"
               variant="light"
-              onClick={handleTurnBack}
+              onClick={() => history.push("/login")}
             >
               Quay Lại
             </Button>
