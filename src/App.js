@@ -1,5 +1,6 @@
 import Forgot_Password from "components/Auth/Forgot-Password/Forgot_Password";
 import Register from "components/Auth/Register/Register";
+import Admin from "containers/Admin/Admin";
 import Auth from "containers/Auth/Auth";
 import HomePage from "containers/HomePage/HomePage";
 import React from "react";
@@ -14,6 +15,9 @@ function App() {
           <HomePage />
         </Route>
 
+        <Route path={["/admin", "/dash-board"]}>
+          <Admin />
+        </Route>
         {/* Login form */}
         <Route path="/login">
           <Auth />

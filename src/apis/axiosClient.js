@@ -15,7 +15,7 @@ axiosClient.interceptors.request.use(async (config) => {
 
   // console.log(JSON.parse(localStorage.getItem("access-token"))?.token);
   config.headers["Authorization"] = ` Bearer ${
-    JSON.parse(localStorage.getItem("access-token"))?.token
+    JSON.parse(localStorage.getItem("access"))?.token
   } `;
 
   return config;

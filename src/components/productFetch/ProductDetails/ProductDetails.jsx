@@ -5,32 +5,32 @@ import { useParams } from "react-router";
 import "./ProductDetails.scss";
 
 function ProductDetails() {
-  const [getDetails, setGetDetails] = useState([]);
+  const [productDetails, setProductDetails] = useState([]);
   const { itemsId } = useParams();
-  //   console.log("trang details", itemsId);
+  // console.log("trang details", itemsId);
 
   useEffect(() => {
     // let isCancelled = false;
-    // !isCancelled && getDetail();
-    // return () => {
+    // !isCancelled && getDetails();
+    // return function cleanup() {
     //   isCancelled = true;
     // };
-    getDetail();
+    getDetails();
   }, []);
 
-  const getDetail = async () => {
+  const getDetails = async () => {
     try {
       const response = await productsApi.getBooksById(itemsId);
-      setGetDetails([response]);
+      setProductDetails([response]);
     } catch (error) {
       console.log({ error });
     }
   };
 
   //   console.log(getDetails);
-  const renderBook = getDetails?.map((details) => {
+  const renderBook = productDetails?.map((details, index) => {
     return (
-      <div className="contain">
+      <div className="contain" key={index}>
         <div className="contain_img">
           <img alt="img-title" src={details.cover} />
         </div>
