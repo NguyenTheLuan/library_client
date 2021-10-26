@@ -1,6 +1,7 @@
 import DashBoard from "components/Admin/DashBoard/DashBoard";
 import CreateUser from "components/Admin/Manage/Users/CreateUser/CreateUser";
 import ViewUser from "components/Admin/Manage/Users/ViewUser/ViewUser";
+import Logout from "components/Auth/Logout/Logout";
 import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import "./Admin.scss";
@@ -20,7 +21,7 @@ function Admin() {
             <div className="containerDashBoard_content_lists">
               <Route
                 path={`${path}`}
-                component={() => "trang login"}
+                component={() => <Logout />}
                 exact={true}
               />
               <Route

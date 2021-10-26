@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, Redirect } from "react-router-dom";
 
 import accountApi from "apis/authApi";
 //redux
@@ -30,11 +30,19 @@ function Login() {
       user && localStorage.setItem("user", JSON.stringify(user));
       access && localStorage.setItem("access", JSON.stringify(access));
       refresh && localStorage.setItem("refresh", JSON.stringify(refresh));
-
+      checkRoute(user);
       setErr("Đăng Nhập Thành Công");
     } catch (error) {
       // console.log("err", error.response);
       setErr(error.response.data.message);
+    }
+  };
+
+  const checkRoute = (user) => {
+    if (user.role === "admin") {
+      history.push("/admin");
+    } else {
+      history.push("/");
     }
   };
 

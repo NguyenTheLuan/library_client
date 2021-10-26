@@ -1,0 +1,8 @@
+.logoutInput {
+  //   background: red op;
+  background: opacify($color: red, $amount: 0.1);
+  width: 140px;
+  color: white;
+  height: 40px;
+  border: none;
+}

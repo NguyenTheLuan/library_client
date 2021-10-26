@@ -8,14 +8,38 @@ import { Link } from "react-router-dom";
 
 import { BsFillPersonFill } from "react-icons/bs";
 import "./Header.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser } from "reducers/userSlice";
+import Logout from "components/Auth/Logout/Logout";
 
 function Header() {
   const history = useHistory();
+  const isUser = useSelector(selectUser);
+
+  const checkBtn = () => {
+    if (isUser) {
+      return (
+        <div className="header_btn">
+          <span className="nameUser">Xin chào, {isUser.name}</span>
+          <Logout />
+        </div>
+      );
+    } else {
+      return (
+        <div className="header_btn" onClick={() => history.push("/login")}>
+          <span>
+            <BsFillPersonFill className="icon" />
+          </span>
+          <Button variant="primary">Đăng Nhập</Button>
+        </div>
+      );
+    }
+  };
 
   return (
     <div className="header">
       <div className="header_logo">
-        <Link exact to="/home">
+        <Link exact={true} to="/home">
           <img alt="logoMenu" src={LogoMenu} />
           <span>Geny Library</span>
         </Link>
@@ -34,14 +58,13 @@ function Header() {
           </Button>
         </Form.Group>
       </div>
-      <div className="header_btn">
-        <span onClick={() => history.replace("/login")}>
+      {/* <div className="header_btn" onClick={() => history.push("/login")}>
+        <span>
           <BsFillPersonFill className="icon" />
         </span>
-        <Button variant="primary" onClick={() => history.replace("/login")}>
-          Đăng Nhập
-        </Button>
-      </div>
+        <Button variant="primary">Đăng Nhập</Button>
+      </div> */}
+      {checkBtn()}
     </div>
   );
 }

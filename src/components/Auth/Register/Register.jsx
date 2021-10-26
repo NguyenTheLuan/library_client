@@ -29,8 +29,8 @@ function Register() {
       access && localStorage.setItem("access", JSON.stringify(access));
       refresh && localStorage.setItem("refresh", JSON.stringify(refresh));
 
-      setErr("Đăng Nhập Thành Công");
       setErr("Đăng kí thành công");
+      history.push("/");
     } catch (error) {
       setErr(error.response.data.message);
     }

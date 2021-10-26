@@ -51,25 +51,39 @@
     font-size: 20px;
     font-weight: 200;
 
+    display: flex;
+    flex-direction: row;
+    // justify-content: center;
+    align-items: center;
+    gap: 10px;
     .icon {
       font-size: 40px;
       color: white;
       cursor: pointer;
     }
+    //when login: ===> login btn ===> logout btn
+    .nameUser {
+      color: white;
 
-    .logged {
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-start;
-      align-items: center;
-      gap: 10px;
-      span {
-        // width: 110px;
-        color: white;
-        font-weight: 200;
-        text-overflow: ellipsis;
-        overflow: hidden;
-      }
+      width: 140px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
+
+    // .logged {
+    //   display: flex;
+    //   flex-direction: row;
+    //   justify-content: flex-start;
+    //   align-items: center;
+    //   gap: 10px;
+    //   span {
+    //     // width: 110px;
+    //     color: white;
+    //     font-weight: 200;
+    //     text-overflow: ellipsis;
+    //     overflow: hidden;
+    //   }
+    // }
   }
 }

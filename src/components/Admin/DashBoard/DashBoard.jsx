@@ -11,7 +11,7 @@ function DashBoard({ url }) {
       <div className="homeMenu">
         <div className="homeMenu_link">
           {/* <div className="homeNav"> */}
-          <Link to="/" exact>
+          <Link to="/" exact={true}>
             <ImHome className="iconItem" />
             <span className="iconName">Trở lại trang chủ</span>
           </Link>

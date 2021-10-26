@@ -5,6 +5,11 @@ import Auth from "containers/Auth/Auth";
 import HomePage from "containers/HomePage/HomePage";
 import React from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import {
+  AdminPrivateRoutes,
+  MenuLink,
+  PrivateRoutes,
+} from "routes/customRoutes";
 
 function App() {
   return (
@@ -15,10 +20,14 @@ function App() {
           <HomePage />
         </Route>
 
-        <Route path={["/admin", "/dash-board"]}>
+        {/* <Route path={["/admin", "/dash-board"]}>
           <Admin />
-        </Route>
+        </Route> */}
+        <AdminPrivateRoutes path={["/admin", "/dash-board"]}>
+          <Admin />
+        </AdminPrivateRoutes>
         {/* Login form */}
+
         <Route path="/login">
           <Auth />
         </Route>
@@ -28,6 +37,15 @@ function App() {
         <Route path="/forgot-password">
           <Forgot_Password />
         </Route>
+        {/* <MenuLink path="/login">
+          <Auth />
+        </MenuLink>
+        <MenuLink path="/register">
+          <Register />
+        </MenuLink>
+        <MenuLink path="/forgot-password">
+          <Forgot_Password />
+        </MenuLink> */}
       </Switch>
     </BrowserRouter>
   );

@@ -1,20 +1,30 @@
 import React from "react";
 import { Redirect, Route } from "react-router";
 
-const isAuth = localStorage.getItem("access-token");
+const isAuth = localStorage.getItem("access");
 
 //Auth Route (for login, register,..)
 export const MenuLink = ({ children, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={() => (isAuth ? <Redirect to={"/"} /> : children)}
+      render={() => (!isAuth ? children : <Redirect to={"/"} exact={true} />)}
     />
   );
 };
 
-//Private Route (for admin, user)
-export const PrivateRoutes = ({ children, ...rest }) => {
+//Private Route (for admin)
+export const AdminPrivateRoutes = ({ children, ...rest }) => {
+  return (
+    <Route
+      {...rest}
+      render={() => (isAuth ? children : <Redirect to={"/login"} />)}
+    />
+  );
+};
+
+//Private Route (for user)
+export const UserPrivateRoutes = ({ children, ...rest }) => {
   return (
     <Route
       {...rest}
