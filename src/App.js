@@ -3,10 +3,11 @@ import Login from "components/Auth/Login/Login";
 import Register from "components/Auth/Register/Register";
 import Admin from "containers/Admin/Admin";
 import HomePage from "containers/HomePage/HomePage";
+import NotFound from "containers/HomePage/NotFound/NotFound";
+
 import User from "containers/User/User";
 import React from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import { AdminPrivateRoutes, MenuLink } from "routes/customRoutes";
 import AdminRoute from "routes/customRoutes/AdminRoute";
 import AuthRoute from "routes/customRoutes/AuthRoute";
 import UserRoute from "routes/customRoutes/UserRoute";
@@ -16,6 +17,7 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Redirect from="/" to="/home" exact={true} />
+        {/* home route */}
         <Route path="/home">
           <HomePage />
         </Route>
@@ -23,17 +25,18 @@ function App() {
         {/* <Route path={["/admin", "/dash-board"]}>
           <Admin />
         </Route> */}
+        {/* admin route */}
         <AdminRoute path={["/admin", "/dash-board"]}>
           <Admin />
         </AdminRoute>
 
+        {/* for user route */}
         <UserRoute path="/user">
           <User />
         </UserRoute>
-        {/* Login form */}
 
+        {/* Login form */}
         <AuthRoute path="/login">
-          {/* <Auth /> */}
           <Login />
         </AuthRoute>
         <AuthRoute path="/register">
@@ -42,15 +45,10 @@ function App() {
         <AuthRoute path="/forgot-password">
           <ForgotPassword />
         </AuthRoute>
-        {/* <MenuLink path="/login">
-          <Auth />
-        </MenuLink>
-        <MenuLink path="/register">
-          <Register />
-        </MenuLink>
-        <MenuLink path="/forgot-password">
-          <Forgot_Password />
-        </MenuLink> */}
+
+        <Route>
+          <NotFound />
+        </Route>
       </Switch>
     </BrowserRouter>
   );

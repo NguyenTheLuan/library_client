@@ -1,0 +1,25 @@
+.form {
+  &_name {
+    padding: 20px;
+    width: 100%;
+    border-bottom: 1px solid #000;
+
+    font-weight: 200;
+  }
+  &_items {
+    display: flex;
+    flex-direction: row;
+
+    padding: 0 20px;
+
+    &_label {
+      flex: 1;
+    }
+    &_input {
+      flex: 3;
+      &:focus {
+        box-shadow: none !important;
+      }
+    }
+  }
+}

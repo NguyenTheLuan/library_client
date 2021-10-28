@@ -2,7 +2,7 @@ import adminApi from "apis/adminApi";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { Table } from "react-bootstrap";
+import { Table, Button } from "react-bootstrap";
 
 // import "../UsersForm.scss";
 
@@ -26,14 +26,30 @@ function ViewUser() {
     }
   };
   // console.log(userItems);
+  const activeEmail = (isActive) => {
+    // console.log(isActive);
+    if (!isActive) {
+      return <Button>Kích hoạt email</Button>;
+    } else if (isActive) {
+      return <Button disabled> Đã Cập Nhật</Button>;
+    }
+  };
+
   const showUsers = userItems.map((user, index) => {
     return (
-      <tr>
+      <tr key={index}>
         <td>{index}</td>
         <td>{user.name}</td>
-        <td>{user.email}</td>
-        <td>{user.isEmailVerified}</td>
         <td>{user.role}</td>
+        <td>{user.email}</td>
+        <td>{activeEmail(user.isEmailVerified)}</td>
+        {/* custom td */}
+        <td>
+          <Button variant="success">Thay đổi thông tin</Button>
+        </td>
+        <td>
+          <Button variant="danger">Xoá người dùng</Button>
+        </td>
       </tr>
     );
   });
@@ -43,13 +59,16 @@ function ViewUser() {
       <div className="formContainer">
         <h2>Thông Tin Người Dùng</h2>
         <Table striped bordered hover>
+          {err && <h2>{err}</h2>}
           <thead>
             <tr>
-              <th>#</th>
+              <th>STT</th>
               <th>Tên Người Dùng</th>
+              <th>Chức vụ</th>
               <th>Email</th>
               <th>Trình trạng email</th>
-              <th>Chức vụ</th>
+              <th>Thay đổi thông tin</th>
+              <th>Xoá người dùng</th>
             </tr>
           </thead>
           <tbody>{showUsers}</tbody>

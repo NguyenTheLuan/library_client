@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Accordion } from "react-bootstrap";
-import { Link, NavLink } from "react-router-dom";
 import { ImHome } from "react-icons/im";
+import { Link, NavLink } from "react-router-dom";
 import "./DashBoard.scss";
 
 function DashBoard({ url }) {
   // console.log("dashboard", url);
+  useEffect(() => {
+    const handleShow = () => {
+      return localStorage.getItem("showItem");
+    };
+  }, []);
+
+  const handleShow = () => {
+    return localStorage.getItem("showItem");
+  };
+
   return (
     <div>
       <div className="homeMenu">
@@ -18,7 +28,10 @@ function DashBoard({ url }) {
           {/* </div> */}
         </div>
       </div>
-      <Accordion>
+      <Accordion
+        defaultActiveKey={handleShow}
+        onSelect={(e) => localStorage.setItem("showItem", e)}
+      >
         {/* Quản lý người dùng */}
         <Accordion.Item eventKey="0">
           <Accordion.Header>Quản Lý Người Dùng</Accordion.Header>
@@ -32,7 +45,7 @@ function DashBoard({ url }) {
               Tạo người dùng mới
             </NavLink>
           </Accordion.Body>
-          <Accordion.Body>
+          {/* <Accordion.Body>
             <NavLink to={`${url}/users/edit`} activeClassName="active">
               Chỉnh Sửa Thông Tin
             </NavLink>
@@ -41,29 +54,29 @@ function DashBoard({ url }) {
             <NavLink to={`${url}/users/:id/delete`} activeClassName="active">
               Xoá Thông Tin
             </NavLink>
-          </Accordion.Body>
+          </Accordion.Body> */}
         </Accordion.Item>
 
         {/* Quản Lý Sách */}
         <Accordion.Item eventKey="1">
           <Accordion.Header>Quản Lý Sách</Accordion.Header>
           <Accordion.Body>
-            <NavLink to="/admin/user" activeClassName="active">
-              Tạo Mới
+            <NavLink to={`${url}/books`} exact={true} activeClassName="active">
+              Tổng số sách
             </NavLink>
           </Accordion.Body>
           <Accordion.Body>
-            <NavLink to="/admin/user" activeClassName="active">
-              Xem Danh Sách
+            <NavLink to={`${url}/books/create`} activeClassName="active">
+              Thêm một đầu sách
             </NavLink>
           </Accordion.Body>
           <Accordion.Body>
-            <NavLink to="/admin/user" activeClassName="active">
+            <NavLink to={`${url}/authors`} activeClassName="active">
               Xem Tác Giả
             </NavLink>
           </Accordion.Body>
           <Accordion.Body>
-            <NavLink to="/admin/user" activeClassName="active">
+            <NavLink to={`${url}/categories`} activeClassName="active">
               Xem Danh Mục
             </NavLink>
           </Accordion.Body>

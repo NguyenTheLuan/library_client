@@ -1,0 +1,24 @@
+.notFoundMenu {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+  font-weight: 100;
+  span {
+    font-size: 100px;
+  }
+  a {
+    text-decoration: none;
+    font-size: 30px;
+    height: 50px;
+
+    &:hover {
+      border-bottom: 1px solid #000;
+    }
+  }
+}

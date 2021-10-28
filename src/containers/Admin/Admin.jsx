@@ -1,7 +1,9 @@
+import AdminPage from "components/Admin/AdminPage/AdminPage";
 import DashBoard from "components/Admin/DashBoard/DashBoard";
+import AddBooks from "components/Admin/Manage/Books/AddBooks/AddBooks";
+import GetBooks from "components/Admin/Manage/Books/GetBooks/GetBooks";
 import CreateUser from "components/Admin/Manage/Users/CreateUser/CreateUser";
 import ViewUser from "components/Admin/Manage/Users/ViewUser/ViewUser";
-import Logout from "components/Auth/Logout/Logout";
 import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import "./Admin.scss";
@@ -21,9 +23,11 @@ function Admin() {
             <div className="containerDashBoard_content_lists">
               <Route
                 path={`${path}`}
-                component={() => <Logout />}
+                component={() => <AdminPage />}
                 exact={true}
               />
+
+              {/* Quản lý users */}
               <Route
                 path={`${path}/users`}
                 component={() => <ViewUser />}
@@ -32,6 +36,18 @@ function Admin() {
               <Route
                 path={`${path}/users/create`}
                 component={() => <CreateUser />}
+                exact={true}
+              />
+
+              {/* Quản lý sách */}
+              <Route
+                path={`${path}/books`}
+                component={() => <GetBooks />}
+                exact={true}
+              />
+              <Route
+                path={`${path}/books/create`}
+                component={() => <AddBooks />}
                 exact={true}
               />
             </div>
