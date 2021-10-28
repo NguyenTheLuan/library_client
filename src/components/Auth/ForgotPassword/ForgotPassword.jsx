@@ -1,14 +1,18 @@
 import React, { useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import accountApi from "apis/authApi";
+
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
+
+import { Form, Button } from "react-bootstrap";
 import { AiOutlineHome } from "react-icons/ai";
 import "../StyleForm.scss";
-import accountApi from "apis/authApi";
-import { Link } from "react-router-dom";
-function Forgot_Password() {
+
+function ForgotPassword() {
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [err, setErr] = useState("");
+
   const Forgot_Password = async () => {
     const dataResetPassword = { ...email };
     try {
@@ -74,4 +78,4 @@ function Forgot_Password() {
   );
 }
 
-export default Forgot_Password;
+export default ForgotPassword;

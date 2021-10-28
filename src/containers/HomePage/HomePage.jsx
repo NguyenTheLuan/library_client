@@ -15,22 +15,28 @@ function HomePage() {
     <div style={{ overflowX: "hidden" }}>
       <Header />
       <Navigation url={url} />
-      <Switch>
-        {/* <Route exact={true} path={path} /> */}
-        <Route
-          path={`${path}`}
-          component={() => <GetProducts />}
-          exact={true}
-        />
-        <Route path={`${path}/community`} component={() => "trang cộng đỒng"} />
-        <Route path={`${path}/tu-lieu`} component={() => "trang tư liệu"} />
-        <Route path={`${path}/bai-giang`} component={BaiGiang} />
-        <Route
-          path={`${path}/:itemsId`}
-          component={() => <ProductDetails />}
-          exact={true}
-        />
-      </Switch>
+      <div className="list_items">
+        <div className="items">
+          <Switch>
+            <Route
+              path={`${path}`}
+              component={() => <GetProducts />}
+              exact={true}
+            />
+            <Route
+              path={`${path}/community`}
+              component={() => "trang cộng đỒng"}
+            />
+            <Route path={`${path}/tu-lieu`} component={() => "trang tư liệu"} />
+            <Route path={`${path}/bai-giang`} component={BaiGiang} />
+            <Route
+              path={`${path}/:itemsId`}
+              component={() => <ProductDetails />}
+              exact={true}
+            />
+          </Switch>
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,6 +1,3 @@
-import Forgot_Password from "components/Auth/Forgot-Password/Forgot_Password";
-import Register from "components/Auth/Register/Register";
-import Auth from "containers/Auth/Auth";
 import HomePage from "containers/HomePage/HomePage";
 
 export const MAIN_PAGES = [

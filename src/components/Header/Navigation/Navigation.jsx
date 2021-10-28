@@ -24,7 +24,7 @@ function Navigation({ url }) {
         </li>
         <li className="list">
           <NavLink to={`${url}/community`} activeClassName="active">
-            Thảo Luận
+            Cộng Đồng
           </NavLink>
         </li>
       </ul>

@@ -8,9 +8,10 @@ export const GetProducts = () => {
   let { path } = useRouteMatch();
   const [products, setProducts] = useState([]);
   const history = useHistory();
-  useEffect(() => {
-    getAllProducts();
-  }, []);
+
+  // useEffect(() => {
+  //   getAllProducts();
+  // }, []);
 
   const getAllProducts = async () => {
     try {
@@ -41,12 +42,11 @@ export const GetProducts = () => {
   });
 
   return (
-    <div className="list_items">
-      <div className="items">
+    <>
+      {/* {listBooks}
         {listBooks}
-        {listBooks}
-        {listBooks}
-      </div>
-    </div>
+        {listBooks} */}
+      đang fix
+    </>
   );
 };

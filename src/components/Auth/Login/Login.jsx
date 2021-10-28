@@ -1,13 +1,11 @@
+import accountApi from "apis/authApi";
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { Link, useHistory, Redirect } from "react-router-dom";
-
-import accountApi from "apis/authApi";
+import { AiOutlineHome } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
 //redux
 import { loginIn } from "reducers/userSlice";
-import { useDispatch } from "react-redux";
-
-import { AiOutlineHome } from "react-icons/ai";
 import "../StyleForm.scss";
 
 function Login() {
@@ -24,14 +22,15 @@ function Login() {
       //Trả về user, access-token, refresh token
       const { user, tokens } = response;
       const { access, refresh } = tokens;
-      //Chuyển vào redux store
-      dispatch(loginIn(user));
       //Lưu vào local-storage
       user && localStorage.setItem("user", JSON.stringify(user));
       access && localStorage.setItem("access", JSON.stringify(access));
       refresh && localStorage.setItem("refresh", JSON.stringify(refresh));
-      checkRoute(user);
       setErr("Đăng Nhập Thành Công");
+      //Chuyển vào redux store
+      dispatch(loginIn(user));
+      //admin or user?
+      user && checkRoute(user);
     } catch (error) {
       // console.log("err", error.response);
       setErr(error.response.data.message);
@@ -41,7 +40,7 @@ function Login() {
   const checkRoute = (user) => {
     if (user.role === "admin") {
       history.push("/admin");
-    } else {
+    } else if (user.role === "user") {
       history.push("/");
     }
   };
@@ -79,8 +78,8 @@ function Login() {
               }
             />
             {/* <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
-        </Form.Text> */}
+              We'll never share your email with anyone else.
+            </Form.Text> */}
           </Form.Group>
 
           <Form.Group
