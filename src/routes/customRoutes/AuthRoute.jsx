@@ -8,7 +8,13 @@ function AuthRoute({ children, ...rest }) {
   return (
     <Route
       {...rest}
-      render={() => (isLogin ? <Redirect to={"/"} exact={true} /> : children)}
+      render={() =>
+        isLogin && isLogin.status === "active" ? (
+          <Redirect to={"/"} exact={true} />
+        ) : (
+          children
+        )
+      }
     />
   );
 }
