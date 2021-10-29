@@ -36,22 +36,24 @@ function ViewUser() {
   };
 
   const showUsers = userItems.map((user, index) => {
-    return (
-      <tr key={index}>
-        <td>{index}</td>
-        <td>{user.name}</td>
-        <td>{user.role}</td>
-        <td>{user.email}</td>
-        <td>{activeEmail(user.isEmailVerified)}</td>
-        {/* custom td */}
-        <td>
-          <Button variant="success">Thay đổi thông tin</Button>
-        </td>
-        <td>
-          <Button variant="danger">Xoá người dùng</Button>
-        </td>
-      </tr>
-    );
+    if (user.role === "user") {
+      return (
+        <tr key={index}>
+          <td>{index}</td>
+          <td>{user.name}</td>
+          <td>{user.role}</td>
+          <td>{user.email}</td>
+          <td>{activeEmail(user.isEmailVerified)}</td>
+          {/* custom td */}
+          <td>
+            <Button variant="success">Thay đổi thông tin</Button>
+          </td>
+          <td>
+            <Button variant="danger">Xoá người dùng</Button>
+          </td>
+        </tr>
+      );
+    }
   });
 
   return (

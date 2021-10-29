@@ -15,11 +15,16 @@ function Header() {
   const history = useHistory();
   const isUser = useSelector(selectUser);
 
+  const showName = (name) => {
+    const getName = name.split(" ");
+    return getName[getName.length - 1];
+  };
+
   const checkBtn = () => {
     if (isUser && isUser.status === "active") {
       return (
         <div className="header_btn">
-          <span className="nameUser">Xin chào, {isUser.name}</span>
+          <span className="nameUser">Xin chào, {showName(isUser.name)}</span>
           <Logout />
         </div>
       );
