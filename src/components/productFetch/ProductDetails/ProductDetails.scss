@@ -22,6 +22,7 @@ $color_font: #fff;
   }
   &_details {
     width: 100%;
+    padding: 20px 0;
     // border: 1px solid rgb(240, 223, 223);
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
     display: flex;
@@ -29,13 +30,21 @@ $color_font: #fff;
     // gap: 60px;
 
     &_img {
-      width: 40%;
+      width: 25%;
       height: 100%;
       text-align: center;
       img {
-        // margin-top: 20px;
-        width: 60%;
-        height: 90%;
+        width: 200px;
+        height: 280px;
+        transition: 0.5s ease-out;
+        &:hover {
+          transform: scale(1.1);
+          transition: 0.5s ease-in-out;
+          border-radius: 5px;
+
+          box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px,
+            rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+        }
       }
     }
 
@@ -47,8 +56,9 @@ $color_font: #fff;
       flex-direction: column;
       gap: 20px;
 
+      //Tên, tác giả,..
       &_rows {
-        width: 80%;
+        width: 100%;
 
         display: flex;
         flex-direction: row;
@@ -58,13 +68,18 @@ $color_font: #fff;
         td {
           flex: 1;
         }
-        // &:first-child {
-        //   margin-top: 30px;
-        // }
         &:last-child {
           border-bottom: none;
         }
         .btnClick {
+          background: #3f51b5;
+          &_icon {
+            font-size: 20px;
+          }
+          &_name {
+            margin-left: 10px;
+            line-height: 20px;
+          }
           &:focus {
             box-shadow: none;
           }

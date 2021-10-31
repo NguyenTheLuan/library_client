@@ -12,29 +12,38 @@ function HomePage() {
   let { path, url } = useRouteMatch();
 
   return (
-    <div style={{ overflowX: "hidden" }}>
-      <Header />
-      <Navigation url={url} />
-      <div className="list_items">
-        <div className="items">
-          <Switch>
-            <Route
-              path={`${path}`}
-              component={() => <GetProducts />}
-              exact={true}
-            />
-            <Route
-              path={`${path}/community`}
-              component={() => "trang cộng đỒng"}
-            />
-            <Route path={`${path}/tu-lieu`} component={() => "trang tư liệu"} />
-            <Route path={`${path}/bai-giang`} component={BaiGiang} />
-            <Route
-              path={`${path}/:itemsId`}
-              component={() => <ProductDetails />}
-              exact={true}
-            />
-          </Switch>
+    <div className="mainPage">
+      <div className="mainPage_header">
+        <Header />
+      </div>
+      <div className="mainPage_content">
+        <div className="mainPage_content_nav">
+          <Navigation url={url} />
+        </div>
+        <div className="mainPage_content_items">
+          <div className="items">
+            <Switch>
+              <Route
+                path={`${path}`}
+                component={() => <GetProducts />}
+                exact={true}
+              />
+              <Route
+                path={`${path}/community`}
+                component={() => "trang cộng đỒng"}
+              />
+              <Route
+                path={`${path}/tu-lieu`}
+                component={() => "trang tư liệu"}
+              />
+              <Route path={`${path}/bai-giang`} component={BaiGiang} />
+              <Route
+                path={`${path}/:itemsId`}
+                component={() => <ProductDetails />}
+                exact={true}
+              />
+            </Switch>
+          </div>
         </div>
       </div>
     </div>

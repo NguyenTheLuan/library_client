@@ -2,13 +2,11 @@ import Logout from "components/Auth/Logout/Logout";
 import React from "react";
 import { Dropdown } from "react-bootstrap";
 import { FaRegUser } from "react-icons/fa";
-import { useRouteMatch } from "react-router";
-
 import "./DropdownItems.scss";
 
 function DropdownItems() {
-  let { path, url } = useRouteMatch();
-  console.log(path);
+  // let { path } = useRouteMatch();
+  // console.log(path);
   return (
     <div>
       <Dropdown className="dropdownMain">

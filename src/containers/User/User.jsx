@@ -10,7 +10,7 @@ import { Link, NavLink } from "react-router-dom";
 import "./User.scss";
 
 function User() {
-  let { path, url } = useRouteMatch();
+  let { path } = useRouteMatch();
 
   return (
     <div className="mainUser">

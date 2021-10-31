@@ -6,23 +6,23 @@ function Navigation({ url }) {
   // console.log("hàm con", url);
   return (
     <div className="navMenu">
-      <ul className="listItems" style={{ padding: "0px", margin: "0px" }}>
-        <li className="list">
+      <ul className="navMenu_items">
+        <li className="navMenu_items_links">
           <NavLink exact={true} to={`${url}`} activeClassName="active">
             Trang Chủ
           </NavLink>
         </li>
-        <li className="list">
+        <li className="navMenu_items_links">
           <NavLink to={`${url}/bai-giang`} activeClassName="active">
             Bài Giảng
           </NavLink>
         </li>
-        <li className="list">
+        <li className="navMenu_items_links">
           <NavLink to={`${url}/tu-lieu`} activeClassName="active">
             Tư Liệu
           </NavLink>
         </li>
-        <li className="list">
+        <li className="navMenu_items_links">
           <NavLink to={`${url}/community`} activeClassName="active">
             Cộng Đồng
           </NavLink>

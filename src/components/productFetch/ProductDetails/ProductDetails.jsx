@@ -2,6 +2,7 @@ import productsApi from "apis/productsApi";
 import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useParams } from "react-router";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 import "./ProductDetails.scss";
 
 function ProductDetails() {
@@ -14,7 +15,7 @@ function ProductDetails() {
     return books.length;
   };
   const checkAuthorName = (author) => {
-    console.log("tác giả", author);
+    // console.log("tác giả", author);
     return author;
   };
   useEffect(() => {
@@ -43,31 +44,38 @@ function ProductDetails() {
         <table className="containProducts_details_contents">
           <tr className="containProducts_details_contents_rows">
             <td>
-              <strong>Tên:</strong>
+              <strong>Tên</strong>
             </td>
             <td>{details.title}</td>
+            <td></td>
           </tr>
           <tr className="containProducts_details_contents_rows">
             <td>
-              <strong>Tác giả:</strong>
+              <strong>Tác giả</strong>
             </td>
             <td>{checkAuthorName(details.authors)}</td>
+            <td></td>
           </tr>
           <tr className="containProducts_details_contents_rows">
             <td>
-              <strong>Số lượng còn lại:</strong>
+              <strong>Số lượng còn lại</strong>
             </td>
             <td>{checkQuantity(details.copies)}</td>
+            <td></td>
           </tr>
           <tr className="containProducts_details_contents_rows">
             <td>
-              <strong>Thời gian cho mượn:</strong>
+              <strong>Thời gian cho mượn</strong>
             </td>
             <td>{details.loanPeriodDays}</td>
+            <td></td>
           </tr>
           <tr className="containProducts_details_contents_rows">
             <td>
-              <Button className="btnClick">Thêm vào giỏ sách</Button>
+              <Button className="btnClick">
+                <AiOutlineShoppingCart className="btnClick_icon" />
+                <span className="btnClick_name">Thêm vào giỏ sách</span>
+              </Button>
             </td>
           </tr>
         </table>
@@ -81,6 +89,9 @@ function ProductDetails() {
         <span>Thông tin chi tiết</span>
       </div>
       {renderBook}
+      <div className="containProducts_title">
+        <span>Những cuốn sách liên quan</span>
+      </div>
     </div>
   );
 }

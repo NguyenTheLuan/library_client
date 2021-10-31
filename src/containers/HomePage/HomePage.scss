@@ -1,18 +1,27 @@
-.list_items {
+.mainPage {
   width: 100vw;
+  height: 100vh;
+
+  overflow-x: hidden;
 
   display: flex;
-  justify-content: center;
-  align-items: center;
-  .items {
-    padding-top: 20px;
-    width: 80%;
+  flex-direction: column;
+  gap: 40px;
+  &_header {
+  }
 
+  &_content {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: center;
+    // align-items: center;
+    &_nav {
+      flex: 1;
 
-    gap: 50px;
+      // height: 100%;
+    }
+    &_items {
+      flex: 4;
+    }
   }
 }

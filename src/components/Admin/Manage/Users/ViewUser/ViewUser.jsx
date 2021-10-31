@@ -55,6 +55,7 @@ function ViewUser() {
         </tr>
       );
     }
+    return null;
   });
 
   return (

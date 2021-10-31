@@ -7,9 +7,7 @@ import "./DashBoard.scss";
 function DashBoard({ url }) {
   // console.log("dashboard", url);
   useEffect(() => {
-    const handleShow = () => {
-      return localStorage.getItem("showItem");
-    };
+    handleShow();
   }, []);
 
   const handleShow = () => {
