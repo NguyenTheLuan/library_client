@@ -29,16 +29,19 @@
       }
       &_img {
         // width: 100%;
-        width: 220px;
-        height: 300px;
+        // width: 220px;
+        // height: 300px;
+        padding-top: 10px;
+        width: 100%;
 
         display: flex;
 
         justify-content: center;
         align-items: center;
         img {
-          width: 200px;
-          height: 270px;
+          // width: 200px;
+          // height: 270px;
+          width: 90%;
         }
       }
       &_contents {
