@@ -2,9 +2,13 @@ import React from "react";
 import { Form, Button } from "react-bootstrap";
 import "components/Admin/Manage/ManageForm.scss";
 function CreateUser() {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
   return (
-    <Form className="form">
-      <legend>Tạo người dùng mới</legend>
+    <Form className="form" onSubmit={handleSubmit}>
+      <legend className="form_name">Tạo người dùng mới</legend>
+      <Form.Group className="mb-3 form_items"></Form.Group>
       <Form.Group className="mb-3 form_items">
         <Form.Label className="form_items_label">Tên người dùng</Form.Label>
         <Form.Control
@@ -34,7 +38,13 @@ function CreateUser() {
           placeholder="Nhập mật khẩu người dùng"
         />
       </Form.Group>
-      <Button type="submit">Tạo người dùng mới</Button>
+
+      <div className="btnSubmit">
+        <Button type="submit" variant="primary">
+          Tạo người dùng mới
+        </Button>
+        <Button variant="warning">Nhập lại</Button>
+      </div>
     </Form>
   );
 }

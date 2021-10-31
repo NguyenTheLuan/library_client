@@ -9,9 +9,9 @@ export const GetProducts = () => {
   const [products, setProducts] = useState([]);
   const history = useHistory();
 
-  // useEffect(() => {
-  //   getAllProducts();
-  // }, []);
+  useEffect(() => {
+    getAllProducts();
+  }, []);
 
   const getAllProducts = async () => {
     try {
@@ -43,10 +43,9 @@ export const GetProducts = () => {
 
   return (
     <>
-      {/* {listBooks}
-        {listBooks}
-        {listBooks} */}
-      đang fix
+      {listBooks}
+      {listBooks}
+      {listBooks}
     </>
   );
 };

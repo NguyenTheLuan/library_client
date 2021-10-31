@@ -1,0 +1,18 @@
+.dropdownMain {
+  &:focus {
+    box-shadow: none;
+  }
+  &_name {
+    padding: 10px 20px;
+    .icon {
+      font-size: 25px;
+    }
+  }
+  &_menu {
+    &_items {
+      .btn {
+        width: 100%;
+      }
+    }
+  }
+}

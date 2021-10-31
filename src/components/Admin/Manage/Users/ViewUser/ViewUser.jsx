@@ -3,6 +3,7 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Table, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 // import "../UsersForm.scss";
 
@@ -61,7 +62,11 @@ function ViewUser() {
       <div className="formContainer">
         <h2>Thông Tin Người Dùng</h2>
         <Table striped bordered hover>
-          {err && <h2>{err}</h2>}
+          {err && (
+            <Link to="/login">
+              <h2>{err}</h2>
+            </Link>
+          )}
           <thead>
             <tr>
               <th>STT</th>

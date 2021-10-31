@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { logOut } from "reducers/userSlice";
-import "./Logout.scss";
+// import "./Logout.scss";
 
 function Logout() {
   const history = useHistory();

@@ -3,11 +3,11 @@ import axiosClient from "./axiosClient";
 const ACCOUNT_API_ENDPOINT = "/auth";
 
 const accountApi = {
-  // // fn: gửi mã xác nhận
-  // postSendVerifyCode: (email) => {
-  //   const url = ACCOUNT_API_ENDPOINT + "/verify";
-  //   return axiosClient.post(url, email);
-  // },
+  // fn: nhận thông tin user
+  getInfoUser: (id) => {
+    const url = `/users/${id}`;
+    return axiosClient.get(url);
+  },
   // fn: đăng ký
   postRegister: (account) => {
     const url = ACCOUNT_API_ENDPOINT + "/register";

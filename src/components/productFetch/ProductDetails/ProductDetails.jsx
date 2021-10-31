@@ -9,12 +9,15 @@ function ProductDetails() {
   const { itemsId } = useParams();
   // console.log("trang details", itemsId);
 
+  const checkQuantity = (books) => {
+    // console.log(books);
+    return books.length;
+  };
+  const checkAuthorName = (author) => {
+    console.log("tác giả", author);
+    return author;
+  };
   useEffect(() => {
-    // let isCancelled = false;
-    // !isCancelled && getDetails();
-    // return function cleanup() {
-    //   isCancelled = true;
-    // };
     getDetails();
   }, []);
 
@@ -27,31 +30,59 @@ function ProductDetails() {
     }
   };
 
+  console.log(productDetails);
   //   console.log(getDetails);
   const renderBook = productDetails?.map((details, index) => {
     return (
-      <div className="contain" key={index}>
-        <div className="contain_img">
+      <div className="containProducts_details" key={index}>
+        {/* Hình ảnh minh hoạ */}
+        <div className="containProducts_details_img">
           <img alt="img-title" src={details.cover} />
         </div>
-        <div className="contain_contents">
-          <span className="contain_contents_title">{details.title}</span>
-          <span className="contain_contents_author">
-            Tác giả: {details.author}
-          </span>
-          <span className="contain_contents_quantity">
-            Còn lại: {details.coppies}
-          </span>
-          <span className="contain_contents_periods">
-            Thời gian cho mượn: {details.loanPeriodDays}
-          </span>
-          <Button className="contain_contents_btn">Mượn Ngay</Button>
-        </div>
+        {/* Thông tin chi tiết */}
+        <table className="containProducts_details_contents">
+          <tr className="containProducts_details_contents_rows">
+            <td>
+              <strong>Tên:</strong>
+            </td>
+            <td>{details.title}</td>
+          </tr>
+          <tr className="containProducts_details_contents_rows">
+            <td>
+              <strong>Tác giả:</strong>
+            </td>
+            <td>{checkAuthorName(details.authors)}</td>
+          </tr>
+          <tr className="containProducts_details_contents_rows">
+            <td>
+              <strong>Số lượng còn lại:</strong>
+            </td>
+            <td>{checkQuantity(details.copies)}</td>
+          </tr>
+          <tr className="containProducts_details_contents_rows">
+            <td>
+              <strong>Thời gian cho mượn:</strong>
+            </td>
+            <td>{details.loanPeriodDays}</td>
+          </tr>
+          <tr className="containProducts_details_contents_rows">
+            <td>
+              <Button className="btnClick">Thêm vào giỏ sách</Button>
+            </td>
+          </tr>
+        </table>
       </div>
     );
   });
 
-  return <div className="box">{renderBook}</div>;
+  return (
+    <div className="containProducts">
+      <div className="containProducts_title">
+        <span>Thông tin chi tiết</span>
+      </div>
+      {renderBook}
+    </div>
+  );
 }
 
 export default ProductDetails;

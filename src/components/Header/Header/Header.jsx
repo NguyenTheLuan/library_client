@@ -1,5 +1,6 @@
 // import LogoMenu from "assets/icons/LogoMenu.gif";
 import LogoMenu from "assets/icons/logo.png";
+import DropdownItems from "components/customComponents/DropdownItems/DropdownItems";
 import Logout from "components/Auth/Logout/Logout";
 import React from "react";
 import { Button, Form } from "react-bootstrap";
@@ -22,12 +23,22 @@ function Header() {
 
   const checkBtn = () => {
     if (isUser && isUser.status === "active") {
-      return (
-        <div className="header_btn">
-          <span className="nameUser">Xin chào, {showName(isUser.name)}</span>
-          <Logout />
-        </div>
-      );
+      if (isUser.role === "user") {
+        return (
+          <div className="header_btn">
+            <span className="nameUser">Xin chào, {showName(isUser.name)}</span>
+            {/* <Logout /> */}
+            <DropdownItems />
+          </div>
+        );
+      } else {
+        return (
+          <div className="header_btn">
+            <span className="nameUser">Xin chào, {showName(isUser.name)}</span>
+            <Logout />
+          </div>
+        );
+      }
     } else {
       return (
         <div className="header_btn" onClick={() => history.push("/login")}>

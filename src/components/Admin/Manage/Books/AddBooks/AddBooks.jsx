@@ -3,9 +3,13 @@ import { Form, Button } from "react-bootstrap";
 import "components/Admin/Manage/ManageForm.scss";
 
 function AddBooks() {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
   return (
-    <Form className="form">
+    <Form className="form" onSubmit={handleSubmit}>
       <legend className="form_name">Tạo mới một đầu sách</legend>
+      <Form.Group className="mb-3 form_items"></Form.Group>
       <Form.Group className="mb-3 form_items">
         <Form.Label className="form_items_label">Tên sách</Form.Label>
         <Form.Control
@@ -69,7 +73,12 @@ function AddBooks() {
           placeholder="Nhập số lượng"
         />
       </Form.Group>
-      <Button type="submit">Thêm sách mới</Button>
+      <div className="btnSubmit">
+        <Button type="submit" variant="primary">
+          Thêm sách mới
+        </Button>
+        <Button variant="warning">Nhập lại</Button>
+      </div>
     </Form>
   );
 }

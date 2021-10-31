@@ -1,6 +1,7 @@
 import accountApi from "apis/authApi";
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
+import "./ActiveEmail.scss";
 
 function ActiveEmail() {
   //   console.log("nút active email", email);
@@ -17,7 +18,9 @@ function ActiveEmail() {
 
   return (
     <div>
-      <Button onClick={sendEmail}>Kích hoạt email</Button>
+      <Button className="btnActive" onClick={sendEmail}>
+        Kích hoạt email
+      </Button>
     </div>
   );
 }

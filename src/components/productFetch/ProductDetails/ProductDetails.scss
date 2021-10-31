@@ -1,29 +1,73 @@
-.box {
+$color_bg: #e83e8c;
+$color_font: #fff;
+
+.containProducts {
+  width: 100%;
+
   display: flex;
-  justify-content: center;
-  align-items: center;
-  .contain {
-    width: 70%;
+  flex-direction: column;
+
+  gap: 20px;
+  &_title {
+    width: 100%;
+    border-radius: 2px;
+    background: $color_bg;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    span {
+      font-size: 30px;
+      margin-left: 20px;
+      color: $color_font;
+      font-weight: 600;
+    }
+  }
+  &_details {
+    width: 100%;
+    // border: 1px solid rgb(240, 223, 223);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
     display: flex;
     flex-direction: row;
-    gap: 50px;
+    // gap: 60px;
+
     &_img {
+      width: 40%;
+      height: 100%;
+      text-align: center;
       img {
-        width: 340px;
-        height: 500px;
+        // margin-top: 20px;
+        width: 60%;
+        height: 90%;
       }
     }
+
     &_contents {
+      height: 100%;
+      width: 50%;
+
       display: flex;
       flex-direction: column;
       gap: 20px;
-      &_title {
-        font-size: 30px;
-        font-weight: 400;
-      }
-      &_btn {
-        &:focus {
-          box-shadow: none;
+
+      &_rows {
+        width: 80%;
+
+        display: flex;
+        flex-direction: row;
+
+        border-bottom: 1px solid rgb(255, 220, 235);
+        padding-bottom: 10px;
+        td {
+          flex: 1;
+        }
+        // &:first-child {
+        //   margin-top: 30px;
+        // }
+        &:last-child {
+          border-bottom: none;
+        }
+        .btnClick {
+          &:focus {
+            box-shadow: none;
+          }
         }
       }
     }

@@ -1,0 +1,15 @@
+.menuProfile {
+  &_info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    h2 {
+      font-size: 25px;
+      font-weight: 400;
+      span {
+        font-weight: 300;
+        margin-left: 20px;
+      }
+    }
+  }
+}
