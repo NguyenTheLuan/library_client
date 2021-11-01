@@ -30,7 +30,7 @@ function Carts() {
       <OverlayTrigger
         key="bottom"
         placement="bottom"
-        overlay={<Tooltip id="tooltip-top">Đến giỏ hàng</Tooltip>}
+        overlay={<Tooltip>Đến giỏ hàng</Tooltip>}
       >
         {cartIcon()}
       </OverlayTrigger>
