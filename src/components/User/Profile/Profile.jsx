@@ -1,13 +1,14 @@
+import accountApi from "apis/authApi";
+import ActiveEmail from "components/Auth/ActiveEmail/ActiveEmail";
 import React, { useEffect, useState } from "react";
+import { Alert, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { selectUser } from "reducers/userSlice";
-import { Alert, Button } from "react-bootstrap";
-import ActiveEmail from "components/Auth/ActiveEmail/ActiveEmail";
-import accountApi from "apis/authApi";
-
 import "./Profile.scss";
 
 function Profile() {
+  // const { path, url } = useRouteMatch();
+  // console.log(path);
   const user = useSelector(selectUser);
   const [userInfo, setUserInfo] = useState({});
   const [error, setError] = useState("");
@@ -16,7 +17,7 @@ function Profile() {
     getInfo();
   }, []);
 
-  console.log("User Info: ", userInfo);
+  // console.log("User Info: ", userInfo);
 
   const isActiveEmail = (active) => {
     if (!active) {
@@ -31,7 +32,8 @@ function Profile() {
       const response = await accountApi.getInfoUser(user.id);
       setUserInfo(response);
     } catch (error) {
-      setError({ error });
+      setError(error.response.data.message);
+      // console.log({ error });
     }
   };
 

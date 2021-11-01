@@ -11,7 +11,7 @@ function DashBoard({ url }) {
   }, []);
 
   const handleShow = () => {
-    return localStorage.getItem("showItem");
+    return sessionStorage.getItem("showItem");
   };
 
   return (
@@ -28,7 +28,7 @@ function DashBoard({ url }) {
       </div>
       <Accordion
         defaultActiveKey={handleShow}
-        onSelect={(e) => localStorage.setItem("showItem", e)}
+        onSelect={(e) => sessionStorage.setItem("showItem", e)}
       >
         {/* Quản lý người dùng */}
         <Accordion.Item eventKey="0">

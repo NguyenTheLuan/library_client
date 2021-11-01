@@ -1,6 +1,6 @@
 import Logout from "components/Auth/Logout/Logout";
 import VerifyEmail from "components/Auth/VerifyEmail/VerifyEmail";
-import Carts from "components/User/Carts/Carts";
+import MyCarts from "components/User/MyCarts/MyCarts";
 import Profile from "components/User/Profile/Profile";
 import ResetPassword from "components/User/ResetPassword/ResetPassword";
 import React from "react";
@@ -71,7 +71,7 @@ function User() {
             />
             <Route
               path={`${path}/carts`}
-              component={() => <Carts />}
+              component={() => <MyCarts />}
               exact={true}
             />
           </Switch>

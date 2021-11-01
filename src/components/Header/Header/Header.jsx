@@ -11,11 +11,13 @@ import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { selectUser } from "reducers/userSlice";
 import "./Header.scss";
+import Carts from "components/customComponents/Carts/Carts";
 
 function Header() {
   const history = useHistory();
   const isUser = useSelector(selectUser);
 
+  //Hiện tên cuối
   const showName = (name) => {
     const getName = name.split(" ");
     return getName[getName.length - 1];
@@ -25,26 +27,28 @@ function Header() {
     if (isUser && isUser.status === "active") {
       if (isUser.role === "user") {
         return (
-          <div className="header_btn">
+          <>
             <span className="nameUser">Xin chào, {showName(isUser.name)}</span>
             {/* <Logout /> */}
+            <Carts />
             <DropdownItems />
-          </div>
+          </>
         );
       } else {
         return (
-          <div className="header_btn">
+          <>
             <span className="nameUser">Xin chào, {showName(isUser.name)}</span>
             <Logout />
-          </div>
+          </>
         );
       }
     } else {
       return (
         <div className="header_btn" onClick={() => history.push("/login")}>
-          <span>
+          {/* <span>
             <BsFillPersonFill className="icon" />
-          </span>
+          </span> */}
+          <Carts />
           <Button variant="primary">Đăng Nhập</Button>
         </div>
       );
@@ -73,7 +77,7 @@ function Header() {
           </Button>
         </Form.Group>
       </div>
-      {checkBtn()}
+      <div className="header_btn">{checkBtn()}</div>
     </div>
   );
 }

@@ -56,7 +56,7 @@
     flex-direction: row;
     // justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
     .icon {
       font-size: 40px;
       color: white;
@@ -66,25 +66,10 @@
     .nameUser {
       color: white;
 
-      width: 140px;
+      width: 120px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
-
-    // .logged {
-    //   display: flex;
-    //   flex-direction: row;
-    //   justify-content: flex-start;
-    //   align-items: center;
-    //   gap: 10px;
-    //   span {
-    //     // width: 110px;
-    //     color: white;
-    //     font-weight: 200;
-    //     text-overflow: ellipsis;
-    //     overflow: hidden;
-    //   }
-    // }
   }
 }

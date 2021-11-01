@@ -12,6 +12,11 @@ const productsApi = {
     const url = `${PRODUCTS_API_ENDPOINT}/${id}`;
     return axiosClient.get(url);
   },
+  //tạo sách mới
+  postCreateBook: (bookInfo) => {
+    const url = PRODUCTS_API_ENDPOINT;
+    return axiosClient.post(url, bookInfo);
+  },
 };
 
 export default productsApi;

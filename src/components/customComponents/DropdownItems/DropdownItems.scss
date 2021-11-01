@@ -1,11 +1,15 @@
 .dropdownMain {
-  &:focus {
-    box-shadow: none;
+  //fix màu user
+  #dropdown-basic {
+    &:focus {
+      box-shadow: none;
+      background: rgb(46, 2, 88);
+    }
   }
   &_name {
     padding: 10px 20px;
     .icon {
-      font-size: 25px;
+      font-size: 25px !important;
     }
   }
   &_menu {

@@ -1,0 +1,25 @@
+.carts {
+  position: relative;
+
+  width: 80px;
+  height: 80px;
+  &:hover {
+    cursor: pointer;
+  }
+
+  &_icon {
+    font-size: 40px;
+    color: white;
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  &_quantity {
+    position: absolute;
+    left: 80%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+  }
+}
