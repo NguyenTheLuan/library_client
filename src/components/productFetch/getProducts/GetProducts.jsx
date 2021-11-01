@@ -1,7 +1,6 @@
 import productsApi from "apis/productsApi";
+import ButtonAddCarts from "components/customComponents/ButtonHandleCarts/ButtonAddCarts";
 import { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
-import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useHistory, useRouteMatch } from "react-router";
 import "./GetProduct.scss";
 
@@ -32,12 +31,11 @@ export const GetProducts = () => {
   // console.log(products);
   const listBooks = products?.map((product, index) => {
     return (
-      <div
-        key={index}
-        className="menuBooks_list_items"
-        onClick={() => history.push(`${path}/${product.id}`)}
-      >
-        <div className="menuBooks_list_items_img">
+      <div key={index} className="menuBooks_list_items">
+        <div
+          className="menuBooks_list_items_img"
+          onClick={() => history.push(`${path}/details/${product.id}`)}
+        >
           <img src={product.cover} alt="img" />
         </div>
         <div className="menuBooks_list_items_contents">
@@ -48,11 +46,7 @@ export const GetProducts = () => {
             Tác giả: <span>{checkAuthorName(product.authors)}</span>
           </div>
           <div className="menuBooks_list_items_contents_title">
-            {/* <Button variant="primary">Xem Thử</Button> */}
-            <Button className="btnClick">
-              <AiOutlineShoppingCart className="btnClick_icon" />
-              <span className="btnClick_name">Thêm vào giỏ sách</span>
-            </Button>
+            <ButtonAddCarts product={product} />
           </div>
         </div>
       </div>

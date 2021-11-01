@@ -1,17 +1,16 @@
 // import LogoMenu from "assets/icons/LogoMenu.gif";
 import LogoMenu from "assets/icons/logo.png";
-import DropdownItems from "components/customComponents/DropdownItems/DropdownItems";
 import Logout from "components/Auth/Logout/Logout";
+import Carts from "components/customComponents/Carts/Carts";
+import DropdownItems from "components/customComponents/DropdownItems/DropdownItems";
 import React from "react";
 import { Button, Form } from "react-bootstrap";
-import { BsFillPersonFill } from "react-icons/bs";
 import { GoSearch } from "react-icons/go";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { selectUser } from "reducers/userSlice";
 import "./Header.scss";
-import Carts from "components/customComponents/Carts/Carts";
 
 function Header() {
   const history = useHistory();

@@ -1,8 +1,7 @@
 import productsApi from "apis/productsApi";
+import ButtonAddCarts from "components/customComponents/ButtonHandleCarts/ButtonAddCarts";
 import React, { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
 import { useParams } from "react-router";
-import { AiOutlineShoppingCart } from "react-icons/ai";
 import "./ProductDetails.scss";
 
 function ProductDetails() {
@@ -31,7 +30,7 @@ function ProductDetails() {
     }
   };
 
-  console.log(productDetails);
+  // console.log(productDetails);
   //   console.log(getDetails);
   const renderBook = productDetails?.map((details, index) => {
     return (
@@ -42,42 +41,41 @@ function ProductDetails() {
         </div>
         {/* Thông tin chi tiết */}
         <table className="containProducts_details_contents">
-          <tr className="containProducts_details_contents_rows">
-            <td>
-              <strong>Tên</strong>
-            </td>
-            <td>{details.title}</td>
-            <td></td>
-          </tr>
-          <tr className="containProducts_details_contents_rows">
-            <td>
-              <strong>Tác giả</strong>
-            </td>
-            <td>{checkAuthorName(details.authors)}</td>
-            <td></td>
-          </tr>
-          <tr className="containProducts_details_contents_rows">
-            <td>
-              <strong>Số lượng còn lại</strong>
-            </td>
-            <td>{checkQuantity(details.copies)}</td>
-            <td></td>
-          </tr>
-          <tr className="containProducts_details_contents_rows">
-            <td>
-              <strong>Thời gian cho mượn</strong>
-            </td>
-            <td>{details.loanPeriodDays}</td>
-            <td></td>
-          </tr>
-          <tr className="containProducts_details_contents_rows">
-            <td>
-              <Button className="btnClick">
-                <AiOutlineShoppingCart className="btnClick_icon" />
-                <span className="btnClick_name">Thêm vào giỏ sách</span>
-              </Button>
-            </td>
-          </tr>
+          <tbody>
+            <tr className="containProducts_details_contents_rows">
+              <td>
+                <strong>Tên</strong>
+              </td>
+              <td>{details.title}</td>
+              <td></td>
+            </tr>
+            <tr className="containProducts_details_contents_rows">
+              <td>
+                <strong>Tác giả</strong>
+              </td>
+              <td>{checkAuthorName(details.authors)}</td>
+              <td></td>
+            </tr>
+            <tr className="containProducts_details_contents_rows">
+              <td>
+                <strong>Số lượng còn lại</strong>
+              </td>
+              <td>{checkQuantity(details.copies)}</td>
+              <td></td>
+            </tr>
+            <tr className="containProducts_details_contents_rows">
+              <td>
+                <strong>Thời gian cho mượn</strong>
+              </td>
+              <td>{details.loanPeriodDays}</td>
+              <td></td>
+            </tr>
+            <tr className="containProducts_details_contents_rows">
+              <td>
+                <ButtonAddCarts product={details} />
+              </td>
+            </tr>
+          </tbody>
         </table>
       </div>
     );

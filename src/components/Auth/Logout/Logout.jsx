@@ -24,6 +24,7 @@ function Logout() {
 
       //clear user after logout
       localStorage.clear();
+      sessionStorage.clear();
       dispatch(logOut());
       //return to Home Page
       history.push("/");

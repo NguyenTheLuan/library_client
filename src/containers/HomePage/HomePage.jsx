@@ -3,7 +3,7 @@ import Navigation from "components/Header/Navigation/Navigation";
 import { GetProducts } from "components/productFetch/getProducts/GetProducts";
 import ProductDetails from "components/productFetch/ProductDetails/ProductDetails";
 import React from "react";
-import { Route, Switch, useRouteMatch } from "react-router";
+import { Redirect, Route, Switch, useRouteMatch } from "react-router";
 import BaiGiang from "./Bai-giang/BaiGiang";
 import "./HomePage.scss";
 
@@ -38,10 +38,13 @@ function HomePage() {
               />
               <Route path={`${path}/bai-giang`} component={BaiGiang} />
               <Route
-                path={`${path}/:itemsId`}
+                path={`${path}/details/:itemsId`}
                 component={() => <ProductDetails />}
                 exact={true}
               />
+              <Route>
+                <Redirect to="/NotFound" />
+              </Route>
             </Switch>
           </div>
         </div>

@@ -1,0 +1,14 @@
+.cartTable {
+  &_header {
+  }
+  &_contents {
+    tr {
+      th {
+        img {
+          width: 25px;
+          height: 40px;
+        }
+      }
+    }
+  }
+}

@@ -20,10 +20,11 @@
       flex-direction: column;
       // justify-content: center;
       // align-items: center;
-
+      border-radius: 10px;
+      transition: 0.3s ease-in-out;
       &:hover {
         cursor: pointer;
-        transition: 0.3s ease-in-out;
+        transition: 0.4s ease-in-out;
         box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
           rgba(0, 0, 0, 0.22) 0px 15px 12px;
       }
@@ -31,7 +32,7 @@
         // width: 100%;
         // width: 220px;
         // height: 300px;
-        padding-top: 10px;
+        padding-top: 20px;
         width: 100%;
 
         display: flex;
@@ -52,7 +53,7 @@
         justify-content: center;
         align-items: center;
         gap: 10px;
-        padding-bottom: 10px;
+        padding-bottom: 20px;
         &_title {
           .btnClick {
             background: #3f51b5;

@@ -1,0 +1,13 @@
+.btnClick {
+  background: #3f51b5;
+  &_icon {
+    font-size: 20px;
+  }
+  &_name {
+    margin-left: 10px;
+    line-height: 20px;
+  }
+  &:focus {
+    box-shadow: none !important;
+  }
+}
