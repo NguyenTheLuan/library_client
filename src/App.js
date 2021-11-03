@@ -4,7 +4,6 @@ import Register from "components/Auth/Register/Register";
 import Admin from "containers/Admin/Admin";
 import HomePage from "containers/HomePage/HomePage";
 import NotFound from "containers/HomePage/NotFound/NotFound";
-
 import User from "containers/User/User";
 import React from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
