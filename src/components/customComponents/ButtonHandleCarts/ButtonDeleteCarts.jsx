@@ -12,7 +12,6 @@ function ButtonDeleteCarts({ product }) {
   // console.log("delete products", { product });
   const user = useSelector(selectUser);
   const history = useHistory();
-  const { id } = product;
 
   const dispatch = useDispatch();
 
@@ -36,7 +35,6 @@ function ButtonDeleteCarts({ product }) {
     if (!user) {
       history.push("/login");
     } else {
-      //Xoá book by id
       deleteCarts();
     }
   };

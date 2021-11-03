@@ -2,6 +2,7 @@ import Logout from "components/Auth/Logout/Logout";
 import VerifyEmail from "components/Auth/VerifyEmail/VerifyEmail";
 import MyCarts from "components/User/MyCarts/MyCarts";
 import Profile from "components/User/Profile/Profile";
+import Reservation from "components/User/Reservation/Reservation";
 import ResetPassword from "components/User/ResetPassword/ResetPassword";
 import React from "react";
 import { FaUserCircle } from "react-icons/fa";
@@ -35,6 +36,9 @@ function User() {
           </NavLink>
           <NavLink to={`${path}/carts`} activeClassName="active">
             Giỏ Hàng
+          </NavLink>
+          <NavLink to={`${path}/reservation`} activeClassName="active">
+            Xem lịch hẹn
           </NavLink>
           <Logout />
         </div>
@@ -72,6 +76,11 @@ function User() {
             <Route
               path={`${path}/carts`}
               component={() => <MyCarts />}
+              exact={true}
+            />
+            <Route
+              path={`${path}/reservation`}
+              component={() => <Reservation />}
               exact={true}
             />
           </Switch>

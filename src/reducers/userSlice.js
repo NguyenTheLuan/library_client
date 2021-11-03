@@ -6,13 +6,20 @@ const userSlice = createSlice({
     user: JSON.parse(localStorage.getItem("user"))
       ? JSON.parse(localStorage.getItem("user"))
       : null,
+    clickItems: null,
   },
   reducers: {
-    loginIn: (state, action) => {
+    //auth
+    loginIn(state, action) {
       state.user = action.payload;
     },
-    logOut: (state) => {
+    logOut(state) {
       state.user = null;
+    },
+
+    //handle Click
+    chooseItems(state, action) {
+      state.clickItems = action.payload;
     },
   },
 });
@@ -20,5 +27,6 @@ const userSlice = createSlice({
 export const { loginIn, logOut } = userSlice.actions;
 
 export const selectUser = (state) => state.user.user;
+export const selectClickItems = (state) => state.user.clickItems;
 
 export default userSlice.reducer;

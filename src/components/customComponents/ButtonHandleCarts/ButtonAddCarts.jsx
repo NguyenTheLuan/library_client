@@ -12,7 +12,6 @@ function ButtonAddCarts({ product }) {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
   const history = useHistory();
-  // useEffect(() => {}, []);
 
   const addCarts = async () => {
     const userId = user.id;
@@ -25,7 +24,8 @@ function ButtonAddCarts({ product }) {
       dispatch(addBookById(bookId));
       alert("Add sản phẩm thành công");
     } catch (error) {
-      console.log("lỗi tại buttonAddCarts", error.response.data.message);
+      // console.log("lỗi tại buttonAddCarts", error.response.data.message);
+      alert(`Thất bại ${error.response.data.message}`);
     }
   };
 

@@ -22,10 +22,15 @@ const userApi = {
     return axiosClient.delete(url);
   },
 
-  //fn: tạo lịch hẹn nhận sách mới
-  postSchedule: (id) => {
-    const url = `${USER_API_ENDPOINT}/${id}/reservations`;
+  //fn: lấy lịch sử mượn trả sách của người dùng
+  postScheduledTimes: (id) => {
+    const url = `${USER_API_ENDPOINT}/${id}/books`;
     return axiosClient.post(url);
+  },
+  //fn: tạo lịch hẹn nhận sách mới
+  postSchedule: (id, books) => {
+    const url = `${USER_API_ENDPOINT}/${id}/reservations`;
+    return axiosClient.post(url, books);
   },
 
   //fn: Lấy danh sách hẹn của người dùng
