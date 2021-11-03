@@ -8,7 +8,7 @@ import { deleteBookById } from "reducers/bookSlice";
 import { selectUser } from "reducers/userSlice";
 import "./ButtonStyleCarts.scss";
 
-function ButtonDeleteCarts({ product, onUpdateCart }) {
+function ButtonDeleteCarts({ product }) {
   // console.log("delete products", { product });
   const user = useSelector(selectUser);
   const history = useHistory();
@@ -16,24 +16,17 @@ function ButtonDeleteCarts({ product, onUpdateCart }) {
 
   const dispatch = useDispatch();
 
-  // const [update, setUpdate] = useState(false);
-  // useEffect(() => {}, []);
-
   const deleteCarts = async () => {
     //Truyền vào userId và bookId để tiến thành xoá
     const userId = user.id;
     const bookId = product.id;
     try {
       await userApi.deleteBooksOfCart(userId, bookId);
-      console.log("xoá thành công");
-
-      //set lại carts
-      // setUpdate(!update);
 
       //xoá bookById và resetup cho redux
       dispatch(deleteBookById(bookId));
       //Thông báo xoá thành công
-      // alert("Xoá sản phẩm thành công");
+      alert("Xoá sản phẩm thành công");
     } catch (error) {
       console.log("lỗi tại delecarts", { error });
     }
@@ -45,16 +38,9 @@ function ButtonDeleteCarts({ product, onUpdateCart }) {
     } else {
       //Xoá book by id
       deleteCarts();
-
-      //truyền id xoá cho thằng cha
-      getIdCart(id);
     }
   };
 
-  //truyền props cho cha để reset cart
-  const getIdCart = (isUpdate) => {
-    return onUpdateCart(isUpdate);
-  };
   return (
     <>
       <Button
