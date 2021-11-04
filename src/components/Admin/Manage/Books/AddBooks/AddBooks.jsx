@@ -1,25 +1,65 @@
 import productsApi from "apis/productsApi";
 import "components/Admin/Manage/ManageForm.scss";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 
 function AddBooks() {
-  const [bookCreate, setBookCreate] = useState({});
+  // const [bookCreate, setBookCreate] = useState({});
+  //Tên sách
+  const [title, setTitle] = useState("");
+  //Số ngày mượn
+  const [loanPeriodDays, setLoanPeriodDays] = useState("");
+  //Số lượng
+  const [copies, setCopies] = useState("");
+  //Tên tác giả
+  const [authors, setAuthors] = useState("");
+  //Tiêu đề
+  const [categories, setCategories] = useState("");
+  //Mô tả
+  const [description, setDescription] = useState("");
+
+  const [postImage, setPostImage] = useState();
+
   const [error, setError] = useState("");
   const createBooks = async () => {
-    const infoBookCreate = { ...bookCreate };
+    // const infoBookCreate = { ...bookCreate, ...postImage };
+    // console.log("đây là info sách muốn nhập", infoBookCreate);
+
+    const formData = new FormData();
+    formData.append("cover", postImage);
+    formData.append("title", title);
+    formData.append("loanPeriodDays", loanPeriodDays);
+    formData.append("copies", copies);
+    formData.append("authors", authors);
+    formData.append("categories", categories);
+    formData.append("description", description);
+
+    // console.log("đây là formData", formData.entries());
     try {
-      const response = await productsApi.postCreateBook(infoBookCreate);
-      console.log("tạo sách thành công", response);
+      await productsApi.postCreateBook(formData);
+      // const response = await productsApi.postCreateBook(formData);
+      // console.log("tạo sách thành công", response);
+      alert("Tạo thành công");
     } catch (error) {
       console.log("lỗi rồi", { error });
       setError(error.response.data.message);
     }
   };
 
+  //Xử lí ảnh
+  const handleImgPost = (e) => {
+    // setPostImage({ [e.target.name]: e.target.files[0] });
+    setPostImage(e.target.files[0]);
+  };
+
+  // useEffect(() => {
+  //   console.log("img đã nhận", postImage);
+  // }, [postImage]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(bookCreate);
+    // setBookCreate({ ...bookCreate, ...img });
+    // console.log("dữ liệu đã nhập", bookCreate);
     createBooks();
   };
   return (
@@ -34,9 +74,7 @@ function AddBooks() {
           className="form_items_input"
           type="text"
           placeholder="Nhập tên tên sách"
-          onChange={(e) =>
-            setBookCreate({ ...bookCreate, [e.target.name]: e.target.value })
-          }
+          onChange={(e) => setTitle(e.target.value)}
         />
       </Form.Group>
       <Form.Group className="mb-3 form_items">
@@ -46,9 +84,7 @@ function AddBooks() {
           className="form_items_input"
           type="file"
           placeholder="Nhập link hình ảnh"
-          onChange={(e) =>
-            setBookCreate({ ...bookCreate, [e.target.name]: e.target.value })
-          }
+          onChange={handleImgPost}
         />
       </Form.Group>
       <Form.Group className="mb-3 form_items">
@@ -58,9 +94,7 @@ function AddBooks() {
           className="form_items_input"
           type="text"
           placeholder="Nhập tên tác giả"
-          onChange={(e) =>
-            setBookCreate({ ...bookCreate, [e.target.name]: e.target.value })
-          }
+          onChange={(e) => setAuthors(e.target.value)}
         />
       </Form.Group>
       <Form.Group className="mb-3 form_items">
@@ -70,9 +104,7 @@ function AddBooks() {
           className="form_items_input"
           type="text"
           placeholder="Nhập tên thể loại"
-          onChange={(e) =>
-            setBookCreate({ ...bookCreate, [e.target.name]: e.target.value })
-          }
+          onChange={(e) => setCategories(e.target.value)}
         />
       </Form.Group>
       <Form.Group className="mb-3 form_items">
@@ -82,9 +114,7 @@ function AddBooks() {
           className="form_items_input"
           type="text"
           placeholder="Nhập tên mô tả"
-          onChange={(e) =>
-            setBookCreate({ ...bookCreate, [e.target.name]: e.target.value })
-          }
+          onChange={(e) => setDescription(e.target.value)}
         />
       </Form.Group>
       <Form.Group className="mb-3 form_items">
@@ -94,9 +124,7 @@ function AddBooks() {
           className="form_items_input"
           type="text"
           placeholder="Nhập số ngày mà người mượn có thể mượn sách"
-          onChange={(e) =>
-            setBookCreate({ ...bookCreate, [e.target.name]: e.target.value })
-          }
+          onChange={(e) => setLoanPeriodDays(e.target.value)}
         />
       </Form.Group>
       <Form.Group className="mb-3 form_items">
@@ -106,9 +134,7 @@ function AddBooks() {
           className="form_items_input"
           type="text"
           placeholder="Nhập số lượng"
-          onChange={(e) =>
-            setBookCreate({ ...bookCreate, [e.target.name]: e.target.value })
-          }
+          onChange={(e) => setCopies(e.target.value)}
         />
       </Form.Group>
       <div className="btnSubmit">

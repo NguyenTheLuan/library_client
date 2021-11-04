@@ -3,12 +3,14 @@ import ButtonDeleteCarts from "components/customComponents/ButtonHandleCarts/But
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { selectProducts } from "reducers/bookSlice";
+import { selectActiveCarts, selectProducts } from "reducers/bookSlice";
 import "./MyCarts.scss";
 
 function MyCarts() {
   //Lấy Books từ redux
   const getCarts = useSelector(selectProducts);
+  //Trạng thái update từ carts
+  const isActive = useSelector(selectActiveCarts);
 
   // console.log("get carts from redux", getCarts);
 
@@ -49,7 +51,7 @@ function MyCarts() {
 
   useEffect(() => {
     getCarts && setCarts(getCarts);
-  }, [getCarts]);
+  }, [getCarts, isActive]);
 
   // useEffect(() => {
   //   console.log("select books", selectBooks);

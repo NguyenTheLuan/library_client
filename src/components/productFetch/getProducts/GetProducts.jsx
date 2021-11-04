@@ -55,14 +55,7 @@ export const GetProducts = () => {
 
   return (
     <div className="menuBooks">
-      <div className="menuBooks_list">
-        {listBooks}
-        {listBooks}
-        {listBooks}
-        {listBooks}
-        {listBooks}
-        {listBooks}
-      </div>
+      <div className="menuBooks_list">{listBooks}</div>
     </div>
   );
 };

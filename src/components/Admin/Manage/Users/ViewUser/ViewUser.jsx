@@ -40,7 +40,7 @@ function ViewUser() {
     if (user.role === "user") {
       return (
         <tr key={index}>
-          <td>{index}</td>
+          <td>{index - 2}</td>
           <td>{user.name}</td>
           <td>{user.role}</td>
           <td>{user.email}</td>

@@ -6,7 +6,7 @@ const userSlice = createSlice({
     user: JSON.parse(localStorage.getItem("user"))
       ? JSON.parse(localStorage.getItem("user"))
       : null,
-    clickItems: null,
+    // clickItems: null,
   },
   reducers: {
     //auth
@@ -18,9 +18,9 @@ const userSlice = createSlice({
     },
 
     //handle Click
-    chooseItems(state, action) {
-      state.clickItems = action.payload;
-    },
+    // chooseItems(state, action) {
+    //   state.clickItems = action.payload;
+    // },
   },
 });
 

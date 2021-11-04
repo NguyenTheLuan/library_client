@@ -11,6 +11,7 @@ const productSlice = createSlice({
     quantityBooks: JSON.parse(sessionStorage.getItem("carts"))
       ? JSON.parse(sessionStorage.getItem("carts")).totalResults
       : null,
+    isUpdate: false,
   },
   reducers: {
     //Nhận books khi load lại Cart từ api
@@ -40,13 +41,22 @@ const productSlice = createSlice({
       state.books = newItemsFromCarts;
       sessionStorage.setItem("carts", JSON.stringify(state.books));
     },
+    isUpdateCart(state, action) {
+      state.isUpdate = action.payload;
+    },
   },
 });
 
-export const { getAllProduct, getQuantity, deleteBookById, addBookById } =
-  productSlice.actions;
+export const {
+  getAllProduct,
+  getQuantity,
+  deleteBookById,
+  addBookById,
+  isUpdateCarts,
+} = productSlice.actions;
 
 export const selectProducts = (state) => state.books.books;
 export const selectQuantity = (state) => state.books.quantityBooks;
+export const selectActiveCarts = (state) => state.books.isUpdate;
 
 export default productSlice.reducer;

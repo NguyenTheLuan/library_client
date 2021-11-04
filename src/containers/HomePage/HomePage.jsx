@@ -2,13 +2,41 @@ import Header from "components/Header/Header/Header";
 import Navigation from "components/Header/Navigation/Navigation";
 import { GetProducts } from "components/productFetch/getProducts/GetProducts";
 import ProductDetails from "components/productFetch/ProductDetails/ProductDetails";
-import React from "react";
-import { Redirect, Route, Switch, useRouteMatch } from "react-router";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import {
+  Redirect,
+  Route,
+  Switch,
+  useHistory,
+  useRouteMatch,
+} from "react-router";
+import { selectUser } from "reducers/userSlice";
 import BaiGiang from "./Bai-giang/BaiGiang";
 import "./HomePage.scss";
 
 function HomePage() {
   // const match = useRouteMatch();
+  const isUser = useSelector(selectUser);
+  const history = useHistory();
+
+  useEffect(() => {
+    isUser && checkRole();
+  }, [isUser]);
+
+  useEffect(() => {
+    isUser && checkRole();
+    return () => {
+      cleanup;
+    };
+  }, [input]);
+
+  const checkRole = () => {
+    if (isUser.role === "admin") {
+      history.push("/admin");
+    }
+  };
+
   let { path, url } = useRouteMatch();
 
   return (
