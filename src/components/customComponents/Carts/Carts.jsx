@@ -25,7 +25,13 @@ function Carts() {
   // const [error, setError] = useState("");
 
   useEffect(() => {
-    isUser && getCarts();
+    let isMounted = true;
+    if (isMounted === true) {
+      isUser && getCarts();
+    }
+    return () => {
+      isMounted = false;
+    };
   }, [cartCounts, setQuantity]);
 
   const getCarts = async () => {

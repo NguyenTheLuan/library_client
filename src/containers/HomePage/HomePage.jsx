@@ -21,15 +21,14 @@ function HomePage() {
   const history = useHistory();
 
   useEffect(() => {
-    isUser && checkRole();
-  }, [isUser]);
-
-  useEffect(() => {
-    isUser && checkRole();
+    let isMounted = true;
+    if (isMounted) {
+      isUser && checkRole();
+    }
     return () => {
-      cleanup;
+      isMounted = false;
     };
-  }, [input]);
+  }, [isUser]);
 
   const checkRole = () => {
     if (isUser.role === "admin") {

@@ -3,13 +3,22 @@ import React, { useEffect, useState } from "react";
 import { Table, Button } from "react-bootstrap";
 
 import "components/Admin/Manage/ManageForm.scss";
+import DeleteBooks from "../DeleteBooks/DeleteBooks";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getAllProduct,
+  selectProducts,
+  selectQuantity,
+} from "reducers/bookSlice";
 
 function GetBooks() {
   const [products, setProducts] = useState([]);
-
+  const dispatch = useDispatch();
+  const selectBooks = useSelector(selectProducts);
+  const quantity = useSelector(selectQuantity);
   useEffect(() => {
     getAllProducts();
-  }, []);
+  }, [quantity]);
 
   // const checkQuantity = (quantityBooks) => {
   //   return quantityBooks;
@@ -22,17 +31,19 @@ function GetBooks() {
     try {
       const response = await productsApi.getBooks();
 
+      // console.log(response);
+      dispatch(getAllProduct(response.results));
       setProducts(response.results);
     } catch (error) {
       console.log("err ", error);
     }
   };
-  console.log("đây là trang admin Products", products);
+  // console.log("đây là trang admin Products", products);
   const showBody = products.map((bookDetails, index) => {
     return (
-      <tr className="viewMenu_table_body_row">
+      <tr className="viewMenu_table_body_row" key={index}>
         <td>{index}</td>
-        <td>{bookDetails.id}</td>
+        {/* <td>{bookDetails.id}</td> */}
         <td>{imgShow(bookDetails.cover)}</td>
         <td>{bookDetails.title}</td>
         <td>{bookDetails.availableCopies}</td>
@@ -43,7 +54,8 @@ function GetBooks() {
           <Button variant="success">Chỉnh sửa sách</Button>
         </td>
         <td>
-          <Button variant="danger">Xoá sách</Button>
+          {/* <Button variant="danger">Xoá sách</Button> */}
+          <DeleteBooks bookId={bookDetails.id} />
         </td>
       </tr>
     );
@@ -55,7 +67,7 @@ function GetBooks() {
         <thead className="viewMenu_table_header">
           <tr className="viewMenu_table_header_row">
             <th>#</th>
-            <th>ID</th>
+            {/* <th>ID</th> */}
             <th>Ảnh</th>
             <th>Tên sách</th>
             <th>Số lượng</th>

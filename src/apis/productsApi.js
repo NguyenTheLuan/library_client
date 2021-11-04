@@ -17,6 +17,11 @@ const productsApi = {
     const url = PRODUCTS_API_ENDPOINT;
     return axiosClient.post(url, bookInfo);
   },
+  //xoá sách
+  postDeleteBookById: (bookId) => {
+    const url = `${PRODUCTS_API_ENDPOINT}/${bookId}`;
+    return axiosClient.delete(url);
+  },
 };
 
 export default productsApi;
