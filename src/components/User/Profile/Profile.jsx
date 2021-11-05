@@ -3,7 +3,7 @@ import ActiveEmail from "components/Auth/ActiveEmail/ActiveEmail";
 import React, { useEffect, useState } from "react";
 import { Alert, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { selectUser } from "reducers/userSlice";
+import { selectUser } from "reducers/authSlice";
 import "./Profile.scss";
 
 function Profile() {

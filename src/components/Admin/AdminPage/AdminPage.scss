@@ -5,4 +5,33 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  &_menu {
+    width: 90%;
+    height: 90%;
+    display: flex;
+    flex-direction: row;
+    &_logo {
+      flex: 1;
+      .icons {
+        font-size: 200px;
+        color: rgb(91, 85, 95);
+      }
+    }
+    &_contents {
+      flex: 2;
+
+      font-size: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      &_items {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        .title {
+          width: 20%;
+        }
+      }
+    }
+  }
 }

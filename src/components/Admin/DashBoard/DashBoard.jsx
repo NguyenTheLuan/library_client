@@ -1,8 +1,13 @@
 import React, { useEffect } from "react";
 import { Accordion } from "react-bootstrap";
-import { ImHome } from "react-icons/im";
 import { Link, NavLink } from "react-router-dom";
 import "./DashBoard.scss";
+
+//icon
+import { MdOutlineAdminPanelSettings } from "react-icons/md";
+// import { GrUserSettings } from "react-icons/gr";
+import { FaUserCog } from "react-icons/fa";
+import { RiBookletFill } from "react-icons/ri";
 
 function DashBoard({ url }) {
   // console.log("dashboard", url);
@@ -17,11 +22,20 @@ function DashBoard({ url }) {
   return (
     <div>
       <div className="homeMenu">
-        <div className="homeMenu_link">
-          {/* <div className="homeNav"> */}
+        {/* <div className="homeMenu_link">
+          
           <Link to="/" exact={true}>
             <ImHome className="iconItem" />
             <span className="iconName">Trở lại trang chủ</span>
+          </Link>
+          
+        </div> */}
+        <div className="homeMenu_link">
+          {/* <div className="homeNav"> */}
+          <Link to="/admin" exact={true}>
+            {/* <ImHome className="iconItem" /> */}
+            <MdOutlineAdminPanelSettings className="iconItem" />
+            <span className="iconName">Admin dashboard</span>
           </Link>
           {/* </div> */}
         </div>
@@ -32,7 +46,10 @@ function DashBoard({ url }) {
       >
         {/* Quản lý người dùng */}
         <Accordion.Item eventKey="0">
-          <Accordion.Header>Quản Lý Người Dùng</Accordion.Header>
+          <Accordion.Header>
+            <FaUserCog className="iconItem" />
+            Quản Lý Người Dùng
+          </Accordion.Header>
           <Accordion.Body>
             <NavLink to={`${url}/users`} exact={true} activeClassName="active">
               Danh sách người dùng
@@ -57,7 +74,10 @@ function DashBoard({ url }) {
 
         {/* Quản Lý Sách */}
         <Accordion.Item eventKey="1">
-          <Accordion.Header>Quản Lý Sách</Accordion.Header>
+          <Accordion.Header>
+            <RiBookletFill className="iconItem" />
+            Quản Lý Sách
+          </Accordion.Header>
           <Accordion.Body>
             <NavLink to={`${url}/books`} exact={true} activeClassName="active">
               Tổng số sách

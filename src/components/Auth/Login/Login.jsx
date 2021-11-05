@@ -5,7 +5,7 @@ import { AiOutlineHome } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 //redux
-import { loginIn } from "reducers/userSlice";
+import { loginIn } from "reducers/authSlice";
 import "../StyleForm.scss";
 
 function Login() {

@@ -18,7 +18,7 @@ function CreateUser() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(userCreate);
+    // console.log(userCreate);
     createUser();
   };
   return (

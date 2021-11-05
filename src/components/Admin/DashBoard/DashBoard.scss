@@ -68,6 +68,11 @@
         &:focus {
           box-shadow: none;
         }
+
+        .iconItem {
+          font-size: 35px;
+          padding-right: 5px;
+        }
       }
     }
     .accordion-body {

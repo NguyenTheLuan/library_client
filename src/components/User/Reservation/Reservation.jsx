@@ -2,7 +2,7 @@ import userApi from "apis/userApi";
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { selectUser } from "reducers/userSlice";
+import { selectUser } from "reducers/authSlice";
 
 import "./Reservation.scss";
 

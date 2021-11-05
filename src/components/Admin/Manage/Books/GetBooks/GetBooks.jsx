@@ -39,7 +39,7 @@ function GetBooks() {
   const showBody = products.map((bookDetails, index) => {
     return (
       <tr className="viewMenu_table_body_row" key={index}>
-        <td>{index}</td>
+        <td>{index + 1}</td>
         {/* <td>{bookDetails.id}</td> */}
         <td>{imgShow(bookDetails.cover)}</td>
         <td>{bookDetails.title}</td>

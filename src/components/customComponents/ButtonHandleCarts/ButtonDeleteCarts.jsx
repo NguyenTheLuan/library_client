@@ -5,7 +5,7 @@ import { MdDeleteForever } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { deleteBookById } from "reducers/bookSlice";
-import { selectUser } from "reducers/userSlice";
+import { selectUser } from "reducers/authSlice";
 import "./ButtonStyleCarts.scss";
 
 function ButtonDeleteCarts({ product }) {

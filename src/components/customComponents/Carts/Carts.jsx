@@ -5,7 +5,7 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { getAllProduct, getQuantity, selectQuantity } from "reducers/bookSlice";
-import { selectUser } from "reducers/userSlice";
+import { selectUser } from "reducers/authSlice";
 import { TooltipItems } from "../TooltipItems/TooltipItems";
 import "./Carts.scss";
 

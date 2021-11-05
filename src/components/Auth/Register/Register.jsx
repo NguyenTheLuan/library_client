@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 
 import accountApi from "apis/authApi";
 import { useDispatch } from "react-redux";
-import { loginIn } from "reducers/userSlice";
+import { loginIn } from "reducers/authSlice";
 
 import { AiOutlineHome } from "react-icons/ai";
 import "../StyleForm.scss";

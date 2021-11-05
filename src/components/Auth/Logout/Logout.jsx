@@ -3,7 +3,7 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
-import { logOut } from "reducers/userSlice";
+import { logOut } from "reducers/authSlice";
 // import "./Logout.scss";
 
 function Logout() {
@@ -40,7 +40,7 @@ function Logout() {
 
   return (
     <Button type="submit" variant="danger" onClick={handleLogout}>
-      Logout
+      Đăng xuất
     </Button>
   );
 }

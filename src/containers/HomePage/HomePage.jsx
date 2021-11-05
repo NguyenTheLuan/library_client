@@ -11,7 +11,7 @@ import {
   useHistory,
   useRouteMatch,
 } from "react-router";
-import { selectUser } from "reducers/userSlice";
+import { selectUser } from "reducers/authSlice";
 import BaiGiang from "./Bai-giang/BaiGiang";
 import "./HomePage.scss";
 

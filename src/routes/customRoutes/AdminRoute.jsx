@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Redirect, Route } from "react-router";
-import { selectUser } from "reducers/userSlice";
+import { selectUser } from "reducers/authSlice";
 
 function AdminRoute({ children, ...rest }) {
   const isAdmin = useSelector(selectUser);

@@ -9,7 +9,8 @@ import { GoSearch } from "react-icons/go";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
-import { selectUser } from "reducers/userSlice";
+import { selectUser } from "reducers/authSlice";
+
 import "./Header.scss";
 
 function Header() {

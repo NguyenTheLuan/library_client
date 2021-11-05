@@ -5,7 +5,7 @@ import { Button } from "react-bootstrap";
 import { MdEventNote } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { isUpdateCarts } from "reducers/bookSlice";
-import { selectUser } from "reducers/userSlice";
+import { selectUser } from "reducers/authSlice";
 
 import "./ButtonStyleCarts.scss";
 
