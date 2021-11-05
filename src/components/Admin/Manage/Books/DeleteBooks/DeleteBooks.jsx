@@ -1,31 +1,31 @@
-import productsApi from "apis/productsApi";
-import React from "react";
+import Modals from "components/customComponents/Modals/Modals";
+import React, { useState } from "react";
 import { Button } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { deleteBookById } from "reducers/bookSlice";
 
 function DeleteBooks({ bookId }) {
-  const dispatch = useDispatch();
-  const deleteBookId = async () => {
-    const id = bookId;
-    console.log(id);
-    try {
-      await productsApi.postDeleteBookById(id);
-      dispatch(deleteBookById(id));
-      console.log("Thành công");
-    } catch (error) {
-      console.log("có lỗi", { error });
-    }
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
+
+  //Nhận props từ con
+  const onShow = (isShow) => {
+    // console.log("cha nhận được từ con", isShow);
+    setShow(isShow);
+    // return show;
   };
-  const handleClick = () => {
-    // console.log("đã lấy được Id", bookId);
-    deleteBookId();
-  };
+
   return (
     <div>
-      <Button variant="danger" onClick={handleClick}>
+      <Button variant="danger" onClick={handleShow}>
         Xoá sách
       </Button>
+
+      <Modals
+        onShow={onShow}
+        isShow={show}
+        title={"Tiến hành xoá sách"}
+        body={"Bạn có chắc chắn xoá không?"}
+        bookId={bookId}
+      />
     </div>
   );
 }

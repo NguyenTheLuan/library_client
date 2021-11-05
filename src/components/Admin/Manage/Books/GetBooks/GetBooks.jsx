@@ -1,20 +1,17 @@
 import productsApi from "apis/productsApi";
-import React, { useEffect, useState } from "react";
-import { Table, Button } from "react-bootstrap";
-
 import "components/Admin/Manage/ManageForm.scss";
-import DeleteBooks from "../DeleteBooks/DeleteBooks";
+import React, { useEffect, useState } from "react";
+import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getAllProduct,
-  selectProducts,
-  selectQuantity,
-} from "reducers/bookSlice";
+import { getAllProduct, selectQuantity } from "reducers/bookSlice";
+import DeleteBooks from "../DeleteBooks/DeleteBooks";
 
 function GetBooks() {
   const [products, setProducts] = useState([]);
   const dispatch = useDispatch();
-  const selectBooks = useSelector(selectProducts);
+  // const selectBooks = useSelector(selectProducts);
+
+  //Nhận số lượng thay đổi của cart => reset carts
   const quantity = useSelector(selectQuantity);
   useEffect(() => {
     getAllProducts();

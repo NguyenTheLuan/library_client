@@ -39,6 +39,7 @@ function AddBooks() {
       await productsApi.postCreateBook(formData);
       // const response = await productsApi.postCreateBook(formData);
       // console.log("tạo sách thành công", response);
+      setError("Tạo sách thành công");
       alert("Tạo thành công");
     } catch (error) {
       console.log("lỗi rồi", { error });
