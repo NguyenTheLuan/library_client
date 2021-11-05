@@ -10,6 +10,7 @@ function ActiveEmail() {
     const url = { redirectUrl: "http://localhost:3000/user/profile/verify" };
     try {
       await accountApi.sendVerificationEmail(url);
+      alert("Đã tiến thành xác thực. Hãy kiểm tra hộp thoại email!!");
     } catch (error) {
       console.log("sai rồi");
       console.log({ error });

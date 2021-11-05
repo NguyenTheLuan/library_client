@@ -4,6 +4,8 @@ import { Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { selectUser } from "reducers/userSlice";
 
+import "./Reservation.scss";
+
 function Reservation() {
   const isUser = useSelector(selectUser);
   const [reservation, setReservation] = useState([]);
@@ -13,13 +15,29 @@ function Reservation() {
     isUser && getReservation();
   }, []);
 
+  const timeDate = (time) => {
+    const date = new Date(time);
+    return (
+      <div className="cartTable_contents_rows_times_items">
+        <span>
+          Vào lúc {date.getHours() + 1} giờ : {date.getMinutes() + 1} phút :
+          {date.getSeconds() + 1} giây.
+        </span>
+        <span>
+          Ngày {date.getDate() + 1} tháng {date.getMonth() + 1} năm
+          {date.getFullYear()}
+        </span>
+      </div>
+    );
+  };
+
   const showBooks = (booksInfo) => {
-    console.log("booksInfo", booksInfo);
+    // console.log("booksInfo", booksInfo);
     return booksInfo.map((details, index) => {
       return (
-        <div key={index}>
-          <h2>{details.title}</h2>
+        <div key={index} className="cartTable_contents_rows_details_items">
           <img src={details.cover} />
+          <span>{details.title}</span>
         </div>
       );
     });
@@ -42,12 +60,18 @@ function Reservation() {
 
   const showReservation = reservation.map((details, index) => {
     return (
-      <tr key={index}>
-        <th>{index + 1}</th>
-        <th>{details.status}</th>
-        <th>{showBooks(details.books)}</th>
-        <th>{details.createdDate}</th>
-        <th>{details.dueDate}</th>
+      <tr key={index} className="cartTable_contents_rows">
+        <th className="cartTable_contents_rows_index">{index + 1}</th>
+        <th className="cartTable_contents_rows_status">{details.status}</th>
+        <th className="cartTable_contents_rows_details">
+          {showBooks(details.books)}
+        </th>
+        <th className="cartTable_contents_rows_times">
+          {timeDate(details.createdDate)}
+        </th>
+        <th className="cartTable_contents_rows_times">
+          {timeDate(details.dueDate)}
+        </th>
       </tr>
     );
   });
