@@ -3,17 +3,13 @@ import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { deleteBookById } from "reducers/bookSlice";
-function Modals({ isShow, onShow, bookId, title, body }) {
-  //   console.log("con nhận show từ cha", onShow());
-  //Modal
-  //show modal
-  const [show, setShow] = useState(false);
 
+function ModalDeleteBookId({ isShow, bookId, onShow, title, body }) {
   //Delete books by id
   const dispatch = useDispatch();
   const deleteBookId = async () => {
     const id = bookId;
-    console.log(id);
+    // console.log(id);
     try {
       await productsApi.postDeleteBookById(id);
       dispatch(deleteBookById(id));
@@ -42,10 +38,12 @@ function Modals({ isShow, onShow, bookId, title, body }) {
         <Button variant="danger" onClick={handleClick}>
           Xoá sách
         </Button>
-        <Button onClick={handleClose}>Huỷ</Button>
+        <Button variant="secondary" onClick={handleClose}>
+          Quay lại
+        </Button>
       </Modal.Footer>
     </Modal>
   );
 }
 
-export default Modals;
+export default ModalDeleteBookId;

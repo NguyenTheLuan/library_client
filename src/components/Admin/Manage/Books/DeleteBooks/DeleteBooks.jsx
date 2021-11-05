@@ -1,8 +1,8 @@
-import Modals from "components/customComponents/Modals/Modals";
+import ModalDeleteBookId from "components/customComponents/Modals/ModalDeleteBookId";
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 
-function DeleteBooks({ bookId }) {
+function DeleteBooks({ bookId, bookName }) {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
 
@@ -10,7 +10,6 @@ function DeleteBooks({ bookId }) {
   const onShow = (isShow) => {
     // console.log("cha nhận được từ con", isShow);
     setShow(isShow);
-    // return show;
   };
 
   return (
@@ -19,11 +18,11 @@ function DeleteBooks({ bookId }) {
         Xoá sách
       </Button>
 
-      <Modals
+      <ModalDeleteBookId
         onShow={onShow}
         isShow={show}
         title={"Tiến hành xoá sách"}
-        body={"Bạn có chắc chắn xoá không?"}
+        body={`Xoá ${bookName}, bạn có chắc chắn xoá không?`}
         bookId={bookId}
       />
     </div>

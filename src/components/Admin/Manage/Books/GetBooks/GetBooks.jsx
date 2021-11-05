@@ -52,7 +52,7 @@ function GetBooks() {
         </td>
         <td>
           {/* <Button variant="danger">Xoá sách</Button> */}
-          <DeleteBooks bookId={bookDetails.id} />
+          <DeleteBooks bookId={bookDetails.id} bookName={bookDetails.title} />
         </td>
       </tr>
     );

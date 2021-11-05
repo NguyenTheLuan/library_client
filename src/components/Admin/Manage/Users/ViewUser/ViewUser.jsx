@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Table, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import DeleteUser from "../DeleteUser/DeleteUser";
+import UpdateUser from "../UpdateUser/UpdateUser";
 
 // import "../UsersForm.scss";
 
@@ -47,10 +49,10 @@ function ViewUser() {
           <td>{activeEmail(user.isEmailVerified)}</td>
           {/* custom td */}
           <td>
-            <Button variant="success">Thay đổi thông tin</Button>
+            <UpdateUser userId={user.id} />
           </td>
           <td>
-            <Button variant="danger">Xoá người dùng</Button>
+            <DeleteUser userId={user.id} userEmail={user.email} />
           </td>
         </tr>
       );
