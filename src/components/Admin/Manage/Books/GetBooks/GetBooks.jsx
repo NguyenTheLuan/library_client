@@ -1,10 +1,11 @@
 import productsApi from "apis/productsApi";
 import "components/Admin/Manage/ManageForm.scss";
 import React, { useEffect, useState } from "react";
-import { Button, Table } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProduct, selectQuantity } from "reducers/bookSlice";
 import DeleteBooks from "../DeleteBooks/DeleteBooks";
+import UpdateBooksById from "../UpdateBooksById/UpdateBooksById";
 
 function GetBooks() {
   const [products, setProducts] = useState([]);
@@ -48,7 +49,7 @@ function GetBooks() {
         <td>{bookDetails.loanPeriodDays}</td>
         {/* custom td */}
         <td>
-          <Button variant="success">Chỉnh sửa sách</Button>
+          <UpdateBooksById bookId={bookDetails.id} />
         </td>
         <td>
           {/* <Button variant="danger">Xoá sách</Button> */}
@@ -60,6 +61,7 @@ function GetBooks() {
 
   return (
     <div className="viewMenu">
+      <h2>Thông tin sách</h2>
       <Table className="viewMenu_table" striped bordered hover>
         <thead className="viewMenu_table_header">
           <tr className="viewMenu_table_header_row">

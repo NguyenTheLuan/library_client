@@ -8,7 +8,6 @@ function DeleteBooks({ bookId, bookName }) {
 
   //Nhận props từ con
   const onShow = (isShow) => {
-    // console.log("cha nhận được từ con", isShow);
     setShow(isShow);
   };
 

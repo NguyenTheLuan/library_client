@@ -36,7 +36,7 @@ function Reservation() {
     return booksInfo.map((details, index) => {
       return (
         <div key={index} className="cartTable_contents_rows_details_items">
-          <img src={details.cover} />
+          <img src={details.cover} alt="cover" />
           <span>{details.title}</span>
         </div>
       );

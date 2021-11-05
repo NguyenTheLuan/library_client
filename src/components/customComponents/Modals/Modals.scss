@@ -1,0 +1,32 @@
+.modal-content {
+  width: 750px !important;
+  .modal-header {
+    font-weight: 600;
+  }
+  .modal-body {
+    .formMenu {
+      &_items {
+        display: flex;
+        flex-direction: row;
+        // gap: 20px;
+        padding: 10px 0;
+        &_label {
+          flex: 1;
+        }
+        &_control {
+          flex: 3;
+          &:focus {
+            box-shadow: none;
+          }
+        }
+      }
+    }
+  }
+  .modal-footer {
+    button {
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }
+}

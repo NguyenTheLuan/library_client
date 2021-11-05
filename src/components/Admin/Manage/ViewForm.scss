@@ -1,0 +1,22 @@
+.viewMenu {
+  &_table {
+    &_header {
+      &_row {
+        th {
+          text-transform: capitalize;
+        }
+      }
+    }
+    &_body {
+      &_row {
+        td {
+          button {
+            &:focus {
+              box-shadow: none !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}

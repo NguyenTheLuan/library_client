@@ -1,23 +1,24 @@
-import ModalUpdateUserInfo from "components/customComponents/Modals/ModalUpdateUserInfo";
+import ModalUpdateBookById from "components/customComponents/Modals/ModalUpdateBookById";
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 
-function UpdateUser({ userId }) {
+function UpdateBooksById({ bookId }) {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
+
   //Nhận props từ con
   const onShow = (isShow) => {
-    // console.log("cha nhận được từ con", isShow);
     setShow(isShow);
   };
+
   return (
     <>
       <Button variant="success" onClick={handleShow}>
-        Thay đổi thông tin
+        Chỉnh sửa sách
       </Button>
-      <ModalUpdateUserInfo onShow={onShow} isShow={show} userId={userId} />
+      <ModalUpdateBookById bookId={bookId} onShow={onShow} isShow={show} />
     </>
   );
 }
 
-export default UpdateUser;
+export default UpdateBooksById;

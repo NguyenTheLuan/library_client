@@ -1,12 +1,9 @@
 import adminApi from "apis/adminApi";
-import productsApi from "apis/productsApi";
-import React, { useState } from "react";
+import React from "react";
 import { Button, Modal } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { deleteBookById } from "reducers/bookSlice";
+import "./Modals.scss";
 function ModalDeleteUserId({ userId, isShow, onShow, title, body }) {
   //Delete books by id
-  const dispatch = useDispatch();
   const deleteUserId = async () => {
     const id = userId;
     // console.log(id);

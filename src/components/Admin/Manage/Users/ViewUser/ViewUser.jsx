@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import DeleteUser from "../DeleteUser/DeleteUser";
 import UpdateUser from "../UpdateUser/UpdateUser";
 
-// import "../UsersForm.scss";
+import "components/Admin/Manage/ViewForm.scss";
 
 function ViewUser() {
   const [userItems, setUserItems] = useState([]);
@@ -41,7 +41,7 @@ function ViewUser() {
   const showUsers = userItems.map((user, index) => {
     if (user.role === "user") {
       return (
-        <tr key={index}>
+        <tr className="viewMenu_table_body_row" key={index}>
           <td>{index - 2}</td>
           <td>{user.name}</td>
           <td>{user.role}</td>
@@ -61,29 +61,29 @@ function ViewUser() {
   });
 
   return (
-    <div className="formMainUser">
-      <div className="formContainer">
-        <h2>Thông Tin Người Dùng</h2>
-        <Table striped bordered hover>
-          {err && (
-            <Link to="/login">
-              <h2>{err}</h2>
-            </Link>
-          )}
-          <thead>
-            <tr>
-              <th>STT</th>
-              <th>Tên Người Dùng</th>
-              <th>Chức vụ</th>
-              <th>Email</th>
-              <th>Trình trạng email</th>
-              <th>Thay đổi thông tin</th>
-              <th>Xoá người dùng</th>
-            </tr>
-          </thead>
-          <tbody>{showUsers}</tbody>
-        </Table>
-      </div>
+    <div className="viewMenu">
+      {/* <div className="formContainer"> */}
+      <h2>Thông Tin Người Dùng</h2>
+      <Table className="viewMenu_table" striped bordered hover>
+        {err && (
+          <Link to="/login">
+            <h2>{err}</h2>
+          </Link>
+        )}
+        <thead className="viewMenu_table_header">
+          <tr className="viewMenu_table_header_row">
+            <th>STT</th>
+            <th>Tên Người Dùng</th>
+            <th>Chức vụ</th>
+            <th>Email</th>
+            <th>Trình trạng email</th>
+            <th>Thay đổi thông tin</th>
+            <th>Xoá người dùng</th>
+          </tr>
+        </thead>
+        <tbody className="viewMenu_table_body">{showUsers}</tbody>
+      </Table>
+      {/* </div> */}
     </div>
   );
 }
