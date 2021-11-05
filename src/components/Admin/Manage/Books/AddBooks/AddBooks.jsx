@@ -84,7 +84,6 @@ function AddBooks() {
           name="cover"
           className="form_items_input"
           type="file"
-          placeholder="Nhập link hình ảnh"
           onChange={handleImgPost}
         />
       </Form.Group>

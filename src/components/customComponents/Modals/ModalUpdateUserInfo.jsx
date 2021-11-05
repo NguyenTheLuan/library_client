@@ -15,7 +15,10 @@ function ModalUpdateUserInfo({ isShow, onShow, userId }) {
   return (
     <>
       <Modal show={isShow} onHide={handleClose}>
-        <Modal.Header>Thay đổi thông tin người dùng</Modal.Header>
+        <Modal.Header>
+          <span className="title">Thay đổi thông tin người dùng</span>
+          <span className="note">(Chỉ nhập thông tin cần thay đổi)</span>
+        </Modal.Header>
         <Modal.Body>
           <Form className="formMenu">
             <Form.Group className="formMenu_items">

@@ -2,7 +2,7 @@ import ModalUpdateBookById from "components/customComponents/Modals/ModalUpdateB
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 
-function UpdateBooksById({ bookId }) {
+function UpdateBooksById({ bookDetails }) {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
 
@@ -16,7 +16,11 @@ function UpdateBooksById({ bookId }) {
       <Button variant="success" onClick={handleShow}>
         Chỉnh sửa sách
       </Button>
-      <ModalUpdateBookById bookId={bookId} onShow={onShow} isShow={show} />
+      <ModalUpdateBookById
+        bookDetails={bookDetails}
+        onShow={onShow}
+        isShow={show}
+      />
     </>
   );
 }

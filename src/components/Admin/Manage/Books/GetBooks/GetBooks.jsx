@@ -49,7 +49,7 @@ function GetBooks() {
         <td>{bookDetails.loanPeriodDays}</td>
         {/* custom td */}
         <td>
-          <UpdateBooksById bookId={bookDetails.id} />
+          <UpdateBooksById bookDetails={bookDetails} />
         </td>
         <td>
           {/* <Button variant="danger">Xoá sách</Button> */}

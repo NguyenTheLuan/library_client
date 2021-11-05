@@ -22,6 +22,11 @@ const productsApi = {
     const url = `${PRODUCTS_API_ENDPOINT}/${bookId}`;
     return axiosClient.delete(url);
   },
+  //Update book byId
+  updateBookById: (bookId, infoBooks) => {
+    const url = `${PRODUCTS_API_ENDPOINT}/${bookId}`;
+    return axiosClient.patch(url, infoBooks);
+  },
 };
 
 export default productsApi;
