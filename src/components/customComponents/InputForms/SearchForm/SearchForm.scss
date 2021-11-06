@@ -1,0 +1,22 @@
+.formSearch {
+  display: flex;
+  justify-content: center;
+  //   align-items: center !important;
+  &_items {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    .formInput {
+      flex: 5;
+      &:focus {
+        box-shadow: none;
+      }
+    }
+    .formSearch {
+      flex: 1;
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }
+}

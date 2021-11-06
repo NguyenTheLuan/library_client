@@ -3,14 +3,14 @@ import LogoMenu from "assets/icons/logo.png";
 import Logout from "components/Auth/Logout/Logout";
 import Carts from "components/customComponents/Carts/Carts";
 import DropdownItems from "components/customComponents/DropdownItems/DropdownItems";
+import SearchForm from "components/customComponents/InputForms/SearchForm/SearchForm";
 import React from "react";
-import { Button, Form } from "react-bootstrap";
-import { GoSearch } from "react-icons/go";
+
+import { Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { selectUser } from "reducers/authSlice";
-
 import "./Header.scss";
 
 function Header() {
@@ -24,30 +24,20 @@ function Header() {
   };
 
   const checkBtn = () => {
+    //Đăng nhập
     if (isUser && isUser.status === "active") {
-      if (isUser.role === "user") {
-        return (
-          <>
-            <span className="nameUser">Xin chào, {showName(isUser.name)}</span>
-            {/* <Logout /> */}
-            <Carts />
-            <DropdownItems />
-          </>
-        );
-      } else {
-        return (
-          <>
-            <span className="nameUser">Xin chào, {showName(isUser.name)}</span>
-            <Logout />
-          </>
-        );
-      }
-    } else {
+      return (
+        <>
+          <span className="nameUser">Xin chào, {showName(isUser.name)}</span>
+          <Carts />
+          <DropdownItems />
+        </>
+      );
+    }
+    //Chưa đăng nhập
+    else {
       return (
         <div className="header_btn" onClick={() => history.push("/login")}>
-          {/* <span>
-            <BsFillPersonFill className="icon" />
-          </span> */}
           <Carts />
           <Button variant="primary">Đăng Nhập</Button>
         </div>
@@ -64,18 +54,7 @@ function Header() {
         </Link>
       </div>
       <div className="header_search">
-        <Form.Group className="header_search_form">
-          <Form.Label className="formLabel"></Form.Label>
-          <Form.Control
-            className="formInput"
-            type="input"
-            placeholder="Nhập tên sách bạn muốn tìm"
-          ></Form.Control>
-          <Button className="formSearch">
-            <GoSearch />
-            Tìm kiếm
-          </Button>
-        </Form.Group>
+        <SearchForm />
       </div>
       <div className="header_btn">{checkBtn()}</div>
     </div>

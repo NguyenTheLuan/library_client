@@ -2,11 +2,14 @@
   // background: #1a94ff;
   background: #3f51b5;
   width: 100vw;
+  height: 100px;
 
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+
+  //Phần logo home
   &_logo {
     flex: 3;
     text-align: center;
@@ -25,28 +28,12 @@
       }
     }
   }
+  //Phần search giữa
   &_search {
     flex: 6;
-    display: flex;
-    justify-content: center;
-    &_form {
-      width: 80%;
-      display: flex;
-      flex-direction: row;
-      .formInput {
-        flex: 5;
-        &:focus {
-          box-shadow: none;
-        }
-      }
-      .formSearch {
-        flex: 1;
-        &:focus {
-          box-shadow: none;
-        }
-      }
-    }
   }
+
+  //Phần btn cuối
   &_btn {
     flex: 3;
     font-size: 20px;
