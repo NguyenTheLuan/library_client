@@ -17,7 +17,7 @@ function AddBooks() {
   const [categories, setCategories] = useState("");
   //Mô tả
   const [description, setDescription] = useState("");
-
+  //Ảnh
   const [postImage, setPostImage] = useState();
 
   const [error, setError] = useState("");
@@ -41,6 +41,8 @@ function AddBooks() {
       // console.log("tạo sách thành công", response);
       setError("Tạo sách thành công");
       alert("Tạo thành công");
+      //reset lại
+      handleReset();
     } catch (error) {
       console.log("lỗi rồi", { error });
       setError(error.response.data.message);
@@ -57,6 +59,16 @@ function AddBooks() {
   //   console.log("img đã nhận", postImage);
   // }, [postImage]);
 
+  const handleReset = () => {
+    setCopies("");
+    setDescription("");
+    setLoanPeriodDays("");
+    setTitle("");
+    setAuthors("");
+    // setPostImage("");
+    setCategories("");
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // setBookCreate({ ...bookCreate, ...img });
@@ -71,6 +83,7 @@ function AddBooks() {
       <Form.Group className="mb-3 form_items">
         <Form.Label className="form_items_label">Tên sách</Form.Label>
         <Form.Control
+          value={title}
           name="title"
           className="form_items_input"
           type="text"
@@ -81,6 +94,7 @@ function AddBooks() {
       <Form.Group className="mb-3 form_items">
         <Form.Label className="form_items_label">Ảnh bìa của sách</Form.Label>
         <Form.Control
+          // value={postImage}
           name="cover"
           className="form_items_input"
           type="file"
@@ -90,6 +104,7 @@ function AddBooks() {
       <Form.Group className="mb-3 form_items">
         <Form.Label className="form_items_label">Tác giả</Form.Label>
         <Form.Control
+          value={authors}
           name="authors"
           className="form_items_input"
           type="text"
@@ -100,6 +115,7 @@ function AddBooks() {
       <Form.Group className="mb-3 form_items">
         <Form.Label className="form_items_label">Thể loại</Form.Label>
         <Form.Control
+          value={categories}
           name="categories"
           className="form_items_input"
           type="text"
@@ -110,6 +126,7 @@ function AddBooks() {
       <Form.Group className="mb-3 form_items">
         <Form.Label className="form_items_label">Mô tả</Form.Label>
         <Form.Control
+          value={description}
           name="description"
           className="form_items_input"
           type="text"
@@ -120,6 +137,7 @@ function AddBooks() {
       <Form.Group className="mb-3 form_items">
         <Form.Label className="form_items_label">Số ngày mượn sách</Form.Label>
         <Form.Control
+          value={loanPeriodDays}
           name="loanPeriodDays"
           className="form_items_input"
           type="text"
@@ -130,6 +148,7 @@ function AddBooks() {
       <Form.Group className="mb-3 form_items">
         <Form.Label className="form_items_label">Số lượng</Form.Label>
         <Form.Control
+          value={copies}
           name="copies"
           className="form_items_input"
           type="text"
@@ -141,7 +160,9 @@ function AddBooks() {
         <Button type="submit" variant="primary">
           Thêm sách mới
         </Button>
-        <Button variant="warning">Nhập lại</Button>
+        <Button variant="outline-danger" onClick={handleReset}>
+          Nhập lại
+        </Button>
       </div>
     </Form>
   );

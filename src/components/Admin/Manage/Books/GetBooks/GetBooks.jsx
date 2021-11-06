@@ -10,7 +10,8 @@ import UpdateBooksById from "../UpdateBooksById/UpdateBooksById";
 function GetBooks() {
   const [products, setProducts] = useState([]);
   const dispatch = useDispatch();
-  // const selectBooks = useSelector(selectProducts);
+
+  // const isUpdate = useSelector(selectUpdateCarts);
 
   //Nhận số lượng thay đổi của cart => reset carts
   const quantity = useSelector(selectQuantity);

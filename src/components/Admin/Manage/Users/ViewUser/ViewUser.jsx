@@ -1,20 +1,23 @@
 import adminApi from "apis/adminApi";
-import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
-import { Table, Button } from "react-bootstrap";
+import "components/Admin/Manage/ViewForm.scss";
+import React, { useEffect, useState } from "react";
+import { Button, Table } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { getUsers, selectTotalUsers } from "reducers/userSlice";
 import DeleteUser from "../DeleteUser/DeleteUser";
 import UpdateUser from "../UpdateUser/UpdateUser";
 
-import "components/Admin/Manage/ViewForm.scss";
-
 function ViewUser() {
   const [userItems, setUserItems] = useState([]);
+
+  const dispatch = useDispatch();
+  const users = useSelector(selectTotalUsers);
   const [err, setErr] = useState("");
+
   useEffect(() => {
     getAllUsers();
-  }, []);
+  }, [users]);
 
   const getAllUsers = async () => {
     try {
@@ -22,6 +25,13 @@ function ViewUser() {
 
       // console.log("users:", response.results);
       setUserItems(response.results);
+      //Lưu vô session storage
+      sessionStorage.setItem(
+        "totalUsers",
+        JSON.stringify(response.totalResults)
+      );
+      //Lưu vô redux
+      dispatch(getUsers(response.totalResults));
     } catch (error) {
       // console.log("err", error.response.data.message);
       // console.log({ error });
@@ -32,9 +42,9 @@ function ViewUser() {
   const activeEmail = (isActive) => {
     // console.log(isActive);
     if (!isActive) {
-      return <Button>Kích hoạt email</Button>;
+      return <Button variant="outline-primary">Kích hoạt email</Button>;
     } else if (isActive) {
-      return <Button disabled> Đã Cập Nhật</Button>;
+      return <Button disabled>Đã Cập Nhật</Button>;
     }
   };
 
@@ -49,7 +59,7 @@ function ViewUser() {
           <td>{activeEmail(user.isEmailVerified)}</td>
           {/* custom td */}
           <td>
-            <UpdateUser userId={user.id} />
+            <UpdateUser userInfo={user} />
           </td>
           <td>
             <DeleteUser userId={user.id} userEmail={user.email} />

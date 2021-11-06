@@ -83,7 +83,7 @@ function CreateUser() {
         <Button type="submit" variant="primary">
           Tạo người dùng mới
         </Button>
-        <Button variant="warning">Nhập lại</Button>
+        <Button variant="outline-danger">Nhập lại</Button>
       </div>
     </Form>
   );

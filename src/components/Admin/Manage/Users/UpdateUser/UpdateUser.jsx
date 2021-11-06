@@ -2,7 +2,8 @@ import ModalUpdateUserInfo from "components/customComponents/Modals/ModalUpdateU
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 
-function UpdateUser({ userId }) {
+function UpdateUser({ userInfo }) {
+  // console.log("update user nhận từ view user", userInfo);
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   //Nhận props từ con
@@ -15,7 +16,7 @@ function UpdateUser({ userId }) {
       <Button variant="success" onClick={handleShow}>
         Thay đổi thông tin
       </Button>
-      <ModalUpdateUserInfo onShow={onShow} isShow={show} userId={userId} />
+      <ModalUpdateUserInfo onShow={onShow} isShow={show} userInfo={userInfo} />
     </>
   );
 }

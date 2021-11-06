@@ -10,7 +10,7 @@ import { TooltipItems } from "../TooltipItems/TooltipItems";
 import "./Carts.scss";
 
 function Carts() {
-  console.log("chạy lại cart");
+  // console.log("chạy lại cart");
 
   const history = useHistory();
   const isUser = useSelector(selectUser);

@@ -1,8 +1,12 @@
 import adminApi from "apis/adminApi";
 import React from "react";
 import { Button, Modal } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { deleteUserById } from "reducers/userSlice";
 import "./Modals.scss";
 function ModalDeleteUserId({ userId, isShow, onShow, title, body }) {
+  const dispatch = useDispatch();
+
   //Delete books by id
   const deleteUserId = async () => {
     const id = userId;
@@ -10,13 +14,15 @@ function ModalDeleteUserId({ userId, isShow, onShow, title, body }) {
     try {
       await adminApi.deleteUser(id);
       alert("Xoá người dùng hoàn tất");
+      //reset lại user
+      dispatch(deleteUserById());
       onShow(false);
     } catch (error) {
       console.log("có lỗi", { error });
     }
   };
   const handleClick = () => {
-    console.log("đã lấy được Id", userId);
+    // console.log("đã lấy được Id", userId);
     deleteUserId();
   };
 

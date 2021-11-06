@@ -1,6 +1,6 @@
 import productsApi from "apis/productsApi";
 import React, { useState } from "react";
-import { Modal, Button, Form } from "react-bootstrap";
+import { Button, Form, Modal } from "react-bootstrap";
 import "./Modals.scss";
 
 function ModalUpdateBookById({ isShow, onShow, bookDetails }) {
@@ -44,7 +44,8 @@ function ModalUpdateBookById({ isShow, onShow, bookDetails }) {
     formData.append("description", description);
     try {
       await productsApi.updateBookById(bookId, formData);
-      alert("Thay đổi thành công");
+      onShow(false);
+      alert("Thay đổi thành công, xin hãy f5 lại");
     } catch (error) {
       // console.log("lỗi rồi", error.response.data.message);
       console.log("lỗi rồi", { error });
