@@ -1,11 +1,15 @@
 import productsApi from "apis/productsApi";
 import ButtonAddCarts from "components/customComponents/ButtonHandleCarts/ButtonAddCarts";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useHistory, useRouteMatch } from "react-router";
+import { selectProducts } from "reducers/bookSlice";
 import "./GetProduct.scss";
 
 export const GetProducts = () => {
   let { path } = useRouteMatch();
+  const bookUpdate = useSelector(selectProducts);
+
   //Danh sách những cuốn sách
   const [products, setProducts] = useState([]);
   const history = useHistory();
@@ -14,9 +18,15 @@ export const GetProducts = () => {
     return author;
   };
 
+  //Lần 1
   useEffect(() => {
     getAllProducts();
   }, []);
+
+  //After search
+  useEffect(() => {
+    setProducts(bookUpdate);
+  }, [bookUpdate]);
 
   const getAllProducts = async () => {
     try {

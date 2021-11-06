@@ -1,11 +1,9 @@
 // import LogoMenu from "assets/icons/LogoMenu.gif";
 import LogoMenu from "assets/icons/logo.png";
-import Logout from "components/Auth/Logout/Logout";
 import Carts from "components/customComponents/Carts/Carts";
 import DropdownItems from "components/customComponents/DropdownItems/DropdownItems";
 import SearchForm from "components/customComponents/InputForms/SearchForm/SearchForm";
 import React from "react";
-
 import { Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";

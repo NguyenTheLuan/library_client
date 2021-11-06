@@ -41,7 +41,7 @@ function ViewBooks() {
     try {
       const response = await productsApi.getBooks();
 
-      // console.log(response);
+      console.log("dữ liệu trả về", response);
       dispatch(getAllProduct(response.results));
       // setProducts(response.results);
     } catch (error) {
@@ -56,6 +56,7 @@ function ViewBooks() {
         {/* <td>{bookDetails.id}</td> */}
         <td>{imgShow(bookDetails.cover)}</td>
         <td>{bookDetails.title}</td>
+        <td>{bookDetails.authors}</td>
         <td>{bookDetails.availableCopies}</td>
         {/* <td>{checkQuantity(bookDetails.availableCopies)}</td> */}
         <td>{bookDetails.loanPeriodDays}</td>
@@ -87,6 +88,7 @@ function ViewBooks() {
             <th>#</th>
             <th>Ảnh</th>
             <th>Tên sách</th>
+            <th>Tác giả</th>
             <th>Số lượng</th>
             <th>Thời gian mượn(ngày)</th>
             <th>Chỉnh sửa</th>

@@ -40,11 +40,12 @@ function ViewUser() {
   };
   // console.log(userItems);
   const activeEmail = (isActive) => {
-    // console.log(isActive);
     if (!isActive) {
-      return <Button variant="outline-primary">Kích hoạt email</Button>;
+      // return <Button variant="outline-primary">Chưa kích hoạt</Button>;
+      return <span>Chưa kích hoạt</span>;
     } else if (isActive) {
-      return <Button disabled>Đã Cập Nhật</Button>;
+      // return <Button disabled>Đã kích hoạt</Button>;
+      return <span>Đã kích hoạt</span>;
     }
   };
 
@@ -55,14 +56,20 @@ function ViewUser() {
           <td>{index - 2}</td>
           <td>{user.name}</td>
           <td>{user.role}</td>
-          <td>{user.email}</td>
-          <td>{activeEmail(user.isEmailVerified)}</td>
+          <td>
+            <span>{user.email}</span>
+            {activeEmail(user.isEmailVerified)}
+          </td>
+
           {/* custom td */}
           <td>
             <UpdateUser userInfo={user} />
           </td>
           <td>
             <DeleteUser userId={user.id} userEmail={user.email} />
+          </td>
+          <td>
+            <Button variant="info">Xem chi tiết</Button>
           </td>
         </tr>
       );
@@ -86,9 +93,9 @@ function ViewUser() {
             <th>Tên Người Dùng</th>
             <th>Chức vụ</th>
             <th>Email</th>
-            <th>Trình trạng email</th>
             <th>Thay đổi thông tin</th>
             <th>Xoá người dùng</th>
+            <th>Xem chi tiết</th>
           </tr>
         </thead>
         <tbody className="viewMenu_table_body">{showUsers}</tbody>

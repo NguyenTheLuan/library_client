@@ -27,6 +27,17 @@ const productsApi = {
     const url = `${PRODUCTS_API_ENDPOINT}/${bookId}`;
     return axiosClient.patch(url, infoBooks);
   },
+  //Search books
+  searchBooks: (title, authors) => {
+    // const url = `${PRODUCTS_API_ENDPOINT}?title=${bookInfo}`;
+    const url = `${PRODUCTS_API_ENDPOINT}`;
+    return axiosClient.get(url, {
+      params: {
+        title,
+        authors,
+      },
+    });
+  },
 };
 
 export default productsApi;
