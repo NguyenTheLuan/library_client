@@ -1,5 +1,5 @@
 import productsApi from "apis/productsApi";
-import SearchForm from "components/customComponents/InputForms/SearchForm/SearchForm";
+import SearchFormAdmin from "components/customComponents/InputForms/SearchForm/SearchFormAdmin";
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,9 +23,12 @@ function ViewBooks() {
 
   //Nhận số lượng thay đổi của cart => reset carts
   const quantity = useSelector(selectQuantity);
+
+  //Lần 1 get all products
   useEffect(() => {
     getAllProducts();
   }, [quantity]);
+  //Lần 2 reset sau khi search
   useEffect(() => {
     setProducts(books);
   }, [books]);
@@ -41,7 +44,7 @@ function ViewBooks() {
     try {
       const response = await productsApi.getBooks();
 
-      console.log("dữ liệu trả về", response);
+      // console.log("dữ liệu trả về", response);
       dispatch(getAllProduct(response.results));
       // setProducts(response.results);
     } catch (error) {
@@ -57,6 +60,7 @@ function ViewBooks() {
         <td>{imgShow(bookDetails.cover)}</td>
         <td>{bookDetails.title}</td>
         <td>{bookDetails.authors}</td>
+        <td>{bookDetails.categories}</td>
         <td>{bookDetails.availableCopies}</td>
         {/* <td>{checkQuantity(bookDetails.availableCopies)}</td> */}
         <td>{bookDetails.loanPeriodDays}</td>
@@ -75,11 +79,9 @@ function ViewBooks() {
   return (
     <div className="viewMenu">
       <div className="viewMenu_header">
-        <div className="viewMenu_header_label">
-          <span>Thông tin sách</span>
-        </div>
         <div className="viewMenu_header_search">
-          <SearchForm />
+          <legend>Thông tin sách</legend>
+          <SearchFormAdmin />
         </div>
       </div>
       <Table className="viewMenu_table" striped bordered hover>
@@ -89,6 +91,7 @@ function ViewBooks() {
             <th>Ảnh</th>
             <th>Tên sách</th>
             <th>Tác giả</th>
+            <th>Thể loại</th>
             <th>Số lượng</th>
             <th>Thời gian mượn(ngày)</th>
             <th>Chỉnh sửa</th>

@@ -28,15 +28,16 @@ const productsApi = {
     return axiosClient.patch(url, infoBooks);
   },
   //Search books
-  searchBooks: (title, authors) => {
+  searchBooks: (bookInfo) => {
     // const url = `${PRODUCTS_API_ENDPOINT}?title=${bookInfo}`;
     const url = `${PRODUCTS_API_ENDPOINT}`;
-    return axiosClient.get(url, {
-      params: {
-        title,
-        authors,
-      },
-    });
+    // return axiosClient.get(url, {
+    //   params: {
+    //     title,
+    //     authors,
+    //   },
+    // });
+    return axiosClient.get(url, { params: bookInfo });
   },
 };
 

@@ -30,10 +30,11 @@ function SearchForm() {
         <Form.Group className="formSearch_items">
           <Form.Label className="formLabel"></Form.Label>
           <Form.Control
+            name="title"
             className="formInput"
             type="input"
             placeholder="Nhập tên sách bạn muốn tìm"
-            onChange={(e) => setSearchInfo(e.target.value)}
+            onChange={(e) => setSearchInfo({ [e.target.name]: e.target.value })}
           ></Form.Control>
           <Button className="formSearch" type="submit">
             <GoSearch />

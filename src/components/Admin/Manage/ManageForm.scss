@@ -20,6 +20,14 @@
     }
     &_search {
       flex: 4;
+      //Tiêu đề
+      legend {
+        width: 60%;
+        padding: 0 0 5px 20px;
+        font-size: 30px;
+        font-weight: 300;
+        border-bottom: 1px solid rgb(221, 207, 207);
+      }
     }
   }
   &_table {

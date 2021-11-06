@@ -4,10 +4,11 @@
   //   align-items: center !important;
   &_items {
     width: 80%;
+    // flex: 5;
     display: flex;
     flex-direction: row;
     .formInput {
-      flex: 5;
+      flex: 4;
       &:focus {
         box-shadow: none;
       }
@@ -16,6 +17,63 @@
       flex: 1;
       &:focus {
         box-shadow: none;
+      }
+    }
+  }
+}
+
+//Admin
+.formSearchAdmin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  // gap: 20px;
+
+  //search user, authors, categories
+  &_search {
+    width: 90%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+
+    &_items {
+      flex: 1;
+      .formInput {
+        &:focus {
+          box-shadow: none;
+        }
+      }
+    }
+  }
+
+  //asc,desc,search
+  &_order {
+    width: 90%;
+
+    display: flex;
+    justify-content: end;
+
+    &_items {
+      width: 32%;
+
+      display: flex;
+      gap: 10px;
+      &_select {
+        flex: 1;
+
+        &:focus {
+          box-shadow: none !important;
+        }
+      }
+      &_btn {
+        flex: 3;
+        &:focus {
+          box-shadow: none !important;
+        }
       }
     }
   }
