@@ -6,8 +6,9 @@ import "./DashBoard.scss";
 //icon
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
 // import { GrUserSettings } from "react-icons/gr";
-import { FaUserCog } from "react-icons/fa";
-import { RiBookletFill } from "react-icons/ri";
+// import { RiBookletFill } from "react-icons/ri";
+import { FaUserCog, FaBook } from "react-icons/fa";
+import { AiTwotoneFileText } from "react-icons/ai";
 
 function DashBoard({ url }) {
   // console.log("dashboard", url);
@@ -60,22 +61,13 @@ function DashBoard({ url }) {
               Tạo người dùng mới
             </NavLink>
           </Accordion.Body>
-          {/* <Accordion.Body>
-            <NavLink to={`${url}/users/edit`} activeClassName="active">
-              Chỉnh Sửa Thông Tin
-            </NavLink>
-          </Accordion.Body>
-          <Accordion.Body>
-            <NavLink to={`${url}/users/:id/delete`} activeClassName="active">
-              Xoá Thông Tin
-            </NavLink>
-          </Accordion.Body> */}
         </Accordion.Item>
 
         {/* Quản Lý Sách */}
         <Accordion.Item eventKey="1">
           <Accordion.Header>
-            <RiBookletFill className="iconItem" />
+            {/* <RiBookletFill className="iconItem" /> */}
+            <FaBook className="iconItem" />
             Quản Lý Sách
           </Accordion.Header>
           <Accordion.Body>
@@ -85,7 +77,7 @@ function DashBoard({ url }) {
           </Accordion.Body>
           <Accordion.Body>
             <NavLink to={`${url}/books/create`} activeClassName="active">
-              Thêm một đầu sách
+              Nhập sách
             </NavLink>
           </Accordion.Body>
           <Accordion.Body>
@@ -101,20 +93,24 @@ function DashBoard({ url }) {
         </Accordion.Item>
         {/* Quản Lý Báo Cáo */}
         <Accordion.Item eventKey="2">
-          <Accordion.Header>Quản Báo Cáo</Accordion.Header>
+          <Accordion.Header>
+            <AiTwotoneFileText className="iconItem" />
+            Quản Báo Cáo
+          </Accordion.Header>
           <Accordion.Body>
-            <NavLink to="/admin/user" activeClassName="active">
-              Xem Báo Cáo
+            <NavLink to={`${url}/report`} activeClassName="active" exact={true}>
+              Thống kê
             </NavLink>
           </Accordion.Body>
           <Accordion.Body>
-            <NavLink to="/admin/user" activeClassName="active">
+            <NavLink to="/admin/report/export" activeClassName="active">
               Xuất Báo Cáo
             </NavLink>
           </Accordion.Body>
         </Accordion.Item>
+
         {/* Quản Lý Danh Mục */}
-        <Accordion.Item eventKey="3">
+        {/* <Accordion.Item eventKey="3">
           <Accordion.Header>Quản Danh Mục</Accordion.Header>
           <Accordion.Body>
             <NavLink to="/admin/user" activeClassName="active">
@@ -131,7 +127,7 @@ function DashBoard({ url }) {
               Xoá danh mục
             </NavLink>
           </Accordion.Body>
-        </Accordion.Item>
+        </Accordion.Item> */}
       </Accordion>
     </div>
   );
