@@ -1,14 +1,22 @@
 import productsApi from "apis/productsApi";
-import "components/Admin/Manage/ManageForm.scss";
+import SearchForm from "components/customComponents/InputForms/SearchForm/SearchForm";
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProduct, selectQuantity } from "reducers/bookSlice";
+import {
+  getAllProduct,
+  selectProducts,
+  selectQuantity,
+} from "reducers/bookSlice";
 import DeleteBooks from "../DeleteBooks/DeleteBooks";
 import UpdateBooksById from "../UpdateBooksById/UpdateBooksById";
 
-function GetBooks() {
-  const [products, setProducts] = useState([]);
+import "components/Admin/Manage/ManageForm.scss";
+
+function ViewBooks() {
+  const books = useSelector(selectProducts);
+
+  const [products, setProducts] = useState(books);
   const dispatch = useDispatch();
 
   // const isUpdate = useSelector(selectUpdateCarts);
@@ -18,6 +26,9 @@ function GetBooks() {
   useEffect(() => {
     getAllProducts();
   }, [quantity]);
+  useEffect(() => {
+    setProducts(books);
+  }, [books]);
 
   // const checkQuantity = (quantityBooks) => {
   //   return quantityBooks;
@@ -32,7 +43,7 @@ function GetBooks() {
 
       // console.log(response);
       dispatch(getAllProduct(response.results));
-      setProducts(response.results);
+      // setProducts(response.results);
     } catch (error) {
       console.log("err ", error);
     }
@@ -62,12 +73,18 @@ function GetBooks() {
 
   return (
     <div className="viewMenu">
-      <h2>Thông tin sách</h2>
+      <div className="viewMenu_header">
+        <div className="viewMenu_header_label">
+          <span>Thông tin sách</span>
+        </div>
+        <div className="viewMenu_header_search">
+          <SearchForm />
+        </div>
+      </div>
       <Table className="viewMenu_table" striped bordered hover>
         <thead className="viewMenu_table_header">
           <tr className="viewMenu_table_header_row">
             <th>#</th>
-            {/* <th>ID</th> */}
             <th>Ảnh</th>
             <th>Tên sách</th>
             <th>Số lượng</th>
@@ -82,4 +99,4 @@ function GetBooks() {
   );
 }
 
-export default GetBooks;
+export default ViewBooks;

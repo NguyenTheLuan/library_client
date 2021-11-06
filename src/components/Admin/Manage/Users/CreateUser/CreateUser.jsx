@@ -1,25 +1,36 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
-import "components/Admin/Manage/ManageForm.scss";
 import adminApi from "apis/adminApi";
 
+import "components/Admin/Manage/ManageForm.scss";
+
 function CreateUser() {
-  const [userCreate, setUserCreate] = useState({});
+  const [userCreate, setUserCreate] = useState({
+    name: "",
+    role: "Chọn chức vụ",
+    email: "",
+    password: "",
+  });
   const [error, setError] = useState("");
 
   const createUser = async () => {
     const infoUser = { ...userCreate };
     try {
       await adminApi.createUser(infoUser);
+      handleReset();
       setError("Tạo user thành công");
     } catch (error) {
       setError(error.response.data.message);
     }
   };
 
+  const handleReset = () => {
+    setUserCreate({ name: "", role: "Chọn chức vụ", email: "", password: "" });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(userCreate);
+    // console.log("user thêm có thông tin là", userCreate);
     createUser();
   };
   return (
@@ -30,6 +41,7 @@ function CreateUser() {
       <Form.Group className="mb-3 form_items">
         <Form.Label className="form_items_label">Tên người dùng</Form.Label>
         <Form.Control
+          value={userCreate.name}
           className="form_items_input"
           name="name"
           type="text"
@@ -42,7 +54,7 @@ function CreateUser() {
 
       <Form.Group className="mb-3 form_items">
         <Form.Label className="form_items_label">Chức vụ</Form.Label>
-        <Form.Control
+        {/* <Form.Control
           className="form_items_input"
           name="role"
           type="text"
@@ -50,12 +62,25 @@ function CreateUser() {
           onChange={(e) =>
             setUserCreate({ ...userCreate, [e.target.name]: e.target.value })
           }
-        />
+        /> */}
+        <Form.Select
+          value={userCreate.role}
+          name="role"
+          className="form_items_input"
+          onChange={(e) =>
+            setUserCreate({ ...userCreate, [e.target.name]: e.target.value })
+          }
+        >
+          <option>Chọn chức vụ</option>
+          <option value="user">Người dùng</option>
+          <option value="librarian">Thủ thư</option>
+        </Form.Select>
       </Form.Group>
       <Form.Group className="mb-3 form_items">
         <Form.Label className="form_items_label">Địa chỉ email</Form.Label>
         <Form.Control
           className="form_items_input"
+          value={userCreate.email}
           name="email"
           type="email"
           placeholder="Nhập địa chỉ email"
@@ -69,6 +94,7 @@ function CreateUser() {
           Mật khẩu người dùng
         </Form.Label>
         <Form.Control
+          value={userCreate.password}
           className="form_items_input"
           name="password"
           type="password"
@@ -83,7 +109,9 @@ function CreateUser() {
         <Button type="submit" variant="primary">
           Tạo người dùng mới
         </Button>
-        <Button variant="outline-danger">Nhập lại</Button>
+        <Button variant="danger" onClick={handleReset}>
+          Nhập lại
+        </Button>
       </div>
     </Form>
   );

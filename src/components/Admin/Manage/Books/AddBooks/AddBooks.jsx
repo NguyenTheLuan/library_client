@@ -160,7 +160,7 @@ function AddBooks() {
         <Button type="submit" variant="primary">
           Thêm sách mới
         </Button>
-        <Button variant="outline-danger" onClick={handleReset}>
+        <Button variant="danger" onClick={handleReset}>
           Nhập lại
         </Button>
       </div>
