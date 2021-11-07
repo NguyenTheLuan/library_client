@@ -9,7 +9,10 @@ import { loginIn } from "reducers/authSlice";
 import "../StyleForm.scss";
 
 function Login() {
-  const [userLogin, setUserLogin] = useState({});
+  const [userLogin, setUserLogin] = useState({
+    email: "admin@gmail.com",
+    password: "12345678",
+  });
   const [err, setErr] = useState("");
   const history = useHistory();
   const dispatch = useDispatch();
@@ -69,6 +72,7 @@ function Login() {
               Địa chỉ email
             </Form.Label>
             <Form.Control
+              value={userLogin.email}
               name="email"
               className="mb-3 formMenu_items_value"
               type="email"
@@ -90,6 +94,7 @@ function Login() {
               Mật khẩu
             </Form.Label>
             <Form.Control
+              value={userLogin.password}
               name="password"
               className="mb-3 formMenu_items_value"
               type="password"

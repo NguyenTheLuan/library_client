@@ -20,11 +20,11 @@ function Reservation() {
     return (
       <div className="cartTable_contents_rows_times_items">
         <span>
-          Vào lúc {date.getHours() + 1} giờ : {date.getMinutes() + 1} phút :
-          {date.getSeconds() + 1} giây.
+          Vào lúc {date.getHours()} giờ : {date.getMinutes()} phút :
+          {date.getSeconds()} giây.
         </span>
         <span>
-          Ngày {date.getDate() + 1} tháng {date.getMonth() + 1} năm
+          Ngày {date.getDate()} tháng {date.getMonth() + 1} năm
           {date.getFullYear()}
         </span>
       </div>

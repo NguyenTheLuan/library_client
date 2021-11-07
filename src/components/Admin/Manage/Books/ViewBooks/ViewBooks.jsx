@@ -36,10 +36,11 @@ function ViewBooks() {
   };
 
   const getAllProducts = async () => {
+    // const param = { page: 1, limit: 3 };
     try {
       const response = await productsApi.getBooks();
 
-      // console.log("dữ liệu trả về", response);
+      console.log("dữ liệu trả về", response);
       dispatch(getBooks(response.results));
       // setProducts(response.results);
     } catch (error) {

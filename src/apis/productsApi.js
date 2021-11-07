@@ -3,9 +3,9 @@ const PRODUCTS_API_ENDPOINT = "/books";
 
 const productsApi = {
   // fn: lấy danh sách các đầu sách
-  getBooks: () => {
+  getBooks: (bookInfo) => {
     const url = PRODUCTS_API_ENDPOINT;
-    return axiosClient.get(url);
+    return axiosClient.get(url, { params: bookInfo });
   },
   //get books by Id
   getBooksById: (id) => {
