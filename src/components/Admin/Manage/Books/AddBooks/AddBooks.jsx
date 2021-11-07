@@ -1,10 +1,13 @@
 import productsApi from "apis/productsApi";
 import React, { useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Modal } from "react-bootstrap";
 import "components/Admin/Manage/ManageForm.scss";
+import { useDispatch } from "react-redux";
+import { addBookById, getBooks } from "reducers/bookSlice";
 
-function AddBooks() {
+function AddBooks({ isShow, onShow }) {
   // const [bookCreate, setBookCreate] = useState({});
+  const dispatch = useDispatch();
   //Tên sách
   const [title, setTitle] = useState("");
   //Số ngày mượn
@@ -36,13 +39,17 @@ function AddBooks() {
 
     // console.log("đây là formData", formData.entries());
     try {
-      await productsApi.postCreateBook(formData);
-      // const response = await productsApi.postCreateBook(formData);
-      // console.log("tạo sách thành công", response);
+      // await productsApi.postCreateBook(formData);
+      const response = await productsApi.postCreateBook(formData);
+      console.log("tạo sách thành công", response);
       setError("Tạo sách thành công");
       alert("Tạo thành công");
+      //Truyền vô redux
+      dispatch(addBookById(response));
       //reset lại
       handleReset();
+      //Tắt form
+      onShow(false);
     } catch (error) {
       console.log("lỗi rồi", { error });
       setError(error.response.data.message);
@@ -75,96 +82,117 @@ function AddBooks() {
     // console.log("dữ liệu đã nhập", bookCreate);
     createBooks();
   };
+
+  //Thiết lập cho cha
+  const handleClose = () => {
+    return onShow(false);
+  };
+
   return (
-    <Form className="form" onSubmit={handleSubmit}>
-      {error && <h2>{error}</h2>}
-      <legend className="form_name">Tạo mới một đầu sách</legend>
-      <Form.Group className="mb-3 form_items"></Form.Group>
-      <Form.Group className="mb-3 form_items">
-        <Form.Label className="form_items_label">Tên sách</Form.Label>
-        <Form.Control
-          value={title}
-          name="title"
-          className="form_items_input"
-          type="text"
-          placeholder="Nhập tên tên sách"
-          onChange={(e) => setTitle(e.target.value)}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3 form_items">
-        <Form.Label className="form_items_label">Ảnh bìa của sách</Form.Label>
-        <Form.Control
-          // value={postImage}
-          name="cover"
-          className="form_items_input"
-          type="file"
-          onChange={handleImgPost}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3 form_items">
-        <Form.Label className="form_items_label">Tác giả</Form.Label>
-        <Form.Control
-          value={authors}
-          name="authors"
-          className="form_items_input"
-          type="text"
-          placeholder="Nhập tên tác giả"
-          onChange={(e) => setAuthors(e.target.value)}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3 form_items">
-        <Form.Label className="form_items_label">Thể loại</Form.Label>
-        <Form.Control
-          value={categories}
-          name="categories"
-          className="form_items_input"
-          type="text"
-          placeholder="Nhập tên thể loại"
-          onChange={(e) => setCategories(e.target.value)}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3 form_items">
-        <Form.Label className="form_items_label">Mô tả</Form.Label>
-        <Form.Control
-          value={description}
-          name="description"
-          className="form_items_input"
-          type="text"
-          placeholder="Nhập tên mô tả"
-          onChange={(e) => setDescription(e.target.value)}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3 form_items">
-        <Form.Label className="form_items_label">Số ngày mượn sách</Form.Label>
-        <Form.Control
-          value={loanPeriodDays}
-          name="loanPeriodDays"
-          className="form_items_input"
-          type="text"
-          placeholder="Nhập số ngày mà người mượn có thể mượn sách"
-          onChange={(e) => setLoanPeriodDays(e.target.value)}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3 form_items">
-        <Form.Label className="form_items_label">Số lượng</Form.Label>
-        <Form.Control
-          value={copies}
-          name="copies"
-          className="form_items_input"
-          type="text"
-          placeholder="Nhập số lượng"
-          onChange={(e) => setCopies(e.target.value)}
-        />
-      </Form.Group>
-      <div className="btnSubmit">
-        <Button type="submit" variant="primary">
-          Thêm sách mới
-        </Button>
-        <Button variant="danger" onClick={handleReset}>
-          Nhập lại
-        </Button>
-      </div>
-    </Form>
+    <Modal show={isShow} onHide={handleClose}>
+      {/* <Modal.Header>
+        <Modal.Title>Nhập sách mới</Modal.Title>
+      </Modal.Header> */}
+      <Modal.Body>
+        <Form className="form" onSubmit={handleSubmit}>
+          {error && <h2>{error}</h2>}
+          <legend className="form_name">Tạo mới một đầu sách</legend>
+          <Form.Group className="mb-3 form_items"></Form.Group>
+          <Form.Group className="mb-3 form_items">
+            <Form.Label className="form_items_label">Tên sách</Form.Label>
+            <Form.Control
+              value={title}
+              name="title"
+              className="form_items_input"
+              type="text"
+              placeholder="Nhập tên tên sách"
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3 form_items">
+            <Form.Label className="form_items_label">
+              Ảnh bìa của sách
+            </Form.Label>
+            <Form.Control
+              // value={postImage}
+              name="cover"
+              className="form_items_input"
+              type="file"
+              onChange={handleImgPost}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3 form_items">
+            <Form.Label className="form_items_label">Tác giả</Form.Label>
+            <Form.Control
+              value={authors}
+              name="authors"
+              className="form_items_input"
+              type="text"
+              placeholder="Nhập tên tác giả"
+              onChange={(e) => setAuthors(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3 form_items">
+            <Form.Label className="form_items_label">Thể loại</Form.Label>
+            <Form.Control
+              value={categories}
+              name="categories"
+              className="form_items_input"
+              type="text"
+              placeholder="Nhập tên thể loại"
+              onChange={(e) => setCategories(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3 form_items">
+            <Form.Label className="form_items_label">Mô tả</Form.Label>
+            <Form.Control
+              value={description}
+              name="description"
+              className="form_items_input"
+              type="text"
+              placeholder="Nhập tên mô tả"
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3 form_items">
+            <Form.Label className="form_items_label">
+              Số ngày mượn sách
+            </Form.Label>
+            <Form.Control
+              value={loanPeriodDays}
+              name="loanPeriodDays"
+              className="form_items_input"
+              type="text"
+              placeholder="Nhập số ngày mà người mượn có thể mượn sách"
+              onChange={(e) => setLoanPeriodDays(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3 form_items">
+            <Form.Label className="form_items_label">Số lượng</Form.Label>
+            <Form.Control
+              value={copies}
+              name="copies"
+              className="form_items_input"
+              type="text"
+              placeholder="Nhập số lượng"
+              onChange={(e) => setCopies(e.target.value)}
+            />
+          </Form.Group>
+          <div className="btnSubmit">
+            <Button type="submit" variant="primary">
+              Thêm sách mới
+            </Button>
+            <Button variant="danger" onClick={handleReset}>
+              Nhập lại
+            </Button>
+            <Button variant="secondary" onClick={handleClose}>
+              Quay lại
+            </Button>
+          </div>
+        </Form>
+      </Modal.Body>
+      {/* <Modal.Footer></Modal.Footer> */}
+    </Modal>
   );
 }
 

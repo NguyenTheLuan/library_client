@@ -2,11 +2,14 @@ import productsApi from "apis/productsApi";
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { GoSearch } from "react-icons/go";
+import { BsPlusLg } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { getBooks } from "reducers/bookSlice";
 import "./SearchForm.scss";
+import AddBooks from "components/Admin/Manage/Books/AddBooks/AddBooks";
 
 function SearchFormAdmin() {
+  //Search Form
   const [searchInfo, setSearchInfo] = useState({});
   const dispatch = useDispatch();
   const getBook = async () => {
@@ -19,14 +22,24 @@ function SearchFormAdmin() {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     // console.log("thông tin cần search là", searchInfo);
     getBook();
   };
+  const handleForm = (e) => {
+    e.preventDefault();
+  };
+
+  //Modal
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
+  const onShow = (isShow) => {
+    setShow(isShow);
+  };
+
   return (
     <>
-      <Form className="formSearchAdmin" onSubmit={handleSubmit}>
+      <Form className="formSearchAdmin" onSubmit={handleForm}>
         <div className="formSearchAdmin_order">
           <div className="formSearchAdmin_order_items">
             <Form.Select
@@ -40,13 +53,26 @@ function SearchFormAdmin() {
               }
             >
               <option>Sắp xếp</option>
-              <option value="title:asc">{`a -> z`}</option>
-              <option value="title:desc">{`z -> a`}</option>
+              <option value="title:asc">{`A -> Z`}</option>
+              <option value="title:desc">{`Z -> A`}</option>
             </Form.Select>
 
-            <Button className="formSearchAdmin_order_items_btn" type="submit">
-              <GoSearch />
-              Tìm kiếm
+            <Button
+              variant="secondary"
+              className="formSearchAdmin_order_items_btn"
+              type="submit"
+              onClick={handleSubmit}
+            >
+              <GoSearch className="icon" />
+              <span className="title">Tìm kiếm</span>
+            </Button>
+            <Button
+              className="formSearchAdmin_order_items_btn"
+              type="submit"
+              onClick={handleShow}
+            >
+              <BsPlusLg className="icon" />
+              <span className="title">Thêm sách</span>
             </Button>
           </div>
         </div>
@@ -100,6 +126,9 @@ function SearchFormAdmin() {
           </Form.Group>
         </div>
       </Form>
+
+      {/* modal */}
+      <AddBooks onShow={onShow} isShow={show} />
     </>
   );
 }

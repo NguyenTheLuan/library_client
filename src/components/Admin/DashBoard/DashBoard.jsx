@@ -1,14 +1,13 @@
 import React, { useEffect } from "react";
 import { Accordion } from "react-bootstrap";
-import { Link, NavLink } from "react-router-dom";
-import "./DashBoard.scss";
-
-//icon
-import { MdOutlineAdminPanelSettings } from "react-icons/md";
+import { AiFillFileExcel } from "react-icons/ai";
 // import { GrUserSettings } from "react-icons/gr";
 // import { RiBookletFill } from "react-icons/ri";
-import { FaUserCog, FaBook } from "react-icons/fa";
-import { AiTwotoneFileText } from "react-icons/ai";
+import { FaBook, FaUserCog } from "react-icons/fa";
+//icon
+import { MdOutlineAdminPanelSettings } from "react-icons/md";
+import { Link, NavLink } from "react-router-dom";
+import "./DashBoard.scss";
 
 function DashBoard({ url }) {
   // console.log("dashboard", url);
@@ -72,14 +71,14 @@ function DashBoard({ url }) {
           </Accordion.Header>
           <Accordion.Body>
             <NavLink to={`${url}/books`} exact={true} activeClassName="active">
-              Tổng số sách
+              Thông tin sách thư viện
             </NavLink>
           </Accordion.Body>
-          <Accordion.Body>
+          {/* <Accordion.Body>
             <NavLink to={`${url}/books/create`} activeClassName="active">
               Nhập sách
             </NavLink>
-          </Accordion.Body>
+          </Accordion.Body> */}
           <Accordion.Body>
             <NavLink to={`${url}/authors`} activeClassName="active">
               Xem Tác Giả
@@ -94,7 +93,8 @@ function DashBoard({ url }) {
         {/* Quản Lý Báo Cáo */}
         <Accordion.Item eventKey="2">
           <Accordion.Header>
-            <AiTwotoneFileText className="iconItem" />
+            {/* <AiTwotoneFileText className="iconItem" /> */}
+            <AiFillFileExcel className="iconItem" />
             Quản Báo Cáo
           </Accordion.Header>
           <Accordion.Body>

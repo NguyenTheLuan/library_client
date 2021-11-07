@@ -35,7 +35,7 @@ const productSlice = createSlice({
     //Add books
     addBookById(state, action) {
       const newBookId = action.payload;
-      const newItemsFromCarts = { ...state.books, newBookId };
+      const newItemsFromCarts = [...state.books, newBookId];
 
       state.totalBooks = state.totalBooks + 1;
       state.books = newItemsFromCarts;

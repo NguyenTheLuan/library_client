@@ -50,20 +50,22 @@
     }
   }
 
-  //asc,desc,search
+  //asc,desc,search, add button
   &_order {
+    padding-top: 10px;
+
     width: 90%;
 
     display: flex;
     justify-content: end;
 
     &_items {
-      width: 32%;
+      width: 50%;
 
       display: flex;
       gap: 10px;
       &_select {
-        flex: 1;
+        flex: 3;
 
         &:focus {
           box-shadow: none !important;
@@ -71,6 +73,13 @@
       }
       &_btn {
         flex: 3;
+        .icon {
+          font-size: 20px;
+          margin-right: 5px;
+        }
+        .title {
+          font-size: 18px;
+        }
         &:focus {
           box-shadow: none !important;
         }
