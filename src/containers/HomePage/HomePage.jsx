@@ -1,7 +1,7 @@
-import Header from "components/Header/Header/Header";
-import Navigation from "components/Header/Navigation/Navigation";
-import { GetProducts } from "components/productFetch/getProducts/GetProducts";
-import ProductDetails from "components/productFetch/ProductDetails/ProductDetails";
+import BookDetails from "components/HomePage/Contains/BookDetails/ProductDetails";
+import { ViewBooks } from "components/HomePage/Contains/ViewBooks/ViewBooks";
+import Header from "components/HomePage/Header/Header/Header";
+import Navigation from "components/HomePage/Header/Navigation/Navigation";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import {
@@ -52,7 +52,7 @@ function HomePage() {
             <Switch>
               <Route
                 path={`${path}`}
-                component={() => <GetProducts />}
+                component={() => <ViewBooks />}
                 exact={true}
               />
               <Route
@@ -66,7 +66,7 @@ function HomePage() {
               <Route path={`${path}/bai-giang`} component={BaiGiang} />
               <Route
                 path={`${path}/details/:itemsId`}
-                component={() => <ProductDetails />}
+                component={() => <BookDetails />}
                 exact={true}
               />
               <Route>

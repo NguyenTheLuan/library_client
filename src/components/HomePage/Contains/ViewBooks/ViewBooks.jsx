@@ -3,12 +3,13 @@ import ButtonAddCarts from "components/customComponents/ButtonHandleCarts/Button
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory, useRouteMatch } from "react-router";
-import { selectProducts } from "reducers/bookSlice";
-import "./GetProduct.scss";
+import { selectBooks, selectTotalBooks } from "reducers/bookSlice";
+import "./ViewBooks.scss";
 
-export const GetProducts = () => {
+export const ViewBooks = () => {
   let { path } = useRouteMatch();
-  const bookUpdate = useSelector(selectProducts);
+
+  const bookUpdate = useSelector(selectBooks);
 
   //Danh sách những cuốn sách
   const [products, setProducts] = useState([]);

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getUsers, selectTotalUsers } from "reducers/userSlice";
+import { getUsers, selectTotalUsers } from "reducers/adminSlice";
 import DeleteUser from "../DeleteUser/DeleteUser";
 import UpdateUser from "../UpdateUser/UpdateUser";
 

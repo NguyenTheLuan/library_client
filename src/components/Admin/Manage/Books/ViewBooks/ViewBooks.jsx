@@ -3,18 +3,13 @@ import SearchFormAdmin from "components/customComponents/InputForms/SearchForm/S
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getAllProduct,
-  selectProducts,
-  selectQuantity,
-} from "reducers/bookSlice";
+import { getBooks, selectBooks, selectTotalBooks } from "reducers/bookSlice";
 import DeleteBooks from "../DeleteBooks/DeleteBooks";
 import UpdateBooksById from "../UpdateBooksById/UpdateBooksById";
-
 import "components/Admin/Manage/ManageForm.scss";
 
 function ViewBooks() {
-  const books = useSelector(selectProducts);
+  const books = useSelector(selectBooks);
 
   const [products, setProducts] = useState(books);
   const dispatch = useDispatch();
@@ -22,12 +17,12 @@ function ViewBooks() {
   // const isUpdate = useSelector(selectUpdateCarts);
 
   //Nhận số lượng thay đổi của cart => reset carts
-  const quantity = useSelector(selectQuantity);
+  const totalCarts = useSelector(selectTotalBooks);
 
   //Lần 1 get all products
   useEffect(() => {
     getAllProducts();
-  }, [quantity]);
+  }, [totalCarts]);
   //Lần 2 reset sau khi search
   useEffect(() => {
     setProducts(books);
@@ -45,14 +40,14 @@ function ViewBooks() {
       const response = await productsApi.getBooks();
 
       // console.log("dữ liệu trả về", response);
-      dispatch(getAllProduct(response.results));
+      dispatch(getBooks(response.results));
       // setProducts(response.results);
     } catch (error) {
       console.log("err ", error);
     }
   };
   // console.log("đây là trang admin Products", products);
-  const showBody = products.map((bookDetails, index) => {
+  const showBody = products?.map((bookDetails, index) => {
     return (
       <tr className="viewMenu_table_body_row" key={index}>
         <td>{index + 1}</td>

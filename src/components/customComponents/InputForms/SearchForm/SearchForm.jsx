@@ -3,17 +3,18 @@ import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { GoSearch } from "react-icons/go";
 import { useDispatch } from "react-redux";
-import { getAllProduct } from "reducers/bookSlice";
+import { getBooks } from "reducers/bookSlice";
 import "./SearchForm.scss";
 
 function SearchForm() {
   const [searchInfo, setSearchInfo] = useState("");
   const dispatch = useDispatch();
+  //search books
   const searchBooks = async () => {
     try {
       const response = await productsApi.searchBooks(searchInfo);
       //   console.log("đã search ra được", response);
-      dispatch(getAllProduct(response.results));
+      dispatch(getBooks(response.results));
     } catch (error) {
       console.log("lỗi tại search", { error });
     }

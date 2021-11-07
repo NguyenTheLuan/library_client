@@ -2,9 +2,9 @@ import productsApi from "apis/productsApi";
 import ButtonAddCarts from "components/customComponents/ButtonHandleCarts/ButtonAddCarts";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import "./ProductDetails.scss";
+import "./BookDetails.scss";
 
-function ProductDetails() {
+function BookDetails() {
   const [productDetails, setProductDetails] = useState([]);
   const { itemsId } = useParams();
   // console.log("trang details", itemsId);
@@ -94,4 +94,4 @@ function ProductDetails() {
   );
 }
 
-export default ProductDetails;
+export default BookDetails;

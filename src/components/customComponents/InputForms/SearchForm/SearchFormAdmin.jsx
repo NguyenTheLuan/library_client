@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { GoSearch } from "react-icons/go";
 import { useDispatch } from "react-redux";
-import { getAllProduct } from "reducers/bookSlice";
+import { getBooks } from "reducers/bookSlice";
 import "./SearchForm.scss";
 
 function SearchFormAdmin() {
@@ -13,7 +13,7 @@ function SearchFormAdmin() {
     try {
       const response = await productsApi.searchBooks(searchInfo);
       console.log("sách sau khi search là", response);
-      dispatch(getAllProduct(response.results));
+      dispatch(getBooks(response.results));
     } catch (error) {
       console.log("lỗi rồi", { error });
     }

@@ -4,8 +4,8 @@ import { Button } from "react-bootstrap";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { addBookById } from "reducers/bookSlice";
 import { selectUser } from "reducers/authSlice";
+import { addCartsId } from "reducers/userSlice";
 import "./ButtonStyleCarts.scss";
 
 function ButtonAddCarts({ product }) {
@@ -21,7 +21,7 @@ function ButtonAddCarts({ product }) {
       // console.log("thêm vào thành công");
 
       //truyền vô redux
-      dispatch(addBookById(bookId));
+      dispatch(addCartsId(bookId));
       alert("Add sản phẩm thành công");
     } catch (error) {
       // console.log("lỗi tại buttonAddCarts", error.response.data.message);

@@ -3,12 +3,13 @@ import ButtonDeleteCarts from "components/customComponents/ButtonHandleCarts/But
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { selectProducts } from "reducers/bookSlice";
+import { selectMyCarts, selectMyTotalCarts } from "reducers/userSlice";
 import "./MyCarts.scss";
 
 function MyCarts() {
-  //Lấy Books từ redux
-  const getCarts = useSelector(selectProducts);
+  //Lấy carts từ user
+  const getMyCarts = useSelector(selectMyCarts);
+  const getMyTotalCarts = useSelector(selectMyTotalCarts);
   //Trạng thái update từ carts
   // const isActive = useSelector(selectUpdateCarts);
 
@@ -16,6 +17,11 @@ function MyCarts() {
 
   // Danh sách carts
   const [carts, setCarts] = useState([]);
+
+  useEffect(() => {
+    getMyCarts && setCarts(getMyCarts);
+    console.log("đã nhận được thông tin cập nhật", getMyCarts);
+  }, [getMyCarts, getMyTotalCarts]);
 
   const [selectBooks, setSelectBooks] = useState([]);
 
@@ -48,14 +54,6 @@ function MyCarts() {
       setSelectBooks([...selectBooks, details]);
     }
   };
-
-  useEffect(() => {
-    getCarts && setCarts(getCarts);
-  }, [getCarts]);
-
-  // useEffect(() => {
-  //   console.log("select books", selectBooks);
-  // }, [selectBooks]);
 
   const imgCarts = (img) => {
     return <img src={img} alt="img-book" />;

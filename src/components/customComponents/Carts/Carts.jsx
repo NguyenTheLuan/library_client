@@ -4,8 +4,12 @@ import { Badge, OverlayTrigger } from "react-bootstrap";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { getAllProduct, getQuantity, selectQuantity } from "reducers/bookSlice";
 import { selectUser } from "reducers/authSlice";
+import {
+  getMyCarts,
+  getTotalCarts,
+  selectMyTotalCarts,
+} from "reducers/userSlice";
 import { TooltipItems } from "../TooltipItems/TooltipItems";
 import "./Carts.scss";
 
@@ -17,7 +21,7 @@ function Carts() {
   const dispatch = useDispatch();
 
   //Nhận số lượng sách từ redux
-  const setQuantity = useSelector(selectQuantity);
+  const myTotalCarts = useSelector(selectMyTotalCarts);
   // console.log(setQuantity);
 
   const [cartCounts, setCartCounts] = useState(0);
@@ -25,27 +29,18 @@ function Carts() {
   // const [error, setError] = useState("");
 
   useEffect(() => {
-    let isMounted = true;
-    if (isMounted === true) {
-      isUser && getCarts();
-    }
-    return () => {
-      isMounted = false;
-    };
-  }, [cartCounts, setQuantity]);
+    isUser && getCarts();
+  }, [cartCounts, myTotalCarts]);
 
   const getCarts = async () => {
     const idUSer = isUser.id;
     try {
       const response = await userApi.getCarts(idUSer);
 
-      //truyền vô redux
-
-      //truyền books
-      dispatch(getAllProduct(response.results));
-
+      //truyền carts về cho user
+      dispatch(getMyCarts(response.results));
       //truyền số lượng
-      dispatch(getQuantity(response.totalResults));
+      dispatch(getTotalCarts(response.totalResults));
 
       //Hiện thị thông số lên carts
 
@@ -53,11 +48,7 @@ function Carts() {
       // setCartCounts(setQuantity);
 
       //Lưu để f5 vẫn còn giữ giá trị
-      sessionStorage.setItem("carts", JSON.stringify(response));
-      // console.log(
-      //   "lấy từ session carts",
-      //   JSON.parse(sessionStorage.getItem("carts")).results
-      // );
+      sessionStorage.setItem("myCarts", JSON.stringify(response));
     } catch (error) {
       // setError(error.response.data.message);
       console.log("lỗi từ cart", { error });

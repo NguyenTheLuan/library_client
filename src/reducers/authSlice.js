@@ -8,18 +8,14 @@ const authSlice = createSlice({
       : null,
   },
   reducers: {
-    //auth
+    //login
     loginIn(state, action) {
       state.auth = action.payload;
     },
+    //logout
     logOut(state) {
       state.auth = null;
     },
-
-    //handle Click
-    // chooseItems(state, action) {
-    //   state.clickItems = action.payload;
-    // },
   },
 });
 

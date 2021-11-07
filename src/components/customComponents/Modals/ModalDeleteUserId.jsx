@@ -2,7 +2,7 @@ import adminApi from "apis/adminApi";
 import React from "react";
 import { Button, Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { deleteUserById } from "reducers/userSlice";
+import { deleteUserById } from "reducers/adminSlice";
 import "./Modals.scss";
 function ModalDeleteUserId({ userId, isShow, onShow, title, body }) {
   const dispatch = useDispatch();

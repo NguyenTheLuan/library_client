@@ -4,8 +4,8 @@ import { Button } from "react-bootstrap";
 import { MdDeleteForever } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { deleteBookById } from "reducers/bookSlice";
 import { selectUser } from "reducers/authSlice";
+import { deleteCartsId } from "reducers/userSlice";
 import "./ButtonStyleCarts.scss";
 
 function ButtonDeleteCarts({ product }) {
@@ -23,7 +23,7 @@ function ButtonDeleteCarts({ product }) {
       await userApi.deleteBooksOfCart(userId, bookId);
 
       //xoá bookById và resetup cho redux
-      dispatch(deleteBookById(bookId));
+      dispatch(deleteCartsId(bookId));
       //Thông báo xoá thành công
       alert("Xoá sản phẩm thành công");
     } catch (error) {

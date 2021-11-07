@@ -8,6 +8,8 @@ import { isUpdateCarts } from "reducers/bookSlice";
 import { selectUser } from "reducers/authSlice";
 
 import "./ButtonStyleCarts.scss";
+import { deleteCartsId } from "reducers/userSlice";
+import ResetPassword from "components/User/ResetPassword/ResetPassword";
 
 function ButtonChooseCarts({ selectBooks }) {
   const isUser = useSelector(selectUser);
@@ -16,16 +18,23 @@ function ButtonChooseCarts({ selectBooks }) {
 
   const bookCarts = { books: selectBooks };
 
-  // console.log("booksCarts", bookCarts);
+  console.log("booksCarts", bookCarts);
   const makeReservation = async () => {
     try {
       // const response = await userApi.postSchedule(isUser.id, bookCarts);
       await userApi.postSchedule(isUser.id, bookCarts);
       // console.log("thành công", { response });
-      dispatch(isUpdateCarts(true));
+      // dispatch(isUpdateCarts(true));
+      //Reset carts
+      resetMyCarts(selectBooks);
+      alert("Đặt thành công, hãy kiểm tra lịch hẹn");
     } catch (error) {
       console.log({ error });
     }
+  };
+
+  const resetMyCarts = (books) => {
+    books.map((bookId) => dispatch(deleteCartsId(bookId)));
   };
 
   const handleClick = () => {
