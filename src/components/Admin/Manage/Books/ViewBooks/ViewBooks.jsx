@@ -3,18 +3,34 @@ import SearchFormAdmin from "components/customComponents/InputForms/SearchForm/S
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getBooks, selectBooks, selectTotalBooks } from "reducers/bookSlice";
+import {
+  getBooks,
+  getTotalBooks,
+  selectBooks,
+  selectTotalBooks,
+} from "reducers/bookSlice";
 import DeleteBooks from "../DeleteBooks/DeleteBooks";
 import UpdateBooksById from "../UpdateBooksById/UpdateBooksById";
+import Pagination from "components/customComponents/PaginationItems/PaginationItems";
 import "components/Admin/Manage/ManageForm.scss";
 
 function ViewBooks() {
   const books = useSelector(selectBooks);
 
   const [products, setProducts] = useState(books);
+
   const dispatch = useDispatch();
 
   // const isUpdate = useSelector(selectUpdateCarts);
+
+  //Pagination
+  const [totalBooks, setTotalBooks] = useState();
+  const [limitPage, setLimitPage] = useState(4);
+  const [newPage, setNewPage] = useState(1);
+
+  const handleChangePage = (newPage) => {
+    setNewPage(newPage);
+  };
 
   //Nhận số lượng thay đổi của cart => reset carts
   const totalCarts = useSelector(selectTotalBooks);
@@ -22,7 +38,7 @@ function ViewBooks() {
   //Lần 1 get all products
   useEffect(() => {
     getAllProducts();
-  }, [totalCarts]);
+  }, [totalCarts, newPage]);
   //Lần 2 reset sau khi search
   useEffect(() => {
     setProducts(books);
@@ -36,12 +52,15 @@ function ViewBooks() {
   };
 
   const getAllProducts = async () => {
-    // const param = { page: 1, limit: 3 };
+    const params = { page: newPage, limit: limitPage };
     try {
-      const response = await productsApi.getBooks();
+      const response = await productsApi.getBooks(params);
 
       console.log("dữ liệu trả về", response);
       dispatch(getBooks(response.results));
+      // dispatch(getTotalBooks(response.totalResults));
+      //Để Phân trang
+      setTotalBooks(response.totalResults);
       // setProducts(response.results);
     } catch (error) {
       console.log("err ", error);
@@ -95,6 +114,13 @@ function ViewBooks() {
           </tr>
         </thead>
         <tbody className="viewMenu_table_body">{showBody}</tbody>
+        <tfoot className="viewMenu_table_foot">
+          <Pagination
+            totalRows={totalBooks}
+            limit={limitPage}
+            onChangePage={handleChangePage}
+          />
+        </tfoot>
       </Table>
     </div>
   );
