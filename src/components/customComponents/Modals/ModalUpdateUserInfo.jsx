@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
+import adminApi from "apis/adminApi";
 import "./Modals.scss";
 
 function ModalUpdateUserInfo({ isShow, onShow, userInfo }) {
@@ -13,8 +14,31 @@ function ModalUpdateUserInfo({ isShow, onShow, userInfo }) {
     return onShow(false);
   };
 
+  const updateUserInfo = async () => {
+    //id user
+    const userId = userInfo.id;
+    //data update
+    const bookInfo = {
+      name: name,
+      email: email,
+      status: status,
+      // password: password,
+    };
+
+    try {
+      await adminApi.updateUser(userId, bookInfo);
+
+      alert("Cập nhật thành công, xin hãy f5");
+      onShow(false);
+    } catch (error) {
+      console.log("lỗi", { error });
+    }
+  };
+
   const handleClick = () => {
-    console.log("cập nhật thông tin cho user có id: ", userInfo);
+    console.log("update user", userInfo.id, { password, status, name });
+
+    updateUserInfo();
   };
 
   return (
@@ -26,6 +50,7 @@ function ModalUpdateUserInfo({ isShow, onShow, userInfo }) {
         </Modal.Header>
         <Modal.Body>
           <Form className="formMenu">
+            {/* Email */}
             <Form.Group className="formMenu_items">
               <Form.Label className="formMenu_items_label">Email</Form.Label>
               <Form.Control
@@ -33,10 +58,24 @@ function ModalUpdateUserInfo({ isShow, onShow, userInfo }) {
                 type="email"
                 placeholder="Nhập địa chỉ email"
                 className="formMenu_items_control"
-                onChange={(e) => setEmail(e.target.value)}
+                // onChange={(e) => setEmail(e.target.value)}
                 disabled
               />
             </Form.Group>
+            {/* UserName */}
+            <Form.Group className="formMenu_items">
+              <Form.Label className="formMenu_items_label">
+                Tên người dùng
+              </Form.Label>
+              <Form.Control
+                value={name}
+                type="text"
+                placeholder="Nhập tên người dùng"
+                className="formMenu_items_control"
+                onChange={(e) => setName(e.target.value)}
+              />
+            </Form.Group>
+            {/* status */}
             <Form.Group className="formMenu_items">
               <Form.Label className="formMenu_items_label">
                 Trạng thái
@@ -51,18 +90,7 @@ function ModalUpdateUserInfo({ isShow, onShow, userInfo }) {
                 <option value="active">Kích hoạt</option>
               </Form.Select>
             </Form.Group>
-            <Form.Group className="formMenu_items">
-              <Form.Label className="formMenu_items_label">
-                Tên người dùng
-              </Form.Label>
-              <Form.Control
-                value={name}
-                type="text"
-                placeholder="Nhập tên người dùng"
-                className="formMenu_items_control"
-                onChange={(e) => setName(e.target.value)}
-              />
-            </Form.Group>
+            {/* Password */}
             <Form.Group className="formMenu_items">
               <Form.Label className="formMenu_items_label">Mật Khẩu</Form.Label>
               <Form.Control

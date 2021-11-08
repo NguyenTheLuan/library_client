@@ -18,9 +18,9 @@ const adminApi = {
     return axiosClient.post(url);
   },
   //fn: cập nhật thông tin
-  updateUser: (userId) => {
+  updateUser: (userId, userInfo) => {
     const url = `${USERS_API_ENDPOINT}/${userId}`;
-    return axiosClient.patch(url);
+    return axiosClient.patch(url, userInfo);
   },
   //fn: xoá người dùng
   deleteUser: (userId) => {
