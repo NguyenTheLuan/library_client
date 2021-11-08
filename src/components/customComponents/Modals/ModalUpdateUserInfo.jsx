@@ -5,7 +5,9 @@ import "./Modals.scss";
 function ModalUpdateUserInfo({ isShow, onShow, userInfo }) {
   const [email, setEmail] = useState(userInfo.email);
   const [name, setName] = useState(userInfo.name);
+  const [status, setStatus] = useState(userInfo.status);
   const [password, setPassword] = useState("");
+
   //Thiết lập cho cha
   const handleClose = () => {
     return onShow(false);
@@ -37,6 +39,20 @@ function ModalUpdateUserInfo({ isShow, onShow, userInfo }) {
             </Form.Group>
             <Form.Group className="formMenu_items">
               <Form.Label className="formMenu_items_label">
+                Trạng thái
+              </Form.Label>
+              <Form.Select
+                value={status}
+                name="status"
+                className="formMenu_items_checkbox"
+                onChange={(e) => setStatus(e.target.value)}
+              >
+                <option value="inactive">Không kích hoạt</option>
+                <option value="active">Kích hoạt</option>
+              </Form.Select>
+            </Form.Group>
+            <Form.Group className="formMenu_items">
+              <Form.Label className="formMenu_items_label">
                 Tên người dùng
               </Form.Label>
               <Form.Control
@@ -54,7 +70,7 @@ function ModalUpdateUserInfo({ isShow, onShow, userInfo }) {
                 type="password"
                 placeholder="Nhập mật khẩu"
                 className="formMenu_items_control"
-                onChange={(e) => setPassword(e.target.password)}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </Form.Group>
           </Form>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import adminApi from "apis/adminApi";
 
-import "components/Admin/Manage/ManageForm.scss";
+import "components/Admin/Manage/AddForm.scss";
 
 function CreateUser() {
   const [userCreate, setUserCreate] = useState({

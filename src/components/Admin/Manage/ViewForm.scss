@@ -1,19 +1,81 @@
 .viewMenu {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  // gap: 20px;
+
+  //cho phần search
+  &_search {
+    padding-bottom: 20px;
+  }
+
+  //cho phần table
   &_table {
-    &_header {
-      &_row {
-        th {
-          text-transform: capitalize;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    .tableForm {
+      width: 98%;
+      text-align: center;
+
+      //title form
+      &_header {
+        .tableItems {
+          th {
+            text-transform: capitalize;
+          }
+        }
+      }
+      //body form
+      &_body {
+        .tableItems {
+          td {
+            line-height: 40px;
+            font-size: 15px;
+
+            //Hình ảnh
+            img {
+              width: 30px;
+            }
+            //button
+            button {
+              &:focus {
+                box-shadow: none;
+              }
+            }
+          }
+
+          .emailInfo {
+            display: flex;
+            justify-content: space-between;
+            .emailName {
+              flex: 2;
+            }
+            .emailStatus {
+              flex: 1;
+              font-size: 14px;
+            }
+          }
         }
       }
     }
-    &_body {
-      &_row {
-        td {
-          button {
-            &:focus {
-              box-shadow: none !important;
-            }
+  }
+
+  //cho phần pagination
+  &_pagination {
+    display: flex;
+    justify-content: end;
+
+    padding-right: 10px;
+    .pagination {
+      .page-item {
+        .page-link {
+          &:focus {
+            box-shadow: none;
+            background: rgb(140, 0, 255);
+            color: white;
           }
         }
       }

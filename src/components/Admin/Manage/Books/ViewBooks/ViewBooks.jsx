@@ -1,18 +1,14 @@
 import productsApi from "apis/productsApi";
+// import "components/Admin/Manage/AddForm.scss";
+import "components/Admin/Manage/ViewForm.scss";
 import SearchFormAdmin from "components/customComponents/InputForms/SearchForm/SearchFormAdmin";
+import Pagination from "components/customComponents/PaginationItems/PaginationItems";
 import React, { useEffect, useState } from "react";
-import { Table } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getBooks,
-  getTotalBooks,
-  selectBooks,
-  selectTotalBooks,
-} from "reducers/bookSlice";
+import { getBooks, selectBooks, selectTotalBooks } from "reducers/bookSlice";
 import DeleteBooks from "../DeleteBooks/DeleteBooks";
 import UpdateBooksById from "../UpdateBooksById/UpdateBooksById";
-import Pagination from "components/customComponents/PaginationItems/PaginationItems";
-import "components/Admin/Manage/ManageForm.scss";
 
 function ViewBooks() {
   const books = useSelector(selectBooks);
@@ -25,7 +21,7 @@ function ViewBooks() {
 
   //Pagination
   const [totalBooks, setTotalBooks] = useState();
-  const [limitPage, setLimitPage] = useState(4);
+  const [limitPage, setLimitPage] = useState(5);
   const [newPage, setNewPage] = useState(1);
 
   const handleChangePage = (newPage) => {
@@ -69,7 +65,7 @@ function ViewBooks() {
   // console.log("đây là trang admin Products", products);
   const showBody = products?.map((bookDetails, index) => {
     return (
-      <tr className="viewMenu_table_body_row" key={index}>
+      <tr className="tableItems" key={index}>
         <td>{index + 1}</td>
         {/* <td>{bookDetails.id}</td> */}
         <td>{imgShow(bookDetails.cover)}</td>
@@ -77,8 +73,8 @@ function ViewBooks() {
         <td>{bookDetails.authors}</td>
         <td>{bookDetails.categories}</td>
         <td>{bookDetails.availableCopies}</td>
-        {/* <td>{checkQuantity(bookDetails.availableCopies)}</td> */}
-        <td>{bookDetails.loanPeriodDays}</td>
+        <td>{bookDetails.loanPeriodDays} ngày</td>
+
         {/* custom td */}
         <td>
           <UpdateBooksById bookDetails={bookDetails} />
@@ -93,35 +89,40 @@ function ViewBooks() {
 
   return (
     <div className="viewMenu">
-      <div className="viewMenu_header">
-        <div className="viewMenu_header_search">
+      <div className="viewMenu_search">
+        {/* Search form */}
+        <div className="search">
           <legend>Thông tin sách</legend>
           <SearchFormAdmin />
         </div>
       </div>
-      <Table className="viewMenu_table" striped bordered hover>
-        <thead className="viewMenu_table_header">
-          <tr className="viewMenu_table_header_row">
-            <th>#</th>
-            <th>Ảnh</th>
-            <th>Tên sách</th>
-            <th>Tác giả</th>
-            <th>Thể loại</th>
-            <th>Số lượng</th>
-            <th>Thời gian mượn(ngày)</th>
-            <th>Chỉnh sửa</th>
-            <th>Xoá sách</th>
-          </tr>
-        </thead>
-        <tbody className="viewMenu_table_body">{showBody}</tbody>
-        <tfoot className="viewMenu_table_foot">
-          <Pagination
-            totalRows={totalBooks}
-            limit={limitPage}
-            onChangePage={handleChangePage}
-          />
-        </tfoot>
-      </Table>
+      <div className="viewMenu_table">
+        <Table striped bordered hover className="tableForm">
+          {/* Title Name */}
+          <thead className="tableForm_header">
+            <tr className="tableItems">
+              <th>STT</th>
+              <th>Ảnh</th>
+              <th>Tên sách</th>
+              <th>Tác giả</th>
+              <th>Thể loại</th>
+              <th>Số lượng</th>
+              {/* <th>Tăng số lượng</th> */}
+              <th>Thời gian mượn</th>
+              <th>Chỉnh sửa</th>
+              <th>Xoá sách</th>
+            </tr>
+          </thead>
+          <tbody className="tableForm_body">{showBody}</tbody>
+        </Table>
+      </div>
+      <div className="viewMenu_pagination">
+        <Pagination
+          totalRows={totalBooks}
+          limit={limitPage}
+          onChangePage={handleChangePage}
+        />
+      </div>
     </div>
   );
 }

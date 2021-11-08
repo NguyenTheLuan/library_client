@@ -1,10 +1,10 @@
 import productsApi from "apis/productsApi";
 import React, { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
-import "components/Admin/Manage/ManageForm.scss";
 import { useDispatch } from "react-redux";
 import { addBookById, getBooks } from "reducers/bookSlice";
 
+import "components/Admin/Manage/AddForm.scss";
 function AddBooks({ isShow, onShow }) {
   // const [bookCreate, setBookCreate] = useState({});
   const dispatch = useDispatch();

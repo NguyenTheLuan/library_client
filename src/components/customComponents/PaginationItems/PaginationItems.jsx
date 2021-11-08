@@ -29,13 +29,11 @@ function PaginationItems({ totalRows, limit, onChangePage }) {
   };
 
   return (
-    <div>
-      <Pagination>
-        <Pagination.First />
-        {showPages}
-        <Pagination.Last />
-      </Pagination>
-    </div>
+    <Pagination>
+      <Pagination.First onClick={() => onChangePage(1)} />
+      {showPages}
+      <Pagination.Last onClick={() => onChangePage(totalPage)} />
+    </Pagination>
   );
 }
 

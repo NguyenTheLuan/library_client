@@ -1,5 +1,4 @@
 import adminApi from "apis/adminApi";
-import "components/Admin/Manage/ViewForm.scss";
 import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,6 +6,8 @@ import { Link } from "react-router-dom";
 import { getUsers, selectTotalUsers } from "reducers/adminSlice";
 import DeleteUser from "../DeleteUser/DeleteUser";
 import UpdateUser from "../UpdateUser/UpdateUser";
+
+import "components/Admin/Manage/ViewForm.scss";
 
 function ViewUser() {
   const [userItems, setUserItems] = useState([]);
@@ -42,22 +43,26 @@ function ViewUser() {
   const activeEmail = (isActive) => {
     if (!isActive) {
       // return <Button variant="outline-primary">Chưa kích hoạt</Button>;
-      return <span>Chưa kích hoạt</span>;
+      return (
+        <span className="emailStatus" style={{ color: "red" }}>
+          Chưa kích hoạt
+        </span>
+      );
     } else if (isActive) {
       // return <Button disabled>Đã kích hoạt</Button>;
-      return <span>Đã kích hoạt</span>;
+      return <span className="emailStatus">Đã kích hoạt</span>;
     }
   };
 
   const showUsers = userItems.map((user, index) => {
     if (user.role === "user") {
       return (
-        <tr className="viewMenu_table_body_row" key={index}>
+        <tr className="tableItems" key={index}>
           <td>{index - 2}</td>
           <td>{user.name}</td>
           <td>{user.role}</td>
-          <td>
-            <span>{user.email}</span>
+          <td className="emailInfo">
+            <span className="emailName">{user.email}</span>
             {activeEmail(user.isEmailVerified)}
           </td>
 
@@ -80,27 +85,30 @@ function ViewUser() {
   return (
     <div className="viewMenu">
       {/* <div className="formContainer"> */}
-      <h2>Thông Tin Người Dùng</h2>
-      <Table className="viewMenu_table" striped bordered hover>
-        {err && (
-          <Link to="/login">
-            <h2>{err}</h2>
-          </Link>
-        )}
-        <thead className="viewMenu_table_header">
-          <tr className="viewMenu_table_header_row">
-            <th>STT</th>
-            <th>Tên Người Dùng</th>
-            <th>Chức vụ</th>
-            <th>Email</th>
-            <th>Thay đổi thông tin</th>
-            <th>Xoá người dùng</th>
-            <th>Xem chi tiết</th>
-          </tr>
-        </thead>
-        <tbody className="viewMenu_table_body">{showUsers}</tbody>
-      </Table>
-      {/* </div> */}
+      <div className="viewMenu_search">
+        <h2>Thông Tin Người Dùng</h2>
+      </div>
+      <div className="viewMenu_table">
+        <Table className="tableForm" striped bordered hover>
+          {err && (
+            <Link to="/login">
+              <h2>{err}</h2>
+            </Link>
+          )}
+          <thead className="tableForm_header">
+            <tr className="tableItems">
+              <th>STT</th>
+              <th>Tên Người Dùng</th>
+              <th>Chức vụ</th>
+              <th>Email</th>
+              <th>Thay đổi thông tin</th>
+              <th>Xoá người dùng</th>
+              <th>Xem chi tiết</th>
+            </tr>
+          </thead>
+          <tbody className="tableForm_body">{showUsers}</tbody>
+        </Table>
+      </div>
     </div>
   );
 }
