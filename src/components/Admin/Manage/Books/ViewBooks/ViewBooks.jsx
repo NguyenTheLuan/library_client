@@ -1,6 +1,5 @@
 import productsApi from "apis/productsApi";
 // import "components/Admin/Manage/AddForm.scss";
-import "components/Admin/Manage/ViewForm.scss";
 import SearchFormAdmin from "components/customComponents/InputForms/SearchForm/SearchFormAdmin";
 import Pagination from "components/customComponents/PaginationItems/PaginationItems";
 import React, { useEffect, useState } from "react";
@@ -9,6 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getBooks, selectBooks, selectTotalBooks } from "reducers/bookSlice";
 import DeleteBooks from "../DeleteBooks/DeleteBooks";
 import UpdateBooksById from "../UpdateBooksById/UpdateBooksById";
+
+import "components/Admin/Manage/ViewForm.scss";
 
 function ViewBooks() {
   const books = useSelector(selectBooks);
@@ -48,6 +49,8 @@ function ViewBooks() {
   };
 
   const getAllProducts = async () => {
+    //set về rỗng trước
+    setProducts();
     const params = { page: newPage, limit: limitPage };
     try {
       const response = await productsApi.getBooks(params);
@@ -57,7 +60,6 @@ function ViewBooks() {
       // dispatch(getTotalBooks(response.totalResults));
       //Để Phân trang
       setTotalBooks(response.totalResults);
-      // setProducts(response.results);
     } catch (error) {
       console.log("err ", error);
     }

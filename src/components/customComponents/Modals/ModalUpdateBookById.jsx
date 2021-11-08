@@ -1,5 +1,5 @@
 import productsApi from "apis/productsApi";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import "./Modals.scss";
 
@@ -8,6 +8,8 @@ function ModalUpdateBookById({ isShow, onShow, bookDetails }) {
   const handleClose = () => {
     return onShow(false);
   };
+
+  // console.log(bookDetails);
 
   //Tên sách
   const [title, setTitle] = useState(bookDetails.title);
@@ -52,6 +54,7 @@ function ModalUpdateBookById({ isShow, onShow, bookDetails }) {
     }
   };
 
+  // console.log("cập nhật thông tin cho book có id: ", bookDetails);
   const handleClick = () => {
     // console.log("cập nhật thông tin cho book có id: ", bookDetails);
     updateBookById();

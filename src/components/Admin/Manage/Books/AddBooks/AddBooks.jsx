@@ -41,8 +41,9 @@ function AddBooks({ isShow, onShow }) {
     try {
       // await productsApi.postCreateBook(formData);
       const response = await productsApi.postCreateBook(formData);
-      console.log("tạo sách thành công", response);
-      setError("Tạo sách thành công");
+      // console.log("tạo sách thành công", response);
+      // setError("Tạo sách thành công");
+      setError("");
       alert("Tạo thành công");
       //Truyền vô redux
       dispatch(addBookById(response));

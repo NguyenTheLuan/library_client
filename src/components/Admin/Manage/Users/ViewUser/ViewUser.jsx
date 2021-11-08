@@ -42,14 +42,12 @@ function ViewUser() {
   // console.log(userItems);
   const activeEmail = (isActive) => {
     if (!isActive) {
-      // return <Button variant="outline-primary">Chưa kích hoạt</Button>;
       return (
         <span className="emailStatus" style={{ color: "red" }}>
           Chưa kích hoạt
         </span>
       );
     } else if (isActive) {
-      // return <Button disabled>Đã kích hoạt</Button>;
       return <span className="emailStatus">Đã kích hoạt</span>;
     }
   };
