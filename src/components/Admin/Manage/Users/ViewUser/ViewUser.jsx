@@ -1,4 +1,8 @@
 import adminApi from "apis/adminApi";
+import "components/Admin/Manage/ViewForm.scss";
+import SearchUsersAdmin from "components/customComponents/InputForms/SearchForm/SearchUsersAdmin";
+
+import PaginationItems from "components/customComponents/PaginationItems/PaginationItems";
 import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,12 +11,10 @@ import { getUsers, selectTotalUsers } from "reducers/adminSlice";
 import DeleteUser from "../DeleteUser/DeleteUser";
 import UpdateUser from "../UpdateUser/UpdateUser";
 
-import "components/Admin/Manage/ViewForm.scss";
-import PaginationItems from "components/customComponents/PaginationItems/PaginationItems";
-
 function ViewUser() {
+  //Thông tin user
   const [userItems, setUserItems] = useState([]);
-
+  const [searchInfo, setSearchInfo] = useState();
   const users = useSelector(selectTotalUsers);
 
   const dispatch = useDispatch();
@@ -27,14 +29,25 @@ function ViewUser() {
   const handleChangePage = (newPage) => {
     setNewPage(newPage);
   };
+  //Set row
+  const handleTotalRows = (newRows) => {
+    // console.log("cha đã nhận được số sản phẩm mới", newRows);
+    setTotalUsers(newRows);
+  };
 
   //Lần 1 render all
   useEffect(() => {
     getAllUsers();
-  }, [newPage, users]);
+  }, [newPage, searchInfo]);
 
   const getAllUsers = async () => {
-    const params = { role: role, page: newPage, limit: limitPage };
+    const params = {
+      role: role,
+      page: newPage,
+      limit: limitPage,
+      ...searchInfo,
+    };
+    console.log("tiến hành search", params);
     try {
       const response = await adminApi.getAllUser(params);
       setUserItems();
@@ -67,12 +80,19 @@ function ViewUser() {
     }
   };
 
+  //Nhận thông tin từ user con
+  const handleInfo = (infoUser) => {
+    console.log("đã nhận được thông tin", infoUser);
+    setSearchInfo(infoUser);
+  };
+
   const showUsers = userItems?.map((user, index) => {
     return (
       <tr className="tableItems" key={index}>
-        <td>{index + 1} </td>
+        {/* <td>{index + 1} </td> */}
         <td>{user.name}</td>
         <td>{user.role}</td>
+        <td>{user.status}</td>
         <td className="emailInfo">
           <span className="emailName">{user.email}</span>
           {activeEmail(user.isEmailVerified)}
@@ -95,7 +115,10 @@ function ViewUser() {
   return (
     <div className="viewMenu">
       <div className="viewMenu_search">
-        <h2>Thông Tin Người Dùng</h2>
+        <div className="search">
+          <legend>Thông tin người dùng</legend>
+          <SearchUsersAdmin onChangeInfo={handleInfo} />
+        </div>
       </div>
       <div className="viewMenu_table">
         <Table className="tableForm" striped bordered hover>
@@ -106,9 +129,10 @@ function ViewUser() {
           )}
           <thead className="tableForm_header">
             <tr className="tableItems">
-              <th>STT</th>
+              {/* <th>STT</th> */}
               <th>Tên Người Dùng</th>
               <th>Chức vụ</th>
+              <th>Trạng thái</th>
               <th>Email</th>
               <th>Thay đổi thông tin</th>
               <th>Xoá người dùng</th>

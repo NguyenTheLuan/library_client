@@ -14,7 +14,9 @@ import UserRoute from "routes/customRoutes/UserRoute";
 
 function App() {
   //Xử lí time
-  const timeExpire = JSON.parse(localStorage.getItem("access")).expires;
+  const timeExpire = JSON.parse(localStorage.getItem("access"))
+    ? JSON.parse(localStorage.getItem("access")).expires
+    : {};
   const timeRefresh = new Date(timeExpire);
   const currentTime = new Date();
   //refresh token
@@ -28,7 +30,7 @@ function App() {
 
   const refreshToken = async () => {
     const token = {
-      refreshToken: JSON.parse(localStorage.getItem("refresh")).token,
+      refreshToken: JSON.parse(localStorage.getItem("refresh"))?.token,
     };
     try {
       const response = await accountApi.postRefreshToken(token);

@@ -1,6 +1,6 @@
 import productsApi from "apis/productsApi";
 // import "components/Admin/Manage/AddForm.scss";
-import SearchFormAdmin from "components/customComponents/InputForms/SearchForm/SearchFormAdmin";
+import SearchFormAdmin from "components/customComponents/InputForms/SearchForm/SearchBooksAdmin";
 
 import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
@@ -42,7 +42,7 @@ function ViewBooks() {
   //Lần 1 get all products
   useEffect(() => {
     getAllProducts();
-  }, [totalCarts, newPage]);
+  }, [newPage]);
   //Lần 2 reset sau khi search
   useEffect(() => {
     setProducts(books);
@@ -61,8 +61,9 @@ function ViewBooks() {
     try {
       const response = await productsApi.getBooks(params);
 
-      console.log("dữ liệu trả về", response);
+      // console.log("dữ liệu trả về", response);
       setProducts();
+      //Nhận thông tin sách
       dispatch(getBooks(response.results));
       //Để Phân trang
       setTotalBooks(response.totalResults);
@@ -70,6 +71,7 @@ function ViewBooks() {
       console.log("err ", error);
     }
   };
+
   // console.log("đây là trang admin Products", products);
   const showBody = products?.map((bookDetails, index) => {
     return (

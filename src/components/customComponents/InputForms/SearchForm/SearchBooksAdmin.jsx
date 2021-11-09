@@ -5,12 +5,12 @@ import { GoSearch } from "react-icons/go";
 import { BsPlusLg } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { getBooks } from "reducers/bookSlice";
-import "./SearchForm.scss";
-import AddBooks from "components/Admin/Manage/Books/AddBooks/AddBooks";
 import CheckBoxAuthor from "components/customComponents/CheckBoxItems/CheckBoxAuthor";
 import CheckBoxCategory from "components/customComponents/CheckBoxItems/CheckBoxCategory";
+import AddBooks from "components/Admin/Manage/Books/AddBooks/AddBooks";
+import "./SearchForm.scss";
 
-function SearchFormAdmin({ limit, newPage, onTotalRow }) {
+function SearchBooksAdmin({ limit, newPage, onTotalRow }) {
   //Search Form
   const [searchInfo, setSearchInfo] = useState({});
   const dispatch = useDispatch();
@@ -137,4 +137,4 @@ function SearchFormAdmin({ limit, newPage, onTotalRow }) {
   );
 }
 
-export default SearchFormAdmin;
+export default SearchBooksAdmin;
