@@ -25,8 +25,14 @@ function ViewBooks() {
   const [limitPage, setLimitPage] = useState(5);
   const [newPage, setNewPage] = useState(1);
 
+  //Chuyển trang mới
   const handleChangePage = (newPage) => {
     setNewPage(newPage);
+  };
+  //Set row
+  const handleTotalRows = (newRows) => {
+    // console.log("cha đã nhận được số sản phẩm mới", newRows);
+    setTotalBooks(newRows);
   };
 
   //Nhận số lượng thay đổi của cart => reset carts
@@ -95,7 +101,11 @@ function ViewBooks() {
         {/* Search form */}
         <div className="search">
           <legend>Thông tin sách</legend>
-          <SearchFormAdmin />
+          <SearchFormAdmin
+            limit={limitPage}
+            newPage={newPage}
+            onTotalRow={handleTotalRows}
+          />
         </div>
       </div>
       <div className="viewMenu_table">

@@ -7,15 +7,23 @@ import { useDispatch } from "react-redux";
 import { getBooks } from "reducers/bookSlice";
 import "./SearchForm.scss";
 import AddBooks from "components/Admin/Manage/Books/AddBooks/AddBooks";
+import CheckBoxAuthor from "components/customComponents/CheckBoxItems/CheckBoxAuthor";
+import CheckBoxCategory from "components/customComponents/CheckBoxItems/CheckBoxCategory";
 
-function SearchFormAdmin() {
+function SearchFormAdmin({ limit, newPage, onTotalRow }) {
   //Search Form
   const [searchInfo, setSearchInfo] = useState({});
   const dispatch = useDispatch();
+
+  // console.log("trang search", limit, newPage);
   const getBook = async () => {
+    const params = { page: newPage, limit: limit, ...searchInfo };
     try {
-      const response = await productsApi.searchBooks(searchInfo);
+      const response = await productsApi.searchBooks(params);
       console.log("sách sau khi search là", response);
+      //Truyền tổng books cho cha để phân trang
+      onTotalRow(response.totalResults);
+      //Truyền vô redux
       dispatch(getBooks(response.results));
     } catch (error) {
       console.log("lỗi rồi", { error });
@@ -28,6 +36,22 @@ function SearchFormAdmin() {
   };
   const handleForm = (e) => {
     e.preventDefault();
+  };
+
+  //Xử lý tên tác giả
+  const handleAuthorsName = (authorName) => {
+    //Nhận tên tác giả
+    const { authors } = authorName;
+    // console.log("cha đã nhận đƯợc tên tác giả là", authorName);
+    setSearchInfo({ ...searchInfo, authors });
+    // console.log("tiến hành cập nhật", searchInfo);
+  };
+  //Xử lý tên danh mục
+  const handleCategoriesName = (categoryName) => {
+    //Nhận tên danh mục
+    const { categories } = categoryName;
+    setSearchInfo({ ...searchInfo, categories });
+    // console.log("tiến hành cập nhật", searchInfo);
   };
 
   //Modal
@@ -94,36 +118,10 @@ function SearchFormAdmin() {
           </Form.Group>
 
           {/* Tên tác giả */}
-          <Form.Group className="formSearchAdmin_search_items">
-            <Form.Label className="formLabel"></Form.Label>
-            <Form.Control
-              name="authors"
-              className="formInput"
-              placeholder="Nhập tên sách tác giả"
-              onChange={(e) =>
-                setSearchInfo({
-                  ...searchInfo,
-                  [e.target.name]: e.target.value,
-                })
-              }
-            ></Form.Control>
-          </Form.Group>
+          <CheckBoxAuthor onAuthorName={handleAuthorsName} />
 
           {/* Thể loại sách */}
-          <Form.Group className="formSearchAdmin_search_items">
-            <Form.Label className="formLabel"></Form.Label>
-            <Form.Control
-              name="categories"
-              className="formInput"
-              placeholder="Nhập thể loại sách"
-              onChange={(e) =>
-                setSearchInfo({
-                  ...searchInfo,
-                  [e.target.name]: e.target.value,
-                })
-              }
-            ></Form.Control>
-          </Form.Group>
+          <CheckBoxCategory onCategoryName={handleCategoriesName} />
         </div>
       </Form>
 

@@ -29,15 +29,19 @@ const productsApi = {
   },
   //Search books
   searchBooks: (bookInfo) => {
-    // const url = `${PRODUCTS_API_ENDPOINT}?title=${bookInfo}`;
     const url = `${PRODUCTS_API_ENDPOINT}`;
-    // return axiosClient.get(url, {
-    //   params: {
-    //     title,
-    //     authors,
-    //   },
-    // });
     return axiosClient.get(url, { params: bookInfo });
+  },
+
+  //Lấy tên tác giả
+  getAuthorName: () => {
+    const url = PRODUCTS_API_ENDPOINT + "/authors";
+    return axiosClient.get(url);
+  },
+  //Lấy tên danh mục
+  getCategoriesName: () => {
+    const url = PRODUCTS_API_ENDPOINT + "/categories";
+    return axiosClient.get(url);
   },
 };
 
