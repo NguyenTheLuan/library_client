@@ -49,6 +49,11 @@ const accountApi = {
     // console.log("đây là token", token);
     return axiosClient.post(`${url}?token=${token}`);
   },
+  //fn: refresh-tokens
+  postRefreshToken: (token) => {
+    const url = ACCOUNT_API_ENDPOINT + "/refresh-tokens";
+    return axiosClient.post(url, token);
+  },
 };
 
 export default accountApi;
