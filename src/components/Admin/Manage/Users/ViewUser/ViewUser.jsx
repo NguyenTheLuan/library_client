@@ -19,6 +19,7 @@ function ViewUser() {
   const [err, setErr] = useState("");
 
   //Pagination
+  const [role, setRole] = useState("user");
   const [totalUsers, setTotalUsers] = useState();
   const [limitPage, setLimitPage] = useState(5);
   const [newPage, setNewPage] = useState(1);
@@ -33,7 +34,7 @@ function ViewUser() {
   }, [newPage, users]);
 
   const getAllUsers = async () => {
-    const params = { page: newPage, limit: limitPage };
+    const params = { role: role, page: newPage, limit: limitPage };
     try {
       const response = await adminApi.getAllUser(params);
       setUserItems();
