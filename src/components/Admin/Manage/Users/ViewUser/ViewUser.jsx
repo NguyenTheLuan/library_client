@@ -1,7 +1,6 @@
 import adminApi from "apis/adminApi";
 import "components/Admin/Manage/ViewForm.scss";
 import SearchUsersAdmin from "components/customComponents/InputForms/SearchForm/SearchUsersAdmin";
-
 import PaginationItems from "components/customComponents/PaginationItems/PaginationItems";
 import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
@@ -15,8 +14,9 @@ function ViewUser() {
   //Thông tin user
   const [userItems, setUserItems] = useState([]);
   const [searchInfo, setSearchInfo] = useState();
-  const users = useSelector(selectTotalUsers);
 
+  //Nhận user từ redux
+  const users = useSelector(selectTotalUsers);
   const dispatch = useDispatch();
   const [err, setErr] = useState("");
 
@@ -38,7 +38,7 @@ function ViewUser() {
   //Lần 1 render all
   useEffect(() => {
     getAllUsers();
-  }, [newPage, searchInfo]);
+  }, [newPage, searchInfo, users]);
 
   const getAllUsers = async () => {
     const params = {
@@ -51,7 +51,7 @@ function ViewUser() {
     try {
       const response = await adminApi.getAllUser(params);
       setUserItems();
-      console.log(response);
+      // console.log(response);
       // console.log("users:", response.results);
       setUserItems(response.results);
       //Lưu vô session storage
@@ -59,7 +59,7 @@ function ViewUser() {
         "totalUsers",
         JSON.stringify(response.totalResults)
       );
-      //Set lại tổng user
+      //Để phân trang
       setTotalUsers(response.totalResults);
       //Lưu vô redux
       dispatch(getUsers(response.results));

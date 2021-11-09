@@ -14,12 +14,12 @@ import PaginationItems from "components/customComponents/PaginationItems/Paginat
 
 function ViewBooks() {
   const books = useSelector(selectBooks);
-
-  const [products, setProducts] = useState(books);
+  //Để search
+  const [searchInfo, setSearchInfo] = useState();
+  //Để render
+  const [products, setProducts] = useState();
 
   const dispatch = useDispatch();
-
-  // const isUpdate = useSelector(selectUpdateCarts);
 
   //Pagination
   const [totalBooks, setTotalBooks] = useState();
@@ -35,6 +35,11 @@ function ViewBooks() {
     // console.log("cha đã nhận được số sản phẩm mới", newRows);
     setTotalBooks(newRows);
   };
+  //Search Info
+  const handleInfo = (info) => {
+    // console.log("search info này", info);
+    setSearchInfo(info);
+  };
 
   //Nhận số lượng thay đổi của cart => reset carts
   const totalCarts = useSelector(selectTotalBooks);
@@ -42,7 +47,7 @@ function ViewBooks() {
   //Lần 1 get all products
   useEffect(() => {
     getAllProducts();
-  }, [newPage]);
+  }, [newPage, searchInfo]);
   //Lần 2 reset sau khi search
   useEffect(() => {
     setProducts(books);
@@ -57,12 +62,13 @@ function ViewBooks() {
 
   const getAllProducts = async () => {
     //set về rỗng trước
-    const params = { page: newPage, limit: limitPage };
+    const params = { page: newPage, limit: limitPage, ...searchInfo };
     try {
       const response = await productsApi.getBooks(params);
 
       // console.log("dữ liệu trả về", response);
       setProducts();
+      setProducts(response.results);
       //Nhận thông tin sách
       dispatch(getBooks(response.results));
       //Để Phân trang
@@ -103,11 +109,7 @@ function ViewBooks() {
         {/* Search form */}
         <div className="search">
           <legend>Thông tin sách</legend>
-          <SearchFormAdmin
-            limit={limitPage}
-            newPage={newPage}
-            onTotalRow={handleTotalRows}
-          />
+          <SearchFormAdmin onChangeInfo={handleInfo} />
         </div>
       </div>
       <div className="viewMenu_table">

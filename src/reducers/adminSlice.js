@@ -29,6 +29,6 @@ const adminSlice = createSlice({
 export const { getUsers, deleteUserById, addUserById } = adminSlice.actions;
 
 export const selectTotalUsers = (state) => state.admin.totalUsers;
-export const selectAlllUsers = (state) => state.admin.users;
+export const selectAllUsers = (state) => state.admin.users;
 
 export default adminSlice.reducer;

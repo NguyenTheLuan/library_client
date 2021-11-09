@@ -10,29 +10,12 @@ import CheckBoxCategory from "components/customComponents/CheckBoxItems/CheckBox
 import AddBooks from "components/Admin/Manage/Books/AddBooks/AddBooks";
 import "./SearchForm.scss";
 
-function SearchBooksAdmin({ limit, newPage, onTotalRow }) {
+function SearchBooksAdmin({ onChangeInfo }) {
   //Search Form
   const [searchInfo, setSearchInfo] = useState({});
-  const dispatch = useDispatch();
-
-  // console.log("trang search", limit, newPage);
-  const getBook = async () => {
-    const params = { page: newPage, limit: limit, ...searchInfo };
-    try {
-      const response = await productsApi.searchBooks(params);
-      console.log("sách sau khi search là", response);
-      //Truyền tổng books cho cha để phân trang
-      onTotalRow(response.totalResults);
-      //Truyền vô redux
-      dispatch(getBooks(response.results));
-    } catch (error) {
-      console.log("lỗi rồi", { error });
-    }
-  };
 
   const handleSubmit = () => {
-    // console.log("thông tin cần search là", searchInfo);
-    getBook();
+    onChangeInfo(searchInfo);
   };
   const handleForm = (e) => {
     e.preventDefault();
@@ -44,14 +27,12 @@ function SearchBooksAdmin({ limit, newPage, onTotalRow }) {
     const { authors } = authorName;
     // console.log("cha đã nhận đƯợc tên tác giả là", authorName);
     setSearchInfo({ ...searchInfo, authors });
-    // console.log("tiến hành cập nhật", searchInfo);
   };
   //Xử lý tên danh mục
   const handleCategoriesName = (categoryName) => {
     //Nhận tên danh mục
     const { categories } = categoryName;
     setSearchInfo({ ...searchInfo, categories });
-    // console.log("tiến hành cập nhật", searchInfo);
   };
 
   //Modal
@@ -66,7 +47,7 @@ function SearchBooksAdmin({ limit, newPage, onTotalRow }) {
       <Form className="formSearchAdmin" onSubmit={handleForm}>
         <div className="formSearchAdmin_order">
           <div className="formSearchAdmin_order_items">
-            <div onClick={() => getBook()}>
+            <div onClick={() => handleSubmit()}>
               <Form.Select
                 name="sortBy"
                 className="formSearchAdmin_order_items_select"
@@ -120,12 +101,12 @@ function SearchBooksAdmin({ limit, newPage, onTotalRow }) {
           </Form.Group>
 
           {/* Tên tác giả */}
-          <div onClick={() => getBook()}>
+          <div onClick={() => handleSubmit()}>
             <CheckBoxAuthor onAuthorName={handleAuthorsName} />
           </div>
 
           {/* Thể loại sách */}
-          <div onClick={() => getBook()}>
+          <div onClick={() => handleSubmit()}>
             <CheckBoxCategory onCategoryName={handleCategoriesName} />
           </div>
         </div>
