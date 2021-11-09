@@ -68,15 +68,15 @@ function ViewUser() {
     }
   };
 
-  const activeEmail = (isActive) => {
+  const activeEmail = (isActive, email) => {
     if (!isActive) {
       return (
         <span className="emailStatus" style={{ color: "red" }}>
-          Chưa kích hoạt
+          {email}
         </span>
       );
     } else if (isActive) {
-      return <span className="emailStatus">Đã kích hoạt</span>;
+      return <span className="emailStatus">{email}</span>;
     }
   };
 
@@ -93,10 +93,7 @@ function ViewUser() {
         <td>{user.name}</td>
         <td>{user.role}</td>
         <td>{user.status}</td>
-        <td className="emailInfo">
-          <span className="emailName">{user.email}</span>
-          {activeEmail(user.isEmailVerified)}
-        </td>
+        <td>{activeEmail(user.isEmailVerified, user.email)}</td>
 
         {/* custom td */}
         <td>
