@@ -19,9 +19,11 @@ function App() {
   const currentTime = new Date();
   //refresh token
   useEffect(() => {
-    setInterval(() => {
+    const clear = setInterval(() => {
       refreshToken();
     }, timeRefresh - currentTime);
+
+    clearInterval(clear);
   }, []);
 
   const refreshToken = async () => {

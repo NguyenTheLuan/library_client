@@ -21,7 +21,7 @@ function CheckBoxCategory({ onCategoryName }) {
 
   const adminCheckBox = authorNames?.map((adminName, index) => {
     if (adminName) {
-      return <option>{adminName}</option>;
+      return <option key={index}>{adminName}</option>;
     }
   });
 

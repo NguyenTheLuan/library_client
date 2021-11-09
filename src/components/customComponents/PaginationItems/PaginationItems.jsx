@@ -14,9 +14,9 @@ function PaginationItems({ totalRows, limit, onChangePage }) {
     return res;
   };
 
-  const showPages = rowPage()?.map((pageIndex) => {
+  const showPages = rowPage()?.map((pageIndex, index) => {
     return (
-      <Pagination.Item onClick={() => handlePageChange(pageIndex)}>
+      <Pagination.Item key={index} onClick={() => handlePageChange(pageIndex)}>
         {pageIndex}
       </Pagination.Item>
     );
