@@ -66,20 +66,22 @@ function SearchFormAdmin({ limit, newPage, onTotalRow }) {
       <Form className="formSearchAdmin" onSubmit={handleForm}>
         <div className="formSearchAdmin_order">
           <div className="formSearchAdmin_order_items">
-            <Form.Select
-              name="sortBy"
-              className="formSearchAdmin_order_items_select"
-              onChange={(e) =>
-                setSearchInfo({
-                  ...searchInfo,
-                  [e.target.name]: e.target.value,
-                })
-              }
-            >
-              <option>Sắp xếp</option>
-              <option value="title:asc">{`A -> Z`}</option>
-              <option value="title:desc">{`Z -> A`}</option>
-            </Form.Select>
+            <div onClick={() => getBook()}>
+              <Form.Select
+                name="sortBy"
+                className="formSearchAdmin_order_items_select"
+                onChange={(e) =>
+                  setSearchInfo({
+                    ...searchInfo,
+                    [e.target.name]: e.target.value,
+                  })
+                }
+              >
+                <option>Sắp xếp</option>
+                <option value="title:asc">{`A -> Z`}</option>
+                <option value="title:desc">{`Z -> A`}</option>
+              </Form.Select>
+            </div>
 
             <Button
               variant="primary"
@@ -118,10 +120,14 @@ function SearchFormAdmin({ limit, newPage, onTotalRow }) {
           </Form.Group>
 
           {/* Tên tác giả */}
-          <CheckBoxAuthor onAuthorName={handleAuthorsName} />
+          <div onClick={() => getBook()}>
+            <CheckBoxAuthor onAuthorName={handleAuthorsName} />
+          </div>
 
           {/* Thể loại sách */}
-          <CheckBoxCategory onCategoryName={handleCategoriesName} />
+          <div onClick={() => getBook()}>
+            <CheckBoxCategory onCategoryName={handleCategoriesName} />
+          </div>
         </div>
       </Form>
 
