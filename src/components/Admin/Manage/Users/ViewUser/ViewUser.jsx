@@ -8,22 +8,36 @@ import DeleteUser from "../DeleteUser/DeleteUser";
 import UpdateUser from "../UpdateUser/UpdateUser";
 
 import "components/Admin/Manage/ViewForm.scss";
+import PaginationItems from "components/customComponents/PaginationItems/PaginationItems";
 
 function ViewUser() {
   const [userItems, setUserItems] = useState([]);
 
-  const dispatch = useDispatch();
   const users = useSelector(selectTotalUsers);
+
+  const dispatch = useDispatch();
   const [err, setErr] = useState("");
 
+  //Pagination
+  const [totalUsers, setTotalUsers] = useState();
+  const [limitPage, setLimitPage] = useState(5);
+  const [newPage, setNewPage] = useState(1);
+  //Chuyển trang mới
+  const handleChangePage = (newPage) => {
+    setNewPage(newPage);
+  };
+
+  //Lần 1 render all
   useEffect(() => {
     getAllUsers();
-  }, [users]);
+  }, [newPage, users]);
 
   const getAllUsers = async () => {
+    const params = { page: newPage, limit: limitPage };
     try {
-      const response = await adminApi.getAllUser();
-
+      const response = await adminApi.getAllUser(params);
+      setUserItems();
+      console.log(response);
       // console.log("users:", response.results);
       setUserItems(response.results);
       //Lưu vô session storage
@@ -31,15 +45,15 @@ function ViewUser() {
         "totalUsers",
         JSON.stringify(response.totalResults)
       );
+      //Set lại tổng user
+      setTotalUsers(response.totalResults);
       //Lưu vô redux
-      dispatch(getUsers(response.totalResults));
+      dispatch(getUsers(response.results));
     } catch (error) {
-      // console.log("err", error.response.data.message);
-      // console.log({ error });
       setErr(error.response.data.message);
     }
   };
-  // console.log(userItems);
+
   const activeEmail = (isActive) => {
     if (!isActive) {
       return (
@@ -52,37 +66,33 @@ function ViewUser() {
     }
   };
 
-  const showUsers = userItems.map((user, index) => {
-    if (user.role === "user") {
-      return (
-        <tr className="tableItems" key={index}>
-          <td>{index - 2}</td>
-          <td>{user.name}</td>
-          <td>{user.role}</td>
-          <td className="emailInfo">
-            <span className="emailName">{user.email}</span>
-            {activeEmail(user.isEmailVerified)}
-          </td>
+  const showUsers = userItems?.map((user, index) => {
+    return (
+      <tr className="tableItems" key={index}>
+        <td>{index + 1} </td>
+        <td>{user.name}</td>
+        <td>{user.role}</td>
+        <td className="emailInfo">
+          <span className="emailName">{user.email}</span>
+          {activeEmail(user.isEmailVerified)}
+        </td>
 
-          {/* custom td */}
-          <td>
-            <UpdateUser userInfo={user} />
-          </td>
-          <td>
-            <DeleteUser userId={user.id} userEmail={user.email} />
-          </td>
-          <td>
-            <Button variant="info">Xem chi tiết</Button>
-          </td>
-        </tr>
-      );
-    }
-    return null;
+        {/* custom td */}
+        <td>
+          <UpdateUser userInfo={user} />
+        </td>
+        <td>
+          <DeleteUser userId={user.id} userEmail={user.email} />
+        </td>
+        <td>
+          <Button variant="info">Xem chi tiết</Button>
+        </td>
+      </tr>
+    );
   });
 
   return (
     <div className="viewMenu">
-      {/* <div className="formContainer"> */}
       <div className="viewMenu_search">
         <h2>Thông Tin Người Dùng</h2>
       </div>
@@ -106,6 +116,13 @@ function ViewUser() {
           </thead>
           <tbody className="tableForm_body">{showUsers}</tbody>
         </Table>
+      </div>
+      <div className="viewMenu_pagination">
+        <PaginationItems
+          totalRows={totalUsers}
+          limit={limitPage}
+          onChangePage={handleChangePage}
+        />
       </div>
     </div>
   );

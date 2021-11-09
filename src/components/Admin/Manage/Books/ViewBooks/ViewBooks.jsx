@@ -1,7 +1,7 @@
 import productsApi from "apis/productsApi";
 // import "components/Admin/Manage/AddForm.scss";
 import SearchFormAdmin from "components/customComponents/InputForms/SearchForm/SearchFormAdmin";
-import Pagination from "components/customComponents/PaginationItems/PaginationItems";
+
 import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +10,7 @@ import DeleteBooks from "../DeleteBooks/DeleteBooks";
 import UpdateBooksById from "../UpdateBooksById/UpdateBooksById";
 
 import "components/Admin/Manage/ViewForm.scss";
+import PaginationItems from "components/customComponents/PaginationItems/PaginationItems";
 
 function ViewBooks() {
   const books = useSelector(selectBooks);
@@ -56,14 +57,13 @@ function ViewBooks() {
 
   const getAllProducts = async () => {
     //set về rỗng trước
-    setProducts();
     const params = { page: newPage, limit: limitPage };
     try {
       const response = await productsApi.getBooks(params);
 
       console.log("dữ liệu trả về", response);
+      setProducts();
       dispatch(getBooks(response.results));
-      // dispatch(getTotalBooks(response.totalResults));
       //Để Phân trang
       setTotalBooks(response.totalResults);
     } catch (error) {
@@ -129,7 +129,7 @@ function ViewBooks() {
         </Table>
       </div>
       <div className="viewMenu_pagination">
-        <Pagination
+        <PaginationItems
           totalRows={totalBooks}
           limit={limitPage}
           onChangePage={handleChangePage}

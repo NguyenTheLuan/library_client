@@ -6,11 +6,14 @@ const adminSlice = createSlice({
     totalUsers: JSON.parse(sessionStorage.getItem("totalUsers"))
       ? JSON.parse(sessionStorage.getItem("totalUsers"))
       : null,
+    users: JSON.parse(sessionStorage.getItem("users"))
+      ? JSON.parse(sessionStorage.getItem("users"))
+      : null,
   },
   reducers: {
     //get user
     getUsers(state, action) {
-      state.totalUsers = action.payload;
+      state.users = action.payload;
     },
     //delete user
     deleteUserById(state) {
@@ -26,5 +29,6 @@ const adminSlice = createSlice({
 export const { getUsers, deleteUserById, addUserById } = adminSlice.actions;
 
 export const selectTotalUsers = (state) => state.admin.totalUsers;
+export const selectAlllUsers = (state) => state.admin.users;
 
 export default adminSlice.reducer;

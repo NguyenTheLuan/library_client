@@ -3,9 +3,9 @@ const USERS_API_ENDPOINT = "/users";
 
 const adminApi = {
   //fn: lấy danh sách user
-  getAllUser: () => {
+  getAllUser: (infoUser) => {
     const url = USERS_API_ENDPOINT;
-    return axiosClient.get(url);
+    return axiosClient.get(url, { params: infoUser });
   },
   //fn: tạo người dùng mới
   createUser: (userInfo) => {

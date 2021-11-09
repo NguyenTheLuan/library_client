@@ -82,7 +82,7 @@ function SearchFormAdmin({ limit, newPage, onTotalRow }) {
             </Form.Select>
 
             <Button
-              variant="secondary"
+              variant="primary"
               className="formSearchAdmin_order_items_btn"
               type="submit"
               onClick={handleSubmit}
