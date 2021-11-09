@@ -3,7 +3,7 @@ import ForgotPassword from "components/Auth/ForgotPassword/ForgotPassword";
 import Login from "components/Auth/Login/Login";
 import Register from "components/Auth/Register/Register";
 import Admin from "containers/Admin/Admin";
-import HomePage from "containers/HomePage/HomePage";
+import HomePage from "containers/HomePage/MainHome/MainHome";
 import NotFound from "containers/HomePage/NotFound/NotFound";
 import User from "containers/User/User";
 import React, { useEffect } from "react";

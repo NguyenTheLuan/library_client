@@ -1,4 +1,4 @@
-import HomePage from "containers/HomePage/HomePage";
+import HomePage from "containers/HomePage/MainHome/MainHome";
 
 export const MAIN_PAGES = [
   {

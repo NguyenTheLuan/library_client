@@ -1,5 +1,6 @@
 import BookDetails from "components/HomePage/Contains/BookDetails/ProductDetails";
 import { ViewBooks } from "components/HomePage/Contains/ViewBooks/ViewBooks";
+import Footer from "components/HomePage/Header/Footer/Footer";
 import Header from "components/HomePage/Header/Header/Header";
 import Navigation from "components/HomePage/Header/Navigation/Navigation";
 import React, { useEffect } from "react";
@@ -12,8 +13,8 @@ import {
   useRouteMatch,
 } from "react-router";
 import { selectUser } from "reducers/authSlice";
-import BaiGiang from "./Bai-giang/BaiGiang";
-import "./HomePage.scss";
+import BaiGiang from "../Bai-giang/BaiGiang";
+import "./MainHome.scss";
 
 function HomePage() {
   // const match = useRouteMatch();
@@ -75,6 +76,9 @@ function HomePage() {
             </Switch>
           </div>
         </div>
+      </div>
+      <div className="mainPage_footer">
+        <Footer />
       </div>
     </div>
   );
