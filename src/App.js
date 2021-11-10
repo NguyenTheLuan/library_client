@@ -5,6 +5,7 @@ import Register from "components/Auth/Register/Register";
 import Admin from "containers/Admin/Admin";
 import HomePage from "containers/HomePage/MainHome/MainHome";
 import NotFound from "containers/HomePage/NotFound/NotFound";
+import Librarian from "containers/Librarian/Librarian";
 import User from "containers/User/User";
 import React, { useEffect } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
@@ -14,18 +15,20 @@ import UserRoute from "routes/customRoutes/UserRoute";
 
 function App() {
   //Xử lí time
-  const timeExpire = JSON.parse(localStorage.getItem("access"))
-    ? JSON.parse(localStorage.getItem("access")).expires
-    : {};
+  const timeExpire = JSON.parse(localStorage.getItem("access"))?.expires;
+
   const timeRefresh = new Date(timeExpire);
   const currentTime = new Date();
+
   //refresh token
   useEffect(() => {
-    const clear = setInterval(() => {
+    const clearTime = setInterval(() => {
       refreshToken();
-    }, timeRefresh - currentTime);
-
-    clearInterval(clear);
+    }, timeRefresh.getTime() - currentTime.getTime());
+    //Clean up
+    return () => {
+      clearInterval(clearTime);
+    };
   }, []);
 
   const refreshToken = async () => {
@@ -40,16 +43,7 @@ function App() {
       localStorage.setItem("access", JSON.stringify(response.access));
       //Thiết lập lại refresh token
       localStorage.setItem("refresh", JSON.stringify(response.refresh));
-
-      //Test
-      // console.log(
-      //   "sau khi refresh, access token là",
-      //   JSON.parse(localStorage.getItem("access"))
-      // );
-      // console.log(
-      //   "sau khi refresh, access token là",
-      //   JSON.parse(localStorage.getItem("refresh"))
-      // );
+      console.log("refreshToken thành công");
     } catch (error) {
       console.log("refresh-token lỗi", { error });
     }
@@ -59,18 +53,21 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Redirect from="/" to="/home" exact={true} />
-        {/* home route */}
+
+        {/* for home route */}
         <Route path="/home">
           <HomePage />
         </Route>
 
-        {/* <Route path={["/admin", "/dash-board"]}>
-          <Admin />
-        </Route> */}
-        {/* admin route */}
+        {/* for admin route */}
         <AdminRoute path={["/admin", "/dash-board"]}>
           <Admin />
         </AdminRoute>
+
+        {/* for librarian route */}
+        <Librarian path="/user">
+          <Librarian />
+        </Librarian>
 
         {/* for user route */}
         <UserRoute path="/user">
