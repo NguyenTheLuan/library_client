@@ -5,7 +5,7 @@ import { AiFillFileExcel } from "react-icons/ai";
 // import { RiBookletFill } from "react-icons/ri";
 import { FaBook, FaUserCog } from "react-icons/fa";
 //icon
-import { MdOutlineAdminPanelSettings } from "react-icons/md";
+import { IoLibrarySharp } from "react-icons/io5";
 import { Link, NavLink } from "react-router-dom";
 import "./DashBoard.scss";
 
@@ -24,7 +24,7 @@ function LibrarianDashBoard({ url }) {
       <div className="homeMenu">
         <div className="homeMenu_link">
           <Link to="/librarian" exact={true}>
-            <MdOutlineAdminPanelSettings className="iconItem" />
+            <IoLibrarySharp className="iconItem" />
             <span className="iconName">Librarian dashboard</span>
           </Link>
         </div>
@@ -63,11 +63,6 @@ function LibrarianDashBoard({ url }) {
               Thông tin sách thư viện
             </NavLink>
           </Accordion.Body>
-          <Accordion.Body>
-            <NavLink to={`${url}/users/reservation`} activeClassName="active">
-              Danh sách hẹn nhận sách
-            </NavLink>
-          </Accordion.Body>
         </Accordion.Item>
         {/* Quản Lý Báo Cáo */}
         <Accordion.Item eventKey="2">
@@ -87,26 +82,6 @@ function LibrarianDashBoard({ url }) {
             </NavLink>
           </Accordion.Body>
         </Accordion.Item>
-
-        {/* Quản Lý Danh Mục */}
-        {/* <Accordion.Item eventKey="3">
-          <Accordion.Header>Quản Lý Mượn Sách</Accordion.Header>
-          <Accordion.Body>
-            <NavLink to="/admin/user" activeClassName="active">
-              Tìm kiếm danh mục
-            </NavLink>
-          </Accordion.Body>
-          <Accordion.Body>
-            <NavLink to="/admin/user" activeClassName="active">
-              Cập nhật danh mục
-            </NavLink>
-          </Accordion.Body>
-          <Accordion.Body>
-            <NavLink to="/admin/user" activeClassName="active">
-              Xoá danh mục
-            </NavLink>
-          </Accordion.Body>
-        </Accordion.Item> */}
       </Accordion>
     </div>
   );

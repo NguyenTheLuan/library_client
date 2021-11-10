@@ -1,16 +1,19 @@
 import adminApi from "apis/adminApi";
-import "components/Admin/Manage/ViewForm.scss";
 import SearchUsersAdmin from "components/customComponents/InputForms/SearchForm/SearchUsersAdmin";
 import PaginationItems from "components/customComponents/PaginationItems/PaginationItems";
 import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory, useRouteMatch } from "react-router-dom";
 import { getUsers, selectTotalUsers } from "reducers/adminSlice";
 import DeleteUser from "../DeleteUser/DeleteUser";
 import UpdateUser from "../UpdateUser/UpdateUser";
+import "components/Admin/Manage/ViewForm.scss";
 
 function ViewUser() {
+  const history = useHistory();
+  let { path } = useRouteMatch();
+  // console.log(path);
   //Thông tin user
   const [userItems, setUserItems] = useState([]);
   const [searchInfo, setSearchInfo] = useState();
@@ -64,7 +67,8 @@ function ViewUser() {
       //Lưu vô redux
       dispatch(getUsers(response.results));
     } catch (error) {
-      setErr(error.response.data.message);
+      // setErr(error.response.data.message);
+      console.log("có lỗi", { error });
     }
   };
 
@@ -103,7 +107,13 @@ function ViewUser() {
           <DeleteUser userId={user.id} userEmail={user.email} />
         </td>
         <td>
-          <Button variant="info">Xem chi tiết</Button>
+          <Button
+            variant="info"
+            userId={user.id}
+            onClick={() => history.push(`${path}/view/${user.id}`)}
+          >
+            Xem chi tiết
+          </Button>
         </td>
       </tr>
     );

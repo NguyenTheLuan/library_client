@@ -4,7 +4,7 @@ import accountApi from "./authApi";
 // import queryString from "query-string";
 
 function getAccessToken() {
-  const accessToken = JSON.parse(localStorage.getItem("access"))?.token;
+  const accessToken = JSON.parse(localStorage.getItem("access")).token;
   return accessToken;
 }
 function refreshToken() {
@@ -77,7 +77,7 @@ axiosClient.interceptors.response.use(
           //Thiết lập lại refresh token
           localStorage.setItem("refresh", JSON.stringify(response.refresh));
           //Test thử
-          console.log("refreshToken thành công");
+          // alert("refreshToken thành công");
         } catch (error) {
           if (error.response && error.response.data) {
             return Promise.reject(error.response.data);
