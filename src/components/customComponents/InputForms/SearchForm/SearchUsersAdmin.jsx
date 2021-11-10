@@ -1,9 +1,27 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { selectUser } from "reducers/authSlice";
 import "./SearchForm.scss";
 
 function SearchUsersAdmin({ onChangeInfo }) {
   const [searchInfo, setSearchInfo] = useState("");
+
+  const isRole = useSelector(selectUser);
+  const checkRole = () => {
+    if (isRole.role === "admin") {
+      return (
+        <>
+          <option value="user">Người Dùng</option>
+          <option value="librarian">Thủ thư</option>
+          <option value="admin">Admin</option>
+        </>
+      );
+    }
+    if (isRole.role === "librarian") {
+      return <option value="user">Người Dùng</option>;
+    }
+  };
 
   const handleForm = (e) => {
     e.preventDefault();
@@ -46,9 +64,7 @@ function SearchUsersAdmin({ onChangeInfo }) {
                 })
               }
             >
-              <option value="user">Người Dùng</option>
-              <option value="librarian">Thủ thư</option>
-              <option value="admin">Admin</option>
+              {checkRole()}
             </Form.Select>
           </Form.Group>
           <Form.Group

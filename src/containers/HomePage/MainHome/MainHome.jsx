@@ -35,6 +35,9 @@ function HomePage() {
     if (isUser.role === "admin") {
       history.push("/admin");
     }
+    if (isUser.role === "librarian") {
+      history.push("/librarian");
+    }
   };
 
   let { path, url } = useRouteMatch();
@@ -77,9 +80,7 @@ function HomePage() {
           </div>
         </div>
       </div>
-      <div className="mainPage_footer">
-        <Footer />
-      </div>
+      <div className="mainPage_footer">{/* <Footer /> */}</div>
     </div>
   );
 }

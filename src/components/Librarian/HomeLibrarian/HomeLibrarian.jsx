@@ -6,7 +6,7 @@ import { selectUser } from "reducers/authSlice";
 import { FaUserCircle } from "react-icons/fa";
 import "./AdminPage.scss";
 
-function AdminPage() {
+function HomeLibrarian() {
   const admin = useSelector(selectUser);
   return (
     <div className="adminMenu">
@@ -43,4 +43,4 @@ function AdminPage() {
   );
 }
 
-export default AdminPage;
+export default HomeLibrarian;

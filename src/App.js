@@ -11,6 +11,7 @@ import React, { useEffect } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import AdminRoute from "routes/customRoutes/AdminRoute";
 import AuthRoute from "routes/customRoutes/AuthRoute";
+import LibrarianRoute from "routes/customRoutes/LibrarianRoute";
 import UserRoute from "routes/customRoutes/UserRoute";
 
 function App() {
@@ -21,15 +22,15 @@ function App() {
   const currentTime = new Date();
 
   //refresh token
-  useEffect(() => {
-    const clearTime = setInterval(() => {
-      refreshToken();
-    }, timeRefresh.getTime() - currentTime.getTime());
-    //Clean up
-    return () => {
-      clearInterval(clearTime);
-    };
-  }, []);
+  // useEffect(() => {
+  //   const clearTime = setInterval(() => {
+  //     refreshToken();
+  //   }, timeRefresh.getTime() - currentTime.getTime());
+  //   //Clean up
+  //   return () => {
+  //     clearInterval(clearTime);
+  //   };
+  // }, []);
 
   const refreshToken = async () => {
     const token = {
@@ -65,9 +66,9 @@ function App() {
         </AdminRoute>
 
         {/* for librarian route */}
-        <Librarian path="/user">
+        <LibrarianRoute path="/librarian">
           <Librarian />
-        </Librarian>
+        </LibrarianRoute>
 
         {/* for user route */}
         <UserRoute path="/user">

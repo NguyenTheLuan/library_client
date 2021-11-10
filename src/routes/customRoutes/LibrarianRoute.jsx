@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Redirect, Route } from "react-router";
 import { selectUser } from "reducers/authSlice";
 
-function AdminRoute({ children, ...rest }) {
+function LibrarianRoute({ children, ...rest }) {
   const isAdmin = useSelector(selectUser);
   return (
     <Route
@@ -19,4 +19,4 @@ function AdminRoute({ children, ...rest }) {
   );
 }
 
-export default AdminRoute;
+export default LibrarianRoute;

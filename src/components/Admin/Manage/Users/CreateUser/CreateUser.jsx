@@ -3,8 +3,26 @@ import { Form, Button } from "react-bootstrap";
 import adminApi from "apis/adminApi";
 
 import "components/Admin/Manage/AddForm.scss";
+import { useSelector } from "react-redux";
+import { selectUser } from "reducers/authSlice";
 
 function CreateUser() {
+  const isRole = useSelector(selectUser);
+  const checkRole = () => {
+    if (isRole.role === "admin") {
+      return (
+        <>
+          <option>Chọn chức vụ</option>
+          <option value="user">Người dùng</option>
+          <option value="librarian">Thủ thư</option>
+        </>
+      );
+    }
+    if (isRole.role === "librarian") {
+      return <option value="user">Người dùng</option>;
+    }
+  };
+
   const [userCreate, setUserCreate] = useState({
     name: "",
     role: "Chọn chức vụ",
@@ -54,15 +72,6 @@ function CreateUser() {
 
       <Form.Group className="mb-3 form_items">
         <Form.Label className="form_items_label">Chức vụ</Form.Label>
-        {/* <Form.Control
-          className="form_items_input"
-          name="role"
-          type="text"
-          placeholder="user, librarian???"
-          onChange={(e) =>
-            setUserCreate({ ...userCreate, [e.target.name]: e.target.value })
-          }
-        /> */}
         <Form.Select
           value={userCreate.role}
           name="role"
@@ -71,9 +80,7 @@ function CreateUser() {
             setUserCreate({ ...userCreate, [e.target.name]: e.target.value })
           }
         >
-          <option>Chọn chức vụ</option>
-          <option value="user">Người dùng</option>
-          <option value="librarian">Thủ thư</option>
+          {checkRole()}
         </Form.Select>
       </Form.Group>
       <Form.Group className="mb-3 form_items">

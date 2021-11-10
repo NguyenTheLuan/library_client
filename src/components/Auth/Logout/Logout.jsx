@@ -18,9 +18,7 @@ function Logout() {
     const tokenOut = { refreshToken: token };
     // console.log(tokenOut);
     try {
-      //call api logout
       await accountApi.postLogout(tokenOut);
-      // console.log("logout ok");
 
       //clear user after logout
       localStorage.clear();
@@ -29,9 +27,8 @@ function Logout() {
       //return to Home Page
       history.push("/");
     } catch (error) {
-      alert(error);
-      //   console.log(error.reponse);
-      //   console.log("logout fail");
+      // alert(error);
+      console.log("thoát lỗi", { error });
     }
   };
   const handleLogout = () => {
