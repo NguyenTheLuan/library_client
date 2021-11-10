@@ -1,18 +1,27 @@
 import React from "react";
-import { Route, Switch, useParams, useRouteMatch } from "react-router";
+import { Button } from "react-bootstrap";
+import {
+  Route,
+  Switch,
+  useHistory,
+  useParams,
+  useRouteMatch,
+} from "react-router";
 import { Link, NavLink } from "react-router-dom";
 import UserInfo from "../UserInfo/UserInfo";
 import ViewCartUser from "../ViewCartUser/ViewCartUser";
+import ViewScheduleUser from "../ViewScheduleUser/ViewScheduleUser";
 import "./UserDashBoard.scss";
 
 function UserDashBoard() {
   const { id } = useParams();
   const { path } = useRouteMatch();
-
+  const history = useHistory();
   // console.log("xem thông tin của user có id", id);
   return (
     <div className="userDashBoard">
       <div className="userDashBoard_links">
+        <Button onClick={() => history.goBack()}>Quay lại</Button>
         <NavLink
           to={`${path.split(":")[0]}${id}`}
           activeClassName="active"
@@ -60,7 +69,7 @@ function UserDashBoard() {
           />
           <Route
             path={`${path.split(":")[0]}${id}/resevations`}
-            component={() => "trang xem lịch mượn"}
+            component={() => <ViewScheduleUser />}
             exact={true}
           />
           <Route

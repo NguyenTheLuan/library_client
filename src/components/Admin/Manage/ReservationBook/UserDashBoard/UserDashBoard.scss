@@ -9,7 +9,7 @@
 
   &_links {
     width: 80%;
-    height: 60px;
+    height: 15%;
 
     display: flex;
     flex-direction: row;
@@ -20,9 +20,22 @@
       color: rgb(24, 4, 4);
       text-decoration: none;
       font-weight: 300;
+      &:hover {
+        color: rgb(62, 8, 255);
+        border-bottom: 1px solid rgb(62, 8, 255);
+      }
     }
     .active {
       color: rgb(62, 8, 255);
+      border-bottom: 1px solid rgb(62, 8, 255);
     }
+  }
+  &_contents {
+    width: 98%;
+    height: 84%;
+
+    display: flex;
+    justify-items: center;
+    align-items: center;
   }
 }

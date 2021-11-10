@@ -4,6 +4,11 @@ import axiosClient from "./axiosClient";
 // const USER_API_ENDPOINT = "/users";
 const USER_API_ENDPOINT = "/users";
 const userApi = {
+  //fn: xem info của user
+  getInfoUsers: (idUser) => {
+    const url = `${USER_API_ENDPOINT}/${idUser}`;
+    return axiosClient.get(url);
+  },
   // fn: lấy danh sách trong giỏ hàng người dùng
   getCarts: (id) => {
     const url = `${USER_API_ENDPOINT}/${id}/cart`;
@@ -40,8 +45,8 @@ const userApi = {
   },
 
   //fn: Lấy danh sách đã đặt hẹn của người dùng
-  getViewSchedule: (id) => {
-    const url = `${USER_API_ENDPOINT}/${id}/books/copies/reservations`;
+  getViewSchedule: (userId) => {
+    const url = `${USER_API_ENDPOINT}/${userId}/books/copies/reservations`;
     return axiosClient.get(url);
   },
 };
