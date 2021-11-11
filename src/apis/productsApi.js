@@ -43,6 +43,7 @@ const productsApi = {
     const url = PRODUCTS_API_ENDPOINT + "/categories";
     return axiosClient.get(url);
   },
+  //Lấy từng bản sao của sách
 };
 
 export default productsApi;

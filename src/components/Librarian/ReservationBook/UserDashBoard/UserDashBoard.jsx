@@ -1,23 +1,16 @@
 import React from "react";
-import { Button } from "react-bootstrap";
-import {
-  Route,
-  Switch,
-  useHistory,
-  useParams,
-  useRouteMatch,
-} from "react-router";
+import { Route, Switch, useParams, useRouteMatch } from "react-router";
 import { Link, NavLink } from "react-router-dom";
-import UserInfo from "../UserInfo/UserInfo";
-import ViewCartUser from "../ReservationSchedule/ReservationSchedule";
 import ViewScheduleUser from "../BookReservation/BookReservation";
-import "./UserDashBoard.scss";
 import CheckoutReservation from "../CheckoutReservation/CheckoutReservation";
+import ViewCartUser from "../ReservationSchedule/ReservationSchedule";
+import UserInfo from "../UserInfo/UserInfo";
+import "./UserDashBoard.scss";
 
 function UserDashBoard() {
   const { id } = useParams();
   const { path } = useRouteMatch();
-  const history = useHistory();
+
   // console.log("xem thông tin của user có id", id);
   return (
     <div className="userDashBoard">
@@ -47,13 +40,13 @@ function UserDashBoard() {
           to={`${path.split(":")[0]}${id}/resevations/checkout`}
           activeClassName="active"
         >
-          Tạo hồ sơ mượn sách
+          Mượn sách
         </NavLink>
         <NavLink
           to={`${path.split(":")[0]}${id}/resevations/return`}
           activeClassName="active"
         >
-          Lịch sử trả sách
+          Trả sách
         </NavLink>
       </div>
       <div className="userDashBoard_contents">

@@ -82,7 +82,7 @@ function ViewBooks() {
   const showBody = products?.map((bookDetails, index) => {
     return (
       <tr className="tableItems" key={index}>
-        <td>{index + 1}</td>
+        <td>{bookDetails.id}</td>
         {/* <td>{bookDetails.id}</td> */}
         <td>{imgShow(bookDetails.cover)}</td>
         <td>{bookDetails.title}</td>
@@ -117,7 +117,7 @@ function ViewBooks() {
           {/* Title Name */}
           <thead className="tableForm_header">
             <tr className="tableItems">
-              <th>STT</th>
+              <th>ID</th>
               <th>Ảnh</th>
               <th>Tên sách</th>
               <th>Tác giả</th>
