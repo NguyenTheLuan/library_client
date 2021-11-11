@@ -22,35 +22,35 @@ function App() {
   const currentTime = new Date();
 
   //refresh token
-  useEffect(() => {
-    const clearTime = setInterval(() => {
-      if (timeExpire) {
-        refreshToken();
-      }
-    }, timeRefresh.getTime() - currentTime.getTime());
-    //Clean up
-    return () => {
-      clearInterval(clearTime);
-    };
-  }, []);
+  // useEffect(() => {
+  //   const clearTime = setInterval(() => {
+  //     if (timeExpire) {
+  //       // refreshToken();
+  //     }
+  //   }, timeRefresh.getTime() - currentTime.getTime());
+  //   //Clean up
+  //   return () => {
+  //     clearInterval(clearTime);
+  //   };
+  // }, []);
 
-  const refreshToken = async () => {
-    const token = {
-      refreshToken: JSON.parse(localStorage.getItem("refresh"))?.token,
-    };
-    try {
-      const response = await accountApi.postRefreshToken(token);
-      // console.log("refresh thành công", response);
+  // const refreshToken = async () => {
+  //   const token = {
+  //     refreshToken: JSON.parse(localStorage.getItem("refresh"))?.token,
+  //   };
+  //   try {
+  //     const response = await accountApi.postRefreshToken(token);
+  //     // console.log("refresh thành công", response);
 
-      //Thiết lập lại access token
-      localStorage.setItem("access", JSON.stringify(response.access));
-      //Thiết lập lại refresh token
-      localStorage.setItem("refresh", JSON.stringify(response.refresh));
-      console.log("refreshToken thành công");
-    } catch (error) {
-      console.log("refresh-token lỗi", { error });
-    }
-  };
+  //     //Thiết lập lại access token
+  //     localStorage.setItem("access", JSON.stringify(response.access));
+  //     //Thiết lập lại refresh token
+  //     localStorage.setItem("refresh", JSON.stringify(response.refresh));
+  //     console.log("refreshToken thành công");
+  //   } catch (error) {
+  //     console.log("refresh-token lỗi", { error });
+  //   }
+  // };
 
   return (
     <BrowserRouter>

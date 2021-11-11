@@ -34,6 +34,11 @@ function Admin() {
                 exact={true}
               />
               <Route
+                path={`${path}/users/view/:id`}
+                component={() => "trang xem thông tin user của admin"}
+                exact={true}
+              />
+              <Route
                 path={`${path}/users/create`}
                 component={() => <CreateUser />}
                 exact={true}

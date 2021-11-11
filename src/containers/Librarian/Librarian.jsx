@@ -1,12 +1,11 @@
-import DashBoard from "components/Admin/DashBoard/DashBoard";
 import AddBooks from "components/Admin/Manage/Books/AddBooks/AddBooks";
 import GetBooks from "components/Admin/Manage/Books/ViewBooks/ViewBooks";
-import UserReservationInfo from "components/Admin/Manage/ReservationBook/UserDashBoard/UserDashBoard";
-import ViewCartUser from "components/Admin/Manage/ReservationBook/ViewCartUser/ViewCartUser";
+
 import CreateUser from "components/Admin/Manage/Users/CreateUser/CreateUser";
 import ViewUser from "components/Admin/Manage/Users/ViewUser/ViewUser";
 import HomeLibrarian from "components/Librarian/HomeLibrarian/HomeLibrarian";
 import LibrarianDashBoard from "components/Librarian/LibrarianDashBoard/LibrarianDashBoard";
+import UserDashBoard from "components/Librarian/ReservationBook/UserDashBoard/UserDashBoard";
 import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router";
 
@@ -39,7 +38,7 @@ function Librarian() {
               {/* Giỏ hàng chi tiết của user */}
               <Route
                 path={`${path}/users/view/:id`}
-                component={() => <UserReservationInfo />}
+                component={() => <UserDashBoard />}
                 // exact={true}
               />
               {/* 

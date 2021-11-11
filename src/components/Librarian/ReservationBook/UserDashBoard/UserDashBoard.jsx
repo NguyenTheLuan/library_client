@@ -9,8 +9,8 @@ import {
 } from "react-router";
 import { Link, NavLink } from "react-router-dom";
 import UserInfo from "../UserInfo/UserInfo";
-import ViewCartUser from "../ViewCartUser/ViewCartUser";
-import ViewScheduleUser from "../ViewScheduleUser/ViewScheduleUser";
+import ViewCartUser from "../ReservationSchedule/ReservationSchedule";
+import ViewScheduleUser from "../BookReservation/BookReservation";
 import "./UserDashBoard.scss";
 
 function UserDashBoard() {
@@ -21,32 +21,32 @@ function UserDashBoard() {
   return (
     <div className="userDashBoard">
       <div className="userDashBoard_links">
-        <Button onClick={() => history.goBack()}>Quay lại</Button>
+        <Link to={"/librarian/users"}>Quay lại danh sách</Link>
         <NavLink
           to={`${path.split(":")[0]}${id}`}
           activeClassName="active"
           exact={true}
         >
-          Thông tin user
+          Thông tin người dùng
         </NavLink>
         <NavLink
           to={`${path.split(":")[0]}${id}/carts`}
           activeClassName="active"
         >
-          Giỏ hàng users
+          Danh sách lịch hẹn
         </NavLink>
         <NavLink
           to={`${path.split(":")[0]}${id}/resevations`}
           activeClassName="active"
           exact={true}
         >
-          Lịch hẹn đặt sách
+          Sách đã hẹn
         </NavLink>
         <NavLink
           to={`${path.split(":")[0]}${id}/resevations/checkout`}
           activeClassName="active"
         >
-          Lịch hẹn nhận sách
+          Sách đã đặt hẹn
         </NavLink>
         <NavLink
           to={`${path.split(":")[0]}${id}/resevations/checkin`}

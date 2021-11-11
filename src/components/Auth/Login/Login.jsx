@@ -35,8 +35,8 @@ function Login() {
       //admin or user?
       user && checkRoute(user);
     } catch (error) {
-      // console.log("err", error.response);
-      setErr(error.response.data.message);
+      console.log("err", { error });
+      // setErr(error.response.data.message);
     }
   };
 
@@ -45,6 +45,8 @@ function Login() {
       history.push("/admin");
     } else if (user.role === "user") {
       history.push("/");
+    } else if (user.role === "librarian") {
+      history.push("/librarian");
     }
   };
 

@@ -7,6 +7,7 @@ import "./UserInfo.scss";
 
 function UserInfo() {
   const { path } = useRouteMatch();
+
   const [infoUser, setInfoUser] = useState([]);
   useEffect(() => {
     getInfoUsers();

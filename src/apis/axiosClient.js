@@ -8,7 +8,7 @@ function getAccessToken() {
   return accessToken;
 }
 function refreshToken() {
-  const refreshToken = JSON.parse(localStorage.getItem("refresh"))?.token;
+  const refreshToken = JSON.parse(localStorage.getItem("refresh")).token;
   return accountApi.postRefreshToken({ refreshToken: refreshToken });
 }
 
@@ -30,18 +30,18 @@ axiosClient.interceptors.request.use(async (config) => {
 
   return config;
 });
-axiosClient.interceptors.response.use(
-  (response) => {
-    if (response && response.data) {
-      return response.data;
-    }
-    return response;
-  },
-  (error) => {
-    // Handle errors
-    throw error;
-  }
-);
+// axiosClient.interceptors.response.use(
+//   (response) => {
+//     if (response && response.data) {
+//       return response.data;
+//     }
+//     return response;
+//   },
+//   (error) => {
+//     // Handle errors
+//     throw error;
+//   }
+// );
 
 // axiosClient.interceptors.request.use(
 //   async (config) => {
@@ -57,37 +57,42 @@ axiosClient.interceptors.response.use(
 //   }
 // );
 
-// axiosClient.interceptors.response.use(
-//   (response) => {
-//     if (response && response.data) {
-//       return response.data;
-//     }
-//     return response;
-//   },
+axiosClient.interceptors.response.use(
+  (response) => {
+    if (response && response.data) {
+      return response.data;
+    }
+    return response;
+  },
 
-//   async (error) => {
-//     // Handle errors
+  async (error) => {
+    // Handle errors
 
-//     if (error.response) {
-//       //Call request token, access token expires
-//       if (error.request.status === 401) {
-//         try {
-//           const response = await refreshToken();
-//           //Thiết lập lại access token
-//           localStorage.setItem("access", JSON.stringify(response.access));
-//           //Thiết lập lại refresh token
-//           localStorage.setItem("refresh", JSON.stringify(response.refresh));
-//           //Test thử
-//           // alert("refreshToken thành công");
-//         } catch (error) {
-//           if (error.response && error.response.data) {
-//             return Promise.reject(error.response.data);
-//           }
+    if (error.response) {
+      //Call request token, access token expires
+      if (error.request.status === 401) {
+        try {
+          const response = await refreshToken();
+          //Thiết lập lại access token
+          localStorage.setItem("access", JSON.stringify(response.access));
+          //Thiết lập lại refresh token
+          localStorage.setItem("refresh", JSON.stringify(response.refresh));
+          //Set vô header lại
+          Headers["Authorization"] = ` Bearer ${
+            JSON.parse(localStorage.getItem("access")).token
+          }`;
 
-//           return Promise.reject(error);
-//         }
-//       }
-//     }
-//   }
-// );
+          //Test thử
+          alert("refreshToken thành công");
+        } catch (error) {
+          if (error.response && error.response.data) {
+            return Promise.reject(error.response.data);
+          }
+
+          return Promise.reject(error);
+        }
+      }
+    }
+  }
+);
 export default axiosClient;
