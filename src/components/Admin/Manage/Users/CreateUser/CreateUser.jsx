@@ -19,7 +19,12 @@ function CreateUser() {
       );
     }
     if (isRole.role === "librarian") {
-      return <option value="user">Người dùng</option>;
+      return (
+        <>
+          <option>Chọn chức vụ</option>
+          <option value="user">Người dùng</option>
+        </>
+      );
     }
   };
 

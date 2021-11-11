@@ -17,18 +17,8 @@ function Reservation() {
 
   const timeDate = (time) => {
     const date = new Date(time);
-    return (
-      <div className="cartTable_contents_rows_times_items">
-        <span>
-          Vào lúc {date.getHours()} giờ : {date.getMinutes()} phút :
-          {date.getSeconds()} giây.
-        </span>
-        <span>
-          Ngày {date.getDate()} tháng {date.getMonth() + 1} năm
-          {date.getFullYear()}
-        </span>
-      </div>
-    );
+
+    return <>{date.toLocaleString()}</>;
   };
 
   const showBooks = (booksInfo) => {

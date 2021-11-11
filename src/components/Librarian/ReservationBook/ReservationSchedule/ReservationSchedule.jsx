@@ -14,7 +14,7 @@ function ReservationSchedule() {
     const userId = path.split("/")[4];
     try {
       const response = await userApi.getSchedule(userId);
-      console.log("thành công", response);
+      // console.log("thành công", response);
       setReservation(response.results);
     } catch (error) {
       console.log("lỗi rồi", { error });
@@ -32,13 +32,17 @@ function ReservationSchedule() {
       return <h6>{info.title}</h6>;
     });
   };
+  const renderQuantityBook = (books) => {
+    return books.length;
+  };
 
   const rederReservation = reservation?.map((info, index) => {
     return (
       <tr>
-        <td>{index}</td>
+        <td>{index + 1}</td>
         {/* <td>{info.id}</td> */}
         <td>{renderBook(info.books)}</td>
+        <td>{renderQuantityBook(info.books)}</td>
         <td>{renderTime(info.createdDate)}</td>
         <td>{renderTime(info.dueDate)}</td>
         <td>{info.status}</td>
@@ -54,7 +58,8 @@ function ReservationSchedule() {
           <tr>
             <th>STT</th>
             {/* <th>Mã sách</th> */}
-            <th>Tên sách</th>
+            <th>Sách mượn bao gồm</th>
+            <th>Tổng cộng</th>
             <th>Ngày bắt đầu nhận</th>
             <th>Hạn chót</th>
             <th>Trạng thái</th>

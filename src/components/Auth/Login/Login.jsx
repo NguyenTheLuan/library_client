@@ -10,7 +10,7 @@ import "../StyleForm.scss";
 
 function Login() {
   const [userLogin, setUserLogin] = useState({
-    email: "admin@gmail.com",
+    email: "thuthu@gmail.com",
     password: "12345678",
   });
   const [err, setErr] = useState("");

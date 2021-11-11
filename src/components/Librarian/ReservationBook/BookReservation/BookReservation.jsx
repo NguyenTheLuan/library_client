@@ -36,18 +36,19 @@ function BookReservation() {
     return <img style={{ width: "40px" }} src={img} alt="img" />;
   };
 
-  const renderCarts = carts?.map((cart) => {
+  const renderCarts = carts?.map((cart, index) => {
     return (
       <>
         <tr>
           {/* <td>{cart.id}</td> */}
+          <td>{index + 1}</td>
+          <td>{setImg(cart.cover)}</td>
           <td>{cart.copy}</td>
           <td>{cart.title}</td>
           <td>{cart.categories}</td>
           <td>{cart.authors}</td>
-          <td>{setImg(cart.cover)}</td>
           <td>{cart.loanPeriodDays}</td>
-          <td>{cart.description}</td>
+          {/* <td>{cart.description}</td> */}
         </tr>
       </>
     );
@@ -61,13 +62,14 @@ function BookReservation() {
           <thead>
             <tr>
               {/* <th>Id</th> */}
+              <th>STT</th>
+              <th>Ảnh bìa</th>
               <th>Mã sách</th>
               <th>Tên sách</th>
               <th>Thể loại</th>
               <th>Tên tác giả</th>
-              <th>Ảnh minh hoạ</th>
               <th>Thời gian mượn</th>
-              <th>Miêu tả</th>
+              {/* <th>Miêu tả</th> */}
             </tr>
           </thead>
           <tbody>{renderCarts}</tbody>

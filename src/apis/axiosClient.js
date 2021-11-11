@@ -78,12 +78,12 @@ axiosClient.interceptors.response.use(
           //Thiết lập lại refresh token
           localStorage.setItem("refresh", JSON.stringify(response.refresh));
           //Set vô header lại
-          Headers["Authorization"] = ` Bearer ${
-            JSON.parse(localStorage.getItem("access")).token
-          }`;
+          // Headers["Authorization"] = ` Bearer ${
+          //   JSON.parse(localStorage.getItem("access")).token
+          // }`;
 
           //Test thử
-          alert("refreshToken thành công");
+          // alert("refreshToken thành công");
         } catch (error) {
           if (error.response && error.response.data) {
             return Promise.reject(error.response.data);

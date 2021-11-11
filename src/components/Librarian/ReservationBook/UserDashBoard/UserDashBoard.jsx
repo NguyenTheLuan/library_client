@@ -12,6 +12,7 @@ import UserInfo from "../UserInfo/UserInfo";
 import ViewCartUser from "../ReservationSchedule/ReservationSchedule";
 import ViewScheduleUser from "../BookReservation/BookReservation";
 import "./UserDashBoard.scss";
+import CheckoutReservation from "../CheckoutReservation/CheckoutReservation";
 
 function UserDashBoard() {
   const { id } = useParams();
@@ -40,16 +41,16 @@ function UserDashBoard() {
           activeClassName="active"
           exact={true}
         >
-          Sách đã hẹn
+          Sách đặt trước
         </NavLink>
         <NavLink
           to={`${path.split(":")[0]}${id}/resevations/checkout`}
           activeClassName="active"
         >
-          Sách đã đặt hẹn
+          Tạo hồ sơ mượn sách
         </NavLink>
         <NavLink
-          to={`${path.split(":")[0]}${id}/resevations/checkin`}
+          to={`${path.split(":")[0]}${id}/resevations/return`}
           activeClassName="active"
         >
           Lịch sử trả sách
@@ -73,12 +74,12 @@ function UserDashBoard() {
             exact={true}
           />
           <Route
-            path={`${path.split(":")[0]}${id}/checkout`}
-            component={() => "trang cho mượn"}
+            path={`${path.split(":")[0]}${id}/resevations/checkout`}
+            component={() => <CheckoutReservation />}
             exact={true}
           />
           <Route
-            path={`${path.split(":")[0]}${id}/checkin`}
+            path={`${path.split(":")[0]}${id}/resevations/return`}
             component={() => "trang trả sách"}
             exact={true}
           />
