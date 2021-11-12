@@ -1,8 +1,9 @@
 import productsApi from "apis/productsApi";
 import React, { useState } from "react";
 import { FloatingLabel, Form, Table } from "react-bootstrap";
-import "./CheckoutReservation.scss";
-function CheckoutReservation() {
+import "./CheckBooks.scss";
+
+function CheckBooks() {
   const [bookId, setBookId] = useState("");
   const [copies, setCopies] = useState();
 
@@ -72,4 +73,4 @@ function CheckoutReservation() {
   );
 }
 
-export default CheckoutReservation;
+export default CheckBooks;

@@ -1,12 +1,18 @@
 import userApi from "apis/userApi";
 import React, { useEffect, useState } from "react";
-import { Table } from "react-bootstrap";
+import { Table, Button } from "react-bootstrap";
+import { useDispatch } from "react-redux";
 import { useRouteMatch } from "react-router";
+import { addCreateCarts, createNewCarts } from "reducers/librarianSlice";
 
 function BookReservation() {
   const { path } = useRouteMatch();
   const [carts, setCarts] = useState();
   const [status, setStatus] = useState(false);
+
+  const [copies, setCopies] = useState();
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     getScheduleUser();
@@ -49,10 +55,25 @@ function BookReservation() {
           <td>{cart.authors}</td>
           <td>{cart.loanPeriodDays}</td>
           {/* <td>{cart.description}</td> */}
+          <td>
+            <input
+              name={index}
+              type="checkbox"
+              onClick={(e) =>
+                setCopies({ ...copies, [e.target.name]: cart.copy })
+              }
+            />
+          </td>
         </tr>
       </>
     );
   });
+
+  //Chọn sách
+  const chooseBook = () => {
+    console.log("tiến hành đặt coppies", copies);
+    dispatch(addCreateCarts(copies));
+  };
 
   return (
     <div>
@@ -69,10 +90,12 @@ function BookReservation() {
               <th>Thể loại</th>
               <th>Tên tác giả</th>
               <th>Thời gian mượn</th>
+              <th>Chọn sách</th>
               {/* <th>Miêu tả</th> */}
             </tr>
           </thead>
           <tbody>{renderCarts}</tbody>
+          <Button onClick={() => chooseBook()}>Chọn sách</Button>
         </Table>
       ) : (
         <h2>Không có sản phẩm nào</h2>

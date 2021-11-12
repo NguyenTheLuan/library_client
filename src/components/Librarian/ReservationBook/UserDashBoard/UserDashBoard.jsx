@@ -2,9 +2,9 @@ import React from "react";
 import { Route, Switch, useParams, useRouteMatch } from "react-router";
 import { Link, NavLink } from "react-router-dom";
 import ViewScheduleUser from "../BookReservation/BookReservation";
-import CheckoutReservation from "../CheckoutReservation/CheckoutReservation";
-import ViewCartUser from "../ReservationSchedule/ReservationSchedule";
+import ConfirmReservation from "../ConfirmReservation/ConfirmReservation";
 import UserInfo from "../UserInfo/UserInfo";
+import ViewCartUser from "../ViewSchedule/ViewSchedule";
 import "./UserDashBoard.scss";
 
 function UserDashBoard() {
@@ -37,7 +37,7 @@ function UserDashBoard() {
           Sách đặt trước
         </NavLink>
         <NavLink
-          to={`${path.split(":")[0]}${id}/resevations/checkout`}
+          to={`${path.split(":")[0]}${id}/resevations/book`}
           activeClassName="active"
         >
           Mượn sách
@@ -67,10 +67,15 @@ function UserDashBoard() {
             exact={true}
           />
           <Route
-            path={`${path.split(":")[0]}${id}/resevations/checkout`}
-            component={() => <CheckoutReservation />}
-            exact={true}
+            path={`${path.split(":")[0]}${id}/resevations/book`}
+            component={() => <ConfirmReservation />}
+            // exact={true}
           />
+          {/* <Route
+            path={`${path.split(":")[0]}${id}/resevations/book`}
+            component={() => <ConfirmReservation />}
+            // exact={true}
+          /> */}
           <Route
             path={`${path.split(":")[0]}${id}/resevations/return`}
             component={() => "trang trả sách"}
