@@ -27,9 +27,9 @@ axiosClient.interceptors.request.use(async (config) => {
   config.headers["Authorization"] = ` Bearer ${
     JSON.parse(localStorage.getItem("access"))?.token
   } `;
-
   return config;
 });
+
 // axiosClient.interceptors.response.use(
 //   (response) => {
 //     if (response && response.data) {
@@ -77,10 +77,6 @@ axiosClient.interceptors.response.use(
           localStorage.setItem("access", JSON.stringify(response.access));
           //Thiết lập lại refresh token
           localStorage.setItem("refresh", JSON.stringify(response.refresh));
-          //Set vô header lại
-          // Headers["Authorization"] = ` Bearer ${
-          //   JSON.parse(localStorage.getItem("access")).token
-          // }`;
 
           //Test thử
           // alert("refreshToken thành công");
@@ -88,11 +84,11 @@ axiosClient.interceptors.response.use(
           if (error.response && error.response.data) {
             return Promise.reject(error.response.data);
           }
-
           return Promise.reject(error);
         }
       }
     }
+    return Promise.reject(error);
   }
 );
 export default axiosClient;

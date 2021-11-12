@@ -15,9 +15,9 @@ function Register() {
   const history = useHistory();
   const dispatch = useDispatch();
   const Register = async () => {
-    const dataRegister = { ...userRegister };
+    const infoUser = { ...userRegister };
     try {
-      const response = await accountApi.postRegister(dataRegister);
+      const response = await accountApi.postRegister(infoUser);
       // console.log("đăng kí thành công", response);
       //Trả về user, access-token, refresh token
       const { user, tokens } = response;
@@ -33,6 +33,7 @@ function Register() {
       history.push("/");
     } catch (error) {
       setErr(error.response.data.message);
+      // console.log("lỗi rồi", { error });
     }
   };
 
@@ -113,9 +114,6 @@ function Register() {
           <div className=" mb-3 formMenu_items_link">
             <p>{err && <span>{err}</span>}</p>
           </div>
-          {/* <Form.Group className="mb-3 formMenu_items" controlId="formBasicCheckbox">
-        <Form.Check type="checkbox" label="Duy Trì Đăng Nhập" />
-      </Form.Group> */}
           <Button className="mb-3 formMenu_btn" variant="success" type="submit">
             Đăng Ký Tài Khoản
           </Button>
