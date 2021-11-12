@@ -11,6 +11,7 @@ import UpdateBooksById from "../UpdateBooksById/UpdateBooksById";
 
 import "components/Admin/Manage/ViewForm.scss";
 import PaginationItems from "components/customComponents/PaginationItems/PaginationItems";
+import { createCarts } from "reducers/librarianSlice";
 
 function ViewBooks() {
   const books = useSelector(selectBooks);
@@ -61,12 +62,12 @@ function ViewBooks() {
   };
 
   const getAllProducts = async () => {
-    //set về rỗng trước
     const params = { page: newPage, limit: limitPage, ...searchInfo };
     try {
       const response = await productsApi.getBooks(params);
 
       // console.log("dữ liệu trả về", response);
+      //set về rỗng trước
       setProducts();
       setProducts(response.results);
       //Nhận thông tin sách

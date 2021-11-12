@@ -1,12 +1,15 @@
 import productsApi from "apis/productsApi";
 import React, { useState } from "react";
 import { FloatingLabel, Form, Table } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { addCarts } from "reducers/librarianSlice";
 import "./CheckBooks.scss";
 
 function CheckBooks() {
   const [bookId, setBookId] = useState("");
   const [copies, setCopies] = useState();
 
+  const dispatch = useDispatch();
   //Kiếm thông tin sách
   const getInfoCopies = async () => {
     try {
@@ -30,9 +33,14 @@ function CheckBooks() {
         <td>{index + 1}</td>
         <td>{copy.status}</td>
         <td>{copy._id}</td>
-        <td>{renderDate(copy.createdAt)}</td>
+        {/* <td>{renderDate(copy.createdAt)}</td> */}
         <td>{renderDate(copy.borrowedDate)}</td>
         <td>{copy.user}</td>
+        <td>
+          <button type="checkbox" onClick={() => dispatch(addCarts(copy._id))}>
+            Chọn sách
+          </button>
+        </td>
       </tr>
     );
   });
@@ -59,9 +67,10 @@ function CheckBooks() {
               <th>STT</th>
               <th>Trạng thái</th>
               <th>Mã sách</th>
-              <th>Ngày bắt đầu</th>
-              <th>Ngày kết thúc</th>
+              {/* <th>Ngày bắt đầu</th> */}
+              <th>Ngày trả sách</th>
               <th>Người mượn</th>
+              <th>Chọn sách</th>
             </tr>
           </thead>
           <tbody>{renderCopies}</tbody>

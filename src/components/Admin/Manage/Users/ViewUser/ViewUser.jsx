@@ -9,6 +9,7 @@ import { getUsers, selectTotalUsers } from "reducers/adminSlice";
 import DeleteUser from "../DeleteUser/DeleteUser";
 import UpdateUser from "../UpdateUser/UpdateUser";
 import "components/Admin/Manage/ViewForm.scss";
+import { createCarts } from "reducers/librarianSlice";
 
 function ViewUser() {
   const history = useHistory();
@@ -40,6 +41,7 @@ function ViewUser() {
 
   //Lần 1 render all
   useEffect(() => {
+    dispatch(createCarts([]));
     getAllUsers();
   }, [newPage, searchInfo, users]);
 

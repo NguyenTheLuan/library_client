@@ -3,14 +3,14 @@ import React, { useEffect, useState } from "react";
 import { Table, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useRouteMatch } from "react-router";
-import { addCreateCarts, createNewCarts } from "reducers/librarianSlice";
+import { createCarts } from "reducers/librarianSlice";
 
 function BookReservation() {
   const { path } = useRouteMatch();
   const [carts, setCarts] = useState();
   const [status, setStatus] = useState(false);
 
-  const [copies, setCopies] = useState();
+  const [copies, setCopies] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -59,9 +59,7 @@ function BookReservation() {
             <input
               name={index}
               type="checkbox"
-              onClick={(e) =>
-                setCopies({ ...copies, [e.target.name]: cart.copy })
-              }
+              onClick={(e) => setCopies([...copies, cart.copy])}
             />
           </td>
         </tr>
@@ -72,7 +70,7 @@ function BookReservation() {
   //Chọn sách
   const chooseBook = () => {
     console.log("tiến hành đặt coppies", copies);
-    dispatch(addCreateCarts(copies));
+    dispatch(createCarts(copies));
   };
 
   return (
