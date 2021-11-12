@@ -8,7 +8,7 @@ import "./ConfirmReservation.scss";
 
 function ConfirmReservation() {
   const { path } = useRouteMatch();
-  console.log(path);
+  // console.log(path);
   return (
     <div className="confirmMenu">
       <div className="confirmMenu_links">

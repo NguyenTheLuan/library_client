@@ -43,7 +43,15 @@ const productsApi = {
     const url = PRODUCTS_API_ENDPOINT + "/categories";
     return axiosClient.get(url);
   },
+
+  //Librarian, admin
   //Lấy từng bản sao của sách
+
+  //Cho người mượn sách
+  postCopiesCheckout: (userInfo) => {
+    const url = `${PRODUCTS_API_ENDPOINT}/copies/checkout`;
+    return axiosClient.post(url, userInfo);
+  },
 };
 
 export default productsApi;

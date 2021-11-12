@@ -1,11 +1,19 @@
+import productsApi from "apis/productsApi";
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCarts, selectCartCheckout } from "reducers/librarianSlice";
+import { useRouteMatch } from "react-router";
+import {
+  createCarts,
+  deleteCarts,
+  selectCartCheckout,
+} from "reducers/librarianSlice";
 
 function CheckoutBooks() {
-  const booksCheckout = useSelector(selectCartCheckout);
+  const { path } = useRouteMatch();
   const dispatch = useDispatch();
+  const booksCheckout = useSelector(selectCartCheckout);
+
   const [books, setBooks] = useState();
   useEffect(() => {
     setBooks(booksCheckout);
@@ -23,6 +31,30 @@ function CheckoutBooks() {
     );
   });
 
+  const checkoutBooks = async () => {
+    const userId = path.split("/")[4];
+    try {
+      const response = await productsApi.postCopiesCheckout({
+        user: userId,
+        copies: books,
+      });
+      console.log("cho mượn thành công", response);
+      dispatch(createCarts([]));
+    } catch (error) {
+      console.log("lỗi rồi", { error });
+    }
+  };
+
+  const handleCheckout = () => {
+    console.log(
+      "tiến hành cho mượn",
+      books,
+      "cho user có id",
+      path.split("/")[4]
+    );
+    checkoutBooks();
+  };
+
   return (
     <div>
       <legend> Các sách đã được đặt là</legend>
@@ -36,7 +68,7 @@ function CheckoutBooks() {
         </thead>
         <tbody>{renderBooksCheckout}</tbody>
       </Table>
-      <button>Cho mượn</button>
+      <button onClick={handleCheckout}>Cho mượn</button>
     </div>
   );
 }

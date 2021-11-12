@@ -15,14 +15,14 @@ const librarianSlice = createSlice({
     },
     //thêm vô carts
     addCarts(state, action) {
-      state.carts.map((book) => {
-        if (book !== action.payload) {
-          return state.carts.push(action.payload);
-        } else {
-          return state.carts;
-        }
-      });
-
+      var newCarts = [];
+      const checkCart = state.carts.some((bookId) => bookId === action.payload);
+      //Nếu như không tìm ra => thêm
+      console.log(checkCart);
+      if (!checkCart) {
+        newCarts = [...state.carts, action.payload];
+      }
+      state.carts = newCarts;
       sessionStorage.setItem("cartsCheckout", JSON.stringify(state.carts));
     },
     //xoá đi nếu user không muốn nữa
