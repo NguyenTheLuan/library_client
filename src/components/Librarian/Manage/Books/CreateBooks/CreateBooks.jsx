@@ -40,6 +40,8 @@ function CreateBooks() {
   const inscreaseBook = async (bookId) => {
     try {
       await productsApi.postCopies(bookId);
+      // const response = await productsApi.postCopies(bookId);
+      // console.log(response);
       alert("thêm thành công");
     } catch (error) {
       console.log("thêm 1 đầu sách bị lỗi", { error });

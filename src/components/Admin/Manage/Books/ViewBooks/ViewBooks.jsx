@@ -11,7 +11,7 @@ import UpdateBooksById from "../UpdateBooksById/UpdateBooksById";
 
 import "components/Admin/Manage/ViewForm.scss";
 import PaginationItems from "components/customComponents/PaginationItems/PaginationItems";
-import { createCarts } from "reducers/librarianSlice";
+import { getUserId } from "reducers/librarianSlice";
 
 function ViewBooks() {
   const books = useSelector(selectBooks);
@@ -47,6 +47,7 @@ function ViewBooks() {
 
   //Lần 1 get all products
   useEffect(() => {
+    dispatch(getUserId([]));
     getAllProducts();
   }, [newPage, searchInfo]);
   //Lần 2 reset sau khi search

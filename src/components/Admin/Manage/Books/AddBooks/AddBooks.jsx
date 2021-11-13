@@ -5,6 +5,9 @@ import { useDispatch } from "react-redux";
 import { addBookById, getBooks } from "reducers/bookSlice";
 
 import "components/Admin/Manage/AddForm.scss";
+import CheckBoxAuthor from "components/customComponents/CheckBoxItems/CheckBoxAuthor";
+import CheckBoxCategory from "components/customComponents/CheckBoxItems/CheckBoxCategory";
+
 function AddBooks({ isShow, onShow }) {
   // const [bookCreate, setBookCreate] = useState({});
   const dispatch = useDispatch();
@@ -86,8 +89,20 @@ function AddBooks({ isShow, onShow }) {
 
   //Thiết lập cho cha
   const handleClose = () => {
+    setShowAuthor(true);
+    setShowCategories(true);
     return onShow(false);
   };
+  const handleAuthorsName = (authorName) => {
+    console.log("cha đã nhận được authorname", authorName);
+  };
+  const handleCategoriesName = (categoriesName) => {
+    console.log("cha đã nhận được authorname", categoriesName);
+  };
+
+  //Dùng để disabled authors, actegories
+  const [showAuthor, setShowAuthor] = useState(true);
+  const [showCategories, setShowCategories] = useState(true);
 
   return (
     <Modal show={isShow} onHide={handleClose}>
@@ -122,7 +137,41 @@ function AddBooks({ isShow, onShow }) {
               onChange={handleImgPost}
             />
           </Form.Group>
+          {/* Form tác giả */}
           <Form.Group className="mb-3 form_items">
+            <Form.Label className="form_items_label">Tác giả</Form.Label>
+            <CheckBoxAuthor
+              onAuthorName={handleAuthorsName}
+              status={showAuthor}
+            />
+            <Form.Control
+              className="form_items_input"
+              placeholder="Nhập tên tác giả mới"
+              disabled={!showAuthor}
+            />
+            <Form.Check
+              label="Thêm tác giả mới"
+              onClick={() => setShowAuthor(!showAuthor)}
+            />
+          </Form.Group>
+          {/* Form thể loại */}
+          <Form.Group className="mb-3 form_items">
+            <Form.Label className="form_items_label">Thể loại</Form.Label>
+            <CheckBoxCategory
+              onCategoryName={handleCategoriesName}
+              status={showCategories}
+            />
+            <Form.Control
+              className="form_items_input"
+              placeholder="Nhập tên thể loại mới"
+              disabled={!showCategories}
+            />
+            <Form.Check
+              label="Thêm thể loại mới"
+              onClick={() => setShowCategories(!showCategories)}
+            />
+          </Form.Group>
+          {/* <Form.Group className="mb-3 form_items">
             <Form.Label className="form_items_label">Tác giả</Form.Label>
             <Form.Control
               value={authors}
@@ -132,8 +181,8 @@ function AddBooks({ isShow, onShow }) {
               placeholder="Nhập tên tác giả"
               onChange={(e) => setAuthors(e.target.value)}
             />
-          </Form.Group>
-          <Form.Group className="mb-3 form_items">
+          </Form.Group> */}
+          {/* <Form.Group className="mb-3 form_items">
             <Form.Label className="form_items_label">Thể loại</Form.Label>
             <Form.Control
               value={categories}
@@ -143,7 +192,7 @@ function AddBooks({ isShow, onShow }) {
               placeholder="Nhập tên thể loại"
               onChange={(e) => setCategories(e.target.value)}
             />
-          </Form.Group>
+          </Form.Group> */}
           <Form.Group className="mb-3 form_items">
             <Form.Label className="form_items_label">Mô tả</Form.Label>
             <Form.Control

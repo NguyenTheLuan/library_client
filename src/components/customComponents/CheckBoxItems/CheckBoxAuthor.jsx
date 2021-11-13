@@ -2,7 +2,8 @@ import productsApi from "apis/productsApi";
 import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 
-function CheckBoxAuthor({ onAuthorName }) {
+function CheckBoxAuthor({ onAuthorName, status }) {
+  // console.log("trang author checkbox", status);
   const [authorNames, setAuthorNames] = useState(null);
   //render lại
   useEffect(() => {
@@ -27,6 +28,7 @@ function CheckBoxAuthor({ onAuthorName }) {
 
   return (
     <Form.Select
+      disabled={status}
       name="authors"
       className="formSearchAdmin_search_items"
       onChange={(e) => onAuthorName({ [e.target.name]: e.target.value })}

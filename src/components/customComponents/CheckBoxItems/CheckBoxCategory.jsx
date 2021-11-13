@@ -2,7 +2,8 @@ import productsApi from "apis/productsApi";
 import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 
-function CheckBoxCategory({ onCategoryName }) {
+function CheckBoxCategory({ onCategoryName, status }) {
+  // console.log("categories", status);
   const [authorNames, setAuthorNames] = useState(null);
   //render lại
   useEffect(() => {
@@ -27,6 +28,7 @@ function CheckBoxCategory({ onCategoryName }) {
 
   return (
     <Form.Select
+      disabled={status}
       name="categories"
       className="formSearchAdmin_search_items"
       onChange={(e) => onCategoryName({ [e.target.name]: e.target.value })}
