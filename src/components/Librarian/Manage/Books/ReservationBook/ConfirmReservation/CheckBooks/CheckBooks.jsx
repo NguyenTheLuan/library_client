@@ -1,16 +1,15 @@
 import productsApi from "apis/productsApi";
 import React, { useState } from "react";
 import { FloatingLabel, Form, Table } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouteMatch } from "react-router";
-import { addCarts } from "reducers/librarianSlice";
+import { addCarts, selectCartUserId } from "reducers/librarianSlice";
 import "./CheckBooks.scss";
 
 function CheckBooks() {
   const [bookId, setBookId] = useState("");
   const [copies, setCopies] = useState();
-
-  const { path } = useRouteMatch();
+  const selectUserId = useSelector(selectCartUserId);
 
   const dispatch = useDispatch();
   //Kiếm thông tin sách
@@ -42,8 +41,8 @@ function CheckBooks() {
     }
   };
   const renderUserName = (userId) => {
-    console.log("userId", userId);
-    const userReservedId = path.split("/")[4];
+    // console.log("userId", userId);
+    const userReservedId = selectUserId;
     if (userReservedId === userId) {
       return <>Bạn là người mượn</>;
     } else {

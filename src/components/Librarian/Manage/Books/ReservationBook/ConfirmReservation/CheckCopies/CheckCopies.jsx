@@ -1,12 +1,11 @@
 import productsApi from "apis/productsApi";
 import React, { useState } from "react";
 import { FloatingLabel, Form, Table } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { useRouteMatch } from "react-router";
-import { addCarts } from "reducers/librarianSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addCarts, selectCartUserId } from "reducers/librarianSlice";
 
 function CheckCopies() {
-  const { path } = useRouteMatch();
+  const selectUserId = useSelector(selectCartUserId);
   const [bookId, setBookId] = useState("");
   const [copies, setCopies] = useState();
 
@@ -41,7 +40,7 @@ function CheckCopies() {
   };
   // render userName
   const renderUser = (userId) => {
-    const userReservedId = path.split("/")[4];
+    const userReservedId = selectUserId;
     if (userReservedId === userId._id) {
       return <>Bạn là người mượn</>;
     } else {

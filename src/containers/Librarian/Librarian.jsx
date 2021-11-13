@@ -5,7 +5,11 @@ import CreateUser from "components/Admin/Manage/Users/CreateUser/CreateUser";
 import ViewUser from "components/Admin/Manage/Users/ViewUser/ViewUser";
 import HomeLibrarian from "components/Librarian/HomeLibrarian/HomeLibrarian";
 import LibrarianDashBoard from "components/Librarian/LibrarianDashBoard/LibrarianDashBoard";
-import UserDashBoard from "components/Librarian/ReservationBook/UserDashBoard/UserDashBoard";
+import CreateBooks from "components/Librarian/Manage/Books/CreateBooks/CreateBooks";
+import CheckoutBooks from "components/Librarian/Manage/Books/ReservationBook/CheckoutBooks";
+import ReturnBooks from "components/Librarian/Manage/Books/ReturnBooks/ReturnBooks";
+import UserDashBoard from "components/Librarian/Manage/Users/UserDashBoard/UserDashBoard";
+
 import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router";
 
@@ -41,27 +45,6 @@ function Librarian() {
                 component={() => <UserDashBoard />}
                 // exact={true}
               />
-              {/* 
-              <Route
-                path={`${path}/users/view/:id/carts`}
-                component={() => <ViewCartUser />}
-                exact={true}
-              />
-              <Route
-                path={`${path}/users/view/:id/resevations`}
-                component={() => "trang xem lịch mượn"}
-                exact={true}
-              />
-              <Route
-                path={`${path}/users/view/:id/resevations/checkout`}
-                component={() => "trang cho mượn"}
-                exact={true}
-              />
-              <Route
-                path={`${path}/users/view/:id/resevations/checkin`}
-                component={() => "trang trả sách"}
-                exact={true}
-              /> */}
 
               <Route
                 path={`${path}/users/create`}
@@ -71,14 +54,24 @@ function Librarian() {
 
               {/* Quản lý sách */}
               <Route
-                path={`${path}/books`}
+                path={`${path}/books/view`}
                 component={() => <GetBooks />}
                 exact={true}
               />
               <Route
                 path={`${path}/books/create`}
-                component={() => <AddBooks />}
+                component={() => <CreateBooks />}
                 exact={true}
+              />
+              <Route
+                path={`${path}/books/copies`}
+                component={() => <CheckoutBooks />}
+                // exact={true}
+              />
+              <Route
+                path={`${path}/books/return`}
+                component={() => <ReturnBooks />}
+                // exact={true}
               />
             </div>
             {/* <Route

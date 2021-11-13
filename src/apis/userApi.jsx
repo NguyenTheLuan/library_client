@@ -50,7 +50,7 @@ const userApi = {
   //Phần admin, librarian quản lý
 
   //fn: Lấy danh sách đã đặt hẹn của người dùng
-  getViewSchedule: (userId) => {
+  getBookReserved: (userId) => {
     const url = `${USER_API_ENDPOINT}/${userId}/books/copies/reservations`;
     return axiosClient.get(url);
   },

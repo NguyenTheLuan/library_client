@@ -6,8 +6,17 @@ const librarianSlice = createSlice({
     carts: JSON.parse(localStorage.getItem("cartsCheckout"))
       ? JSON.parse(localStorage.getItem("cartsCheckout"))
       : [],
+    userId: JSON.parse(localStorage.getItem("userId"))
+      ? JSON.parse(localStorage.getItem("userId"))
+      : [],
   },
   reducers: {
+    //get id user
+    getUserId(state, action) {
+      state.userId = action.payload;
+      localStorage.setItem("userId", JSON.stringify(state.userId));
+    },
+
     //tạo carts để đặt cho user
     createCarts(state, action) {
       state.carts = action.payload;
@@ -41,7 +50,9 @@ const librarianSlice = createSlice({
   },
 });
 
-export const { createCarts, addCarts, deleteCarts } = librarianSlice.actions;
+export const { createCarts, addCarts, deleteCarts, getUserId } =
+  librarianSlice.actions;
 export const selectCartCheckout = (state) => state.librarian.carts;
+export const selectCartUserId = (state) => state.librarian.userId;
 
 export default librarianSlice.reducer;

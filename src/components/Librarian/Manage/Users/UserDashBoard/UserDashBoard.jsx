@@ -1,10 +1,10 @@
 import React from "react";
 import { Route, Switch, useParams, useRouteMatch } from "react-router";
 import { Link, NavLink } from "react-router-dom";
-import ViewScheduleUser from "../BookReservation/BookReservation";
-import ConfirmReservation from "../ConfirmReservation/ConfirmReservation";
+import ConfirmReservation from "../../Books/ReservationBook/ConfirmReservation/ConfirmReservation";
+
 import UserInfo from "../UserInfo/UserInfo";
-import ViewCartUser from "../ViewSchedule/ViewSchedule";
+
 import "./UserDashBoard.scss";
 
 function UserDashBoard() {
@@ -51,21 +51,21 @@ function UserDashBoard() {
       </div>
       <div className="userDashBoard_contents">
         <Switch>
-          <Route
+          {/* <Route
             path={`${path.split(":")[0]}${id}/carts`}
             component={() => <ViewCartUser />}
             exact={true}
-          />
+          /> */}
           <Route
             path={`${path.split(":")[0]}${id}`}
             component={() => <UserInfo />}
             exact={true}
           />
-          <Route
+          {/* <Route
             path={`${path.split(":")[0]}${id}/resevations`}
             component={() => <ViewScheduleUser />}
             exact={true}
-          />
+          /> */}
           <Route
             path={`${path.split(":")[0]}${id}/resevations/book`}
             component={() => <ConfirmReservation />}

@@ -9,7 +9,7 @@ import {
   selectCartCheckout,
 } from "reducers/librarianSlice";
 
-function CheckoutBooks() {
+function Checkout() {
   const { path } = useRouteMatch();
   const dispatch = useDispatch();
   const [books, setBooks] = useState([]);
@@ -34,6 +34,7 @@ function CheckoutBooks() {
 
   const checkoutBooks = async () => {
     const userId = path.split("/")[4];
+
     try {
       await productsApi.postCopiesCheckout({
         user: userId,
@@ -81,4 +82,4 @@ function CheckoutBooks() {
   );
 }
 
-export default CheckoutBooks;
+export default Checkout;

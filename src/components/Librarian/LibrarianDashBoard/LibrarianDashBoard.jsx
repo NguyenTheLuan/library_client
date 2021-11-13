@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
 import { Accordion } from "react-bootstrap";
-import { AiFillFileExcel } from "react-icons/ai";
-// import { GrUserSettings } from "react-icons/gr";
-// import { RiBookletFill } from "react-icons/ri";
-import { FaBook, FaUserCog } from "react-icons/fa";
-//icon
-import { IoLibrarySharp } from "react-icons/io5";
 import { Link, NavLink } from "react-router-dom";
+
+//icon
+import { AiFillFileExcel } from "react-icons/ai";
+import { FaBook, FaUserCog } from "react-icons/fa";
+import { IoLibrarySharp } from "react-icons/io5";
 import "./DashBoard.scss";
 
 function LibrarianDashBoard({ url }) {
@@ -59,15 +58,45 @@ function LibrarianDashBoard({ url }) {
             Quản Lý Sách
           </Accordion.Header>
           <Accordion.Body>
-            <NavLink to={`${url}/books`} exact={true} activeClassName="active">
+            <NavLink
+              to={`${url}/books/view`}
+              exact={true}
+              activeClassName="active"
+            >
               Thông tin sách thư viện
+            </NavLink>
+          </Accordion.Body>
+          <Accordion.Body>
+            <NavLink
+              to={`${url}/books/create`}
+              exact={true}
+              activeClassName="active"
+            >
+              Nhập sách
+            </NavLink>
+          </Accordion.Body>
+          <Accordion.Body>
+            <NavLink
+              to={`${url}/books/copies`}
+              exact={true}
+              activeClassName="active"
+            >
+              Mượn sách
+            </NavLink>
+          </Accordion.Body>
+          <Accordion.Body>
+            <NavLink
+              to={`${url}/books/return`}
+              exact={true}
+              activeClassName="active"
+            >
+              Trả sách
             </NavLink>
           </Accordion.Body>
         </Accordion.Item>
         {/* Quản Lý Báo Cáo */}
         <Accordion.Item eventKey="2">
           <Accordion.Header>
-            {/* <AiTwotoneFileText className="iconItem" /> */}
             <AiFillFileExcel className="iconItem" />
             Quản Báo Cáo
           </Accordion.Header>

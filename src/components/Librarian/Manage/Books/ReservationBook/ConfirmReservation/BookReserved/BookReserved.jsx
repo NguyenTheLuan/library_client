@@ -1,12 +1,12 @@
 import userApi from "apis/userApi";
 import React, { useEffect, useState } from "react";
 import { Table, Button } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { useRouteMatch } from "react-router";
-import { createCarts } from "reducers/librarianSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { createCarts, selectCartUserId } from "reducers/librarianSlice";
 
-function BookReservation() {
-  const { path } = useRouteMatch();
+function BookReserved() {
+  const selectUserId = useSelector(selectCartUserId);
+  const [userId, setUserId] = useState();
   const [carts, setCarts] = useState();
   const [status, setStatus] = useState(false);
 
@@ -15,28 +15,35 @@ function BookReservation() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // console.log("select id", selectUserId);
+    setUserId(selectUserId);
+  }, [selectUserId]);
+
+  useEffect(() => {
+    // console.log("select userId", userId);
     getScheduleUser();
-  }, [status]);
+  }, [userId]);
 
   const getScheduleUser = async () => {
-    const userId = path.split("/")[4];
+    const id = userId;
+    console.log("id là", id);
     try {
-      const response = await userApi.getViewSchedule(userId);
-      // console.log("danh sách lịch đã đặt là", response);
+      const response = await userApi.getBookReserved(id);
+      console.log("danh sách lịch đã đặt là", response);
       setCarts(response.results);
-      checkStatus(response.totalResults);
+      // checkStatus(response.totalResults);
     } catch (error) {
       console.log("lỗi rồi", { error });
     }
   };
 
-  const checkStatus = (quantity) => {
-    if (quantity > 0) {
-      setStatus(true);
-    } else {
-      setStatus(false);
-    }
-  };
+  // const checkStatus = (quantity) => {
+  //   if (quantity > 0) {
+  //     setStatus(true);
+  //   } else {
+  //     setStatus(false);
+  //   }
+  // };
 
   const setImg = (img) => {
     return <img style={{ width: "40px" }} src={img} alt="img" />;
@@ -76,30 +83,30 @@ function BookReservation() {
   return (
     <div>
       <legend>Danh sách sách đã hẹn</legend>
-      {status ? (
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              {/* <th>Id</th> */}
-              <th>STT</th>
-              <th>Ảnh bìa</th>
-              <th>Mã sách</th>
-              <th>Tên sách</th>
-              <th>Thể loại</th>
-              <th>Tên tác giả</th>
-              <th>Thời gian mượn</th>
-              <th>Chọn sách</th>
-              {/* <th>Miêu tả</th> */}
-            </tr>
-          </thead>
-          <tbody>{renderCarts}</tbody>
-          <Button onClick={() => chooseBook()}>Chọn sách</Button>
-        </Table>
-      ) : (
+      {/* {status ? ( */}
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            {/* <th>Id</th> */}
+            <th>STT</th>
+            <th>Ảnh bìa</th>
+            <th>Mã sách</th>
+            <th>Tên sách</th>
+            <th>Thể loại</th>
+            <th>Tên tác giả</th>
+            <th>Thời gian mượn</th>
+            <th>Chọn sách</th>
+            {/* <th>Miêu tả</th> */}
+          </tr>
+        </thead>
+        <tbody>{renderCarts}</tbody>
+        <Button onClick={() => chooseBook()}>Chọn sách</Button>
+      </Table>
+      {/* ) : (
         <h2>Không có sản phẩm nào</h2>
-      )}
+      )} */}
     </div>
   );
 }
 
-export default BookReservation;
+export default BookReserved;
