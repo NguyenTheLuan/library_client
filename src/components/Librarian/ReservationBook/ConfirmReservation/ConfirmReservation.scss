@@ -7,8 +7,9 @@
   align-items: center;
 
   gap: 100px;
+  //Link bên trái
   &_links {
-    flex: 1;
+    flex: 2;
 
     height: 360px;
 
@@ -27,6 +28,7 @@
       border-bottom: 1px solid #3e08ff;
     }
   }
+  //Content bên phải
   &_contents {
     flex: 7;
     height: 100%;

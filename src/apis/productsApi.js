@@ -7,11 +7,7 @@ const productsApi = {
     const url = PRODUCTS_API_ENDPOINT;
     return axiosClient.get(url, { params: bookInfo });
   },
-  //get books by Id
-  getBooksById: (id) => {
-    const url = `${PRODUCTS_API_ENDPOINT}/${id}`;
-    return axiosClient.get(url);
-  },
+
   //tạo sách mới
   postCreateBook: (bookInfo) => {
     const url = PRODUCTS_API_ENDPOINT;
@@ -44,8 +40,24 @@ const productsApi = {
     return axiosClient.get(url);
   },
 
+  //get books by Id
+  getBooksById: (id) => {
+    const url = `${PRODUCTS_API_ENDPOINT}/${id}`;
+    return axiosClient.get(url);
+  },
+
   //Librarian, admin
-  //Lấy từng bản sao của sách
+
+  //Check mã sách
+  getCheckCopies: (copiesId) => {
+    const url = `${PRODUCTS_API_ENDPOINT}/copies/${copiesId}`;
+    return axiosClient.get(url);
+  },
+  //Tạo 1 bản sao cho sách
+  postCopies: (bookId) => {
+    const url = `${PRODUCTS_API_ENDPOINT}/${bookId}/copies`;
+    return axiosClient.post(url);
+  },
 
   //Cho người mượn sách
   postCopiesCheckout: (userInfo) => {

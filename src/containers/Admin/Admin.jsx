@@ -4,6 +4,7 @@ import AddBooks from "components/Admin/Manage/Books/AddBooks/AddBooks";
 import GetBooks from "components/Admin/Manage/Books/ViewBooks/ViewBooks";
 import CreateUser from "components/Admin/Manage/Users/CreateUser/CreateUser";
 import ViewUser from "components/Admin/Manage/Users/ViewUser/ViewUser";
+import UserInfo from "components/Librarian/ReservationBook/UserInfo/UserInfo";
 import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import "./Admin.scss";
@@ -35,7 +36,7 @@ function Admin() {
               />
               <Route
                 path={`${path}/users/view/:id`}
-                component={() => "trang xem thông tin user của admin"}
+                component={() => "đây là trang thông tin chi tiết của user"}
                 exact={true}
               />
               <Route

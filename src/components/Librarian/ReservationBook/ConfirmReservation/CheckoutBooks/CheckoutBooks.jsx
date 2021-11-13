@@ -12,14 +12,15 @@ import {
 function CheckoutBooks() {
   const { path } = useRouteMatch();
   const dispatch = useDispatch();
+  const [books, setBooks] = useState([]);
   const booksCheckout = useSelector(selectCartCheckout);
 
-  const [books, setBooks] = useState();
   useEffect(() => {
+    // console.log("có chạy lại mà");
     setBooks(booksCheckout);
   }, [booksCheckout]);
 
-  const renderBooksCheckout = books?.map((book, index) => {
+  const renderBooksCheckout = books.map((book, index) => {
     return (
       <tr>
         <th>{index + 1}</th>
@@ -34,11 +35,18 @@ function CheckoutBooks() {
   const checkoutBooks = async () => {
     const userId = path.split("/")[4];
     try {
-      const response = await productsApi.postCopiesCheckout({
+      await productsApi.postCopiesCheckout({
         user: userId,
         copies: books,
       });
-      console.log("cho mượn thành công", response);
+      console.log("cho mượn thành công");
+      // const response = await productsApi.postCopiesCheckout({
+      //   user: userId,
+      //   copies: books,
+      // });
+      // console.log("cho mượn thành công", response);
+
+      //Reset lại cart đặt
       dispatch(createCarts([]));
     } catch (error) {
       console.log("lỗi rồi", { error });
@@ -46,12 +54,12 @@ function CheckoutBooks() {
   };
 
   const handleCheckout = () => {
-    console.log(
-      "tiến hành cho mượn",
-      books,
-      "cho user có id",
-      path.split("/")[4]
-    );
+    // console.log(
+    //   "tiến hành cho mượn",
+    //   books,
+    //   "cho user có id",
+    //   path.split("/")[4]
+    // );
     checkoutBooks();
   };
 

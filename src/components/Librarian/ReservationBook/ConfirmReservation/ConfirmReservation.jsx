@@ -2,6 +2,8 @@ import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router";
 import { NavLink } from "react-router-dom";
 import CheckBooks from "./CheckBooks/CheckBooks";
+import CheckCopies from "./CheckCopies/CheckCopies";
+
 import CheckoutBooks from "./CheckoutBooks/CheckoutBooks";
 
 import "./ConfirmReservation.scss";
@@ -12,11 +14,19 @@ function ConfirmReservation() {
   return (
     <div className="confirmMenu">
       <div className="confirmMenu_links">
-        <NavLink to={`${path}`} activeClassName="active" exact={true}>
-          Kiểm tra sách
+        <NavLink
+          to={`${path}/check-copies`}
+          activeClassName="active"
+          exact={true}
+        >
+          Kiểm tra Copies sách
         </NavLink>
+        <NavLink to={`${path}`} activeClassName="active" exact={true}>
+          Kiểm tra ID sách
+        </NavLink>
+
         <NavLink to={`${path}/checkout`} activeClassName="active">
-          Đặt sách
+          Tiến thành đặt sách
         </NavLink>
       </div>
       <div className="confirmMenu_contents">
@@ -25,6 +35,11 @@ function ConfirmReservation() {
           <Route
             path={`${path}`}
             component={() => <CheckBooks />}
+            exact={true}
+          />
+          <Route
+            path={`${path}/check-copies`}
+            component={() => <CheckCopies />}
             exact={true}
           />
           <Route

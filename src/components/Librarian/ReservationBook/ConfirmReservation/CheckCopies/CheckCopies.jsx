@@ -4,50 +4,48 @@ import { FloatingLabel, Form, Table } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useRouteMatch } from "react-router";
 import { addCarts } from "reducers/librarianSlice";
-import "./CheckBooks.scss";
 
-function CheckBooks() {
+function CheckCopies() {
+  const { path } = useRouteMatch();
   const [bookId, setBookId] = useState("");
   const [copies, setCopies] = useState();
 
-  const { path } = useRouteMatch();
-
   const dispatch = useDispatch();
+
   //Kiếm thông tin sách
   const getInfoCopies = async () => {
     try {
-      const response = await productsApi.getBooksById(bookId);
+      const response = await productsApi.getCheckCopies(bookId);
       console.log("đã lấy ra thông tin sách", response);
-      setCopies(response.copies);
+      setCopies([response]);
     } catch (error) {
       console.log("lỗi rồi", { error });
     }
   };
 
+  //render components
   const renderDate = (time) => {
     const date = new Date(time);
     return date.toLocaleString();
   };
-
-  //render component
-  const renderBtn = (status, bookId) => {
+  const renderBtn = (status, copiesId) => {
     if (status === "borrowed" || status === "reserved") {
       return <button disabled>Không đặt được</button>;
     } else {
       return (
-        <button type="checkbox" onClick={() => dispatch(addCarts(bookId))}>
+        <button type="checkbox" onClick={() => dispatch(addCarts(copiesId))}>
           Chọn sách
         </button>
       );
     }
   };
-  const renderUserName = (userId) => {
-    console.log("userId", userId);
+  // render userName
+  const renderUser = (userId) => {
     const userReservedId = path.split("/")[4];
-    if (userReservedId === userId) {
+    if (userReservedId === userId._id) {
       return <>Bạn là người mượn</>;
     } else {
-      return <> {userId}</>;
+      return <> {userId._id}</>;
     }
   };
 
@@ -55,13 +53,16 @@ function CheckBooks() {
   const renderCopies = copies?.map((copy, index) => {
     return (
       <tr key={index}>
-        <td>{index + 1}</td>
         <td>{copy.status}</td>
-        <td>{copy._id}</td>
+        <td>{copy.title}</td>
         {/* <td>{renderDate(copy.createdAt)}</td> */}
+        {/* Mã copies */}
+        <td>{copy.id}</td>
+        {/* Mã sách */}
+        <td>{copy.book}</td>
         {/* <td>{renderDate(copy.borrowedDate)}</td> */}
-        <td>{renderUserName(copy.user)}</td>
-        <td>{renderBtn(copy.status, copy._id)}</td>
+        <td>{renderUser(copy.user)}</td>
+        <td>{renderBtn(copy.status, copy.id)}</td>
       </tr>
     );
   });
@@ -72,7 +73,7 @@ function CheckBooks() {
       {/* <div className="checkoutReservation_search"> */}
       <FloatingLabel
         // className="checkoutReservation_search_form"
-        label="Nhập mã ID của sách"
+        label="Nhập mã Copies của sách"
       >
         <Form.Control
           type="text"
@@ -85,11 +86,11 @@ function CheckBooks() {
         <Table>
           <thead>
             <tr>
-              <th>STT</th>
               <th>Trạng thái</th>
-              <th>Mã sách</th>
+              <th>Tên sách</th>
+              <th>Mã copies sách</th>
+              <th>Mã ID sách</th>
               {/* <th>Ngày bắt đầu</th> */}
-              {/* <th>Ngày trả sách</th> */}
               <th>Người mượn</th>
               <th>Chọn sách</th>
             </tr>
@@ -103,4 +104,4 @@ function CheckBooks() {
   );
 }
 
-export default CheckBooks;
+export default CheckCopies;
