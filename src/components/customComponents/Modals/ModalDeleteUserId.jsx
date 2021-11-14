@@ -4,7 +4,7 @@ import { Button, Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { deleteUserById } from "reducers/adminSlice";
 import "./Modals.scss";
-function ModalDeleteUserId({ userId, isShow, onShow, title, body }) {
+function ModalDeleteUserId({ userId, isShow, onShow, userEmail }) {
   const dispatch = useDispatch();
 
   //Delete books by id
@@ -33,9 +33,12 @@ function ModalDeleteUserId({ userId, isShow, onShow, title, body }) {
   return (
     <Modal show={isShow} onHide={handleClose}>
       <Modal.Header>
-        <Modal.Title>{title}</Modal.Title>
+        <Modal.Title>Xoá người dùng</Modal.Title>
       </Modal.Header>
-      <Modal.Body>{body}</Modal.Body>
+      <Modal.Body>
+        Xoá người dùng có gmail là <strong> {userEmail}</strong>, bạn có chắc
+        chắn xoá không?
+      </Modal.Body>
       <Modal.Footer>
         <Button variant="danger" onClick={handleClick}>
           Xoá người dùng

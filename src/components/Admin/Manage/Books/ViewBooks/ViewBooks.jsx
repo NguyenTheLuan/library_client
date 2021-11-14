@@ -66,7 +66,6 @@ function ViewBooks() {
 
   //Nhập giá trị update sau khi thay đổi
   const handleUpdate = (status) => {
-    // console.log("lấy được trạng thái", status);
     setUpdate(status);
   };
 

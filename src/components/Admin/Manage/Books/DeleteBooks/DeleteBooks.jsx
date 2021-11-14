@@ -20,8 +20,7 @@ function DeleteBooks({ bookId, bookName }) {
       <ModalDeleteBookId
         onShow={onShow}
         isShow={show}
-        title={"Tiến hành xoá sách"}
-        body={`Xoá ${bookName}, bạn có chắc chắn xoá không?`}
+        bookName={bookName}
         bookId={bookId}
       />
     </div>

@@ -19,8 +19,7 @@ function DeleteUser({ userId, userEmail }) {
       <ModalDeleteUserId
         onShow={onShow}
         isShow={show}
-        title={"Xoá người dùng"}
-        body={`Người dùng có gmail là ${userEmail}, bạn có chắc chắn xoá không?`}
+        userEmail={userEmail}
         userId={userId}
       />
     </>

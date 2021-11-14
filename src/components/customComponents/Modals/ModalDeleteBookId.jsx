@@ -4,7 +4,7 @@ import { Button, Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { deleteBookById } from "reducers/bookSlice";
 import "./Modals.scss";
-function ModalDeleteBookId({ isShow, bookId, onShow, title, body }) {
+function ModalDeleteBookId({ isShow, bookId, onShow, bookName }) {
   //Delete books by id
   const dispatch = useDispatch();
   const deleteBookId = async () => {
@@ -12,8 +12,10 @@ function ModalDeleteBookId({ isShow, bookId, onShow, title, body }) {
     // console.log(id);
     try {
       await productsApi.postDeleteBookById(id);
+      alert("Xoá thành công");
       dispatch(deleteBookById(id));
-      console.log("Thành công");
+      // console.log("Thành công");
+
       onShow(false);
     } catch (error) {
       console.log("có lỗi", { error });
@@ -31,9 +33,12 @@ function ModalDeleteBookId({ isShow, bookId, onShow, title, body }) {
   return (
     <Modal show={isShow} onHide={handleClose}>
       <Modal.Header>
-        <Modal.Title>{title}</Modal.Title>
+        <Modal.Title>Tiến hành xoá sách</Modal.Title>
       </Modal.Header>
-      <Modal.Body>{body}</Modal.Body>
+      <Modal.Body>
+        Xoá sách có tên là
+        <strong> {bookName}</strong>, bạn có chắc chắn xoá không?
+      </Modal.Body>
       <Modal.Footer>
         <Button variant="danger" onClick={handleClick}>
           Xoá sách
