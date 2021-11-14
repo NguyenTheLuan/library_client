@@ -1,25 +1,27 @@
 import adminApi from "apis/adminApi";
+import "components/Admin/Manage/ViewForm.scss";
 import SearchUsersAdmin from "components/customComponents/InputForms/SearchForm/SearchUsersAdmin";
 import PaginationItems from "components/customComponents/PaginationItems/PaginationItems";
 import React, { useEffect, useState } from "react";
-import { Button, Table } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory, useRouteMatch } from "react-router-dom";
 import { getUsers, selectTotalUsers } from "reducers/adminSlice";
+import { createCarts } from "reducers/librarianSlice";
 import DeleteUser from "../DeleteUser/DeleteUser";
 import UpdateUser from "../UpdateUser/UpdateUser";
-import "components/Admin/Manage/ViewForm.scss";
-import { createCarts } from "reducers/librarianSlice";
+import UserDetails from "../UserDetails/UserDetails";
 
 function ViewUser() {
   //Thông tin user
   const [userItems, setUserItems] = useState([]);
+  //Để search
   const [searchInfo, setSearchInfo] = useState();
+  //Để update
+  const [update, setUpdate] = useState(false);
 
   //Nhận user từ redux
   const users = useSelector(selectTotalUsers);
   const dispatch = useDispatch();
-  const [err, setErr] = useState("");
 
   //Pagination
   const [role, setRole] = useState("user");
@@ -38,9 +40,8 @@ function ViewUser() {
 
   //Lần 1 render all
   useEffect(() => {
-    dispatch(createCarts([]));
     getAllUsers();
-  }, [newPage, searchInfo, users]);
+  }, [newPage, searchInfo, users, update]);
 
   const getAllUsers = async () => {
     const params = {
@@ -71,6 +72,7 @@ function ViewUser() {
     }
   };
 
+  //render component
   const activeEmail = (isActive, email) => {
     if (!isActive) {
       return (
@@ -78,9 +80,15 @@ function ViewUser() {
           {email}
         </span>
       );
-    } else if (isActive) {
+    } else {
       return <span className="emailStatus">{email}</span>;
     }
+  };
+
+  //Nhập giá trị update sau khi thay đổi
+  const handleUpdate = (status) => {
+    // console.log("lấy được trạng thái", status);
+    setUpdate(status);
   };
 
   //Nhận thông tin từ user con
@@ -100,15 +108,13 @@ function ViewUser() {
 
         {/* custom td */}
         <td>
-          <UpdateUser userInfo={user} />
+          <UpdateUser onUpdate={handleUpdate} update={update} userInfo={user} />
         </td>
         <td>
           <DeleteUser userId={user.id} userEmail={user.email} />
         </td>
         <td>
-          <Button variant="info" userId={user.id}>
-            Xem chi tiết
-          </Button>
+          <UserDetails userInfo={user} />
         </td>
       </tr>
     );
@@ -124,11 +130,6 @@ function ViewUser() {
       </div>
       <div className="viewMenu_table">
         <Table className="tableForm" striped bordered hover>
-          {err && (
-            <Link to="/login">
-              <h2>{err}</h2>
-            </Link>
-          )}
           <thead className="tableForm_header">
             <tr className="tableItems">
               {/* <th>STT</th> */}

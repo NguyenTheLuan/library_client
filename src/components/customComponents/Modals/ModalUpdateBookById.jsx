@@ -47,6 +47,7 @@ function ModalUpdateBookById({ isShow, onShow, bookDetails }) {
     try {
       await productsApi.updateBookById(bookId, formData);
       onShow(false);
+      alert("Cập nhật thông tin sách thành công");
     } catch (error) {
       console.log("lỗi rồi", { error });
       alert(error.response.data.message);

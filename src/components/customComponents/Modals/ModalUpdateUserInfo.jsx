@@ -28,10 +28,12 @@ function ModalUpdateUserInfo({ isShow, onShow, userInfo }) {
     try {
       await adminApi.updateUser(userId, bookInfo);
 
-      alert("Cập nhật thành công, xin hãy f5");
+      alert("Cập nhật thông tin người dùng thành công");
       onShow(false);
     } catch (error) {
       console.log("lỗi", { error });
+      alert(error.response.data.message);
+      onShow(false);
     }
   };
 

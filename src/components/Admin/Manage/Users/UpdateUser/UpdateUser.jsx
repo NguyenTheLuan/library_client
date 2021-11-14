@@ -2,14 +2,18 @@ import ModalUpdateUserInfo from "components/customComponents/Modals/ModalUpdateU
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 
-function UpdateUser({ userInfo }) {
+function UpdateUser({ userInfo, onUpdate, update }) {
   // console.log("update user nhận từ view user", userInfo);
   const [show, setShow] = useState(false);
-  const handleShow = () => setShow(true);
+
+  const handleShow = () => {
+    setShow(true);
+  };
+
   //Nhận props từ con
   const onShow = (isShow) => {
-    // console.log("cha nhận được từ con", isShow);
     setShow(isShow);
+    onUpdate(!update);
   };
   return (
     <>

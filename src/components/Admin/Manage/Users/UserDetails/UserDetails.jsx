@@ -1,8 +1,8 @@
-import ModalViewBookDetails from "components/customComponents/Modals/ModalViewBookDetails";
+import ModalViewUserDetails from "components/customComponents/Modals/ModalViewUserDetails";
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 
-function ViewDetailsBook({ bookDetails }) {
+function UserDetails({ userInfo }) {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
 
@@ -15,13 +15,14 @@ function ViewDetailsBook({ bookDetails }) {
       <Button variant="info" onClick={handleShow}>
         Xem chi tiết
       </Button>
-      <ModalViewBookDetails
+
+      <ModalViewUserDetails
         onShow={onShow}
         isShow={show}
-        bookDetails={bookDetails}
+        userDetails={userInfo}
       />
     </>
   );
 }
 
-export default ViewDetailsBook;
+export default UserDetails;

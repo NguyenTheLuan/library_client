@@ -1,9 +1,8 @@
 import productsApi from "apis/productsApi";
-// import "components/Admin/Manage/AddForm.scss";
-import SearchFormAdmin from "components/customComponents/InputForms/SearchForm/SearchBooksAdmin";
 
+import SearchFormAdmin from "components/customComponents/InputForms/SearchForm/SearchBooksAdmin";
 import React, { useEffect, useState } from "react";
-import { Button, Table } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getBooks, selectBooks, selectTotalBooks } from "reducers/bookSlice";
 import DeleteBooks from "../DeleteBooks/DeleteBooks";
@@ -12,8 +11,9 @@ import UpdateBooksById from "../UpdateBooksById/UpdateBooksById";
 import PaginationItems from "components/customComponents/PaginationItems/PaginationItems";
 
 import IncreaseBooks from "../IncreaseBooks/IncreaseBooks";
-import ViewDetailsBook from "../ViewDetailsBook/ViewDetailsBook";
+
 import "components/Admin/Manage/ViewForm.scss";
+import ViewBookDetails from "../ViewBookDetails/ViewBookDetails";
 
 function ViewBooks() {
   const books = useSelector(selectBooks);
@@ -75,7 +75,7 @@ function ViewBooks() {
     try {
       const response = await productsApi.getBooks(params);
 
-      console.log("dữ liệu trả về", response);
+      // console.log("dữ liệu trả về", response);
       //set về rỗng trước
       setProducts();
       setProducts(response.results);
@@ -123,7 +123,7 @@ function ViewBooks() {
           <DeleteBooks bookId={bookDetails.id} bookName={bookDetails.title} />
         </td>
         <td>
-          <ViewDetailsBook bookDetails={bookDetails} />
+          <ViewBookDetails bookDetails={bookDetails} />
         </td>
       </tr>
     );
@@ -150,7 +150,7 @@ function ViewBooks() {
               {/* <th>Thể loại</th> */}
               <th>Số lượng</th>
               <th>Nhập sách</th>
-              {/* <th>Tăng số lượng</th> */}
+
               {/* <th>Thời gian mượn</th> */}
               <th>Chỉnh sửa</th>
               <th>Xoá sách</th>
