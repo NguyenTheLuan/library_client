@@ -101,6 +101,8 @@ function BookReserved() {
         </thead>
         <tbody>{renderCarts}</tbody>
         <Button onClick={() => chooseBook()}>Chọn sách</Button>
+        <button>Mượn thêm sách</button>
+        <button>CHo mượn sách</button>
       </Table>
       {/* ) : (
         <h2>Không có sản phẩm nào</h2>

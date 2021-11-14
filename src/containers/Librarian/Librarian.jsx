@@ -1,15 +1,12 @@
-import AddBooks from "components/Admin/Manage/Books/AddBooks/AddBooks";
 import GetBooks from "components/Admin/Manage/Books/ViewBooks/ViewBooks";
-
 import CreateUser from "components/Admin/Manage/Users/CreateUser/CreateUser";
 import ViewUser from "components/Admin/Manage/Users/ViewUser/ViewUser";
 import HomeLibrarian from "components/Librarian/HomeLibrarian/HomeLibrarian";
 import LibrarianDashBoard from "components/Librarian/LibrarianDashBoard/LibrarianDashBoard";
-import CreateBooks from "components/Librarian/Manage/Books/CreateBooks/CreateBooks";
 import CheckoutBooks from "components/Librarian/Manage/Books/ReservationBook/CheckoutBooks";
 import ReturnBooks from "components/Librarian/Manage/Books/ReturnBooks/ReturnBooks";
+import ViewReservation from "components/Librarian/Manage/Books/ViewReservation/ViewReservation";
 import UserDashBoard from "components/Librarian/Manage/Users/UserDashBoard/UserDashBoard";
-
 import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router";
 
@@ -40,11 +37,11 @@ function Librarian() {
               />
 
               {/* Giỏ hàng chi tiết của user */}
-              <Route
+              {/* <Route
                 path={`${path}/users/view/:id`}
                 component={() => <UserDashBoard />}
                 // exact={true}
-              />
+              /> */}
 
               <Route
                 path={`${path}/users/create`}
@@ -59,8 +56,8 @@ function Librarian() {
                 exact={true}
               />
               <Route
-                path={`${path}/books/create`}
-                component={() => <CreateBooks />}
+                path={`${path}/books/reservation`}
+                component={() => <ViewReservation />}
                 exact={true}
               />
               <Route

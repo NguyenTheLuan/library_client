@@ -47,16 +47,15 @@ function ModalUpdateBookById({ isShow, onShow, bookDetails }) {
     try {
       await productsApi.updateBookById(bookId, formData);
       onShow(false);
-      alert("Thay đổi thành công, xin hãy f5 lại");
     } catch (error) {
-      // console.log("lỗi rồi", error.response.data.message);
       console.log("lỗi rồi", { error });
+      alert(error.response.data.message);
+      onShow(false);
     }
   };
 
   // console.log("cập nhật thông tin cho book có id: ", bookDetails);
   const handleClick = () => {
-    // console.log("cập nhật thông tin cho book có id: ", bookDetails);
     updateBookById();
   };
 

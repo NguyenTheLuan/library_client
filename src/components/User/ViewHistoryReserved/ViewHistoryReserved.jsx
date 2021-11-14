@@ -33,7 +33,7 @@ function ViewHistoryReserved() {
       return reservationInfo?.map((info, index) => {
         return (
           <tr key={index}>
-            <td>{index}</td>
+            <td>{index + 1}</td>
             <td>{info.status}</td>
             <td>{info.title}</td>
             <td>{info.authors}</td>

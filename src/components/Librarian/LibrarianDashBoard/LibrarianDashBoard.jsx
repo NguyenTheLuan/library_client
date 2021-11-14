@@ -68,11 +68,11 @@ function LibrarianDashBoard({ url }) {
           </Accordion.Body>
           <Accordion.Body>
             <NavLink
-              to={`${url}/books/create`}
+              to={`${url}/books/reservation`}
               exact={true}
               activeClassName="active"
             >
-              Nhập sách
+              Lịch hẹn người dùng
             </NavLink>
           </Accordion.Body>
           <Accordion.Body>

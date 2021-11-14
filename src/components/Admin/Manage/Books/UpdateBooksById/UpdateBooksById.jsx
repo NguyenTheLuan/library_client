@@ -1,20 +1,18 @@
 import ModalUpdateBookById from "components/customComponents/Modals/ModalUpdateBookById";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 
-function UpdateBooksById({ bookDetails }) {
+function UpdateBooksById({ bookDetails, onUpdate, update }) {
   const [show, setShow] = useState(false);
 
-  const [bookInfo, setBookInfo] = useState(bookDetails);
   const handleShow = () => {
-    console.log(bookDetails);
-
     setShow(true);
   };
 
   //Nhận props từ con
   const onShow = (isShow) => {
     setShow(isShow);
+    onUpdate(!update);
   };
 
   return (
@@ -23,7 +21,7 @@ function UpdateBooksById({ bookDetails }) {
         Chỉnh sửa sách
       </Button>
       <ModalUpdateBookById
-        bookDetails={bookInfo}
+        bookDetails={bookDetails}
         onShow={onShow}
         isShow={show}
       />

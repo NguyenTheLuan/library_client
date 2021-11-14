@@ -96,6 +96,7 @@ function CheckBooks() {
           <tbody>{renderCopies}</tbody>
         </Table>
       </div>
+
       {/* </div> */}
       {/* <div className="checkoutReservation_checkout">Đặt sách</div> */}
     </div>

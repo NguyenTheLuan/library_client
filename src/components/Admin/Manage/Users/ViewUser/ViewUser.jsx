@@ -12,9 +12,6 @@ import "components/Admin/Manage/ViewForm.scss";
 import { createCarts } from "reducers/librarianSlice";
 
 function ViewUser() {
-  const history = useHistory();
-  let { path } = useRouteMatch();
-  // console.log(path);
   //Thông tin user
   const [userItems, setUserItems] = useState([]);
   const [searchInfo, setSearchInfo] = useState();
@@ -109,11 +106,7 @@ function ViewUser() {
           <DeleteUser userId={user.id} userEmail={user.email} />
         </td>
         <td>
-          <Button
-            variant="info"
-            userId={user.id}
-            onClick={() => history.push(`${path}/view/${user.id}`)}
-          >
+          <Button variant="info" userId={user.id}>
             Xem chi tiết
           </Button>
         </td>
