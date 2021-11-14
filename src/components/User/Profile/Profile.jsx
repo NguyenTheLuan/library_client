@@ -10,7 +10,7 @@ function Profile() {
   // const { path, url } = useRouteMatch();
   // console.log(path);
   const user = useSelector(selectUser);
-  const [userInfo, setUserInfo] = useState({});
+  const [userInfo, setUserInfo] = useState([]);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -30,29 +30,34 @@ function Profile() {
   const getInfo = async () => {
     try {
       const response = await accountApi.getInfoUser(user.id);
-      setUserInfo(response);
+      // console.log(response);
+      setUserInfo([response]);
     } catch (error) {
-      setError(error.response.data.message);
-      // console.log({ error });
+      // // setError(error.response.data.message);
+      console.log("lỗi rồi", { error });
     }
   };
 
+  const renderInfo = userInfo?.map((info) => {
+    return (
+      <>
+        <div>
+          <strong>Tên người dùng</strong> {info.name}
+        </div>
+        <div>
+          <span>
+            <strong>Địa chỉ email</strong> {info.email}
+          </span>
+          <span>{isActiveEmail(info.isEmailVerified)}</span>
+        </div>
+      </>
+    );
+  });
+
   return (
     <div className="menuProfile">
-      {error && (
-        <Alert variant="warning" style={{ width: "90%" }}>
-          {error}
-        </Alert>
-      )}
-      <div className="menuProfile_info">
-        <h2>
-          Tên người dùng:<span>{userInfo.name}</span>
-        </h2>
-        <h2>
-          Địa chỉ email:<span>{userInfo.email}</span>
-        </h2>
-        <h2>{isActiveEmail(userInfo.isEmailVerified)}</h2>
-      </div>
+      <div className="menuProfile_info">{renderInfo}</div>
+      <button>Thay đổi thông tin</button>
     </div>
   );
 }

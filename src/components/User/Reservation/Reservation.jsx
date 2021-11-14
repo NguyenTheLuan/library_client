@@ -1,28 +1,27 @@
 import userApi from "apis/userApi";
 import React, { useEffect, useState } from "react";
-import { Table } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { selectUser } from "reducers/authSlice";
-
 import "./Reservation.scss";
 
 function Reservation() {
   const isUser = useSelector(selectUser);
   const [reservation, setReservation] = useState([]);
+  const [update, setUpdate] = useState(false);
 
   useEffect(() => {
-    // console.log(reservation);
+    console.log("huỷ thành công");
     isUser && getReservation();
-  }, []);
+  }, [update]);
 
+  //render components
   const timeDate = (time) => {
     const date = new Date(time);
-
     return <>{date.toLocaleString()}</>;
   };
 
   const showBooks = (booksInfo) => {
-    // console.log("booksInfo", booksInfo);
     return booksInfo.map((details, index) => {
       return (
         <div key={index} className="cartTable_contents_rows_details_items">
@@ -33,10 +32,27 @@ function Reservation() {
     });
   };
 
+  const cancelButton = (status, reservedId) => {
+    if (
+      status === "canceled" ||
+      status === "expired" ||
+      status === "fulfilled"
+    ) {
+      return <Button disabled>Không thể huỷ</Button>;
+    } else {
+      return (
+        <Button onClick={() => handleCancelReservation(reservedId)}>
+          Huỷ lịch đặt
+        </Button>
+      );
+    }
+  };
+
   const getReservation = async () => {
+    const userId = isUser.id;
     try {
-      const response = await userApi.getSchedule(isUser.id);
-      console.log("thành công", response);
+      const response = await userApi.getSchedule(userId);
+      // console.log("thành công", response);
       //truyền vô state
       setReservation(response.results);
     } catch (error) {
@@ -44,9 +60,18 @@ function Reservation() {
     }
   };
 
-  // const showReservation = () => {
-  //   console.log("reservation", reservation);
-  // };
+  const handleCancelReservation = async (reservedId) => {
+    const userId = isUser.id;
+    try {
+      await userApi.postDeleteReservation(userId, reservedId);
+      // const response = await userApi.postDeleteReservation(userId, reservedId);
+      // console.log("thành công", response);
+      alert("Huỷ lịch thành công");
+      setUpdate(!update);
+    } catch (error) {
+      console.log("lỗi rồi", { error });
+    }
+  };
 
   const showReservation = reservation.map((details, index) => {
     return (
@@ -62,6 +87,7 @@ function Reservation() {
         <th className="cartTable_contents_rows_times">
           {timeDate(details.dueDate)}
         </th>
+        <th>{cancelButton(details.status, details.id)}</th>
       </tr>
     );
   });
@@ -71,11 +97,12 @@ function Reservation() {
       <Table className="cartTable" striped bordered hover>
         <thead className="cartTable_header">
           <tr>
-            <th>#</th>
+            <th>STT</th>
             <th>Trạng thái</th>
             <th>Sách mượn bao gồm</th>
             <th>Ngày tạo</th>
             <th>Hạn chót</th>
+            <th>Huỷ lịch</th>
           </tr>
         </thead>
         <tbody className="cartTable_contents">{showReservation}</tbody>

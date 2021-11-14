@@ -12,7 +12,8 @@ function VerifyEmail() {
   const activeEmail = async () => {
     try {
       await accountApi.verificationEmail(tokenActive);
-      console.log("đã chạy!!");
+      // console.log("đã chạy!!");
+      alert("Kích hoạt email thành công");
     } catch (error) {
       console.log("lỗi rồi", { error });
     }

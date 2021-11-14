@@ -20,7 +20,7 @@ function MyCarts() {
 
   useEffect(() => {
     getMyCarts && setCarts(getMyCarts);
-    console.log("đã nhận được thông tin cập nhật", getMyCarts);
+    // console.log("đã nhận được thông tin cập nhật", getMyCarts);
   }, [getMyCarts, getMyTotalCarts]);
 
   const [selectBooks, setSelectBooks] = useState([]);
@@ -36,9 +36,7 @@ function MyCarts() {
   const checkCarts = (details) => {
     // console.log("checkCarts", details);
     const findBookSId = selectBooks.findIndex(
-      (bookItems) =>
-        // console.log("book id", bookItems)
-        bookItems === details
+      (bookItems) => bookItems === details
     );
     // console.log("vị trí cần xoá", findBookSId);
     //Khi có vị trí => xoá

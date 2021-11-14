@@ -31,9 +31,9 @@ const userApi = {
   },
 
   //fn: xem lịch sử mượn trả sách
-  postScheduledTimes: (id) => {
-    const url = `${USER_API_ENDPOINT}/${id}/books`;
-    return axiosClient.post(url);
+  postScheduledTimes: (userId) => {
+    const url = `${USER_API_ENDPOINT}/${userId}/books`;
+    return axiosClient.get(url);
   },
   //fn: tạo lịch hẹn nhận sách mới
   postSchedule: (id, books) => {
@@ -45,6 +45,11 @@ const userApi = {
   getSchedule: (id) => {
     const url = `${USER_API_ENDPOINT}/${id}/reservations`;
     return axiosClient.get(url);
+  },
+  //Xoá 1 lịch hẹn
+  postDeleteReservation: (userId, reservedId) => {
+    const url = `${USER_API_ENDPOINT}/${userId}/reservations/${reservedId}`;
+    return axiosClient.delete(url);
   },
 
   //Phần admin, librarian quản lý

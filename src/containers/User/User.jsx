@@ -4,6 +4,7 @@ import MyCarts from "components/User/MyCarts/MyCarts";
 import Profile from "components/User/Profile/Profile";
 import Reservation from "components/User/Reservation/Reservation";
 import ResetPassword from "components/User/ResetPassword/ResetPassword";
+import ViewHistoryReserved from "components/User/ViewHistoryReserved/ViewHistoryReserved";
 import React from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { Route, Switch, useRouteMatch } from "react-router";
@@ -38,7 +39,10 @@ function User() {
             Giỏ Hàng
           </NavLink>
           <NavLink to={`${path}/reservation`} activeClassName="active">
-            Xem lịch hẹn
+            Xem Lịch Hẹn
+          </NavLink>
+          <NavLink to={`${path}/history`} activeClassName="active">
+            Lịch sử mượn trả sách
           </NavLink>
           <Logout />
         </div>
@@ -68,6 +72,7 @@ function User() {
               exact={true}
             />
 
+            {/* Dùng để verify email */}
             <Route
               path={`${path}/profile/verify`}
               component={() => <VerifyEmail />}
@@ -81,6 +86,11 @@ function User() {
             <Route
               path={`${path}/reservation`}
               component={() => <Reservation />}
+              exact={true}
+            />
+            <Route
+              path={`${path}/history`}
+              component={() => <ViewHistoryReserved />}
               exact={true}
             />
           </Switch>

@@ -12,8 +12,7 @@ function ActiveEmail() {
       await accountApi.sendVerificationEmail(url);
       alert("Đã tiến thành xác thực. Hãy kiểm tra hộp thoại email!!");
     } catch (error) {
-      console.log("sai rồi");
-      console.log({ error });
+      console.log("lỗi rồi", { error });
     }
   };
 
