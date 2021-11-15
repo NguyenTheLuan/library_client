@@ -101,10 +101,10 @@ function ViewUser() {
     return (
       <tr className="tableItems" key={index}>
         {/* <td>{index + 1} </td> */}
+        <td>{activeEmail(user.isEmailVerified, user.email)}</td>
         <td>{user.name}</td>
         <td>{user.role}</td>
         <td>{user.status}</td>
-        <td>{activeEmail(user.isEmailVerified, user.email)}</td>
 
         {/* custom td */}
         <td>
@@ -133,10 +133,10 @@ function ViewUser() {
           <thead className="tableForm_header">
             <tr className="tableItems">
               {/* <th>STT</th> */}
+              <th>Email</th>
               <th>Tên Người Dùng</th>
               <th>Chức vụ</th>
               <th>Trạng thái</th>
-              <th>Email</th>
               <th>Thay đổi thông tin</th>
               <th>Xoá người dùng</th>
               <th>Xem chi tiết</th>

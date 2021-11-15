@@ -59,6 +59,11 @@ const userApi = {
     const url = `${USER_API_ENDPOINT}/${userId}/books/copies/reservations`;
     return axiosClient.get(url);
   },
+  // Lấy danh sách tất cả lịch hẹn của người dùng
+  getUserReservation: (userInfo) => {
+    const url = `${USER_API_ENDPOINT}/reservations`;
+    return axiosClient.get(url, { params: userInfo });
+  },
 };
 
 export default userApi;

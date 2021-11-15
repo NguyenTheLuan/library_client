@@ -1,4 +1,4 @@
-import ModalViewBookDetails from "components/customComponents/Modals/ModalViewBookDetails";
+import ModalViewBookDetails from "components/customComponents/Modals/ModalForm/ModalViewBookDetails";
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 

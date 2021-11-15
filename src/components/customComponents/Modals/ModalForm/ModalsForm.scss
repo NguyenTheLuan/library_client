@@ -1,5 +1,6 @@
 .modal-content {
   width: 750px !important;
+
   .modal-header {
     display: flex;
     flex-direction: column;
@@ -12,7 +13,9 @@
       font-weight: 350;
     }
   }
+
   .modal-body {
+    //Dành cho menu form
     .formMenu {
       &_items {
         display: flex;
@@ -34,6 +37,40 @@
           padding: 0.375rem 1.25rem 0.375rem 0.75rem;
         }
       }
+    }
+
+    //Dành cho details books
+    .detailsMenu {
+      display: flex;
+      flex-direction: row;
+      &_cover {
+        flex: 2;
+
+        display: flex;
+        justify-content: center;
+
+        img {
+          width: 60%;
+          border-radius: 5px;
+          box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
+      }
+      &_contents {
+        flex: 3;
+
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+    }
+
+    //Dành cho details users
+    .detailsUsers {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      font-size: 18px;
     }
   }
   .modal-footer {

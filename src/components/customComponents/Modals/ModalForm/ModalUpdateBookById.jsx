@@ -1,7 +1,7 @@
 import productsApi from "apis/productsApi";
 import React, { useState, useEffect } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
-import "./Modals.scss";
+import "./ModalsForm.scss";
 
 function ModalUpdateBookById({ isShow, onShow, bookDetails }) {
   //Thiết lập cho cha

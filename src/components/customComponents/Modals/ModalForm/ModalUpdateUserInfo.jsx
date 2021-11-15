@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import adminApi from "apis/adminApi";
-import "./Modals.scss";
+import "./ModalsForm.scss";
 
 function ModalUpdateUserInfo({ isShow, onShow, userInfo }) {
   const [email, setEmail] = useState(userInfo.email);
   const [name, setName] = useState(userInfo.name);
   const [status, setStatus] = useState(userInfo.status);
   const [password, setPassword] = useState("");
+  const [show, setShow] = useState(false);
 
   //Thiết lập cho cha
   const handleClose = () => {
@@ -58,7 +59,7 @@ function ModalUpdateUserInfo({ isShow, onShow, userInfo }) {
               <Form.Control
                 value={email}
                 type="email"
-                placeholder="Nhập địa chỉ email"
+                // placeholder="Nhập địa chỉ email"
                 className="formMenu_items_control"
                 // onChange={(e) => setEmail(e.target.value)}
                 disabled
@@ -101,6 +102,7 @@ function ModalUpdateUserInfo({ isShow, onShow, userInfo }) {
                 placeholder="Nhập mật khẩu"
                 className="formMenu_items_control"
                 onChange={(e) => setPassword(e.target.value)}
+                disabled={show}
               />
             </Form.Group>
           </Form>

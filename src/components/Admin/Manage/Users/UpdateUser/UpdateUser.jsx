@@ -1,4 +1,4 @@
-import ModalUpdateUserInfo from "components/customComponents/Modals/ModalUpdateUserInfo";
+import ModalUpdateUserInfo from "components/customComponents/Modals/ModalForm/ModalUpdateUserInfo";
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 

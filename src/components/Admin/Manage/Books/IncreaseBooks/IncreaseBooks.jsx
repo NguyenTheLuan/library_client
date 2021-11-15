@@ -1,4 +1,4 @@
-import ModalIncreaseBooks from "components/customComponents/Modals/ModalIncreaseBooks";
+import ModalIncreaseBooks from "components/customComponents/Modals/ModalHandle/ModalIncreaseBooks";
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 

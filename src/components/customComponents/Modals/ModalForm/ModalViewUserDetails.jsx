@@ -2,7 +2,7 @@ import React from "react";
 import { Modal, Button } from "react-bootstrap";
 
 function ModalViewUserDetails({ isShow, onShow, userDetails }) {
-  console.log(userDetails);
+  // console.log(userDetails);
   const handleClose = () => {
     return onShow(false);
   };
@@ -30,32 +30,34 @@ function ModalViewUserDetails({ isShow, onShow, userDetails }) {
 
   const RenderInfo = () => {
     return (
-      <div>
+      <div className="detailsUsers">
         <div>
-          <strong>Mã ID user:</strong> {userDetails.id}
+          <strong>Mã ID người dùng: </strong>
+          {userDetails.id}
         </div>
         <div>
-          <strong>Email:</strong>
+          <strong>Địa chỉ email: </strong>
           {userDetails.email}
           {checkEmail(userDetails.isEmailVerified)}
         </div>
         <div>
-          <strong>Trạng thái:</strong> {userDetails.status}
+          <strong>Trạng thái: </strong>
+          {userDetails.status}
         </div>
         <div>
-          <strong>Chức vụ:</strong>
+          <strong>Chức vụ: </strong>
           {userDetails.role}
         </div>
         <div>
-          <strong>Tổng sách đang mượn:</strong>
+          <strong>Tổng sách đang mượn: </strong>
           {countCopies(userDetails.books)} cuốn
         </div>
         <div>
-          <strong>Số lần bỏ hẹn:</strong>
+          <strong>Số lần bỏ hẹn: </strong>
           {countExpired(userDetails.reservations)} lần
         </div>
         <div>
-          <strong>Số lần đặt hẹn thành công:</strong>
+          <strong>Số lần đặt hẹn thành công: </strong>
           {countSuccess(userDetails.reservations)} lần
         </div>
       </div>

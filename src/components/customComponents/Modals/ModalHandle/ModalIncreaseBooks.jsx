@@ -2,6 +2,8 @@ import React from "react";
 import productsApi from "apis/productsApi";
 import { Modal, Button } from "react-bootstrap";
 
+import "./ModalHandle.scss";
+
 function ModalIncreaseBooks({ isShow, onShow, bookName, bookId }) {
   const handleClose = () => {
     return onShow(false);

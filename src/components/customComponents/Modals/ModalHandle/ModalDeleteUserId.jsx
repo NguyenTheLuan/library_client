@@ -1,29 +1,31 @@
-import productsApi from "apis/productsApi";
+import adminApi from "apis/adminApi";
 import React from "react";
 import { Button, Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { deleteBookById } from "reducers/bookSlice";
-import "./Modals.scss";
-function ModalDeleteBookId({ isShow, bookId, onShow, bookName }) {
-  //Delete books by id
+import { deleteUserById } from "reducers/adminSlice";
+
+import "./ModalHandle.scss";
+
+function ModalDeleteUserId({ userId, isShow, onShow, userEmail }) {
   const dispatch = useDispatch();
-  const deleteBookId = async () => {
-    const id = bookId;
+
+  //Delete books by id
+  const deleteUserId = async () => {
+    const id = userId;
     // console.log(id);
     try {
-      await productsApi.postDeleteBookById(id);
-      alert("Xoá thành công");
-      dispatch(deleteBookById(id));
-      // console.log("Thành công");
-
+      await adminApi.deleteUser(id);
+      alert("Xoá người dùng hoàn tất");
+      //reset lại user
+      dispatch(deleteUserById());
       onShow(false);
     } catch (error) {
       console.log("có lỗi", { error });
     }
   };
   const handleClick = () => {
-    // console.log("đã lấy được Id", bookId);
-    deleteBookId();
+    // console.log("đã lấy được Id", userId);
+    deleteUserId();
   };
 
   //Thiết lập cho cha
@@ -33,15 +35,15 @@ function ModalDeleteBookId({ isShow, bookId, onShow, bookName }) {
   return (
     <Modal show={isShow} onHide={handleClose}>
       <Modal.Header>
-        <Modal.Title>Tiến hành xoá sách</Modal.Title>
+        <Modal.Title>Xoá người dùng</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        Xoá sách có tên là
-        <strong> {bookName}</strong>, bạn có chắc chắn xoá không?
+        Xoá người dùng có gmail là <strong> {userEmail}</strong>, bạn có chắc
+        chắn xoá không?
       </Modal.Body>
       <Modal.Footer>
         <Button variant="danger" onClick={handleClick}>
-          Xoá sách
+          Xoá người dùng
         </Button>
         <Button variant="secondary" onClick={handleClose}>
           Quay lại
@@ -51,4 +53,4 @@ function ModalDeleteBookId({ isShow, bookId, onShow, bookName }) {
   );
 }
 
-export default ModalDeleteBookId;
+export default ModalDeleteUserId;

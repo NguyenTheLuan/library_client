@@ -1,4 +1,4 @@
-import ModalDeleteUserId from "components/customComponents/Modals/ModalDeleteUserId";
+import ModalDeleteUserId from "components/customComponents/Modals/ModalHandle/ModalDeleteUserId";
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 function DeleteUser({ userId, userEmail }) {

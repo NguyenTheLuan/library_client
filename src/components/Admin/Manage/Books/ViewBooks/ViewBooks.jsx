@@ -52,7 +52,6 @@ function ViewBooks() {
   //Lần 1 get all products
   useEffect(() => {
     getAllProducts();
-    console.log("load lại khi update nè");
   }, [newPage, searchInfo, update]);
   //Lần 2 reset sau khi search
   useEffect(() => {
@@ -93,10 +92,10 @@ function ViewBooks() {
       <tr className="tableItems" key={index}>
         {/* <td>{bookDetails.id}</td> */}
 
-        <td>{imgShow(bookDetails.cover)}</td>
+        {/* <td>{imgShow(bookDetails.cover)}</td> */}
         <td>{bookDetails.title}</td>
-        {/* <td>{bookDetails.authors}</td> */}
-        {/* <td>{bookDetails.categories}</td> */}
+        <td>{bookDetails.authors}</td>
+        <td>{bookDetails.categories}</td>
         <td>{bookDetails.availableCopies}</td>
         {/* <td>{bookDetails.loanPeriodDays} ngày</td> */}
 
@@ -143,10 +142,10 @@ function ViewBooks() {
           <thead className="tableForm_header">
             <tr className="tableItems">
               {/* <th>ID</th> */}
-              <th>Ảnh</th>
+              {/* <th>Ảnh</th> */}
               <th>Tên sách</th>
-              {/* <th>Tác giả</th> */}
-              {/* <th>Thể loại</th> */}
+              <th>Tác giả</th>
+              <th>Thể loại</th>
               <th>Số lượng</th>
               <th>Nhập sách</th>
 

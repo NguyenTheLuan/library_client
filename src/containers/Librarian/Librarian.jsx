@@ -56,7 +56,7 @@ function Librarian() {
                 exact={true}
               />
               <Route
-                path={`${path}/books/reservation`}
+                path={`${path}/books/reservations`}
                 component={() => <ViewReservation />}
                 exact={true}
               />

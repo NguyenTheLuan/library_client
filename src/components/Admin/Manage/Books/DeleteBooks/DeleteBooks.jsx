@@ -1,4 +1,4 @@
-import ModalDeleteBookId from "components/customComponents/Modals/ModalDeleteBookId";
+import ModalDeleteBookId from "components/customComponents/Modals/ModalHandle/ModalDeleteBookId";
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 

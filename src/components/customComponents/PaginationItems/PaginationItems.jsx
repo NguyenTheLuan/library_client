@@ -3,9 +3,10 @@ import { Pagination } from "react-bootstrap";
 
 function PaginationItems({ totalRows, limit, onChangePage }) {
   const [page, setPage] = useState();
+
   //Tổng số trang
   const totalPage = Math.ceil(totalRows / limit);
-  // console.log("Tổng số trang cần có là", totalPage);
+
   const rowPage = () => {
     const res = [];
     for (var pages = 1; pages <= totalPage; pages++) {
@@ -21,9 +22,8 @@ function PaginationItems({ totalRows, limit, onChangePage }) {
       </Pagination.Item>
     );
   });
-  // console.log(showPages);
+
   const handlePageChange = (pageIndex) => {
-    // console.log("pageIndex", pageIndex);
     //Truyền cho cha
     onChangePage(pageIndex);
   };

@@ -1,46 +1,49 @@
-import React from "react";
-import { Route, Switch, useRouteMatch } from "react-router";
-import { NavLink } from "react-router-dom";
-import Checkout from "./ConfirmReservation/Checkout/Checkout";
-import ConfirmReservation from "./ConfirmReservation/ConfirmReservation";
-import ReservationSchedule from "./ViewSchedule/ViewSchedule";
-
+import React, { useEffect, useState } from "react";
+import { FloatingLabel, Form, Button } from "react-bootstrap";
 import "./CheckoutBooks.scss";
 
 function CheckoutBooks() {
-  const { path } = useRouteMatch();
-  // console.log(path);
+  const [userId, setUserId] = useState();
+
+  const [show, setShow] = useState(false);
+
+  // useEffect(() => {
+  //   console.log("Đã nhận được userId", userId);
+  // }, [userId]);
+
+  const handleUserId = () => {
+    setShow(!show);
+  };
+
+  const renderReservation = () => {
+    if (show) {
+      return (
+        <>
+          Hiển thị ra thông tin mượn sách của user có Id: {userId}
+          <Button variant="primary">Đặt thêm sách khác?</Button>
+          <Button variant="success">Tiến hành mượn sách</Button>
+        </>
+      );
+    } else {
+      return <>Không có gì để hiện</>;
+    }
+  };
+
   return (
     <div className="checkoutForm">
-      <div className="checkoutForm_links">
-        <NavLink to={`${path}`} activeClassName="active" exact={true}>
-          Xem lịch hẹn
-        </NavLink>
-        <NavLink to={`${path}/check`} activeClassName="active" exact={true}>
-          Kiểm tra thông tin sách
-        </NavLink>
-        <NavLink to={`${path}/checkout`} activeClassName="active" exact={true}>
-          Tiến thành đặt sách
-        </NavLink>
+      {/* Search thông tin user */}
+      <div className="checkoutForm_input">
+        <FloatingLabel label="Nhập id của người dùng">
+          <Form.Control
+            placeholder="abcxyz"
+            onChange={(e) => setUserId(e.target.value)}
+          />
+        </FloatingLabel>
+        <Button onClick={handleUserId}>Tìm kiếm</Button>
       </div>
-      <div className="checkoutForm_contents">
-        <Switch>
-          <Route
-            path={`${path}`}
-            component={() => <ReservationSchedule />}
-            exact={true}
-          />
-          <Route
-            path={`${path}/check`}
-            component={() => <ConfirmReservation />}
-          />
-          <Route
-            path={`${path}/checkout`}
-            component={() => <Checkout />}
-            exact={true}
-          />
-        </Switch>
-      </div>
+
+      {/* Hiện thị nội dung */}
+      <div className="checkoutForm_contents">{renderReservation()}</div>
     </div>
   );
 }

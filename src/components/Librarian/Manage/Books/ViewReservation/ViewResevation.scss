@@ -1,0 +1,68 @@
+.viewReservation {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  //form search
+  &_form {
+    padding: 50px 0;
+
+    width: 80%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    &_items {
+      display: flex;
+      flex-direction: row;
+      .label {
+        flex: 1;
+      }
+      .control {
+        flex: 3;
+        padding: 0.375rem 1.25rem 0.375rem 0.75rem !important;
+        &:focus {
+          box-shadow: none;
+        }
+      }
+    }
+    .btnSearch {
+      width: 120px;
+      margin-left: auto;
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }
+
+  //Table show
+  &_table {
+    width: 95% !important;
+
+    thead {
+      tr {
+        td {
+        }
+      }
+    }
+    tbody {
+      tr {
+        td {
+        }
+        .bookItems {
+          display: flex;
+          flex-direction: row;
+          .title {
+            font-weight: 600;
+          }
+          .value {
+            margin-left: 10px;
+          }
+        }
+      }
+    }
+  }
+}

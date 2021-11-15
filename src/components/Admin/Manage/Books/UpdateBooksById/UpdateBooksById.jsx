@@ -1,4 +1,4 @@
-import ModalUpdateBookById from "components/customComponents/Modals/ModalUpdateBookById";
+import ModalUpdateBookById from "components/customComponents/Modals/ModalForm/ModalUpdateBookById";
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 

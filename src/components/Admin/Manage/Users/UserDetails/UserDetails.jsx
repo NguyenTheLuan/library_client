@@ -1,4 +1,4 @@
-import ModalViewUserDetails from "components/customComponents/Modals/ModalViewUserDetails";
+import ModalViewUserDetails from "components/customComponents/Modals/ModalForm/ModalViewUserDetails";
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 

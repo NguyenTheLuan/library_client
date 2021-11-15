@@ -12,28 +12,31 @@ function ModalViewBookDetails({ isShow, onShow, bookDetails }) {
     return copies.length;
   };
   const renderImg = (img) => {
-    return <img src={img} style={{ width: "120px" }} alt="img" />;
+    return <img src={img} alt="img" />;
   };
 
   const RenderInfo = () => {
     return (
-      <div>
-        <div>{renderImg(bookDetails.cover)}</div>
-        <div>
-          <strong>Mã ID sách:</strong> {bookDetails.id}
-        </div>
-        <div>
-          <strong>Tác giả:</strong> {bookDetails.authors}
-        </div>
-        <div>
-          <strong>Thể loại:</strong> {bookDetails.categories}
-        </div>
-        <div>
-          <strong>Thời gian mượn:</strong> {bookDetails.loanPeriodDays} ngày
-        </div>
-        <div>
-          <strong>Số lượng còn lại</strong> {bookDetails.availableCopies}/
-          {countCopies(bookDetails.copies)}
+      <div className="detailsMenu">
+        <div className="detailsMenu_cover">{renderImg(bookDetails.cover)}</div>
+
+        <div className="detailsMenu_contents">
+          <div>
+            <strong>Mã ID sách:</strong> {bookDetails.id}
+          </div>
+          <div>
+            <strong>Tác giả:</strong> {bookDetails.authors}
+          </div>
+          <div>
+            <strong>Thể loại:</strong> {bookDetails.categories}
+          </div>
+          <div>
+            <strong>Thời gian mượn:</strong> {bookDetails.loanPeriodDays} ngày
+          </div>
+          <div>
+            <strong>Số lượng còn lại</strong> {bookDetails.availableCopies}/
+            {countCopies(bookDetails.copies)}
+          </div>
         </div>
       </div>
     );
