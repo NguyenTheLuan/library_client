@@ -1,8 +1,9 @@
 import accountApi from "apis/authApi";
 import React, { useEffect } from "react";
-import { useLocation } from "react-router";
+import { useHistory, useLocation } from "react-router";
 
 function VerifyEmail() {
+  const history = useHistory();
   const location = useLocation();
   const tokenActive = new URLSearchParams(location.search).get("token");
   useEffect(() => {
@@ -14,6 +15,7 @@ function VerifyEmail() {
       await accountApi.verificationEmail(tokenActive);
       // console.log("đã chạy!!");
       alert("Kích hoạt email thành công");
+      history.push("/user");
     } catch (error) {
       console.log("lỗi rồi", { error });
     }

@@ -1,14 +1,13 @@
 import accountApi from "apis/authApi";
 import React from "react";
 import { Button } from "react-bootstrap";
-import { useRouteMatch } from "react-router";
 import "./ActiveEmail.scss";
 
 function ActiveEmail() {
-  const { path } = useRouteMatch();
-
+  const currentURL = window.location.href;
+  // console.log(currentURL);
   const sendEmail = async () => {
-    const url = { redirectUrl: `${path}/profile/verify` };
+    const url = { redirectUrl: `${currentURL}/profile/verify` };
     try {
       await accountApi.sendVerificationEmail(url);
       alert("Đã tiến thành xác thực. Hãy kiểm tra hộp thoại email!!");

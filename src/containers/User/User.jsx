@@ -51,16 +51,6 @@ function User() {
         <div className="mainUser_contents_headers"></div>
         <div className="mainUser_contents_containers">
           <Switch>
-            {/* <Route
-              path={`${path}`}
-              component={() => <UserHome />}
-              exact={true}
-            />
-            <Route
-              path={`${path}/profile`}
-              component={() => <Profile />}
-              exact={true}
-            /> */}
             <Route
               path={`${path}`}
               component={() => <Profile />}
