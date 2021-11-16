@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { addBookById, getBooks } from "reducers/bookSlice";
-
-import "components/Admin/Manage/AddForm.scss";
 import CheckBoxAuthor from "components/customComponents/CheckBoxItems/CheckBoxAuthor";
 import CheckBoxCategory from "components/customComponents/CheckBoxItems/CheckBoxCategory";
+
+import "components/Admin/Manage/AddForm.scss";
 
 function AddBooks({ isShow, onShow }) {
   // const [bookCreate, setBookCreate] = useState({});
@@ -43,21 +43,23 @@ function AddBooks({ isShow, onShow }) {
 
     // console.log("đây là formData", formData.entries());
     try {
-      // await productsApi.postCreateBook(formData);
-      const response = await productsApi.postCreateBook(formData);
+      await productsApi.postCreateBook(formData);
+      // const response = await productsApi.postCreateBook(formData);
       // console.log("tạo sách thành công", response);
       // setError("Tạo sách thành công");
       setError("");
       alert("Tạo thành công");
       //Truyền vô redux
-      dispatch(addBookById(response));
+      // dispatch(addBookById(response));
       //reset lại
       handleReset();
       //Tắt form
       onShow(false);
     } catch (error) {
       console.log("lỗi rồi", { error });
-      setError(error.response.data.message);
+      // setError(error.response.data.message);
+      //Tắt form
+      onShow(false);
     }
   };
 
@@ -111,7 +113,7 @@ function AddBooks({ isShow, onShow }) {
         <Form className="form" onSubmit={handleSubmit}>
           {error && <h2>{error}</h2>}
           <legend className="form_name">Tạo mới một đầu sách</legend>
-          {/* <Form.Group className="mb-3 form_items"></Form.Group> */}
+          <Form.Group className="mb-3 form_items"></Form.Group>
 
           {/* Tên sách */}
           <Form.Group className="mb-3 form_items">
@@ -153,15 +155,17 @@ function AddBooks({ isShow, onShow }) {
 
           {/* new */}
           <Form.Group className="mb-3 form_items">
+            <Form.Label className="form_items_label"></Form.Label>
             <Form.Control
               type="text"
-              className="form_items_input"
+              className="form_items_newInput"
               placeholder="Nhập tên tác giả mới"
               disabled={!showAuthor}
               onChange={(e) => setAuthors(e.target.value)}
             />
             <Form.Check
-              label="Tác giả mới?"
+              className="form_items_check"
+              label="Tác giả mới"
               onClick={() => setShowAuthor(!showAuthor)}
             />
           </Form.Group>
@@ -179,15 +183,17 @@ function AddBooks({ isShow, onShow }) {
 
           {/* new */}
           <Form.Group className="mb-3 form_items">
+            <Form.Label className="form_items_label"></Form.Label>
             <Form.Control
-              className="form_items_input"
+              className="form_items_newInput"
               placeholder="Nhập tên thể loại mới"
               disabled={!showCategories}
               type="text"
               onChange={(e) => setCategories(e.target.value)}
             />
             <Form.Check
-              label="Thể loại mới?"
+              className="form_items_check"
+              label="Thể loại mới"
               onClick={() => setShowCategories(!showCategories)}
             />
           </Form.Group>

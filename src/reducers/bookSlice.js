@@ -34,15 +34,29 @@ const productSlice = createSlice({
     },
     //Add books
     addBookById(state, action) {
-      const newBookId = action.payload;
-      const newItemsFromCarts = [...state.books, newBookId];
+      var newCarts = [];
+      const checkCart = state.books.some(
+        (bookId) => bookId.id === action.payload
+      );
+      //Nếu như không tìm ra => thêm
+      // console.log(checkCart);
 
-      state.totalBooks = state.totalBooks + 1;
-      state.books = newItemsFromCarts;
-      sessionStorage.setItem("books", JSON.stringify(state.books));
+      if (!checkCart) {
+        newCarts = [...state.carts, action.payload];
+        alert("Thêm thành công");
+        state.books = newCarts;
+        sessionStorage.setItem("books", JSON.stringify(state.books));
+      } else {
+        alert("Không thêm được");
+      }
     },
-    // isUpdateCart(state) {
-    //   state.isUpdate = true;
+
+    //   const newBookId = action.payload;
+    //   const newItemsFromCarts = [...state.books, newBookId];
+
+    //   state.totalBooks = state.totalBooks + 1;
+    //   state.books = newItemsFromCarts;
+    //   sessionStorage.setItem("books", JSON.stringify(state.books));
     // },
   },
 });
@@ -57,6 +71,5 @@ export const {
 
 export const selectBooks = (state) => state.books.books;
 export const selectTotalBooks = (state) => state.books.totalBooks;
-// export const selectUpdateCarts = (state) => state.books.isUpdate;
 
 export default productSlice.reducer;

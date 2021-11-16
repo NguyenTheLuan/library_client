@@ -8,7 +8,7 @@ import { GoSearch } from "react-icons/go";
 
 import "./SearchForm.scss";
 
-function SearchBooksAdmin({ onChangeInfo }) {
+function SearchBooksAdmin({ onChangeInfo, onUpdate, update }) {
   //Search Form
   const [searchInfo, setSearchInfo] = useState({});
 
@@ -40,6 +40,7 @@ function SearchBooksAdmin({ onChangeInfo }) {
 
   const onShow = (isShow) => {
     setShow(isShow);
+    onUpdate(!update);
   };
 
   useEffect(() => {

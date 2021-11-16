@@ -134,7 +134,11 @@ function ViewBooks() {
       <div className="viewMenu_search">
         {/* Search form */}
         <div className="search">
-          <SearchFormAdmin onChangeInfo={handleInfo} />
+          <SearchFormAdmin
+            onUpdate={handleUpdate}
+            update={update}
+            onChangeInfo={handleInfo}
+          />
         </div>
       </div>
       <div className="viewMenu_table">

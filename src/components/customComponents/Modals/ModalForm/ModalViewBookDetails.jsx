@@ -22,6 +22,10 @@ function ModalViewBookDetails({ isShow, onShow, bookDetails }) {
 
         <div className="detailsMenu_contents">
           <div>
+            <strong>Tên sách: </strong>
+            {bookDetails.title}
+          </div>
+          <div>
             <strong>Mã ID sách:</strong> {bookDetails.id}
           </div>
           <div>
@@ -45,7 +49,7 @@ function ModalViewBookDetails({ isShow, onShow, bookDetails }) {
   return (
     <Modal show={isShow} onHide={handleClose}>
       <Modal.Header>
-        <Modal.Title>{bookDetails.title}</Modal.Title>
+        <Modal.Title>Thông tin chi tiết sách</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <RenderInfo />
