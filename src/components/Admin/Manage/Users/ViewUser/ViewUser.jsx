@@ -25,7 +25,7 @@ function ViewUser() {
   const dispatch = useDispatch();
 
   //Pagination
-  // const [role, setRole] = useState("user");
+  const [role, setRole] = useState("user");
   const [totalUsers, setTotalUsers] = useState();
   const [limitPage, setLimitPage] = useState(5);
   const [newPage, setNewPage] = useState(1);
@@ -47,7 +47,7 @@ function ViewUser() {
 
   const getAllUsers = async () => {
     const params = {
-      // role: role,
+      role: role,
       page: newPage,
       limit: limitPage,
       ...searchInfo,

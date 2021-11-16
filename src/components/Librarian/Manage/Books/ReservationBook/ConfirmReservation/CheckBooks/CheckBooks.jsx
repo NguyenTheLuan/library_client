@@ -4,7 +4,7 @@ import { Button, FloatingLabel, Form, Table } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { addCarts } from "reducers/librarianSlice";
 
-function CheckCopies({ userId }) {
+function CheckBooks({ userId }) {
   const [bookId, setBookId] = useState("");
   //Set thông tin copies sách
   const [copies, setCopies] = useState();
@@ -15,7 +15,7 @@ function CheckCopies({ userId }) {
 
   // useEffect(() => {
   //   // console.log("đã search được thông tin bookInfoId", bookIdInfo);
-  //   console.log("đã search được thông tin copies", copies);
+  //   console.log("đã search được thông tin copies", copies[0].title);
   // }, [bookIdInfo, copies]);
 
   //Kiếm thông tin sách
@@ -134,7 +134,7 @@ function CheckCopies({ userId }) {
     return (
       <tr key={index}>
         <td>{renderStatus(copy.status)}</td>
-        <td></td>
+        <td>{copies[0].title}</td>
         <td>{renderUser(copy.user)}</td>
         <td>{renderBtnBookId(copy.status, copy._id)}</td>
       </tr>
@@ -152,25 +152,44 @@ function CheckCopies({ userId }) {
       </FloatingLabel>
       <Button onClick={getInfoCopies}>Kiểm tra sách</Button>
       <div className="checkoutReservation_search_show">
-        <Table>
-          <thead>
-            <tr>
-              <th>Trạng thái</th>
-              <th>Tên sách</th>
+        {copies && (
+          <>
+            <legend>Kiểm tra bằng copies </legend>
 
-              <th>Người mượn</th>
-              <th>Chọn sách</th>
-            </tr>
-          </thead>
-          <tbody>
-            {renderCopies}
+            <Table striped hover>
+              <thead>
+                <tr>
+                  <th>Trạng thái</th>
+                  <th>Tên sách</th>
 
-            {renderBookIdInfo}
-          </tbody>
-        </Table>
+                  <th>Người mượn</th>
+                  <th>Chọn sách</th>
+                </tr>
+              </thead>
+              <tbody>{renderCopies}</tbody>
+            </Table>
+          </>
+        )}
+        {bookIdInfo && (
+          <>
+            <legend>Kiểm tra bằng id </legend>
+            <Table hover striped>
+              <thead>
+                <tr>
+                  <th>Trạng thái</th>
+                  <th>Tên sách</th>
+
+                  <th>Người mượn</th>
+                  <th>Chọn sách</th>
+                </tr>
+              </thead>
+              <tbody>{renderBookIdInfo}</tbody>
+            </Table>
+          </>
+        )}
       </div>
     </div>
   );
 }
 
-export default CheckCopies;
+export default CheckBooks;

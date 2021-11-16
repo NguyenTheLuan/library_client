@@ -1,6 +1,6 @@
 import React from "react";
-import { Modal, Button } from "react-bootstrap";
-import CheckCopies from "../CheckCopies/CheckCopies";
+import { Button, Modal } from "react-bootstrap";
+import CheckBooks from "../CheckBooks/CheckBooks";
 
 function ModalCheckBooks({ userId, isShow, onShow }) {
   const handleClose = () => {
@@ -12,13 +12,12 @@ function ModalCheckBooks({ userId, isShow, onShow }) {
         <Modal.Title>Kiểm tra thông tin sách</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <CheckCopies userId={userId} />
-      </Modal.Body>
-      <Modal.Footer>
+        <CheckBooks userId={userId} />
         <Button variant="secondary" onClick={handleClose}>
-          Quay lại
+          Đóng
         </Button>
-      </Modal.Footer>
+      </Modal.Body>
+      {/* <Modal.Footer></Modal.Footer> */}
     </Modal>
   );
 }
