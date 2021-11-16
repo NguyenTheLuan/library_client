@@ -6,7 +6,7 @@ import LibrarianDashBoard from "components/Librarian/LibrarianDashBoard/Libraria
 import CheckoutBooks from "components/Librarian/Manage/Books/ReservationBook/CheckoutBooks";
 import ReturnBooks from "components/Librarian/Manage/Books/ReturnBooks/ReturnBooks";
 import ViewReservation from "components/Librarian/Manage/Books/ViewReservation/ViewReservation";
-import UserDashBoard from "components/Librarian/Manage/Users/UserDashBoard/UserDashBoard";
+
 import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router";
 
@@ -71,11 +71,6 @@ function Librarian() {
                 // exact={true}
               />
             </div>
-            {/* <Route
-            path={`${path}/users/:id`}
-            component={() => <UpdateUser />}
-            exact={true}
-          /> */}
           </div>
         </div>
       </Switch>

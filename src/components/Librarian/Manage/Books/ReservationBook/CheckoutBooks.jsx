@@ -1,27 +1,100 @@
+import userApi from "apis/userApi";
 import React, { useEffect, useState } from "react";
-import { FloatingLabel, Form, Button } from "react-bootstrap";
+import { FloatingLabel, Form, Button, Table } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { addCarts } from "reducers/librarianSlice";
+import ModalCheckBooks from "./ConfirmReservation/ModalCheckBooks/ModalCheckBooks";
+
 import "./CheckoutBooks.scss";
 
 function CheckoutBooks() {
   const [userId, setUserId] = useState();
+  const [hide, setHide] = useState(false);
+  const [booksReserved, setBooksReserved] = useState();
+  const [copies, setCopies] = useState([]);
 
+  const dispatch = useDispatch();
+
+  //Modals
   const [show, setShow] = useState(false);
-
-  // useEffect(() => {
-  //   console.log("Đã nhận được userId", userId);
-  // }, [userId]);
-
-  const handleUserId = () => {
-    setShow(!show);
+  const handleShow = () => setShow(true);
+  const onShow = (isShow) => {
+    // console.log("cha nhận được từ con", isShow);
+    setShow(isShow);
   };
 
+  const getBookReservation = async () => {
+    try {
+      const response = await userApi.getBookReserved(userId);
+      // console.log("sách nhận được", response);
+      setHide(true);
+      setBooksReserved(response.results);
+    } catch (error) {
+      console.log("lỗi rồi", { error });
+    }
+  };
+
+  const handleUserId = () => {
+    dispatch(addCarts(copies));
+  };
+
+  //render component
+  const setImg = (img) => {
+    return <img style={{ width: "40px" }} src={img} alt="img" />;
+  };
+
+  const renderCarts = booksReserved?.map((books, index) => {
+    return (
+      <>
+        <tr key={index}>
+          {/* <td>{cart.id}</td> */}
+          <td>{index + 1}</td>
+          <td>{setImg(books.cover)}</td>
+          <td>{books.copy}</td>
+          <td>{books.title}</td>
+          <td>{books.categories}</td>
+          <td>{books.authors}</td>
+          <td>{books.loanPeriodDays}</td>
+
+          <td>
+            <input
+              name={index}
+              type="checkbox"
+              onClick={(e) => setCopies([...copies, books.copy])}
+            />
+          </td>
+        </tr>
+      </>
+    );
+  });
+
   const renderReservation = () => {
-    if (show) {
+    if (hide) {
       return (
         <>
-          Hiển thị ra thông tin mượn sách của user có Id: {userId}
-          <Button variant="primary">Đặt thêm sách khác?</Button>
-          <Button variant="success">Tiến hành mượn sách</Button>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                {/* <th>Id</th> */}
+                <th>STT</th>
+                <th>Ảnh bìa</th>
+                <th>Mã sách</th>
+                <th>Tên sách</th>
+                <th>Thể loại</th>
+                <th>Tên tác giả</th>
+                <th>Thời gian mượn</th>
+                <th>Chọn sách</th>
+                {/* <th>Miêu tả</th> */}
+              </tr>
+            </thead>
+            <tbody>{renderCarts}</tbody>
+          </Table>
+          <Button variant="primary" onClick={handleShow}>
+            Đặt thêm sách khác?
+          </Button>
+          <Button variant="success" onClick={handleUserId}>
+            Tiến hành mượn sách
+          </Button>
         </>
       );
     } else {
@@ -39,11 +112,13 @@ function CheckoutBooks() {
             onChange={(e) => setUserId(e.target.value)}
           />
         </FloatingLabel>
-        <Button onClick={handleUserId}>Tìm kiếm</Button>
+        <Button onClick={getBookReservation}>Tìm kiếm</Button>
       </div>
 
       {/* Hiện thị nội dung */}
       <div className="checkoutForm_contents">{renderReservation()}</div>
+
+      <ModalCheckBooks userId={userId} onShow={onShow} isShow={show} />
     </div>
   );
 }

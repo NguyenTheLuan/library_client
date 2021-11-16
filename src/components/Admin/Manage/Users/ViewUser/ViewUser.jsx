@@ -52,7 +52,7 @@ function ViewUser() {
       limit: limitPage,
       ...searchInfo,
     };
-    console.log("tiến hành search", params);
+    // console.log("tiến hành search", params);
     try {
       const response = await adminApi.getAllUser(params);
       setUserItems();

@@ -33,7 +33,7 @@ function ViewReservation() {
         return <>Đang hẹn</>;
 
       case "fulfilled":
-        return <>Đang mượn</>;
+        return <>Thành công</>;
 
       case "expired":
         return <>Hết hạn</>;
@@ -52,7 +52,7 @@ function ViewReservation() {
       return (
         <div className="bookItems">
           {/* <span className="title">Tên sách</span> */}
-          <span className="value">{book.book.title}</span>
+          <span className="value">{book.book?.title}</span>
         </div>
       );
     });
@@ -72,7 +72,6 @@ function ViewReservation() {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    // name && setName(null);
     getAllUserReservations();
   };
 
@@ -95,7 +94,7 @@ function ViewReservation() {
             onChange={(e) => setStatus(e.target.value)}
           >
             <option value="pending">Đang hẹn</option>
-            <option value="fulfilled">Đang cho mượn</option>
+            <option value="fulfilled">Thành công</option>
             <option value="expired">Đã hết hạn</option>
             <option value="canceled">Đã bị huỷ</option>
           </Form.Select>

@@ -1,104 +1,174 @@
 import productsApi from "apis/productsApi";
-import React, { useState } from "react";
-import { FloatingLabel, Form, Table } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { addCarts, selectCartUserId } from "reducers/librarianSlice";
+import React, { useEffect, useState } from "react";
+import { Button, FloatingLabel, Form, Table } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { addCarts } from "reducers/librarianSlice";
 
-function CheckCopies() {
-  const selectUserId = useSelector(selectCartUserId);
+function CheckCopies({ userId }) {
   const [bookId, setBookId] = useState("");
+  //Set thông tin copies sách
   const [copies, setCopies] = useState();
+  //Set thông tin id sách
+  const [bookIdInfo, setBookIdInfo] = useState();
 
   const dispatch = useDispatch();
 
+  // useEffect(() => {
+  //   // console.log("đã search được thông tin bookInfoId", bookIdInfo);
+  //   console.log("đã search được thông tin copies", copies);
+  // }, [bookIdInfo, copies]);
+
   //Kiếm thông tin sách
+  //Kiểm tra mã Copies
   const getInfoCopies = async () => {
     try {
       const response = await productsApi.getCheckCopies(bookId);
-      console.log("đã lấy ra thông tin sách", response);
+      // console.log("đã lấy ra thông tin sách", response);
       setCopies([response]);
+    } catch (error) {
+      console.log("lỗi rồi", { error });
+    }
+  };
+  //Kiểm tra mã Id sách
+  const getInfoId = async (bookId) => {
+    try {
+      const response = await productsApi.getBooksById(bookId);
+      // console.log("đã lấy ra thông tin sách", response);
+      setBookIdInfo(response.copies);
     } catch (error) {
       console.log("lỗi rồi", { error });
     }
   };
 
   //render components
-  const renderDate = (time) => {
-    const date = new Date(time);
-    return date.toLocaleString();
+  // const renderDate = (time) => {
+  //   const date = new Date(time);
+  //   return date.toLocaleString();
+  // };
+  const checkBookById = (bookId) => {
+    // console.log("Bắt đầu tìm book có id", bookId);
+    getInfoId(bookId);
   };
-  const renderBtn = (status, copiesId) => {
+
+  const renderBtnCopies = (status, copiesId, bookId) => {
+    console.log(copiesId);
     if (status === "borrowed" || status === "reserved") {
-      return <button disabled>Không đặt được</button>;
+      return (
+        <>
+          <Button disabled>Không đặt được</Button>
+          <Button variant="secondary" onClick={() => checkBookById(bookId)}>
+            Tìm kiếm bằng ID
+          </Button>
+        </>
+      );
     } else {
       return (
-        <button type="checkbox" onClick={() => dispatch(addCarts(copiesId))}>
+        <Button
+          variant="success"
+          type="checkbox"
+          onClick={() => dispatch(addCarts(copiesId))}
+        >
           Chọn sách
-        </button>
+        </Button>
       );
     }
   };
-  // render userName
-  const renderUser = (userId) => {
-    const userReservedId = selectUserId;
-    if (userReservedId === userId._id) {
-      return <>Bạn là người mượn</>;
+  const renderBtnBookId = (status, bookId) => {
+    // console.log("bookid là", bookId);
+    if (status === "borrowed" || status === "reserved") {
+      return (
+        <>
+          <Button disabled>Không đặt được</Button>
+        </>
+      );
     } else {
-      return <> {userId._id}</>;
+      return (
+        <Button
+          variant="success"
+          type="checkbox"
+          onClick={() => dispatch(addCarts(bookId))}
+        >
+          Chọn sách
+        </Button>
+      );
+    }
+  };
+  const renderUser = (user) => {
+    // console.log("user", user);
+    if (userId === user) {
+      return <>Bạn</>;
+    } else if (!user) {
+      return <></>;
+    } else {
+      return <> Đã có</>;
+    }
+  };
+  const renderStatus = (status) => {
+    switch (status) {
+      case "available":
+        return <>Đang trống</>;
+      case "reserved":
+        return <>Đã đặt lịch</>;
+
+      default:
+        return <>Đã huỷ </>;
     }
   };
 
-  // render
+  // render copies books
   const renderCopies = copies?.map((copy, index) => {
     return (
       <tr key={index}>
-        <td>{copy.status}</td>
+        <td>{renderStatus(copy.status)}</td>
         <td>{copy.title}</td>
-        {/* <td>{renderDate(copy.createdAt)}</td> */}
-        {/* Mã copies */}
-        <td>{copy.id}</td>
-        {/* Mã sách */}
-        <td>{copy.book}</td>
-        {/* <td>{renderDate(copy.borrowedDate)}</td> */}
+        {/* <td>{copy.id}</td> */}
+        {/* <td>{copy.book}</td> */}
+        <td>{renderUser(copy.user._id)}</td>
+        <td>{renderBtnCopies(copy.status, copy.id, copy.book)}</td>
+      </tr>
+    );
+  });
+
+  //render book by id
+  const renderBookIdInfo = bookIdInfo?.map((copy, index) => {
+    return (
+      <tr key={index}>
+        <td>{renderStatus(copy.status)}</td>
+        <td></td>
         <td>{renderUser(copy.user)}</td>
-        <td>{renderBtn(copy.status, copy.id)}</td>
+        <td>{renderBtnBookId(copy.status, copy._id)}</td>
       </tr>
     );
   });
 
   return (
-    // <div className="checkoutReservation">
     <div>
-      {/* <div className="checkoutReservation_search"> */}
-      <FloatingLabel
-        // className="checkoutReservation_search_form"
-        label="Nhập mã Copies của sách"
-      >
+      <FloatingLabel label="Nhập mã Copies của sách">
         <Form.Control
           type="text"
           placeholder="name@example.com"
           onChange={(e) => setBookId(e.target.value)}
         />
       </FloatingLabel>
-      <button onClick={getInfoCopies}>Kiểm tra sách</button>
+      <Button onClick={getInfoCopies}>Kiểm tra sách</Button>
       <div className="checkoutReservation_search_show">
         <Table>
           <thead>
             <tr>
               <th>Trạng thái</th>
               <th>Tên sách</th>
-              <th>Mã copies sách</th>
-              <th>Mã ID sách</th>
-              {/* <th>Ngày bắt đầu</th> */}
+
               <th>Người mượn</th>
               <th>Chọn sách</th>
             </tr>
           </thead>
-          <tbody>{renderCopies}</tbody>
+          <tbody>
+            {renderCopies}
+
+            {renderBookIdInfo}
+          </tbody>
         </Table>
       </div>
-      {/* </div> */}
-      {/* <div className="checkoutReservation_checkout">Đặt sách</div> */}
     </div>
   );
 }

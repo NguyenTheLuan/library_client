@@ -94,6 +94,7 @@ function ViewBooks() {
         {/* <td>{bookDetails.id}</td> */}
 
         {/* <td>{imgShow(bookDetails.cover)}</td> */}
+        <td>{index + 1 + (newPage - 1) * limitPage}</td>
         <td>{bookDetails.title}</td>
         <td>{bookDetails.authors}</td>
         <td>{bookDetails.categories}</td>
@@ -147,6 +148,7 @@ function ViewBooks() {
             <tr>
               {/* <th>ID</th> */}
               {/* <th>Ảnh</th> */}
+              <td>STT</td>
               <th>Tên sách</th>
               <th>Tác giả</th>
               <th>Thể loại</th>

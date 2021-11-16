@@ -41,13 +41,7 @@ function Checkout() {
         copies: books,
       });
       console.log("cho mượn thành công");
-      // const response = await productsApi.postCopiesCheckout({
-      //   user: userId,
-      //   copies: books,
-      // });
-      // console.log("cho mượn thành công", response);
 
-      //Reset lại cart đặt
       dispatch(createCarts([]));
     } catch (error) {
       console.log("lỗi rồi", { error });
@@ -55,12 +49,6 @@ function Checkout() {
   };
 
   const handleCheckout = () => {
-    // console.log(
-    //   "tiến hành cho mượn",
-    //   books,
-    //   "cho user có id",
-    //   path.split("/")[4]
-    // );
     checkoutBooks();
   };
 
