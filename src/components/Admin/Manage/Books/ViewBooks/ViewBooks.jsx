@@ -8,12 +8,12 @@ import { getBooks, selectBooks, selectTotalBooks } from "reducers/bookSlice";
 import DeleteBooks from "../DeleteBooks/DeleteBooks";
 import UpdateBooksById from "../UpdateBooksById/UpdateBooksById";
 
+import IncreaseBooks from "../IncreaseBooks/IncreaseBooks";
+import ViewBookDetails from "../ViewBookDetails/ViewBookDetails";
+
 import PaginationItems from "components/customComponents/PaginationItems/PaginationItems";
 
-import IncreaseBooks from "../IncreaseBooks/IncreaseBooks";
-
 import "components/Admin/Manage/ViewForm.scss";
-import ViewBookDetails from "../ViewBookDetails/ViewBookDetails";
 
 function ViewBooks() {
   const books = useSelector(selectBooks);
@@ -53,6 +53,7 @@ function ViewBooks() {
   useEffect(() => {
     getAllProducts();
   }, [newPage, searchInfo, update]);
+
   //Lần 2 reset sau khi search
   useEffect(() => {
     setProducts(books);
@@ -89,7 +90,7 @@ function ViewBooks() {
   // console.log("đây là trang admin Products", products);
   const showBody = products?.map((bookDetails, index) => {
     return (
-      <tr className="tableItems" key={index}>
+      <tr key={index}>
         {/* <td>{bookDetails.id}</td> */}
 
         {/* <td>{imgShow(bookDetails.cover)}</td> */}
@@ -129,18 +130,17 @@ function ViewBooks() {
 
   return (
     <div className="viewMenu">
+      <legend className="viewMenu_title">Quản lý thông tin sách</legend>
       <div className="viewMenu_search">
         {/* Search form */}
         <div className="search">
-          <legend>Thông tin sách</legend>
           <SearchFormAdmin onChangeInfo={handleInfo} />
         </div>
       </div>
       <div className="viewMenu_table">
-        <Table striped bordered hover className="tableForm">
-          {/* Title Name */}
+        <Table className="tableForm" striped bordered hover>
           <thead className="tableForm_header">
-            <tr className="tableItems">
+            <tr>
               {/* <th>ID</th> */}
               {/* <th>Ảnh</th> */}
               <th>Tên sách</th>
@@ -152,7 +152,7 @@ function ViewBooks() {
               {/* <th>Thời gian mượn</th> */}
               <th>Chỉnh sửa</th>
               <th>Xoá sách</th>
-              <td>Xem chi tiết</td>
+              <th>Xem chi tiết</th>
             </tr>
           </thead>
           <tbody className="tableForm_body">{showBody}</tbody>

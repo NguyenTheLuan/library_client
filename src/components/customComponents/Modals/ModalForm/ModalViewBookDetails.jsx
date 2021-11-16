@@ -9,7 +9,7 @@ function ModalViewBookDetails({ isShow, onShow, bookDetails }) {
 
   //render components
   const countCopies = (copies) => {
-    return copies.length;
+    return copies?.length;
   };
   const renderImg = (img) => {
     return <img src={img} alt="img" />;

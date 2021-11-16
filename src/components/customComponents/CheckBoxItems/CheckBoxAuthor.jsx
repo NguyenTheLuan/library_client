@@ -33,7 +33,7 @@ function CheckBoxAuthor({ onAuthorName, status }) {
       className="formSearchAdmin_search_items"
       onChange={(e) => onAuthorName({ [e.target.name]: e.target.value })}
     >
-      <option>Tên tác giả</option>
+      <option value=" ">Tên tác giả</option>
       {adminCheckBox}
     </Form.Select>
   );

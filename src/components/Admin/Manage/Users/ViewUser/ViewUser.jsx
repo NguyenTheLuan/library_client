@@ -120,8 +120,8 @@ function ViewUser() {
 
   return (
     <div className="viewMenu">
+      <legend className="viewMenu_title">Quản lý thông tin người dùng</legend>
       <div className="viewMenu_search">
-        <legend>Thông tin người dùng</legend>
         <div className="search">
           <SearchUsersAdmin onChangeInfo={handleInfo} />
         </div>

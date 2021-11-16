@@ -1,10 +1,11 @@
 import AddBooks from "components/Admin/Manage/Books/AddBooks/AddBooks";
 import CheckBoxAuthor from "components/customComponents/CheckBoxItems/CheckBoxAuthor";
 import CheckBoxCategory from "components/customComponents/CheckBoxItems/CheckBoxCategory";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { BsPlusLg } from "react-icons/bs";
 import { GoSearch } from "react-icons/go";
+
 import "./SearchForm.scss";
 
 function SearchBooksAdmin({ onChangeInfo }) {
@@ -14,6 +15,7 @@ function SearchBooksAdmin({ onChangeInfo }) {
   const handleSubmit = () => {
     onChangeInfo(searchInfo);
   };
+
   const handleForm = (e) => {
     e.preventDefault();
   };
@@ -35,77 +37,84 @@ function SearchBooksAdmin({ onChangeInfo }) {
   //Modal
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
+
   const onShow = (isShow) => {
     setShow(isShow);
   };
 
+  useEffect(() => {
+    onChangeInfo(searchInfo);
+  }, [searchInfo]);
+
   return (
     <>
-      <Form className="formSearchAdmin" onSubmit={handleForm}>
-        <div className="formSearchAdmin_order">
-          <div className="formSearchAdmin_order_items">
-            <div onClick={() => handleSubmit()}>
-              <Form.Select
-                name="sortBy"
-                className="formSearchAdmin_order_items_select"
-                onChange={(e) =>
+      <Form className="formSearch" onSubmit={handleForm}>
+        <div className="inputForm">
+          <Form.Group className="inputForm_items">
+            <Form.Label className="inputForm_items_label">Tên sách</Form.Label>
+            <Form.Control
+              name="title"
+              className="inputForm_items_control"
+              placeholder="Nhập tên sách bạn muốn tìm"
+              onChange={(e) => {
+                if (e.target.value !== "") {
                   setSearchInfo({
                     ...searchInfo,
                     [e.target.name]: e.target.value,
-                  })
+                  });
+                } else {
+                  setSearchInfo({
+                    ...searchInfo,
+                    [e.target.name]: " ",
+                  });
                 }
-              >
-                <option>Sắp xếp</option>
-                <option value="title:asc">{`A -> Z`}</option>
-                <option value="title:desc">{`Z -> A`}</option>
-              </Form.Select>
-            </div>
-
-            <Button
-              variant="primary"
-              className="formSearchAdmin_order_items_btn"
-              type="submit"
-              onClick={handleSubmit}
-            >
-              <GoSearch className="icon" />
-              <span className="title">Tìm kiếm</span>
-            </Button>
-            <Button
-              className="formSearchAdmin_order_items_btn"
-              type="submit"
-              onClick={handleShow}
-            >
-              <BsPlusLg className="icon" />
-              <span className="title">Thêm sách</span>
-            </Button>
-          </div>
+              }}
+            />
+          </Form.Group>
+          <Button
+            variant="primary"
+            className="inputForm_button"
+            type="submit"
+            onClick={handleSubmit}
+          >
+            <GoSearch className="icon" />
+            <span className="title">Tìm kiếm</span>
+          </Button>
+          <Button
+            className="inputForm_button"
+            type="submit"
+            onClick={handleShow}
+          >
+            <BsPlusLg className="icon" />
+            <span className="title">Thêm sách</span>
+          </Button>
         </div>
-        <div className="formSearchAdmin_search">
-          {/* Tên sách */}
-          <Form.Group className="formSearchAdmin_search_items">
-            <Form.Label className="formLabel"></Form.Label>
-            <Form.Control
-              name="title"
-              className="formInput"
-              placeholder="Nhập tên sách bạn muốn tìm"
+
+        <div className="checkboxForm">
+          <Form.Group className="checkboxForm_items">
+            <Form.Label className="checkboxForm_items_label">
+              Sắp xếp
+            </Form.Label>
+            <Form.Select
+              name="sortBy"
+              className="checkboxForm_items_control"
               onChange={(e) =>
                 setSearchInfo({
                   ...searchInfo,
                   [e.target.name]: e.target.value,
                 })
               }
-            ></Form.Control>
+            >
+              <option value="title:asc">Tăng dần</option>
+              <option value="title:desc">Giảm dần</option>
+            </Form.Select>
           </Form.Group>
-
-          {/* Tên tác giả */}
-          <div onClick={() => handleSubmit()}>
+          <Form.Group className="checkboxForm_items">
             <CheckBoxAuthor onAuthorName={handleAuthorsName} />
-          </div>
-
-          {/* Thể loại sách */}
-          <div onClick={() => handleSubmit()}>
+          </Form.Group>
+          <Form.Group className="checkboxForm_items">
             <CheckBoxCategory onCategoryName={handleCategoriesName} />
-          </div>
+          </Form.Group>
         </div>
       </Form>
 

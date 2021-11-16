@@ -10,6 +10,7 @@ import CheckBoxCategory from "components/customComponents/CheckBoxItems/CheckBox
 
 function AddBooks({ isShow, onShow }) {
   // const [bookCreate, setBookCreate] = useState({});
+
   const dispatch = useDispatch();
   //Tên sách
   const [title, setTitle] = useState("");
@@ -62,13 +63,8 @@ function AddBooks({ isShow, onShow }) {
 
   //Xử lí ảnh
   const handleImgPost = (e) => {
-    // setPostImage({ [e.target.name]: e.target.files[0] });
     setPostImage(e.target.files[0]);
   };
-
-  // useEffect(() => {
-  //   console.log("img đã nhận", postImage);
-  // }, [postImage]);
 
   const handleReset = () => {
     setCopies("");
@@ -82,27 +78,29 @@ function AddBooks({ isShow, onShow }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // setBookCreate({ ...bookCreate, ...img });
-    // console.log("dữ liệu đã nhập", bookCreate);
+
     createBooks();
+    // console.log("đã nhận được", authors, categories);
   };
 
   //Thiết lập cho cha
   const handleClose = () => {
-    setShowAuthor(true);
-    setShowCategories(true);
-    return onShow(false);
+    setShowAuthor(false);
+    setShowCategories(false);
+    onShow(false);
   };
   const handleAuthorsName = (authorName) => {
-    console.log("cha đã nhận được authorname", authorName);
+    // console.log("cha đã nhận được authorname", authorName);
+    setAuthors(authorName.authors);
   };
   const handleCategoriesName = (categoriesName) => {
-    console.log("cha đã nhận được authorname", categoriesName);
+    // console.log("cha đã nhận được authorname", categoriesName);
+    setCategories(categoriesName.categories);
   };
 
   //Dùng để disabled authors, actegories
-  const [showAuthor, setShowAuthor] = useState(true);
-  const [showCategories, setShowCategories] = useState(true);
+  const [showAuthor, setShowAuthor] = useState(false);
+  const [showCategories, setShowCategories] = useState(false);
 
   return (
     <Modal show={isShow} onHide={handleClose}>
@@ -113,7 +111,9 @@ function AddBooks({ isShow, onShow }) {
         <Form className="form" onSubmit={handleSubmit}>
           {error && <h2>{error}</h2>}
           <legend className="form_name">Tạo mới một đầu sách</legend>
-          <Form.Group className="mb-3 form_items"></Form.Group>
+          {/* <Form.Group className="mb-3 form_items"></Form.Group> */}
+
+          {/* Tên sách */}
           <Form.Group className="mb-3 form_items">
             <Form.Label className="form_items_label">Tên sách</Form.Label>
             <Form.Control
@@ -125,6 +125,8 @@ function AddBooks({ isShow, onShow }) {
               onChange={(e) => setTitle(e.target.value)}
             />
           </Form.Group>
+
+          {/* Ảnh bìa */}
           <Form.Group className="mb-3 form_items">
             <Form.Label className="form_items_label">
               Ảnh bìa của sách
@@ -137,62 +139,60 @@ function AddBooks({ isShow, onShow }) {
               onChange={handleImgPost}
             />
           </Form.Group>
+
           {/* Form tác giả */}
+
+          {/* Checkbox */}
           <Form.Group className="mb-3 form_items">
             <Form.Label className="form_items_label">Tác giả</Form.Label>
             <CheckBoxAuthor
               onAuthorName={handleAuthorsName}
               status={showAuthor}
             />
+          </Form.Group>
+
+          {/* new */}
+          <Form.Group className="mb-3 form_items">
             <Form.Control
+              type="text"
               className="form_items_input"
               placeholder="Nhập tên tác giả mới"
               disabled={!showAuthor}
+              onChange={(e) => setAuthors(e.target.value)}
             />
             <Form.Check
-              label="Thêm tác giả mới"
+              label="Tác giả mới?"
               onClick={() => setShowAuthor(!showAuthor)}
             />
           </Form.Group>
+
           {/* Form thể loại */}
+
+          {/* Checkbox */}
           <Form.Group className="mb-3 form_items">
             <Form.Label className="form_items_label">Thể loại</Form.Label>
             <CheckBoxCategory
               onCategoryName={handleCategoriesName}
               status={showCategories}
             />
+          </Form.Group>
+
+          {/* new */}
+          <Form.Group className="mb-3 form_items">
             <Form.Control
               className="form_items_input"
               placeholder="Nhập tên thể loại mới"
               disabled={!showCategories}
+              type="text"
+              onChange={(e) => setCategories(e.target.value)}
             />
             <Form.Check
-              label="Thêm thể loại mới"
+              label="Thể loại mới?"
               onClick={() => setShowCategories(!showCategories)}
             />
           </Form.Group>
-          {/* <Form.Group className="mb-3 form_items">
-            <Form.Label className="form_items_label">Tác giả</Form.Label>
-            <Form.Control
-              value={authors}
-              name="authors"
-              className="form_items_input"
-              type="text"
-              placeholder="Nhập tên tác giả"
-              onChange={(e) => setAuthors(e.target.value)}
-            />
-          </Form.Group> */}
-          {/* <Form.Group className="mb-3 form_items">
-            <Form.Label className="form_items_label">Thể loại</Form.Label>
-            <Form.Control
-              value={categories}
-              name="categories"
-              className="form_items_input"
-              type="text"
-              placeholder="Nhập tên thể loại"
-              onChange={(e) => setCategories(e.target.value)}
-            />
-          </Form.Group> */}
+
+          {/* Mô tả */}
           <Form.Group className="mb-3 form_items">
             <Form.Label className="form_items_label">Mô tả</Form.Label>
             <Form.Control
@@ -204,6 +204,8 @@ function AddBooks({ isShow, onShow }) {
               onChange={(e) => setDescription(e.target.value)}
             />
           </Form.Group>
+
+          {/* Số ngày mượn sách */}
           <Form.Group className="mb-3 form_items">
             <Form.Label className="form_items_label">
               Số ngày mượn sách
@@ -217,6 +219,8 @@ function AddBooks({ isShow, onShow }) {
               onChange={(e) => setLoanPeriodDays(e.target.value)}
             />
           </Form.Group>
+
+          {/* Số lượng sách */}
           <Form.Group className="mb-3 form_items">
             <Form.Label className="form_items_label">Số lượng</Form.Label>
             <Form.Control
@@ -228,6 +232,8 @@ function AddBooks({ isShow, onShow }) {
               onChange={(e) => setCopies(e.target.value)}
             />
           </Form.Group>
+
+          {/* Button handle */}
           <div className="btnSubmit">
             <Button type="submit" variant="primary">
               Thêm sách mới

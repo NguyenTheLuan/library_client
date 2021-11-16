@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { selectUser } from "reducers/authSlice";
+
+import { FcSearch } from "react-icons/fc";
+
 import "./SearchForm.scss";
 
 function SearchUsersAdmin({ onChangeInfo }) {
@@ -35,86 +38,105 @@ function SearchUsersAdmin({ onChangeInfo }) {
   };
 
   return (
-    <Form className="formSearchAdmin_search" onSubmit={handleForm}>
-      {/* <div className="formSearchAdmin_search"> */}
-      <Form.Group
-        className="formSearchAdmin_search_items"
-        onClick={() => handleChangeInfo()}
-      >
-        <Form.Control
-          name="name"
-          className="formInput"
-          placeholder="Nhập tên người dùng"
-          onChange={(e) => {
-            if (e.target.value !== "") {
+    <Form className="formSearch" onSubmit={handleForm}>
+      <div className="checkboxForm">
+        <Form.Group
+          className="checkboxForm_items"
+          onClick={() => handleChangeInfo()}
+        >
+          <Form.Label className="checkboxForm_items_label">Chức vụ</Form.Label>
+          <Form.Select
+            className="checkboxForm_items_control"
+            name="role"
+            onChange={(e) =>
               setSearchInfo({
                 ...searchInfo,
                 [e.target.name]: e.target.value,
-              });
-            } else {
+              })
+            }
+          >
+            {checkRole()}
+          </Form.Select>
+        </Form.Group>
+        <Form.Group
+          className="checkboxForm_items"
+          onClick={() => handleChangeInfo()}
+        >
+          <Form.Label className="checkboxForm_items_label">
+            Trạng thái
+          </Form.Label>
+          <Form.Select
+            className="checkboxForm_items_control"
+            name="status"
+            onChange={(e) =>
               setSearchInfo({
                 ...searchInfo,
-                [e.target.name]: " ",
-              });
+                [e.target.name]: e.target.value,
+              })
             }
-          }}
-        ></Form.Control>
-      </Form.Group>
-
-      <Form.Group
-        className="formSearchAdmin_search_items"
-        onClick={() => handleChangeInfo()}
-      >
-        <Form.Select
-          name="role"
-          onChange={(e) =>
-            setSearchInfo({
-              ...searchInfo,
-              [e.target.name]: e.target.value,
-            })
-          }
+          >
+            <option value="active">Kích hoạt</option>
+            <option value="inactive">Không kích hoạt</option>
+          </Form.Select>
+        </Form.Group>
+        <Form.Group
+          className="checkboxForm_items"
+          onClick={() => handleChangeInfo()}
         >
-          {checkRole()}
-        </Form.Select>
-      </Form.Group>
-      <Form.Group
-        className="formSearchAdmin_search_items"
-        onClick={() => handleChangeInfo()}
-      >
-        <Form.Select
-          name="status"
-          onChange={(e) =>
-            setSearchInfo({
-              ...searchInfo,
-              [e.target.name]: e.target.value,
-            })
-          }
+          <Form.Label className="checkboxForm_items_label">Sắp xếp</Form.Label>
+          <Form.Select
+            className="checkboxForm_items_control"
+            name="sortBy"
+            onChange={(e) =>
+              setSearchInfo({
+                ...searchInfo,
+                [e.target.name]: e.target.value,
+              })
+            }
+          >
+            {/* <option value="name:asc">{`A -> Z`}</option>
+            <option value="name:desc">{`Z -> A`}</option> */}
+            <option value="name:asc">Tăng dần</option>
+            <option value="name:desc">Giảm dần</option>
+          </Form.Select>
+        </Form.Group>
+      </div>
+      <div className="inputForm">
+        <Form.Group
+          className="inputForm_items"
+          onClick={() => handleChangeInfo()}
         >
-          <option value="active">Kích hoạt</option>
-          <option value="inactive">Không kích hoạt</option>
-        </Form.Select>
-      </Form.Group>
-      <Form.Group
-        className="formSearchAdmin_search_items"
-        onClick={() => handleChangeInfo()}
-      >
-        <Form.Select
-          name="sortBy"
-          onChange={(e) =>
-            setSearchInfo({
-              ...searchInfo,
-              [e.target.name]: e.target.value,
-            })
-          }
+          <Form.Label className="inputForm_items_label">
+            Tên người dùng
+          </Form.Label>
+          <Form.Control
+            name="name"
+            className="inputForm_items_control"
+            placeholder="Nhập tên người dùng"
+            onChange={(e) => {
+              if (e.target.value !== "") {
+                setSearchInfo({
+                  ...searchInfo,
+                  [e.target.name]: e.target.value,
+                });
+              } else {
+                setSearchInfo({
+                  ...searchInfo,
+                  [e.target.name]: " ",
+                });
+              }
+            }}
+          />
+        </Form.Group>
+        <Button
+          className="inputForm_button"
+          type="submit"
+          onClick={() => handleChangeInfo()}
         >
-          <option value="name:asc">{`A -> Z`}</option>
-          <option value="name:desc">{`Z -> A`}</option>
-        </Form.Select>
-      </Form.Group>
-      {/* </div> */}
-      <Button type="submit" onClick={() => handleChangeInfo()}>
-        Tìm Kiếm Người dùng
-      </Button>
+          <FcSearch style={{ fontSize: "30px" }} />
+          Tìm Kiếm
+        </Button>
+      </div>
     </Form>
   );
 }

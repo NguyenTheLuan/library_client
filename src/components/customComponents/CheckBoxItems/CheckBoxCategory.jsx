@@ -33,7 +33,7 @@ function CheckBoxCategory({ onCategoryName, status }) {
       className="formSearchAdmin_search_items"
       onChange={(e) => onCategoryName({ [e.target.name]: e.target.value })}
     >
-      <option>Thể loại</option>
+      <option value=" ">Thể loại</option>
       {adminCheckBox}
     </Form.Select>
   );
