@@ -3,21 +3,24 @@
 
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   // gap: 20px;
 
   //cho phần search
   &_search {
+    width: 90%;
     padding-bottom: 20px;
   }
 
   //cho phần table
   &_table {
-    width: 100%;
+    width: 95%;
 
     display: flex;
     justify-content: center;
     .tableForm {
-      width: 98%;
+      // width: 98%;
       text-align: center;
 
       //title form
@@ -30,7 +33,7 @@
       }
       //body form
       &_body {
-        .tableItems {
+        tr {
           td {
             line-height: 40px;
             font-size: 15px;

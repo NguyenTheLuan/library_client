@@ -1,15 +1,16 @@
-import adminApi from "apis/adminApi";
-import "components/Admin/Manage/ViewForm.scss";
-import SearchUsersAdmin from "components/customComponents/InputForms/SearchForm/SearchUsersAdmin";
-import PaginationItems from "components/customComponents/PaginationItems/PaginationItems";
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers, selectTotalUsers } from "reducers/adminSlice";
-import { createCarts } from "reducers/librarianSlice";
+import adminApi from "apis/adminApi";
+
+import SearchUsersAdmin from "components/customComponents/InputForms/SearchForm/SearchUsersAdmin";
+import PaginationItems from "components/customComponents/PaginationItems/PaginationItems";
 import DeleteUser from "../DeleteUser/DeleteUser";
 import UpdateUser from "../UpdateUser/UpdateUser";
 import UserDetails from "../UserDetails/UserDetails";
+
+import "components/Admin/Manage/ViewForm.scss";
 
 function ViewUser() {
   //Thông tin user
@@ -24,10 +25,11 @@ function ViewUser() {
   const dispatch = useDispatch();
 
   //Pagination
-  const [role, setRole] = useState("user");
+  // const [role, setRole] = useState("user");
   const [totalUsers, setTotalUsers] = useState();
   const [limitPage, setLimitPage] = useState(5);
   const [newPage, setNewPage] = useState(1);
+
   //Chuyển trang mới
   const handleChangePage = (newPage) => {
     setNewPage(newPage);
@@ -45,7 +47,7 @@ function ViewUser() {
 
   const getAllUsers = async () => {
     const params = {
-      role: role,
+      // role: role,
       page: newPage,
       limit: limitPage,
       ...searchInfo,
@@ -55,7 +57,6 @@ function ViewUser() {
       const response = await adminApi.getAllUser(params);
       setUserItems();
       // console.log(response);
-      // console.log("users:", response.results);
       setUserItems(response.results);
       //Lưu vô session storage
       sessionStorage.setItem(
@@ -75,33 +76,30 @@ function ViewUser() {
   //render component
   const activeEmail = (isActive, email) => {
     if (!isActive) {
-      return (
-        <span className="emailStatus" style={{ color: "red" }}>
-          {email}
-        </span>
-      );
+      return <span style={{ color: "red" }}>{email}</span>;
     } else {
-      return <span className="emailStatus">{email}</span>;
+      return <span>{email}</span>;
     }
   };
 
   //Nhập giá trị update sau khi thay đổi
   const handleUpdate = (status) => {
-    // console.log("lấy được trạng thái", status);
     setUpdate(status);
   };
 
   //Nhận thông tin từ user con
   const handleInfo = (infoUser) => {
-    console.log("đã nhận được thông tin", infoUser);
+    // console.log("đã nhận được thông tin", infoUser);
     setSearchInfo(infoUser);
   };
 
   const showUsers = userItems?.map((user, index) => {
     return (
-      <tr className="tableItems" key={index}>
-        {/* <td>{index + 1} </td> */}
-        <td>{activeEmail(user.isEmailVerified, user.email)}</td>
+      <tr key={index}>
+        <td>{index + 1 + (newPage - 1) * limitPage} </td>
+        <td className="emailName">
+          {activeEmail(user.isEmailVerified, user.email)}
+        </td>
         <td>{user.name}</td>
         <td>{user.role}</td>
         <td>{user.status}</td>
@@ -123,16 +121,16 @@ function ViewUser() {
   return (
     <div className="viewMenu">
       <div className="viewMenu_search">
+        <legend>Thông tin người dùng</legend>
         <div className="search">
-          <legend>Thông tin người dùng</legend>
           <SearchUsersAdmin onChangeInfo={handleInfo} />
         </div>
       </div>
       <div className="viewMenu_table">
         <Table className="tableForm" striped bordered hover>
           <thead className="tableForm_header">
-            <tr className="tableItems">
-              {/* <th>STT</th> */}
+            <tr>
+              <th>STT</th>
               <th>Email</th>
               <th>Tên Người Dùng</th>
               <th>Chức vụ</th>

@@ -2,6 +2,8 @@ import ModalViewUserDetails from "components/customComponents/Modals/ModalForm/M
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 
+import { GoInfo } from "react-icons/go";
+
 function UserDetails({ userInfo }) {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
@@ -12,8 +14,9 @@ function UserDetails({ userInfo }) {
   };
   return (
     <>
-      <Button variant="info" onClick={handleShow}>
-        Xem chi tiết
+      <Button variant="none" onClick={handleShow}>
+        {/* Xem chi tiết */}
+        <GoInfo style={{ fontSize: "30px", color: "#714FFC" }} />
       </Button>
 
       <ModalViewUserDetails

@@ -5,6 +5,7 @@ import { useHistory, useLocation } from "react-router";
 function VerifyEmail() {
   const history = useHistory();
   const location = useLocation();
+
   const tokenActive = new URLSearchParams(location.search).get("token");
   useEffect(() => {
     activeEmail();

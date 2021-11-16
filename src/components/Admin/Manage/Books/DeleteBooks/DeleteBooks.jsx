@@ -2,6 +2,8 @@ import ModalDeleteBookId from "components/customComponents/Modals/ModalHandle/Mo
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 
+import { GoTrashcan } from "react-icons/go";
+
 function DeleteBooks({ bookId, bookName }) {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
@@ -13,8 +15,8 @@ function DeleteBooks({ bookId, bookName }) {
 
   return (
     <div>
-      <Button variant="danger" onClick={handleShow}>
-        Xoá sách
+      <Button variant="none" onClick={handleShow}>
+        <GoTrashcan style={{ fontSize: "30px", color: "red" }} />
       </Button>
 
       <ModalDeleteBookId

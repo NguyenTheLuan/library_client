@@ -2,6 +2,8 @@ import ModalIncreaseBooks from "components/customComponents/Modals/ModalHandle/M
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 
+import { GoPlus } from "react-icons/go";
+
 function IncreaseBooks({ bookId, bookName, onUpdate, update }) {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
@@ -13,7 +15,9 @@ function IncreaseBooks({ bookId, bookName, onUpdate, update }) {
   };
   return (
     <div>
-      <Button onClick={handleShow}>Tăng số lượng</Button>
+      <Button variant="none" onClick={handleShow}>
+        <GoPlus style={{ fontSize: "30px", color: "#0d6efd" }} />
+      </Button>
 
       <ModalIncreaseBooks
         onShow={onShow}

@@ -82,7 +82,7 @@ function MyCarts() {
       <Table className="cartTable" striped bordered hover>
         <thead className="cartTable_header">
           <tr>
-            <th></th>
+            <th>Chọn</th>
             <th>STT</th>
             <th>Ảnh minh hoạ</th>
             <th>Tên sách</th>

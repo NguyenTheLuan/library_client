@@ -2,6 +2,8 @@ import ModalUpdateUserInfo from "components/customComponents/Modals/ModalForm/Mo
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 
+import { FaEdit } from "react-icons/fa";
+
 function UpdateUser({ userInfo, onUpdate, update }) {
   // console.log("update user nhận từ view user", userInfo);
   const [show, setShow] = useState(false);
@@ -17,8 +19,9 @@ function UpdateUser({ userInfo, onUpdate, update }) {
   };
   return (
     <>
-      <Button variant="success" onClick={handleShow}>
-        Thay đổi thông tin
+      <Button variant="none" onClick={handleShow}>
+        {/* Thay đổi thông tin */}
+        <FaEdit style={{ fontSize: "30px", color: "#045B21" }} />
       </Button>
       <ModalUpdateUserInfo onShow={onShow} isShow={show} userInfo={userInfo} />
     </>

@@ -32,6 +32,10 @@ function ModalViewUserDetails({ isShow, onShow, userDetails }) {
     return (
       <div className="detailsUsers">
         <div>
+          <strong>Tên người dùng: </strong>
+          {userDetails.name}
+        </div>
+        <div>
           <strong>Mã ID người dùng: </strong>
           {userDetails.id}
         </div>
@@ -67,7 +71,7 @@ function ModalViewUserDetails({ isShow, onShow, userDetails }) {
   return (
     <Modal show={isShow} onHide={handleClose}>
       <Modal.Header>
-        <Modal.Title>{userDetails.name}</Modal.Title>
+        <Modal.Title>Thông tin chi tiết người dùng</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <RenderInfo />
