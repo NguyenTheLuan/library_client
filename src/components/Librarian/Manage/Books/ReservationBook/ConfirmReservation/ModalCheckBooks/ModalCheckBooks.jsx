@@ -13,11 +13,12 @@ function ModalCheckBooks({ userId, isShow, onShow }) {
       </Modal.Header>
       <Modal.Body>
         <CheckBooks userId={userId} />
+      </Modal.Body>
+      <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
           Đóng
         </Button>
-      </Modal.Body>
-      {/* <Modal.Footer></Modal.Footer> */}
+      </Modal.Footer>
     </Modal>
   );
 }

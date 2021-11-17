@@ -147,6 +147,7 @@ function ViewUser() {
         <PaginationItems
           totalRows={totalUsers}
           limit={limitPage}
+          activePage={newPage}
           onChangePage={handleChangePage}
         />
       </div>

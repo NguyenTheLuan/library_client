@@ -1,4 +1,5 @@
 import userApi from "apis/userApi";
+import PaginationItems from "components/customComponents/PaginationItems/PaginationItems";
 import React, { useEffect, useState } from "react";
 import { Form, Table, Button } from "react-bootstrap";
 
@@ -8,18 +9,32 @@ function ViewReservation() {
   const [status, setStatus] = useState("pending");
   const [name, setName] = useState();
   const [reservationInfo, setReservationInfo] = useState([]);
+  //Phân trang
+  const [totalProducts, setTotalProducts] = useState();
+  const [limitPage, setLimitPage] = useState(3);
+  const [page, setPage] = useState(1);
+
+  const handleChangePage = (newPage) => {
+    setPage(newPage);
+  };
 
   useEffect(() => {
     // console.log(reservationInfo);
     getAllUserReservations();
-  }, [status]);
+  }, [status, page]);
 
   const getAllUserReservations = async () => {
     try {
       const response = await userApi.getUserReservation({
         status: status,
         name: name,
+        limit: limitPage,
+        page: page,
       });
+      console.log("lịch hẹn", response);
+      //Set pagination
+      setTotalProducts(response.totalResults);
+      //Set info
       setReservationInfo(response.results);
     } catch (error) {
       console.log("lỗi rồi", { error });
@@ -104,7 +119,7 @@ function ViewReservation() {
         </Button>
       </Form>
 
-      <Table className="viewReservation_table">
+      <Table bordered hover striped className="viewReservation_table">
         <thead>
           <tr>
             <th>Trạng thái</th>
@@ -116,6 +131,12 @@ function ViewReservation() {
         </thead>
         <tbody>{renderReservation}</tbody>
       </Table>
+      <PaginationItems
+        totalRows={totalProducts}
+        limit={limitPage}
+        onChangePage={handleChangePage}
+        activePage={page}
+      />
     </div>
   );
 }

@@ -3,7 +3,9 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
+import { getUsers } from "reducers/adminSlice";
 import { logOut } from "reducers/authSlice";
+import { createCarts } from "reducers/librarianSlice";
 // import "./Logout.scss";
 
 function Logout() {
@@ -23,6 +25,8 @@ function Logout() {
       //clear user after logout
       localStorage.clear();
       sessionStorage.clear();
+      dispatch(createCarts([]));
+      dispatch(getUsers([]));
       dispatch(logOut());
       //return to Home Page
       history.push("/");

@@ -119,6 +119,7 @@ function CheckBooks({ userId }) {
   const renderCopies = copies?.map((copy, index) => {
     return (
       <tr key={index}>
+        <td>{index + 1}</td>
         <td>{renderStatus(copy.status)}</td>
         <td>{copy.title}</td>
         {/* <td>{copy.id}</td> */}
@@ -133,6 +134,7 @@ function CheckBooks({ userId }) {
   const renderBookIdInfo = bookIdInfo?.map((copy, index) => {
     return (
       <tr key={index}>
+        <td>{index + 1}</td>
         <td>{renderStatus(copy.status)}</td>
         <td>{copies[0].title}</td>
         <td>{renderUser(copy.user)}</td>
@@ -159,6 +161,7 @@ function CheckBooks({ userId }) {
             <Table striped hover>
               <thead>
                 <tr>
+                  <th>STT</th>
                   <th>Trạng thái</th>
                   <th>Tên sách</th>
 
@@ -176,6 +179,7 @@ function CheckBooks({ userId }) {
             <Table hover striped>
               <thead>
                 <tr>
+                  <th>STT</th>
                   <th>Trạng thái</th>
                   <th>Tên sách</th>
 

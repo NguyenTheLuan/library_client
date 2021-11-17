@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Pagination } from "react-bootstrap";
 
-function PaginationItems({ totalRows, limit, onChangePage }) {
+function PaginationItems({ totalRows, limit, onChangePage, activePage }) {
   const [page, setPage] = useState();
 
   //Tổng số trang
@@ -17,7 +17,11 @@ function PaginationItems({ totalRows, limit, onChangePage }) {
 
   const showPages = rowPage()?.map((pageIndex, index) => {
     return (
-      <Pagination.Item key={index} onClick={() => handlePageChange(pageIndex)}>
+      <Pagination.Item
+        key={index}
+        active={pageIndex === activePage}
+        onClick={() => handlePageChange(pageIndex)}
+      >
         {pageIndex}
       </Pagination.Item>
     );
@@ -30,9 +34,15 @@ function PaginationItems({ totalRows, limit, onChangePage }) {
 
   return (
     <Pagination>
-      <Pagination.First onClick={() => onChangePage(1)} />
+      <Pagination.First
+        onClick={() => onChangePage(1)}
+        disabled={activePage === 1}
+      />
       {showPages}
-      <Pagination.Last onClick={() => onChangePage(totalPage)} />
+      <Pagination.Last
+        onClick={() => onChangePage(totalPage)}
+        disabled={activePage === totalPage}
+      />
     </Pagination>
   );
 }

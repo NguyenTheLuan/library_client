@@ -1,9 +1,9 @@
 import userApi from "apis/userApi";
 import React, { useEffect, useState } from "react";
 import { FloatingLabel, Form, Button, Table } from "react-bootstrap";
+import ModalCheckBooks from "./ConfirmReservation/ModalCheckBooks/ModalCheckBooks";
 import { useDispatch } from "react-redux";
 import { addCarts } from "reducers/librarianSlice";
-import ModalCheckBooks from "./ConfirmReservation/ModalCheckBooks/ModalCheckBooks";
 
 import "./CheckoutBooks.scss";
 
@@ -34,8 +34,12 @@ function CheckoutBooks() {
     }
   };
 
-  const handleUserId = () => {
-    dispatch(addCarts(copies));
+  const handleBookId = () => {
+    if (copies.length > 0) {
+      dispatch(addCarts(copies));
+    } else {
+      alert("Không có sản phẩm nào");
+    }
   };
 
   //render component
@@ -88,13 +92,12 @@ function CheckoutBooks() {
               </tr>
             </thead>
             <tbody>{renderCarts}</tbody>
+            <Button onClick={handleBookId}>Chọn sách</Button>
           </Table>
           <Button variant="primary" onClick={handleShow}>
             Đặt thêm sách khác?
           </Button>
-          <Button variant="success" onClick={handleUserId}>
-            Tiến hành mượn sách
-          </Button>
+          <Button variant="success">Tiến hành mượn sách</Button>
         </>
       );
     } else {

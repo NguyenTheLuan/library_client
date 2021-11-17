@@ -168,6 +168,7 @@ function ViewBooks() {
         <PaginationItems
           totalRows={totalBooks}
           limit={limitPage}
+          activePage={newPage}
           onChangePage={handleChangePage}
         />
       </div>
