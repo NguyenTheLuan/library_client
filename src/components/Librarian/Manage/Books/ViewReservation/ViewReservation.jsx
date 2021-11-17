@@ -11,7 +11,7 @@ function ViewReservation() {
   const [reservationInfo, setReservationInfo] = useState([]);
   //Phân trang
   const [totalProducts, setTotalProducts] = useState();
-  const [limitPage, setLimitPage] = useState(3);
+  const [limitPage, setLimitPage] = useState(5);
   const [page, setPage] = useState(1);
 
   const handleChangePage = (newPage) => {
@@ -73,9 +73,10 @@ function ViewReservation() {
     });
   };
 
-  const renderReservation = reservationInfo?.map((info) => {
+  const renderReservation = reservationInfo?.map((info, index) => {
     return (
-      <tr>
+      <tr key={index}>
+        <td>{index + 1 + (page - 1) * limitPage}</td>
         <td>{renderStatus(info.status)}</td>
         <td>{info.user.name}</td>
         <td>{renderBooks(info.books)}</td>
@@ -122,6 +123,7 @@ function ViewReservation() {
       <Table bordered hover striped className="viewReservation_table">
         <thead>
           <tr>
+            <th>STT</th>
             <th>Trạng thái</th>
             <th>Người mượn</th>
             <th>Thông tin sách mượn</th>

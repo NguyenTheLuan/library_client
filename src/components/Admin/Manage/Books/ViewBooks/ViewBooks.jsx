@@ -35,14 +35,11 @@ function ViewBooks() {
   const handleChangePage = (newPage) => {
     setNewPage(newPage);
   };
-  //Set row
-  const handleTotalRows = (newRows) => {
-    // console.log("cha đã nhận được số sản phẩm mới", newRows);
-    setTotalBooks(newRows);
-  };
+
   //Search Info
   const handleInfo = (info) => {
     // console.log("search info này", info);
+    setNewPage(1);
     setSearchInfo(info);
   };
 

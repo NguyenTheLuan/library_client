@@ -79,7 +79,7 @@ function DashBoard({ url }) {
               Nhập sách
             </NavLink>
           </Accordion.Body> */}
-          <Accordion.Body>
+          {/* <Accordion.Body>
             <NavLink to={`${url}/authors`} activeClassName="active">
               Xem Tác Giả
             </NavLink>
@@ -88,7 +88,7 @@ function DashBoard({ url }) {
             <NavLink to={`${url}/categories`} activeClassName="active">
               Xem Danh Mục
             </NavLink>
-          </Accordion.Body>
+          </Accordion.Body> */}
         </Accordion.Item>
         {/* Quản Lý Báo Cáo */}
         <Accordion.Item eventKey="2">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { selectUser } from "reducers/authSlice";
@@ -8,7 +8,12 @@ import { FcSearch } from "react-icons/fc";
 import "./SearchForm.scss";
 
 function SearchUsersAdmin({ onChangeInfo }) {
-  const [searchInfo, setSearchInfo] = useState();
+  //Search Form
+  const [searchInfo, setSearchInfo] = useState({});
+
+  useEffect(() => {
+    onChangeInfo(searchInfo);
+  }, [searchInfo]);
 
   const isRole = useSelector(selectUser);
 
@@ -33,17 +38,13 @@ function SearchUsersAdmin({ onChangeInfo }) {
   };
 
   const handleChangeInfo = () => {
-    // console.log("Truyền cho view user", searchInfo);
     onChangeInfo(searchInfo);
   };
 
   return (
     <Form className="formSearch" onSubmit={handleForm}>
       <div className="checkboxForm">
-        <Form.Group
-          className="checkboxForm_items"
-          onClick={() => handleChangeInfo()}
-        >
+        <Form.Group className="checkboxForm_items">
           <Form.Label className="checkboxForm_items_label">Chức vụ</Form.Label>
           <Form.Select
             className="checkboxForm_items_control"
@@ -58,10 +59,7 @@ function SearchUsersAdmin({ onChangeInfo }) {
             {checkRole()}
           </Form.Select>
         </Form.Group>
-        <Form.Group
-          className="checkboxForm_items"
-          onClick={() => handleChangeInfo()}
-        >
+        <Form.Group className="checkboxForm_items">
           <Form.Label className="checkboxForm_items_label">
             Trạng thái
           </Form.Label>
@@ -79,10 +77,7 @@ function SearchUsersAdmin({ onChangeInfo }) {
             <option value="inactive">Không kích hoạt</option>
           </Form.Select>
         </Form.Group>
-        <Form.Group
-          className="checkboxForm_items"
-          onClick={() => handleChangeInfo()}
-        >
+        <Form.Group className="checkboxForm_items">
           <Form.Label className="checkboxForm_items_label">Sắp xếp</Form.Label>
           <Form.Select
             className="checkboxForm_items_control"
@@ -94,18 +89,13 @@ function SearchUsersAdmin({ onChangeInfo }) {
               })
             }
           >
-            {/* <option value="name:asc">{`A -> Z`}</option>
-            <option value="name:desc">{`Z -> A`}</option> */}
             <option value="name:asc">Tăng dần</option>
             <option value="name:desc">Giảm dần</option>
           </Form.Select>
         </Form.Group>
       </div>
       <div className="inputForm">
-        <Form.Group
-          className="inputForm_items"
-          onClick={() => handleChangeInfo()}
-        >
+        <Form.Group className="inputForm_items">
           <Form.Label className="inputForm_items_label">
             Tên người dùng
           </Form.Label>

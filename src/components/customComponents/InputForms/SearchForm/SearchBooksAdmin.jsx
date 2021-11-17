@@ -12,24 +12,13 @@ function SearchBooksAdmin({ onChangeInfo, onUpdate, update }) {
   //Search Form
   const [searchInfo, setSearchInfo] = useState({});
 
-  const handleSubmit = () => {
-    onChangeInfo(searchInfo);
-  };
-
-  const handleForm = (e) => {
-    e.preventDefault();
-  };
-
   //Xử lý tên tác giả
   const handleAuthorsName = (authorName) => {
-    //Nhận tên tác giả
     const { authors } = authorName;
-    // console.log("cha đã nhận đƯợc tên tác giả là", authorName);
     setSearchInfo({ ...searchInfo, authors });
   };
   //Xử lý tên danh mục
   const handleCategoriesName = (categoryName) => {
-    //Nhận tên danh mục
     const { categories } = categoryName;
     setSearchInfo({ ...searchInfo, categories });
   };
@@ -40,6 +29,8 @@ function SearchBooksAdmin({ onChangeInfo, onUpdate, update }) {
 
   const onShow = (isShow) => {
     setShow(isShow);
+
+    // Để reset lúc thêm sách
     onUpdate(!update);
   };
 
@@ -47,10 +38,19 @@ function SearchBooksAdmin({ onChangeInfo, onUpdate, update }) {
     onChangeInfo(searchInfo);
   }, [searchInfo]);
 
+  const handleSubmit = () => {
+    onChangeInfo(searchInfo);
+  };
+
+  const handleForm = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <>
       <Form className="formSearch" onSubmit={handleForm}>
         <div className="inputForm">
+          {/* Tìm kiếm bằng tên sách */}
           <Form.Group className="inputForm_items">
             <Form.Label className="inputForm_items_label">Tên sách</Form.Label>
             <Form.Control
@@ -72,15 +72,18 @@ function SearchBooksAdmin({ onChangeInfo, onUpdate, update }) {
               }}
             />
           </Form.Group>
+          {/* Nút tìm kiếm */}
           <Button
             variant="primary"
             className="inputForm_button"
             type="submit"
-            onClick={handleSubmit}
+            onClick={() => handleSubmit()}
           >
             <GoSearch className="icon" />
             <span className="title">Tìm kiếm</span>
           </Button>
+
+          {/* Nút thêm sách */}
           <Button
             className="inputForm_button"
             type="submit"
@@ -91,6 +94,7 @@ function SearchBooksAdmin({ onChangeInfo, onUpdate, update }) {
           </Button>
         </div>
 
+        {/* Tìm kiếm bằng sortBy */}
         <div className="checkboxForm">
           <Form.Group className="checkboxForm_items">
             <Form.Label className="checkboxForm_items_label">
@@ -110,9 +114,11 @@ function SearchBooksAdmin({ onChangeInfo, onUpdate, update }) {
               <option value="title:desc">Giảm dần</option>
             </Form.Select>
           </Form.Group>
+          {/* Tìm kiếm bằng tên tác giả */}
           <Form.Group className="checkboxForm_items">
             <CheckBoxAuthor onAuthorName={handleAuthorsName} />
           </Form.Group>
+          {/* Tìm kiếm bằng danh mục */}
           <Form.Group className="checkboxForm_items">
             <CheckBoxCategory onCategoryName={handleCategoriesName} />
           </Form.Group>

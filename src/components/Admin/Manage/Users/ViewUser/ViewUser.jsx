@@ -34,11 +34,6 @@ function ViewUser() {
   const handleChangePage = (newPage) => {
     setNewPage(newPage);
   };
-  //Set row
-  const handleTotalRows = (newRows) => {
-    // console.log("cha đã nhận được số sản phẩm mới", newRows);
-    setTotalUsers(newRows);
-  };
 
   //Lần 1 render all
   useEffect(() => {
@@ -90,6 +85,7 @@ function ViewUser() {
   //Nhận thông tin từ user con
   const handleInfo = (infoUser) => {
     // console.log("đã nhận được thông tin", infoUser);
+    setNewPage(1);
     setSearchInfo(infoUser);
   };
 
