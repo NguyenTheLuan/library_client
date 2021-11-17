@@ -1,0 +1,12 @@
+.paginationForm {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  .formSelect {
+    .select {
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }
+}

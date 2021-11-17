@@ -27,18 +27,22 @@ function ViewUser() {
   //Pagination
   const [role, setRole] = useState("user");
   const [totalUsers, setTotalUsers] = useState();
-  const [limitPage, setLimitPage] = useState(5);
+  const [limitPage, setLimitPage] = useState(3);
   const [newPage, setNewPage] = useState(1);
 
   //Chuyển trang mới
   const handleChangePage = (newPage) => {
     setNewPage(newPage);
   };
+  const handleLimitChange = (newLimit) => {
+    setNewPage(1);
+    setLimitPage(newLimit);
+  };
 
   //Lần 1 render all
   useEffect(() => {
     getAllUsers();
-  }, [newPage, searchInfo, users, update]);
+  }, [newPage, limitPage, searchInfo, users, update]);
 
   const getAllUsers = async () => {
     const params = {
@@ -145,6 +149,7 @@ function ViewUser() {
           limit={limitPage}
           activePage={newPage}
           onChangePage={handleChangePage}
+          onChangeLimit={handleLimitChange}
         />
       </div>
     </div>

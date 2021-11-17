@@ -106,7 +106,7 @@ function LibrarianDashBoard({ url }) {
             </NavLink>
           </Accordion.Body>
           <Accordion.Body>
-            <NavLink to="/admin/report/export" activeClassName="active">
+            <NavLink to={`${url}/report/activities`} activeClassName="active">
               Xuất Báo Cáo
             </NavLink>
           </Accordion.Body>

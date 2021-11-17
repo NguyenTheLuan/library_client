@@ -11,17 +11,26 @@ function ViewReservation() {
   const [reservationInfo, setReservationInfo] = useState([]);
   //Phân trang
   const [totalProducts, setTotalProducts] = useState();
-  const [limitPage, setLimitPage] = useState(5);
+  const [limitPage, setLimitPage] = useState(3);
   const [page, setPage] = useState(1);
 
   const handleChangePage = (newPage) => {
     setPage(newPage);
   };
+  const handleChangeLimit = (newLimit) => {
+    setPage(1);
+    setLimitPage(newLimit);
+  };
 
+  //Khi thay đổi trang
   useEffect(() => {
-    // console.log(reservationInfo);
     getAllUserReservations();
-  }, [status, page]);
+  }, [page, limitPage]);
+  //Khi thay đổi trạng thái
+  useEffect(() => {
+    setPage(1);
+    getAllUserReservations();
+  }, [status]);
 
   const getAllUserReservations = async () => {
     try {
@@ -31,7 +40,7 @@ function ViewReservation() {
         limit: limitPage,
         page: page,
       });
-      console.log("lịch hẹn", response);
+      // console.log("lịch hẹn", response);
       //Set pagination
       setTotalProducts(response.totalResults);
       //Set info
@@ -136,6 +145,7 @@ function ViewReservation() {
       <PaginationItems
         totalRows={totalProducts}
         limit={limitPage}
+        onChangeLimit={handleChangeLimit}
         onChangePage={handleChangePage}
         activePage={page}
       />

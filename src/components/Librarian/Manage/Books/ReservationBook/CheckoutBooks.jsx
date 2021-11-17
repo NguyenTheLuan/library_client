@@ -1,11 +1,12 @@
 import userApi from "apis/userApi";
 import React, { useEffect, useState } from "react";
-import { FloatingLabel, Form, Button, Table } from "react-bootstrap";
+import { FloatingLabel, Form, Button, Table, FormCheck } from "react-bootstrap";
 import ModalCheckBooks from "./ConfirmReservation/ModalCheckBooks/ModalCheckBooks";
 import { useDispatch } from "react-redux";
-import { addCarts } from "reducers/librarianSlice";
+import { addCarts, createCarts } from "reducers/librarianSlice";
 
 import "./CheckoutBooks.scss";
+import ModalCheckout from "./ConfirmReservation/ModalCheckout/ModalCheckout";
 
 function CheckoutBooks() {
   const [userId, setUserId] = useState();
@@ -15,12 +16,24 @@ function CheckoutBooks() {
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    console.log("mã copies là", copies);
+  }, [copies]);
+
   //Modals
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
+
+  //Cho phần đặt sách
   const onShow = (isShow) => {
-    // console.log("cha nhận được từ con", isShow);
     setShow(isShow);
+  };
+  //Cho phần checkout
+  const [checkout, setCheckout] = useState(false);
+  const handleCheckout = () => setCheckout(true);
+
+  const onCheckout = (isCheckout) => {
+    setCheckout(isCheckout);
   };
 
   const getBookReservation = async () => {
@@ -30,15 +43,41 @@ function CheckoutBooks() {
       setHide(true);
       setBooksReserved(response.results);
     } catch (error) {
+      alert("Hãy nhập đúng ID người dùng");
       console.log("lỗi rồi", { error });
     }
   };
 
   const handleBookId = () => {
     if (copies.length > 0) {
-      dispatch(addCarts(copies));
+      dispatch(createCarts(copies));
+      alert("Thêm thành công");
     } else {
       alert("Không có sản phẩm nào");
+    }
+  };
+
+  const handleClick = (details) => {
+    if (copies.length === 0) {
+      setCopies([details]);
+    } else {
+      checkCarts(details);
+    }
+  };
+
+  const checkCarts = (details) => {
+    const findBookSId = copies.findIndex((bookItems) => bookItems === details);
+    //Khi có vị trí => xoá
+    if (findBookSId > -1) {
+      const newCarts = [...copies];
+      // Tiến hành xoá
+      newCarts.splice(findBookSId, 1);
+      //Set lại state
+      setCopies(newCarts);
+    }
+    //Khi có không vị trí => add
+    else if (findBookSId === -1) {
+      setCopies([...copies, details]);
     }
   };
 
@@ -64,7 +103,8 @@ function CheckoutBooks() {
             <input
               name={index}
               type="checkbox"
-              onClick={(e) => setCopies([...copies, books.copy])}
+              onChange={() => handleClick(books.copy)}
+              // onClick={(e) => setCopies([...copies, books.copy])}
             />
           </td>
         </tr>
@@ -76,7 +116,7 @@ function CheckoutBooks() {
     if (hide) {
       return (
         <>
-          <Table striped bordered hover>
+          <Table className="tableForm" striped bordered hover>
             <thead>
               <tr>
                 {/* <th>Id</th> */}
@@ -92,16 +132,20 @@ function CheckoutBooks() {
               </tr>
             </thead>
             <tbody>{renderCarts}</tbody>
-            <Button onClick={handleBookId}>Chọn sách</Button>
+            <tfoot>
+              <Button onClick={handleBookId}>Chọn sách</Button>
+            </tfoot>
           </Table>
           <Button variant="primary" onClick={handleShow}>
             Đặt thêm sách khác?
           </Button>
-          <Button variant="success">Tiến hành mượn sách</Button>
+          <Button variant="success" onClick={handleCheckout}>
+            Tiến hành mượn sách
+          </Button>
         </>
       );
     } else {
-      return <>Không có gì để hiện</>;
+      return <h3>Không có gì để hiện, hãy nhập ID người dùng</h3>;
     }
   };
 
@@ -109,7 +153,7 @@ function CheckoutBooks() {
     <div className="checkoutForm">
       {/* Search thông tin user */}
       <div className="checkoutForm_input">
-        <FloatingLabel label="Nhập id của người dùng">
+        <FloatingLabel label="Nhập ID của người dùng">
           <Form.Control
             placeholder="abcxyz"
             onChange={(e) => setUserId(e.target.value)}
@@ -119,9 +163,10 @@ function CheckoutBooks() {
       </div>
 
       {/* Hiện thị nội dung */}
-      <div className="checkoutForm_contents">{renderReservation()}</div>
+      {renderReservation()}
 
       <ModalCheckBooks userId={userId} onShow={onShow} isShow={show} />
+      <ModalCheckout userId={userId} onShow={onCheckout} isShow={checkout} />
     </div>
   );
 }

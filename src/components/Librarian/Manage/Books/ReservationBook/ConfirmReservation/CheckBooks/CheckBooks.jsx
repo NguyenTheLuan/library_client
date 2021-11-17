@@ -27,6 +27,7 @@ function CheckBooks({ userId }) {
       setCopies([response]);
     } catch (error) {
       console.log("lỗi rồi", { error });
+      alert("Hãy nhập đúng mã sách");
     }
   };
   //Kiểm tra mã Id sách
@@ -175,7 +176,7 @@ function CheckBooks({ userId }) {
         )}
         {bookIdInfo && (
           <>
-            <legend>Kiểm tra bằng id </legend>
+            <legend>Kiểm tra bằng ID </legend>
             <Table hover striped>
               <thead>
                 <tr>

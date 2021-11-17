@@ -1,9 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { Pagination } from "react-bootstrap";
+import React from "react";
+import { Form, Pagination } from "react-bootstrap";
 
-function PaginationItems({ totalRows, limit, onChangePage, activePage }) {
-  const [page, setPage] = useState();
+import "./PaginationItems.scss";
 
+function PaginationItems({
+  totalRows,
+  limit,
+  onChangePage,
+  activePage,
+  onChangeLimit,
+}) {
   //Tổng số trang
   const totalPage = Math.ceil(totalRows / limit);
 
@@ -33,17 +39,29 @@ function PaginationItems({ totalRows, limit, onChangePage, activePage }) {
   };
 
   return (
-    <Pagination>
-      <Pagination.First
-        onClick={() => onChangePage(1)}
-        disabled={activePage === 1}
-      />
-      {showPages}
-      <Pagination.Last
-        onClick={() => onChangePage(totalPage)}
-        disabled={activePage === totalPage}
-      />
-    </Pagination>
+    <div className="paginationForm">
+      <Form className="formSelect">
+        <Form.Select
+          className="select"
+          onChange={(e) => onChangeLimit(e.target.value)}
+        >
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </Form.Select>
+      </Form>
+      <Pagination>
+        <Pagination.First
+          onClick={() => onChangePage(1)}
+          disabled={activePage === 1}
+        />
+        {showPages}
+        <Pagination.Last
+          onClick={() => onChangePage(totalPage)}
+          disabled={activePage === totalPage}
+        />
+      </Pagination>
+    </div>
   );
 }
 

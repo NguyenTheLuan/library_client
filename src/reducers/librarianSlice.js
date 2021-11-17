@@ -26,8 +26,6 @@ const librarianSlice = createSlice({
     addCarts(state, action) {
       var newCarts = [];
       const checkCart = state.carts.some((bookId) => bookId === action.payload);
-      //Nếu như không tìm ra => thêm
-      // console.log(checkCart);
 
       if (!checkCart) {
         newCarts = [...state.carts, action.payload];
@@ -40,12 +38,15 @@ const librarianSlice = createSlice({
     },
     //xoá đi nếu user không muốn nữa
     deleteCarts(state, action) {
+      // console.log(action.payload);
+      // console.log("còn đây là carts", state.carts);
       const newItemsFromCarts = state.carts.filter(
         (book) => book !== action.payload
       );
 
       state.carts = newItemsFromCarts;
       localStorage.setItem("cartsCheckout", JSON.stringify(state.carts));
+      alert("xoá thành công");
     },
   },
 });

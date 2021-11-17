@@ -28,12 +28,16 @@ function ViewBooks() {
 
   //Pagination
   const [totalBooks, setTotalBooks] = useState();
-  const [limitPage, setLimitPage] = useState(5);
+  const [limitPage, setLimitPage] = useState(3);
   const [newPage, setNewPage] = useState(1);
 
   //Chuyển trang mới
   const handleChangePage = (newPage) => {
     setNewPage(newPage);
+  };
+  const handleLimitChange = (newLimit) => {
+    setNewPage(1);
+    setLimitPage(newLimit);
   };
 
   //Search Info
@@ -49,7 +53,7 @@ function ViewBooks() {
   //Lần 1 get all products
   useEffect(() => {
     getAllProducts();
-  }, [newPage, searchInfo, update]);
+  }, [newPage, limitPage, searchInfo, update]);
 
   //Lần 2 reset sau khi search
   useEffect(() => {
@@ -167,6 +171,7 @@ function ViewBooks() {
           limit={limitPage}
           activePage={newPage}
           onChangePage={handleChangePage}
+          onChangeLimit={handleLimitChange}
         />
       </div>
     </div>

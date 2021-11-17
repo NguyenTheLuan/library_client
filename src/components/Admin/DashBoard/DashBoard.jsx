@@ -103,31 +103,11 @@ function DashBoard({ url }) {
             </NavLink>
           </Accordion.Body>
           <Accordion.Body>
-            <NavLink to="/admin/report/export" activeClassName="active">
+            <NavLink to="/admin/report/activities" activeClassName="active">
               Xuất Báo Cáo
             </NavLink>
           </Accordion.Body>
         </Accordion.Item>
-
-        {/* Quản Lý Danh Mục */}
-        {/* <Accordion.Item eventKey="3">
-          <Accordion.Header>Quản Danh Mục</Accordion.Header>
-          <Accordion.Body>
-            <NavLink to="/admin/user" activeClassName="active">
-              Tìm kiếm danh mục
-            </NavLink>
-          </Accordion.Body>
-          <Accordion.Body>
-            <NavLink to="/admin/user" activeClassName="active">
-              Cập nhật danh mục
-            </NavLink>
-          </Accordion.Body>
-          <Accordion.Body>
-            <NavLink to="/admin/user" activeClassName="active">
-              Xoá danh mục
-            </NavLink>
-          </Accordion.Body>
-        </Accordion.Item> */}
       </Accordion>
     </div>
   );

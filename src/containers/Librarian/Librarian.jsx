@@ -70,6 +70,20 @@ function Librarian() {
                 component={() => <ReturnBooks />}
                 // exact={true}
               />
+
+              {/* Quản lý báo cáo */}
+              <Route
+                path={`${path}/report`}
+                component={() => "đây là trang xuất báo cáo"}
+                exact={true}
+              />
+              <Route
+                path={`${path}/report/activities`}
+                component={() =>
+                  "đây là trang xuất danh sách hoạt động các thủ thư"
+                }
+                exact={true}
+              />
             </div>
           </div>
         </div>

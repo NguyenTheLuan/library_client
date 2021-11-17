@@ -1,10 +1,8 @@
 import AdminPage from "components/Admin/AdminPage/AdminPage";
 import DashBoard from "components/Admin/DashBoard/DashBoard";
-import AddBooks from "components/Admin/Manage/Books/AddBooks/AddBooks";
 import GetBooks from "components/Admin/Manage/Books/ViewBooks/ViewBooks";
 import CreateUser from "components/Admin/Manage/Users/CreateUser/CreateUser";
 import ViewUser from "components/Admin/Manage/Users/ViewUser/ViewUser";
-
 import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import "./Admin.scss";
@@ -51,17 +49,26 @@ function Admin() {
                 component={() => <GetBooks />}
                 exact={true}
               />
-              <Route
+              {/* <Route
                 path={`${path}/books/create`}
                 component={() => <AddBooks />}
                 exact={true}
+              /> */}
+
+              {/* Xuất báo cáo */}
+              <Route
+                path={`${path}/report`}
+                component={() => "đây là trang xuất báo cáo"}
+                exact={true}
+              />
+              <Route
+                path={`${path}/report/activities`}
+                component={() =>
+                  "đây là trang xuất danh sách hoạt động các thủ thư"
+                }
+                exact={true}
               />
             </div>
-            {/* <Route
-              path={`${path}/users/:id`}
-              component={() => <UpdateUser />}
-              exact={true}
-            /> */}
           </div>
         </div>
       </Switch>
