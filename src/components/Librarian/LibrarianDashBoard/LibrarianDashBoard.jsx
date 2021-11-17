@@ -98,16 +98,16 @@ function LibrarianDashBoard({ url }) {
         <Accordion.Item eventKey="2">
           <Accordion.Header>
             <AiFillFileExcel className="iconItem" />
-            Quản Báo Cáo
+            Quản Lý Báo Cáo
           </Accordion.Header>
           <Accordion.Body>
             <NavLink to={`${url}/report`} activeClassName="active" exact={true}>
-              Thống kê
+              Xuất Báo Cáo
             </NavLink>
           </Accordion.Body>
           <Accordion.Body>
             <NavLink to={`${url}/report/activities`} activeClassName="active">
-              Xuất Báo Cáo
+              Hoạt động thủ thư
             </NavLink>
           </Accordion.Body>
         </Accordion.Item>

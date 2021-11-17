@@ -16,9 +16,9 @@ function CheckoutBooks() {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log("mã copies là", copies);
-  }, [copies]);
+  // useEffect(() => {
+  //   console.log("mã copies là", copies);
+  // }, [copies]);
 
   //Modals
   const [show, setShow] = useState(false);
@@ -131,11 +131,18 @@ function CheckoutBooks() {
                 {/* <th>Miêu tả</th> */}
               </tr>
             </thead>
-            <tbody>{renderCarts}</tbody>
-            <tfoot>
-              <Button onClick={handleBookId}>Chọn sách</Button>
-            </tfoot>
+            <tbody>
+              {renderCarts}
+
+              <tr>
+                <td colSpan="7" style={{ visibility: "hidden" }}></td>
+                <th>
+                  <Button onClick={handleBookId}>Chọn sách</Button>
+                </th>
+              </tr>
+            </tbody>
           </Table>
+
           <Button variant="primary" onClick={handleShow}>
             Đặt thêm sách khác?
           </Button>

@@ -40,5 +40,13 @@
   //Form contents
   .tableForm {
     width: 95%;
+    text-align: center;
+  }
+
+  //Button
+  button {
+    &:focus {
+      box-shadow: none;
+    }
   }
 }
