@@ -27,7 +27,7 @@ function ViewUser() {
   //Pagination
   const [role, setRole] = useState("user");
   const [totalUsers, setTotalUsers] = useState();
-  const [limitPage, setLimitPage] = useState(3);
+  const [limitPage, setLimitPage] = useState(5);
   const [newPage, setNewPage] = useState(1);
 
   //Chuyển trang mới

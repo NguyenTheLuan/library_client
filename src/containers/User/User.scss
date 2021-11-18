@@ -50,12 +50,15 @@ $backgroundMenu: #3f51b5;
       }
     }
   }
+
   &_contents {
     flex: 6;
     height: 100%;
 
     display: flex;
     flex-direction: column;
+
+    overflow-y: scroll;
     // justify-content: center;
     // align-items: center;
     &_headers {

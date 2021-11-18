@@ -1,6 +1,8 @@
 import AdminPage from "components/Admin/AdminPage/AdminPage";
 import DashBoard from "components/Admin/DashBoard/DashBoard";
 import GetBooks from "components/Admin/Manage/Books/ViewBooks/ViewBooks";
+import ReportActivities from "components/Admin/Manage/Reports/ReportActivities/ReportActivities";
+import ReportLibrarian from "components/Admin/Manage/Reports/ReportLibrarian/ReportLibrarian";
 import CreateUser from "components/Admin/Manage/Users/CreateUser/CreateUser";
 import ViewUser from "components/Admin/Manage/Users/ViewUser/ViewUser";
 import React from "react";
@@ -18,7 +20,10 @@ function Admin() {
             <DashBoard url={url} />
           </div>
 
-          <div className="containerDashBoard_content">
+          <div
+            className="containerDashBoard_content"
+            style={{ overflowY: "scroll" }}
+          >
             <div className="containerDashBoard_content_lists">
               <Route
                 path={`${path}`}
@@ -32,11 +37,7 @@ function Admin() {
                 component={() => <ViewUser />}
                 exact={true}
               />
-              {/* <Route
-                path={`${path}/users/view/:id`}
-                component={() => "đây là trang thông tin chi tiết của user"}
-                exact={true}
-              /> */}
+
               <Route
                 path={`${path}/users/create`}
                 component={() => <CreateUser />}
@@ -49,23 +50,16 @@ function Admin() {
                 component={() => <GetBooks />}
                 exact={true}
               />
-              {/* <Route
-                path={`${path}/books/create`}
-                component={() => <AddBooks />}
-                exact={true}
-              /> */}
 
               {/* Xuất báo cáo */}
               <Route
                 path={`${path}/report`}
-                component={() => "đây là trang xuất báo cáo"}
+                component={() => <ReportActivities />}
                 exact={true}
               />
               <Route
                 path={`${path}/report/activities`}
-                component={() =>
-                  "đây là trang xuất danh sách hoạt động các thủ thư"
-                }
+                component={() => <ReportLibrarian />}
                 exact={true}
               />
             </div>

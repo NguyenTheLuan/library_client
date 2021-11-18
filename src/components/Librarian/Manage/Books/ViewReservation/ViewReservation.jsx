@@ -11,7 +11,7 @@ function ViewReservation() {
   const [reservationInfo, setReservationInfo] = useState([]);
   //Phân trang
   const [totalProducts, setTotalProducts] = useState();
-  const [limitPage, setLimitPage] = useState(3);
+  const [limitPage, setLimitPage] = useState(5);
   const [page, setPage] = useState(1);
 
   const handleChangePage = (newPage) => {

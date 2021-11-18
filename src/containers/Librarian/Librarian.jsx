@@ -1,4 +1,6 @@
 import GetBooks from "components/Admin/Manage/Books/ViewBooks/ViewBooks";
+import ReportActivities from "components/Admin/Manage/Reports/ReportActivities/ReportActivities";
+import ReportLibrarian from "components/Admin/Manage/Reports/ReportLibrarian/ReportLibrarian";
 import CreateUser from "components/Admin/Manage/Users/CreateUser/CreateUser";
 import ViewUser from "components/Admin/Manage/Users/ViewUser/ViewUser";
 import HomeLibrarian from "components/Librarian/HomeLibrarian/HomeLibrarian";
@@ -21,7 +23,10 @@ function Librarian() {
             <LibrarianDashBoard url={url} />
           </div>
 
-          <div className="containerDashBoard_content">
+          <div
+            className="containerDashBoard_content"
+            style={{ overflowY: "scroll" }}
+          >
             <div className="containerDashBoard_content_lists">
               <Route
                 path={`${path}`}
@@ -35,13 +40,6 @@ function Librarian() {
                 component={() => <ViewUser />}
                 exact={true}
               />
-
-              {/* Giỏ hàng chi tiết của user */}
-              {/* <Route
-                path={`${path}/users/view/:id`}
-                component={() => <UserDashBoard />}
-                // exact={true}
-              /> */}
 
               <Route
                 path={`${path}/users/create`}
@@ -74,14 +72,12 @@ function Librarian() {
               {/* Quản lý báo cáo */}
               <Route
                 path={`${path}/report`}
-                component={() => "đây là trang xuất báo cáo"}
+                component={() => <ReportActivities />}
                 exact={true}
               />
               <Route
                 path={`${path}/report/activities`}
-                component={() =>
-                  "đây là trang xuất danh sách hoạt động các thủ thư"
-                }
+                component={() => <ReportLibrarian />}
                 exact={true}
               />
             </div>

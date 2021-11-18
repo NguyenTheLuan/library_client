@@ -28,7 +28,7 @@ function ViewBooks() {
 
   //Pagination
   const [totalBooks, setTotalBooks] = useState();
-  const [limitPage, setLimitPage] = useState(3);
+  const [limitPage, setLimitPage] = useState(5);
   const [newPage, setNewPage] = useState(1);
 
   //Chuyển trang mới
@@ -153,7 +153,7 @@ function ViewBooks() {
               <th>Tên sách</th>
               <th>Tác giả</th>
               <th>Thể loại</th>
-              <th>Số lượng</th>
+              <th>Hiện có</th>
               <th>Nhập sách</th>
 
               {/* <th>Thời gian mượn</th> */}
