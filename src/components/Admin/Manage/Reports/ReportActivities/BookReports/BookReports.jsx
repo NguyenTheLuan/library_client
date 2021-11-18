@@ -8,9 +8,9 @@ function BookReports({ booksChart }) {
     booksChart && renderObj(booksChart.new);
   }, [booksChart]);
 
-  useEffect(() => {
-    console.log("dataChart", dataChart);
-  }, [dataChart]);
+  // useEffect(() => {
+  //   console.log("dataChart", dataChart);
+  // }, [dataChart]);
 
   const renderObj = (books) => {
     if (!books) {

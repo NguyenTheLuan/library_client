@@ -58,17 +58,10 @@ function SearchBooksAdmin({ onChangeInfo, onUpdate, update }) {
               className="inputForm_items_control"
               placeholder="Nhập tên sách bạn muốn tìm"
               onChange={(e) => {
-                if (e.target.value !== "") {
-                  setSearchInfo({
-                    ...searchInfo,
-                    [e.target.name]: e.target.value,
-                  });
-                } else {
-                  setSearchInfo({
-                    ...searchInfo,
-                    [e.target.name]: " ",
-                  });
-                }
+                setSearchInfo({
+                  ...searchInfo,
+                  [e.target.name]: e.target.value,
+                });
               }}
             />
           </Form.Group>

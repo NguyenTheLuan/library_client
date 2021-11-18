@@ -5,7 +5,7 @@ function UserReports({ usersChart }) {
   const [dataChart, setDataChart] = useState();
 
   useEffect(() => {
-    // console.log("user charts", usersChart);
+    console.log("user charts", usersChart);
     usersChart && renderObj(usersChart.new);
   }, [usersChart]);
 

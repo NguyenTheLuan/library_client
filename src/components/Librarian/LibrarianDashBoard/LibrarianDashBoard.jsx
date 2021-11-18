@@ -102,7 +102,7 @@ function LibrarianDashBoard({ url }) {
           </Accordion.Header>
           <Accordion.Body>
             <NavLink to={`${url}/report`} activeClassName="active" exact={true}>
-              Xuất Báo Cáo
+              Thống kê hoạt động
             </NavLink>
           </Accordion.Body>
           <Accordion.Body>

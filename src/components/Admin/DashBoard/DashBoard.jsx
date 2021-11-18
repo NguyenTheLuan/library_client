@@ -74,21 +74,6 @@ function DashBoard({ url }) {
               Thông tin sách thư viện
             </NavLink>
           </Accordion.Body>
-          {/* <Accordion.Body>
-            <NavLink to={`${url}/books/create`} activeClassName="active">
-              Nhập sách
-            </NavLink>
-          </Accordion.Body> */}
-          {/* <Accordion.Body>
-            <NavLink to={`${url}/authors`} activeClassName="active">
-              Xem Tác Giả
-            </NavLink>
-          </Accordion.Body>
-          <Accordion.Body>
-            <NavLink to={`${url}/categories`} activeClassName="active">
-              Xem Danh Mục
-            </NavLink>
-          </Accordion.Body> */}
         </Accordion.Item>
         {/* Quản Lý Báo Cáo */}
         <Accordion.Item eventKey="2">
@@ -99,12 +84,12 @@ function DashBoard({ url }) {
           </Accordion.Header>
           <Accordion.Body>
             <NavLink to={`${url}/report`} activeClassName="active" exact={true}>
-              Thống kê
+              Thống kê hoạt động
             </NavLink>
           </Accordion.Body>
           <Accordion.Body>
             <NavLink to="/admin/report/activities" activeClassName="active">
-              Xuất Báo Cáo
+              Hoạt động thủ thư
             </NavLink>
           </Accordion.Body>
         </Accordion.Item>

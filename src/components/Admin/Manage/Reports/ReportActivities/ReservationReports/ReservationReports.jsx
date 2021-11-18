@@ -8,9 +8,9 @@ function ReservationReports({ reservationsChart }) {
     reservationsChart && renderObj(reservationsChart);
   }, [reservationsChart]);
 
-  useEffect(() => {
-    console.log("dataChart", dataChart);
-  }, [dataChart]);
+  // useEffect(() => {
+  //   console.log("dataChart", dataChart);
+  // }, [dataChart]);
 
   const renderObj = (reservation) => {
     // console.log("lấy được", reservation);
@@ -39,7 +39,7 @@ function ReservationReports({ reservationsChart }) {
       ...keyPending,
     ]);
 
-    console.log(set);
+    // console.log(set);
     const newObj = [];
 
     for (var date of set) {

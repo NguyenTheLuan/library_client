@@ -7,5 +7,9 @@ const reportsApi = {
     const url = REPORT_API_ENDPOINT;
     return axiosClient.get(url, { params: { ...dateInfo } });
   },
+  getLibrarianActivities: (info) => {
+    const url = REPORT_API_ENDPOINT + "/activities";
+    return axiosClient.get(url, { params: { ...info } });
+  },
 };
 export default reportsApi;
