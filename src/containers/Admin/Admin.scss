@@ -11,6 +11,7 @@
     flex-direction: row;
     &_menu {
       flex: 2;
+
       height: 100%;
       background: #162c50;
     }
@@ -21,10 +22,12 @@
       display: flex;
       justify-content: center;
       align-items: center;
+
       &_lists {
         width: 90%;
         height: 90%;
-        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+        // box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
       }
     }
   }
