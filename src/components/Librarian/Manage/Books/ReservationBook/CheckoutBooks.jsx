@@ -1,12 +1,12 @@
 import userApi from "apis/userApi";
 import React, { useEffect, useState } from "react";
-import { FloatingLabel, Form, Button, Table, FormCheck } from "react-bootstrap";
-import ModalCheckBooks from "./ConfirmReservation/ModalCheckBooks/ModalCheckBooks";
+import { Button, FloatingLabel, Form, Table } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { addCarts, createCarts } from "reducers/librarianSlice";
+import { createCarts } from "reducers/librarianSlice";
+import ModalCheckBooks from "./ConfirmReservation/ModalCheckBooks/ModalCheckBooks";
+import ModalCheckout from "./ConfirmReservation/ModalCheckout/ModalCheckout";
 
 import "./CheckoutBooks.scss";
-import ModalCheckout from "./ConfirmReservation/ModalCheckout/ModalCheckout";
 
 function CheckoutBooks() {
   document.title = "Mượn sách";
@@ -16,11 +16,18 @@ function CheckoutBooks() {
   const [booksReserved, setBooksReserved] = useState();
   const [copies, setCopies] = useState([]);
 
+  //Để update
+  const [update, setUpdate] = useState(false);
+
+  const handleUpdate = (status) => {
+    setUpdate(status);
+  };
+
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   console.log("mã copies là", copies);
-  // }, [copies]);
+  useEffect(() => {
+    userId && getBookReservation();
+  }, [update]);
 
   //Modals
   const [show, setShow] = useState(false);
@@ -41,7 +48,6 @@ function CheckoutBooks() {
   const getBookReservation = async () => {
     try {
       const response = await userApi.getBookReserved(userId);
-      // console.log("sách nhận được", response);
       setHide(true);
       setBooksReserved(response.results);
     } catch (error) {
@@ -175,7 +181,13 @@ function CheckoutBooks() {
       {renderReservation()}
 
       <ModalCheckBooks userId={userId} onShow={onShow} isShow={show} />
-      <ModalCheckout userId={userId} onShow={onCheckout} isShow={checkout} />
+      <ModalCheckout
+        userId={userId}
+        onShow={onCheckout}
+        isShow={checkout}
+        update={update}
+        onUpdate={handleUpdate}
+      />
     </div>
   );
 }

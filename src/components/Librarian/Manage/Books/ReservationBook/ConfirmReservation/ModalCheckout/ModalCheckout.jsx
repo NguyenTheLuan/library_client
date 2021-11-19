@@ -1,9 +1,14 @@
+import productsApi from "apis/productsApi";
 import React, { useEffect, useState } from "react";
 import { Button, Modal, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCarts, selectCartCheckout } from "reducers/librarianSlice";
+import {
+  createCarts,
+  deleteCarts,
+  selectCartCheckout,
+} from "reducers/librarianSlice";
 
-function ModalCheckout({ userId, isShow, onShow }) {
+function ModalCheckout({ userId, isShow, onShow, update, onUpdate }) {
   const dispatch = useDispatch();
 
   const booksCart = useSelector(selectCartCheckout);
@@ -14,7 +19,8 @@ function ModalCheckout({ userId, isShow, onShow }) {
   }, [booksCart]);
 
   const handleClose = () => {
-    return onShow(false);
+    // onUpdate(!update);
+    onShow(false);
   };
 
   const handleDelete = (bookId) => {
@@ -33,6 +39,27 @@ function ModalCheckout({ userId, isShow, onShow }) {
     );
   });
 
+  const checkoutBooks = async () => {
+    try {
+      await productsApi.postCopiesCheckout({
+        user: userId,
+        copies: book,
+      });
+      alert("Cho mượn thành công");
+      //set lại carts checkout
+      dispatch(createCarts());
+      onUpdate(!update);
+      onShow(false);
+    } catch (error) {
+      console.log("lỗi rồi", { error });
+    }
+  };
+
+  const handleCheckout = () => {
+    // console.log("Tiến hành cho mượn", book);
+    checkoutBooks();
+  };
+
   return (
     <Modal show={isShow} onHide={handleClose}>
       <Modal.Header>
@@ -49,9 +76,14 @@ function ModalCheckout({ userId, isShow, onShow }) {
           <tbody>{renderBooks}</tbody>
         </Table>
       </Modal.Body>
-      {/* <Modal.Footer>
-       
-      </Modal.Footer> */}
+      <Modal.Footer>
+        <Button onClick={handleCheckout} variant="success">
+          Cho mượn sách
+        </Button>
+        <Button onClick={handleClose} variant="secondary">
+          Quay lại
+        </Button>
+      </Modal.Footer>
     </Modal>
   );
 }
