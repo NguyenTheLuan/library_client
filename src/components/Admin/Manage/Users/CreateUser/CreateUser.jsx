@@ -7,6 +7,8 @@ import { useSelector } from "react-redux";
 import { selectUser } from "reducers/authSlice";
 
 function CreateUser() {
+  document.title = "Tạo người dùng mới";
+
   const isRole = useSelector(selectUser);
   const checkRole = () => {
     if (isRole.role === "admin") {

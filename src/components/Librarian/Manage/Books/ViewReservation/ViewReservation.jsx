@@ -6,6 +6,8 @@ import { Form, Table, Button } from "react-bootstrap";
 import "./ViewResevation.scss";
 
 function ViewReservation() {
+  document.title = "Lịch hẹn người dùng";
+
   const [status, setStatus] = useState("pending");
   const [name, setName] = useState();
   const [reservationInfo, setReservationInfo] = useState([]);

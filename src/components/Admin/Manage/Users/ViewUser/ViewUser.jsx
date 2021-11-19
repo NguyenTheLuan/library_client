@@ -13,6 +13,8 @@ import UserDetails from "../UserDetails/UserDetails";
 import "components/Admin/Manage/ViewForm.scss";
 
 function ViewUser() {
+  document.title = "Danh sách người dùng";
+
   //Thông tin user
   const [userItems, setUserItems] = useState([]);
   //Để search

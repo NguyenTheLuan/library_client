@@ -65,11 +65,11 @@ function ReservationReports({ reservationsChart }) {
         <CartesianGrid stroke="#ccc" strokeDasharray="1 1" />
 
         {/* Của user */}
-        <Bar dataKey="Đang chờ" fill="#8884d8" barSize={30} />
-        <Bar dataKey="Huỷ hẹn" fill="#8884d8" barSize={30} />
-        <Bar dataKey="Thành công" fill="#8884d8" barSize={30} />
-        <Bar dataKey="Quá hạn" fill="#8884d8" barSize={30} />
-        <Bar dataKey="Tổng cộng" fill="#8884d8" barSize={30} />
+        <Bar dataKey="Đang chờ" fill="rgb(148, 103, 189)" barSize={30} />
+        <Bar dataKey="Huỷ hẹn" fill="#ffc658" barSize={30} />
+        <Bar dataKey="Thành công" fill="rgb(140, 86, 75)" barSize={30} />
+        <Bar dataKey="Quá hạn" fill="rgb(44, 160, 44)" barSize={30} />
+        <Bar dataKey="Tổng cộng" fill="rgb(227, 119, 194)" barSize={30} />
       </BarChart>
 
       <span>Thống kê số lượng lịch hẹn </span>

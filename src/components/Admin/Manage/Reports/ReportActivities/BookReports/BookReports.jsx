@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Bar, BarChart, CartesianGrid, Tooltip, XAxis, YAxis } from "recharts";
 
 function BookReports({ booksChart }) {
+  console.log(booksChart);
   const [dataChart, setDataChart] = useState();
 
   useEffect(() => {

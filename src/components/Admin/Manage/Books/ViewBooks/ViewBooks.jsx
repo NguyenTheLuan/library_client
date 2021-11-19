@@ -16,6 +16,8 @@ import PaginationItems from "components/customComponents/PaginationItems/Paginat
 import "components/Admin/Manage/ViewForm.scss";
 
 function ViewBooks() {
+  document.title = "Thông tin sách thư viện";
+
   const books = useSelector(selectBooks);
   //Để search
   const [searchInfo, setSearchInfo] = useState();

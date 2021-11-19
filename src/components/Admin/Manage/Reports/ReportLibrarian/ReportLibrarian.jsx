@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 
 function ReportLibrarian() {
+  document.title = "Hoạt động thủ thư";
+
   const [activities, setActivities] = useState();
   //Phân trang
   const [totalProducts, setTotalProducts] = useState();
@@ -58,7 +60,6 @@ function ReportLibrarian() {
 
   return (
     <div>
-      đây là trang quản lí hoạt động thủ thư
       <Table>
         <thead>
           <tr>

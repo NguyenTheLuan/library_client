@@ -9,6 +9,8 @@ import "./CheckoutBooks.scss";
 import ModalCheckout from "./ConfirmReservation/ModalCheckout/ModalCheckout";
 
 function CheckoutBooks() {
+  document.title = "Mượn sách";
+
   const [userId, setUserId] = useState();
   const [hide, setHide] = useState(false);
   const [booksReserved, setBooksReserved] = useState();
