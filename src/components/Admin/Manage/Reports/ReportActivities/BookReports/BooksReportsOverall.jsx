@@ -1,43 +1,52 @@
 import React, { useEffect, useState } from "react";
 import { Cell, Pie, PieChart, Sector, Tooltip } from "recharts";
 
-function UserReportsOverall({ usersPie }) {
+function BooksReportsOverall({ booksPie }) {
   const [dataPie, setDataPie] = useState();
 
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
-    usersPie && renderObj(usersPie);
-  }, [usersPie]);
+    booksPie && renderObj(booksPie);
+  }, [booksPie]);
 
   // useEffect(() => {
   //   console.log("new nè", dataPie);
   // }, [dataPie]);
 
-  const renderObj = (usersPie) => {
-    if (!usersPie) {
+  const renderObj = (booksPie) => {
+    console.log(booksPie);
+    if (!booksPie) {
       return;
     }
 
     //Lọc keys
-    const keys = Object.keys(usersPie);
+    const keys = Object.keys(booksPie);
     const newKeys = keys.filter((key) => {
-      if (key !== "new" && key !== "deleted" && key !== "total") {
+      if (
+        key !== "cancelled" &&
+        key !== "new" &&
+        key !== "fulfilled" &&
+        key !== "overdue" &&
+        key !== "pending" &&
+        key !== "total"
+      ) {
         return key;
       }
     });
-
+    // console.log(newKeys);
     //Tạo obj mới
     const newObj = [];
     newKeys.map((key) => {
-      newObj.push({ name: key, value: usersPie[key] });
+      newObj.push({ name: key, value: booksPie[key] });
     });
 
+    console.log(newObj);
     //Add vô Pie
     setDataPie(newObj);
   };
 
-  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#ff7300"];
 
   const RADIAN = Math.PI / 180;
   const renderCustomizedLabel = ({
@@ -78,7 +87,6 @@ function UserReportsOverall({ usersPie }) {
           isAnimationActive={false}
           cx="50%"
           cy="50%"
-          //   activeShape={renderActiveShape}
           labelLine={false}
           label={renderCustomizedLabel}
           outerRadius={80}
@@ -96,4 +104,4 @@ function UserReportsOverall({ usersPie }) {
   );
 }
 
-export default UserReportsOverall;
+export default BooksReportsOverall;

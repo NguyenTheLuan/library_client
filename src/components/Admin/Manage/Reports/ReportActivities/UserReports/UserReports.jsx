@@ -61,10 +61,8 @@ function UserReports({ usersChart }) {
 
   return (
     <div>
-      <h2>Thống kê số lượng người dùng</h2>
-
       <ComposedChart
-        width={800}
+        width={700}
         height={300}
         data={dataChart}
         margin={{
@@ -79,10 +77,10 @@ function UserReports({ usersChart }) {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="Tài khoản mới" barSize={20} fill="#413ea0" />
-        <Bar dataKey="Tài khoản bị xoá" barSize={20} fill="#82ca9d" />
+        <Bar dataKey="Tài khoản mới" barSize={20} fill="#0088FE" />
+        <Bar dataKey="Tài khoản bị xoá" barSize={20} fill="#00C49F" />
         {/* Dòng tỉ lệ */}
-        <Line type="monotone" dataKey="Tài khoản mới" stroke="#ff7300" />
+        {/* <Line type="monotone" dataKey="Tài khoản mới" stroke="#ff7300" /> */}
       </ComposedChart>
     </div>
   );

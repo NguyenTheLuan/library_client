@@ -77,9 +77,7 @@ function ReservationReports({ reservationsChart }) {
   };
   return (
     <div>
-      <h2>Thống kê số lượng lịch hẹn </h2>
-
-      <ComposedChart width={900} height={300} data={dataChart}>
+      <ComposedChart width={700} height={300} data={dataChart}>
         <XAxis dataKey="day" stroke="#8884d8" />
         <YAxis />
         <Tooltip />
@@ -87,11 +85,11 @@ function ReservationReports({ reservationsChart }) {
         <CartesianGrid stroke="#ccc" strokeDasharray="1 1" />
 
         {/* Của user */}
-        <Bar dataKey="Đang chờ" fill="rgb(148, 103, 189)" barSize={30} />
-        <Bar dataKey="Huỷ hẹn" fill="#ffc658" barSize={30} />
-        <Bar dataKey="Thành công" fill="rgb(140, 86, 75)" barSize={30} />
-        <Bar dataKey="Quá hạn" fill="rgb(44, 160, 44)" barSize={30} />
-        <Bar dataKey="Tổng cộng" fill="rgb(227, 119, 194)" barSize={30} />
+        <Bar dataKey="Đang chờ" fill="#0088FE" barSize={30} />
+        <Bar dataKey="Huỷ hẹn" fill="#00C49F" barSize={30} />
+        <Bar dataKey="Thành công" fill="#FFBB28" barSize={30} />
+        <Bar dataKey="Quá hạn" fill="#FF8042" barSize={30} />
+        {/* <Bar dataKey="Tổng cộng" fill="rgb(227, 119, 194)" barSize={30} /> */}
         {/* Dòng tỉ lệ */}
         <Line type="monotone" dataKey="Tổng cộng" stroke="#ff7300" />
       </ComposedChart>

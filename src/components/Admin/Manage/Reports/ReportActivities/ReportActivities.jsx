@@ -1,9 +1,13 @@
 import reportsApi from "apis/reportsApi";
 import React, { useEffect, useState } from "react";
 import BookReports from "./BookReports/BookReports";
+import BooksReportsOverall from "./BookReports/BooksReportsOverall";
 import ReservationReports from "./ReservationReports/ReservationReports";
+import ReservationReportsOverall from "./ReservationReports/ReservationReportsOverall";
 import UserReports from "./UserReports/UserReports";
 import UserReportsOverall from "./UserReports/UserReportsOverall";
+
+import "./ReportActivities.scss";
 
 function ReportActivities() {
   document.title = "Thống kê hoạt động";
@@ -28,15 +32,16 @@ function ReportActivities() {
     const time = { from: startDay, to: endDay, view: "overall" };
     try {
       const response = await reportsApi.getReports(time);
-      console.log(response);
+      // console.log(response);
       //Set cho user
       setUsersChart(response.user);
       setUsersPie(response.user);
       //Set cho reservation
       setReservationsChart(response.reservation);
-
+      setReservationsPie(response.reservation);
       //Set cho books
       setBooksChart(response.book);
+      setBooksPie(response.book);
     } catch (error) {
       console.log("lỗi rồi", { error });
     }
@@ -49,44 +54,64 @@ function ReportActivities() {
   const handleEndDay = (time) => {
     setEndDay(time);
   };
+  //render time
+  const renderDate = (time) => {
+    // console.log(time);
+    return time.split("-").reverse().join("-");
+  };
 
   const renderTime = () => {
     if (startDay) {
       if (endDay) {
         return (
           <>
-            Từ ngày <strong>{startDay}</strong> đến ngày
-            <strong>{endDay}</strong>
+            từ ngày <strong>{renderDate(startDay)}</strong> đến ngày
+            <strong> {renderDate(endDay)}</strong>
           </>
         );
       }
       return (
         <>
-          Từ ngày <strong>{startDay}</strong> đến nay
+          từ ngày <strong>{renderDate(startDay)}</strong> đến nay
         </>
       );
     }
   };
 
   return (
-    <div>
-      <div>
-        Thống kê hoạt động {renderTime()}
-        <div>
+    <div className="reportContainer">
+      <div className="reportContainer_search">
+        <legend className="label">Thống kê hoạt động {renderTime()}</legend>
+        <div className="date">
           <input type="date" onChange={(e) => handleStartDay(e.target.value)} />
           <input type="date" onChange={(e) => handleEndDay(e.target.value)} />
         </div>
       </div>
-      <div>
-        <div style={{ display: "flex" }}>
-          <UserReports usersChart={usersChart} />
-          <UserReportsOverall usersPie={usersPie} />
+      <div className="reportContainer_contents">
+        <div className="reportContainer_contents_items">
+          <span className="label">
+            Biểu đồ thể hiện chi tiết số lượng người dùng
+          </span>
+          <div className="charts">
+            <UserReports usersChart={usersChart} />
+            <UserReportsOverall usersPie={usersPie} />
+          </div>
         </div>
-        <div>
-          <ReservationReports reservationsChart={reservationsChart} />
+        <div className="reportContainer_contents_items">
+          <span className="label">
+            Biểu đồ thể hiện chi tiết số lượng lịch đặt sách
+          </span>
+          <div className="charts">
+            <ReservationReports reservationsChart={reservationsChart} />
+            <ReservationReportsOverall reservationsChart={reservationsPie} />
+          </div>
         </div>
-        <div>
-          <BookReports booksChart={booksChart} />
+        <div className="reportContainer_contents_items">
+          <span className="label">Biểu đồ thể hiện số lượng sách đã nhập</span>
+          <div className="charts">
+            <BookReports booksChart={booksChart} />
+            <BooksReportsOverall booksPie={booksPie} />
+          </div>
         </div>
       </div>
     </div>

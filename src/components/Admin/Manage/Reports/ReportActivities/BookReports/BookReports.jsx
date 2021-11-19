@@ -37,8 +37,7 @@ function BookReports({ booksChart }) {
 
   return (
     <div>
-      <h2>Thống kê số lượng sách</h2>
-      <ComposedChart cộng width={900} height={300} data={dataChart}>
+      <ComposedChart cộng width={700} height={300} data={dataChart}>
         <XAxis dataKey="name" stroke="#8884d8" />
         <YAxis />
         <Tooltip />
