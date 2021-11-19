@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Bar, BarChart, CartesianGrid, Tooltip, XAxis, YAxis } from "recharts";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Legend,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 
 function BookReports({ booksChart }) {
-  console.log(booksChart);
+  // console.log(booksChart);
   const [dataChart, setDataChart] = useState();
 
   useEffect(() => {
@@ -28,17 +36,17 @@ function BookReports({ booksChart }) {
 
   return (
     <div>
+      <h2>Thống kê số lượng sách</h2>
       <BarChart width={900} height={300} data={dataChart}>
         <XAxis dataKey="name" stroke="#8884d8" />
         <YAxis />
         <Tooltip />
+        <Legend />
         <CartesianGrid stroke="#ccc" strokeDasharray="1 1" />
 
         {/* Của user */}
         <Bar dataKey="Số lượng sách mới" fill="#8884d8" barSize={30} />
       </BarChart>
-
-      <span>Thống kê số lượng sách</span>
     </div>
   );
 }

@@ -22,9 +22,6 @@ function User() {
         </div>
         <div className="mainUser_nav_links">
           <Link to="/">Trang Chủ</Link>
-          {/* <NavLink to={`${path}`} activeClassName="active" exact={true}>
-            Trang Home
-          </NavLink> */}
           <NavLink to={`${path}`} activeClassName="active" exact={true}>
             Thông Tin Cá Nhân
           </NavLink>
@@ -48,7 +45,6 @@ function User() {
         </div>
       </div>
       <div className="mainUser_contents">
-        <div className="mainUser_contents_headers"></div>
         <div className="mainUser_contents_containers">
           <Switch>
             <Route

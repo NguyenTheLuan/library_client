@@ -1,5 +1,5 @@
 import productsApi from "apis/productsApi";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { GoSearch } from "react-icons/go";
 import { useDispatch } from "react-redux";
@@ -9,6 +9,7 @@ import "./SearchForm.scss";
 function SearchForm() {
   const [searchInfo, setSearchInfo] = useState("");
   const dispatch = useDispatch();
+
   //search books
   const searchBooks = async () => {
     try {
@@ -20,24 +21,29 @@ function SearchForm() {
     }
   };
 
+  const resetValue = () => {
+    setSearchInfo({ title: "" });
+  };
   const handleSearch = (e) => {
-    // console.log("sẽ search với thông tin:", searchInfo);
     e.preventDefault();
     searchBooks();
+    resetValue();
   };
   return (
     <>
       <Form className="formSearch" onSubmit={handleSearch}>
-        <Form.Group className="formSearch_items">
-          <Form.Label className="formLabel"></Form.Label>
+        <Form.Group className="inputForm" style={{ gap: "5px" }}>
+          <Form.Label></Form.Label>
           <Form.Control
+            value={searchInfo.title}
+            style={{ flex: "4" }}
             name="title"
-            className="formInput"
+            className="inputForm_items_control"
             type="input"
             placeholder="Nhập tên sách bạn muốn tìm"
             onChange={(e) => setSearchInfo({ [e.target.name]: e.target.value })}
           ></Form.Control>
-          <Button className="formSearch" type="submit">
+          <Button className="inputForm_button" type="submit">
             <GoSearch />
             Tìm kiếm
           </Button>

@@ -2,6 +2,8 @@ import React from "react";
 import { Button, Form } from "react-bootstrap";
 
 function ResetPassword() {
+  document.title = "Thay đổi mật khẩu";
+
   const handleResetPassword = (e) => {
     e.preventDefault();
   };

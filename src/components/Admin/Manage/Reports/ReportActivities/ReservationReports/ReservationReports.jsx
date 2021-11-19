@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Bar, BarChart, CartesianGrid, Tooltip, XAxis, YAxis } from "recharts";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Legend,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 
 function ReservationReports({ reservationsChart }) {
   const [dataChart, setDataChart] = useState();
@@ -52,16 +60,28 @@ function ReservationReports({ reservationsChart }) {
         "Đang chờ": pending[date] ? pending[date] : 0,
       });
     }
+    newObj.sort(day_sort);
     setDataChart(newObj);
-    // console.log(newObj);
   };
 
+  const day_sort = (prevDay, nextDay) => {
+    return (
+      new Date(
+        prevDay.day.replace(/^(\d{1,2}\/)(\d{1,2}\/)(\d{4})$/, "$2$1$3")
+      ).getTime() -
+      new Date(
+        nextDay.day.replace(/^(\d{1,2}\/)(\d{1,2}\/)(\d{4})$/, "$2$1$3")
+      ).getTime()
+    );
+  };
   return (
     <div>
+      <h2>Thống kê số lượng lịch hẹn </h2>
       <BarChart width={900} height={300} data={dataChart}>
         <XAxis dataKey="day" stroke="#8884d8" />
         <YAxis />
         <Tooltip />
+        <Legend />
         <CartesianGrid stroke="#ccc" strokeDasharray="1 1" />
 
         {/* Của user */}
@@ -71,8 +91,6 @@ function ReservationReports({ reservationsChart }) {
         <Bar dataKey="Quá hạn" fill="rgb(44, 160, 44)" barSize={30} />
         <Bar dataKey="Tổng cộng" fill="rgb(227, 119, 194)" barSize={30} />
       </BarChart>
-
-      <span>Thống kê số lượng lịch hẹn </span>
     </div>
   );
 }

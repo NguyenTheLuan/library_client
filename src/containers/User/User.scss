@@ -1,33 +1,28 @@
 $backgroundMenu: #3f51b5;
 
 .mainUser {
-  width: 100vw;
   height: 100vh;
-
-  overflow-x: hidden;
+  // width: 100vw;
 
   display: flex;
   flex-direction: row;
 
   &_nav {
-    // padding-left: 20px;
     flex: 1;
     height: 100%;
     background: $backgroundMenu;
 
     display: flex;
     flex-direction: column;
-    // justify-content: center;
     align-items: center;
     // gap: 20px;
 
     &_icon {
       height: 150px;
       font-size: 100px;
-      color: rgb(176, 144, 218);
+      color: rgb(255, 255, 255);
 
       display: flex;
-      justify-content: center;
       align-items: center;
     }
 
@@ -52,24 +47,19 @@ $backgroundMenu: #3f51b5;
   }
 
   &_contents {
-    flex: 6;
+    flex: 5;
     height: 100%;
 
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
     overflow-y: scroll;
-    // justify-content: center;
-    // align-items: center;
-    &_headers {
-      height: 50px;
-      //   width: 100%;
-      //   background: $backgroundMenu;
-      //   padding: 15px 0;
-      //   margin-left: 10px;
-    }
+
     &_containers {
-      padding-left: 50px;
+      width: 90%;
+      height: 600px;
     }
   }
 }

@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import { selectUser } from "reducers/authSlice";
 
 function ViewHistoryReserved() {
+  document.title = "Lịch sử mượn trả sách";
+
   const isUser = useSelector(selectUser);
   const [reservationInfo, setReservationInfo] = useState([]);
   useEffect(() => {
@@ -47,7 +49,8 @@ function ViewHistoryReserved() {
 
   return (
     <div>
-      <Table>
+      <legend className="form_name">Lịch sử mượn trả sách</legend>
+      <Table striped bordered hover>
         <thead>
           <tr>
             <th>STT</th>

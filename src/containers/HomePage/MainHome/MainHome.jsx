@@ -17,6 +17,7 @@ import BaiGiang from "../Bai-giang/BaiGiang";
 import "./MainHome.scss";
 
 function HomePage() {
+  document.title = "Thư viện trực tuyến";
   // const match = useRouteMatch();
   const isUser = useSelector(selectUser);
   const history = useHistory();

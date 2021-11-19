@@ -7,13 +7,11 @@ import { selectMyCarts, selectMyTotalCarts } from "reducers/userSlice";
 import "./MyCarts.scss";
 
 function MyCarts() {
+  document.title = "Giỏ hàng cá nhân";
+
   //Lấy carts từ user
   const getMyCarts = useSelector(selectMyCarts);
   const getMyTotalCarts = useSelector(selectMyTotalCarts);
-  //Trạng thái update từ carts
-  // const isActive = useSelector(selectUpdateCarts);
-
-  // console.log("get carts from redux", getCarts);
 
   // Danh sách carts
   const [carts, setCarts] = useState([]);

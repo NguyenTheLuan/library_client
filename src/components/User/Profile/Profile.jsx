@@ -7,6 +7,8 @@ import { selectUser } from "reducers/authSlice";
 import "./Profile.scss";
 
 function Profile() {
+  document.title = "Thông tin cá nhân";
+
   // const { path, url } = useRouteMatch();
   // console.log(path);
   const user = useSelector(selectUser);

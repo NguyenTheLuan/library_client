@@ -6,12 +6,14 @@ import { selectUser } from "reducers/authSlice";
 import "./Reservation.scss";
 
 function Reservation() {
+  document.title = "Xem lịch hẹn";
+
   const isUser = useSelector(selectUser);
   const [reservation, setReservation] = useState([]);
   const [update, setUpdate] = useState(false);
 
   useEffect(() => {
-    console.log("huỷ thành công");
+    // console.log("huỷ thành công");
     isUser && getReservation();
   }, [update]);
 
@@ -19,6 +21,16 @@ function Reservation() {
   const timeDate = (time) => {
     const date = new Date(time);
     return <>{date.toLocaleString()}</>;
+  };
+  const checkStatus = (status) => {
+    switch (status) {
+      case "expired":
+        return <>Hết hạn</>;
+      case "fulfilled":
+        return <>Thành công</>;
+      default:
+        return <>Huỷ hẹn</>;
+    }
   };
 
   const showBooks = (booksInfo) => {
@@ -64,8 +76,6 @@ function Reservation() {
     const userId = isUser.id;
     try {
       await userApi.postDeleteReservation(userId, reservedId);
-      // const response = await userApi.postDeleteReservation(userId, reservedId);
-      // console.log("thành công", response);
       alert("Huỷ lịch thành công");
       setUpdate(!update);
     } catch (error) {
@@ -77,7 +87,9 @@ function Reservation() {
     return (
       <tr key={index} className="cartTable_contents_rows">
         <th className="cartTable_contents_rows_index">{index + 1}</th>
-        <th className="cartTable_contents_rows_status">{details.status}</th>
+        <th className="cartTable_contents_rows_status">
+          {checkStatus(details.status)}
+        </th>
         <th className="cartTable_contents_rows_details">
           {showBooks(details.books)}
         </th>
@@ -94,6 +106,7 @@ function Reservation() {
 
   return (
     <>
+      <legend className="form_name">Lịch hẹn đặt sách</legend>
       <Table className="cartTable" striped bordered hover>
         <thead className="cartTable_header">
           <tr>
