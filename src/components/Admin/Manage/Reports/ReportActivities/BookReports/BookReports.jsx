@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import {
   Bar,
-  BarChart,
   CartesianGrid,
+  ComposedChart,
   Legend,
+  Line,
   Tooltip,
   XAxis,
   YAxis,
@@ -37,7 +38,7 @@ function BookReports({ booksChart }) {
   return (
     <div>
       <h2>Thống kê số lượng sách</h2>
-      <BarChart width={900} height={300} data={dataChart}>
+      <ComposedChart cộng width={900} height={300} data={dataChart}>
         <XAxis dataKey="name" stroke="#8884d8" />
         <YAxis />
         <Tooltip />
@@ -46,7 +47,9 @@ function BookReports({ booksChart }) {
 
         {/* Của user */}
         <Bar dataKey="Số lượng sách mới" fill="#8884d8" barSize={30} />
-      </BarChart>
+        {/* Dòng tỉ lệ */}
+        <Line type="monotone" dataKey="Số lượng sách mới" stroke="#ff7300" />
+      </ComposedChart>
     </div>
   );
 }

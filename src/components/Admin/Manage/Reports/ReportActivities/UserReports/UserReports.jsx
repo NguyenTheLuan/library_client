@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {
-  Area,
   Bar,
-  BarChart,
   CartesianGrid,
+  ComposedChart,
   Legend,
   Line,
   Tooltip,
@@ -12,12 +11,9 @@ import {
 } from "recharts";
 
 function UserReports({ usersChart }) {
-  document.title = "Thống kê hoạt động";
-
   const [dataChart, setDataChart] = useState();
 
   useEffect(() => {
-    // console.log("user charts", usersChart);
     usersChart && renderObj(usersChart);
   }, [usersChart]);
 
@@ -66,18 +62,28 @@ function UserReports({ usersChart }) {
   return (
     <div>
       <h2>Thống kê số lượng người dùng</h2>
-      <BarChart width={900} height={300} data={dataChart}>
-        <XAxis dataKey="day" stroke="#8884d8" />
+
+      <ComposedChart
+        width={800}
+        height={300}
+        data={dataChart}
+        margin={{
+          top: 20,
+          right: 20,
+          bottom: 20,
+          left: 20,
+        }}
+      >
+        <CartesianGrid stroke="#f5f5f5" />
+        <XAxis dataKey="day" scale="band" />
         <YAxis />
         <Tooltip />
         <Legend />
-        <CartesianGrid stroke="#ccc" strokeDasharray="1 1" />
-
-        {/* Của user */}
-        <Bar dataKey="Tài khoản mới" fill="#8884d8" barSize={30} />
-        <Bar dataKey="Tài khoản bị xoá" fill="#82ca9d" barSize={30} />
+        <Bar dataKey="Tài khoản mới" barSize={20} fill="#413ea0" />
+        <Bar dataKey="Tài khoản bị xoá" barSize={20} fill="#82ca9d" />
+        {/* Dòng tỉ lệ */}
         <Line type="monotone" dataKey="Tài khoản mới" stroke="#ff7300" />
-      </BarChart>
+      </ComposedChart>
     </div>
   );
 }
