@@ -1,4 +1,3 @@
-// import LogoMenu from "assets/icons/LogoMenu.gif";
 import LogoMenu from "assets/icons/logo.png";
 import Carts from "components/customComponents/Carts/Carts";
 import DropdownItems from "components/customComponents/DropdownItems/DropdownItems";
@@ -7,8 +6,11 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { Link } from "react-router-dom";
+import { HashLink as Link } from "react-router-hash-link";
+
 import { selectUser } from "reducers/authSlice";
+import Navigation from "../Navigation/Navigation";
+
 import "./Header.scss";
 
 function Header() {
@@ -21,7 +23,7 @@ function Header() {
     return getName[getName.length - 1];
   };
 
-  const checkBtn = () => {
+  const UserForm = () => {
     //Đăng nhập
     if (isUser && isUser.status === "active") {
       return (
@@ -46,15 +48,20 @@ function Header() {
   return (
     <div className="header">
       <div className="header_logo">
-        <Link exact={true} to="/home">
+        <Link smooth={true} to="/home/#about">
           <img alt="logoMenu" src={LogoMenu} />
           <span>Geny Library</span>
         </Link>
       </div>
-      <div className="header_search">
-        <SearchForm />
+      <div className="header_navigation">
+        <Navigation />
       </div>
-      <div className="header_btn">{checkBtn()}</div>
+      {/* <div className="header_search">
+        <SearchForm />
+      </div> */}
+      <div className="header_btn">
+        <UserForm />
+      </div>
     </div>
   );
 }

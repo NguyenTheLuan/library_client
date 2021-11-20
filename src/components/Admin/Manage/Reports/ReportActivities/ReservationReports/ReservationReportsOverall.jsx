@@ -15,7 +15,7 @@ function ReservationReportsOverall({ reservationsChart }) {
   // }, [dataPie]);
 
   const renderObj = (reservedPie) => {
-    // console.log(reservedPie);
+    console.log(reservedPie);
     if (!reservedPie) {
       return;
     }

@@ -1,3 +1,13 @@
+html {
+  font-family: "Arial";
+  padding: 0;
+  margin: 0;
+}
+
+//Fix scroll
+div::-webkit-scrollbar {
+  width: 0px;
+}
 .mainPage {
   width: 100vw;
   height: 100vh;
@@ -6,24 +16,21 @@
 
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  align-items: center;
+  // gap: 10px;
+
   &_header {
+    width: 100vw;
+
+    position: fixed;
+    // // left: 0;
+    z-index: 10;
+    top: 0;
   }
 
-  &_content {
-    margin-top: 80px;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    // align-items: center;
-    &_nav {
-      flex: 1;
-
-      // height: 100%;
-    }
-    &_items {
-      flex: 4;
-    }
+  &_contents {
+    flex-direction: column;
+    align-items: center;
+    // gap: 100px;
   }
 }

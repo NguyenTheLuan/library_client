@@ -1,19 +1,42 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+//Scroll link
+import { NavHashLink as NavLink } from "react-router-hash-link";
 import "./Navigation.scss";
 
-function Navigation({ url }) {
-  // console.log("hàm con", url);
+function Navigation() {
   return (
     <div className="navMenu">
-      <ul className="navMenu_items">
-        <li className="navMenu_items_links">
-          <NavLink exact={true} to={`${url}`} activeClassName="active">
+      <ul className="navMenuItems">
+        <li className="navMenuItem">
+          <NavLink to="/home/#about" activeClassName="active" smooth={true}>
+            Giới thiệu
+          </NavLink>
+        </li>
+        <li className="navMenuItem">
+          <NavLink
+            to="/home/#danh-muc-sach"
+            activeClassName="active"
+            smooth={true}
+          >
+            Danh mục sách
+          </NavLink>
+        </li>
+        <li className="navMenuItem">
+          <NavLink to="/home/#rating" activeClassName="active" smooth={true}>
+            Đánh giá
+          </NavLink>
+        </li>
+        <li className="navMenuItem">
+          <NavLink to="/home/#contact" activeClassName="active" smooth={true}>
+            Liên hệ hỗ trợ
+          </NavLink>
+        </li>
+        {/* <NavLink exact={true} to={`${url}`} activeClassName="active">
             Trang Chủ
           </NavLink>
         </li>
         <li className="navMenu_items_links">
-          <NavLink to={`${url}/bai-giang`} activeClassName="active">
+          <NavLink to={`${url}/tai-lieu`} activeClassName="active">
             Bài Giảng
           </NavLink>
         </li>
@@ -25,8 +48,7 @@ function Navigation({ url }) {
         <li className="navMenu_items_links">
           <NavLink to={`${url}/community`} activeClassName="active">
             Cộng Đồng
-          </NavLink>
-        </li>
+          </NavLink> */}
       </ul>
     </div>
   );

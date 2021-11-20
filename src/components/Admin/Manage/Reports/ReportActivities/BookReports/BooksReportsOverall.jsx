@@ -15,7 +15,7 @@ function BooksReportsOverall({ booksPie }) {
   // }, [dataPie]);
 
   const renderObj = (booksPie) => {
-    console.log(booksPie);
+    // console.log(booksPie);
     if (!booksPie) {
       return;
     }
@@ -41,7 +41,7 @@ function BooksReportsOverall({ booksPie }) {
       newObj.push({ name: key, value: booksPie[key] });
     });
 
-    console.log(newObj);
+    // console.log(newObj);
     //Add vô Pie
     setDataPie(newObj);
   };
