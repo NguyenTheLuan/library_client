@@ -2,10 +2,12 @@ $color_bg: #e83e8c;
 $color_font: #fff;
 
 .containProducts {
-  width: 100%;
+  margin-top: 100px;
+  width: 1500px;
 
   display: flex;
   flex-direction: column;
+  align-items: center;
 
   gap: 20px;
   &_title {
@@ -14,6 +16,7 @@ $color_font: #fff;
     border-radius: 2px;
     background: $color_bg;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    //Chữ trong thẻ tag đó
     span {
       font-size: 30px;
       margin-left: 20px;
@@ -22,32 +25,34 @@ $color_font: #fff;
     }
   }
   &_details {
-    // width: 100%;
     width: 80%;
     padding: 20px 0;
-    // border: 1px solid rgb(240, 223, 223);
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
 
-    // gap: 60px;
+    // gap: 20px;
 
     &_img {
       width: 25%;
-      // height: 80%;
-      // height: 100%;
-      text-align: center;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
       img {
-        width: 200px;
-        height: 280px;
+        // width: 200px;
+        // height: 280px;
+        width: 95%;
         transition: 0.8s ease-out;
         &:hover {
-          // transform: scale(0.9);
-          // transition: 0.5s ease-in-out;
-          // border-radius: 5px;
+          transform: scale(1.1);
+          transition: 0.5s ease-in-out;
+          border-radius: 5px;
 
-          // box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px,
-          //   rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+          box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px,
+            rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
         }
       }
     }

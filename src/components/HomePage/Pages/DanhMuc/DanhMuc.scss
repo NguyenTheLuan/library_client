@@ -1,0 +1,19 @@
+.categoriesForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  legend {
+    text-align: center;
+    font-weight: 300;
+    font-size: 25px;
+    margin-top: 20px;
+  }
+  &_search {
+    width: 900px;
+  }
+  &contents {
+    width: 900px;
+  }
+}

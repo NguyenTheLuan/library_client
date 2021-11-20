@@ -1,14 +1,16 @@
 import productsApi from "apis/productsApi";
 import ButtonAddCarts from "components/customComponents/ButtonHandleCarts/ButtonAddCarts";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useLocation } from "react-router";
 import "./BookDetails.scss";
 
 function BookDetails() {
   const [productDetails, setProductDetails] = useState([]);
-  const { itemsId } = useParams();
-  // console.log("trang details", itemsId);
+  const location = useLocation();
 
+  const bookId = location.pathname.split("/")[3];
+
+  //render components
   const checkQuantity = (books) => {
     // console.log(books);
     return books.length;
@@ -17,13 +19,15 @@ function BookDetails() {
     // console.log("tác giả", author);
     return author;
   };
+
   useEffect(() => {
     getDetails();
-  }, []);
+  }, [bookId]);
 
   const getDetails = async () => {
     try {
-      const response = await productsApi.getBooksById(itemsId);
+      const response = await productsApi.getBooksById(bookId);
+      console.log(response);
       setProductDetails([response]);
     } catch (error) {
       console.log({ error });
@@ -44,9 +48,16 @@ function BookDetails() {
           <tbody>
             <tr className="containProducts_details_contents_rows">
               <td>
-                <strong>Tên</strong>
+                <strong>Tên sách</strong>
               </td>
               <td>{details.title}</td>
+              <td></td>
+            </tr>
+            <tr className="containProducts_details_contents_rows">
+              <td>
+                <strong>Thể loại</strong>
+              </td>
+              <td>{details.categories}</td>
               <td></td>
             </tr>
             <tr className="containProducts_details_contents_rows">
@@ -58,11 +69,19 @@ function BookDetails() {
             </tr>
             <tr className="containProducts_details_contents_rows">
               <td>
-                <strong>Số lượng còn lại</strong>
+                <strong>Số lượng hiện có</strong>
               </td>
               <td>{checkQuantity(details.copies)}</td>
               <td></td>
             </tr>
+            <tr className="containProducts_details_contents_rows">
+              <td>
+                <strong>Mô tả</strong>
+              </td>
+              <td>{details.description}</td>
+              <td></td>
+            </tr>
+
             <tr className="containProducts_details_contents_rows">
               <td>
                 <strong>Thời gian cho mượn</strong>
@@ -70,6 +89,7 @@ function BookDetails() {
               <td>{details.loanPeriodDays}</td>
               <td></td>
             </tr>
+
             <tr className="containProducts_details_contents_rows">
               <td>
                 <ButtonAddCarts product={details} />
@@ -87,6 +107,7 @@ function BookDetails() {
         <span>Thông tin chi tiết</span>
       </div>
       {renderBook}
+
       <div className="containProducts_title">
         <span>Những cuốn sách liên quan</span>
       </div>

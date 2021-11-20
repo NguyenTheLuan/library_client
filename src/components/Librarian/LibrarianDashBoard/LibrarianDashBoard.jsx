@@ -93,6 +93,15 @@ function LibrarianDashBoard({ url }) {
               Trả sách
             </NavLink>
           </Accordion.Body>
+          <Accordion.Body>
+            <NavLink
+              to={`${url}/books/borrowing`}
+              exact={true}
+              activeClassName="active"
+            >
+              Sách đã cho mượn
+            </NavLink>
+          </Accordion.Body>
         </Accordion.Item>
         {/* Quản Lý Báo Cáo */}
         <Accordion.Item eventKey="2">

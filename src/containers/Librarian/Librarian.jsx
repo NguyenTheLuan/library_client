@@ -7,6 +7,7 @@ import HomeLibrarian from "components/Librarian/HomeLibrarian/HomeLibrarian";
 import LibrarianDashBoard from "components/Librarian/LibrarianDashBoard/LibrarianDashBoard";
 import CheckoutBooks from "components/Librarian/Manage/Books/ReservationBook/CheckoutBooks";
 import ReturnBooks from "components/Librarian/Manage/Books/ReturnBooks/ReturnBooks";
+import ViewBorrowingBooks from "components/Librarian/Manage/Books/ViewBorrowingBooks/ViewBorrowingBooks";
 import ViewReservation from "components/Librarian/Manage/Books/ViewReservation/ViewReservation";
 
 import React from "react";
@@ -66,6 +67,11 @@ function Librarian() {
               <Route
                 path={`${path}/books/return`}
                 component={() => <ReturnBooks />}
+                // exact={true}
+              />
+              <Route
+                path={`${path}/books/borrowing`}
+                component={() => <ViewBorrowingBooks />}
                 // exact={true}
               />
 

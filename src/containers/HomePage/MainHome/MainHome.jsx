@@ -1,12 +1,10 @@
-import BookDetails from "components/HomePage/Contains/BookDetails/ProductDetails";
-
+import BookDetails from "components/HomePage/Contains/BookDetails/BookDetails";
 import Header from "components/HomePage/Header/Header/Header";
-import Navigation from "components/HomePage/Header/Navigation/Navigation";
 import About from "components/HomePage/Pages/About/About";
 import Contact from "components/HomePage/Pages/Contact/Contact";
+import DanhMuc from "components/HomePage/Pages/DanhMuc/DanhMuc";
 import MainPage from "components/HomePage/Pages/MainPage/MainPage";
 import Rating from "components/HomePage/Pages/Rating/Rating";
-import TaiLieu from "components/HomePage/Pages/TaiLieu/TaiLieu";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import {
@@ -17,7 +15,6 @@ import {
   useRouteMatch,
 } from "react-router";
 import { selectUser } from "reducers/authSlice";
-
 import "./MainHome.scss";
 
 function HomePage() {
@@ -54,15 +51,14 @@ function HomePage() {
       </div>
 
       <div className="mainPage_contents">
-        <About />
-
-        {/* <MainPage /> */}
-        <TaiLieu />
-        <Rating />
-        <Contact />
-        {/* <Switch>
+        <Switch>
           <Route path={`${path}`} component={() => <MainPage />} exact={true} />
           <Route
+            path={`${path}/book/:id`}
+            component={() => <BookDetails />}
+            exact={true}
+          />
+          {/*<Route
             path={`${path}/community`}
             component={() => "trang cộng đỒng"}
           />
@@ -72,11 +68,11 @@ function HomePage() {
             path={`${path}/details/:itemsId`}
             component={() => <BookDetails />}
             exact={true}
-          />
+          /> */}
           <Route>
             <Redirect to="/NotFound" />
           </Route>
-        </Switch> */}
+        </Switch>
       </div>
 
       <div className="mainPage_footer">{/* <Footer /> */}</div>
