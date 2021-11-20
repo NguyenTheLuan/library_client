@@ -9,9 +9,9 @@ div::-webkit-scrollbar {
   width: 0px;
 }
 .mainPage {
+  //làm khuất thanh scroll bên trái
   width: 100vw;
   height: 100vh;
-
   overflow-x: hidden;
 
   display: flex;
@@ -21,11 +21,10 @@ div::-webkit-scrollbar {
 
   &_header {
     width: 100vw;
-
     position: fixed;
-    // // left: 0;
-    z-index: 10;
+    left: 0;
     top: 0;
+    z-index: 10;
   }
 
   &_contents {

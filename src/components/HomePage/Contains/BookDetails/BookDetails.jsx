@@ -2,10 +2,17 @@ import productsApi from "apis/productsApi";
 import ButtonAddCarts from "components/customComponents/ButtonHandleCarts/ButtonAddCarts";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
+import BookByAuthor from "../BookRelate/BookByAuthor";
+import BookByCategories from "../BookRelate/BookByCategories";
 import "./BookDetails.scss";
 
 function BookDetails() {
   const [productDetails, setProductDetails] = useState([]);
+
+  //Relate
+  const [authorName, setAuthorName] = useState("");
+  const [categoriesName, setCategoriesName] = useState("");
+
   const location = useLocation();
 
   const bookId = location.pathname.split("/")[3];
@@ -28,7 +35,11 @@ function BookDetails() {
     try {
       const response = await productsApi.getBooksById(bookId);
       console.log(response);
+      //Set để render
       setProductDetails([response]);
+      //Thông tin liên quan
+      setAuthorName(response.authors);
+      setCategoriesName(response.categories);
     } catch (error) {
       console.log({ error });
     }
@@ -111,6 +122,8 @@ function BookDetails() {
       <div className="containProducts_title">
         <span>Những cuốn sách liên quan</span>
       </div>
+      <BookByAuthor authorName={authorName} bookId={bookId} />
+      <BookByCategories categoriesName={categoriesName} bookId={bookId} />
     </div>
   );
 }

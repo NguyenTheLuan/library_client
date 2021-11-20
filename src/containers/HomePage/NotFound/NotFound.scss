@@ -8,6 +8,7 @@
   align-items: center;
   gap: 20px;
 
+  background-image: url(../../../assets/images/NotFound.gif);
   font-weight: 100;
   span {
     font-size: 100px;
@@ -17,8 +18,10 @@
     font-size: 30px;
     height: 50px;
 
+    color: white;
     &:hover {
-      border-bottom: 1px solid #000;
+      color: white;
+      border-bottom: 1px solid rgb(255, 255, 255);
     }
   }
 }

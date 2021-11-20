@@ -1,0 +1,36 @@
+.carouselForm {
+  width: 80%;
+
+  display: flex;
+  flex-direction: column;
+
+  legend {
+    text-align: center;
+    padding: 20px 0;
+  }
+  .card {
+    width: 200px;
+    height: 320px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .card-img-top {
+      padding-top: 20px;
+
+      width: 120px;
+      height: 160px;
+    }
+    .card-body {
+      text-align: center;
+    }
+    .card-footer {
+      height: fit-content;
+      button {
+        &:focus {
+          box-shadow: none;
+        }
+      }
+    }
+  }
+}

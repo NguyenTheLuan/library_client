@@ -27,14 +27,14 @@ export const BookHome = () => {
 
   //After search
   useEffect(() => {
-    console.log(books);
+    // console.log(books);
     setBooks(bookUpdate);
   }, [bookUpdate]);
 
   const getAllBooks = async () => {
     try {
       const response = await productsApi.getBooks();
-      console.log(response);
+      // console.log(response);
       setBooks(response.results);
     } catch (error) {
       console.log("err trang getProducts ", error);
