@@ -57,16 +57,14 @@ function BookByCategories({ categoriesName, bookId }) {
   const renderBooks = books?.map((book, index) => {
     if (book.id !== bookId) {
       return (
-        <Card key={index}>
+        <Card key={index} onClick={() => handleViewDetail(book.id)}>
           <Card.Img variant="top" src={book.cover} />
           <Card.Body>
             <Card.Title>{book.title}</Card.Title>
             <Card.Text>{book.categories}</Card.Text>
           </Card.Body>
           <Card.Footer>
-            <Button onClick={() => handleViewDetail(book.id)}>
-              Xem chi tiết
-            </Button>
+            <Button>Xem chi tiết</Button>
           </Card.Footer>
         </Card>
       );

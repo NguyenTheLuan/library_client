@@ -10,8 +10,8 @@ import "./About.scss";
 
 function About() {
   return (
-    <div className="pageContainer" id="about">
-      <div className="pageContainer_contents">
+    <div id="about" className="pageContainer">
+      <div className="pageContainer_contents about">
         <Carousel>
           <Carousel.Item>
             <img className="d-block " src={carousel1} alt="First slide" />

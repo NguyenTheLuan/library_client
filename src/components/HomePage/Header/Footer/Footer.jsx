@@ -19,7 +19,7 @@ function Footer() {
       </div>
       <div className="footer_items">
         <AiOutlineMail className="icon" />
-        <span className="title">Mail: email@gmail</span>
+        <span className="title">Email: email@gmail</span>
       </div>
     </div>
   );

@@ -1,10 +1,13 @@
 .carousel {
+  // padding-top: 80px;
   // margin-top: 190px;
   // margin-top: 180px;
   // padding-top: 160px;
   img {
-    height: 640px;
-    width: 1920px;
+    // height: 650px;
+    height: 92vh;
+    // height: 100vh;
+    width: 100vw;
     object-fit: cover;
   }
 }

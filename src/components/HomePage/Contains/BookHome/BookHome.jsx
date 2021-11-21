@@ -7,8 +7,9 @@ import { useHistory, useRouteMatch } from "react-router";
 import { selectBooks, selectTotalBooks } from "reducers/bookSlice";
 import "./BookHome.scss";
 
-export const BookHome = () => {
+export const BookHome = ({ searchInfo }) => {
   let { path } = useRouteMatch();
+  // console.log(searchInfo);
 
   const bookUpdate = useSelector(selectBooks);
 
@@ -25,15 +26,20 @@ export const BookHome = () => {
     getAllBooks();
   }, []);
 
+  //Khi có categories
+  useEffect(() => {
+    getAllBooks(searchInfo);
+  }, [searchInfo]);
+
   //After search
   useEffect(() => {
     // console.log(books);
     setBooks(bookUpdate);
   }, [bookUpdate]);
 
-  const getAllBooks = async () => {
+  const getAllBooks = async (searchInfo) => {
     try {
-      const response = await productsApi.getBooks();
+      const response = await productsApi.getBooks(searchInfo);
       // console.log(response);
       setBooks(response.results);
     } catch (error) {
@@ -52,8 +58,9 @@ export const BookHome = () => {
         <Card.Body onClick={() => viewDetails(book.id)}>
           <Card.Title>{book.title}</Card.Title>
           <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
+            {/* Some quick example text to build on the card title and make up the
+            bulk of the card's content. */}
+            Tác giả: <strong> {book.authors}</strong>
           </Card.Text>
         </Card.Body>
         <Card.Footer>

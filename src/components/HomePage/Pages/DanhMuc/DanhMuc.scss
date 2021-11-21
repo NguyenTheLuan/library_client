@@ -8,10 +8,30 @@
     text-align: center;
     font-weight: 300;
     font-size: 25px;
-    margin-top: 20px;
+    // margin-top: 20px;
   }
   &_search {
     width: 900px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 10px;
+
+    .searchInput {
+      width: 100%;
+    }
+    .searchChecbox {
+      width: 60%;
+      display: flex;
+      flex-direction: row;
+
+      gap: 40px;
+      select {
+        flex: 1;
+      }
+    }
   }
   &contents {
     width: 900px;

@@ -34,7 +34,7 @@ function BookDetails() {
   const getDetails = async () => {
     try {
       const response = await productsApi.getBooksById(bookId);
-      console.log(response);
+      // console.log(response);
       //Set để render
       setProductDetails([response]);
       //Thông tin liên quan

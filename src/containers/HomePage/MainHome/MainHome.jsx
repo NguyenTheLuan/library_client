@@ -1,10 +1,6 @@
 import BookDetails from "components/HomePage/Contains/BookDetails/BookDetails";
 import Header from "components/HomePage/Header/Header/Header";
-import About from "components/HomePage/Pages/About/About";
-import Contact from "components/HomePage/Pages/Contact/Contact";
-import DanhMuc from "components/HomePage/Pages/DanhMuc/DanhMuc";
 import MainPage from "components/HomePage/Pages/MainPage/MainPage";
-import Rating from "components/HomePage/Pages/Rating/Rating";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import {
@@ -75,7 +71,9 @@ function HomePage() {
         </Switch>
       </div>
 
-      <div className="mainPage_footer">{/* <Footer /> */}</div>
+      {/* <div className="mainPage_footer">
+        <Footer />
+      </div> */}
     </div>
   );
 }

@@ -1,17 +1,33 @@
 .pageContainer {
-  padding-top: 80px;
+  // padding-top: 80px;
 
-  // height: 900px;
-  height: fit-content;
+  height: 900px;
+  // height: fit-content;
   width: 100%;
 
   display: flex;
   justify-content: center;
   align-items: center;
+
+  position: relative;
+
   &:first-child {
     align-items: flex-start;
   }
 
   &_contents {
+    position: absolute;
+  }
+  .about {
+    top: 8%;
+  }
+  .danh-muc {
+    top: 8%;
+  }
+  .rating {
+    top: 0;
+  }
+  .contact {
+    bottom: 0;
   }
 }
