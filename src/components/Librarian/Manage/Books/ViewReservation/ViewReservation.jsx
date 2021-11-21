@@ -2,6 +2,7 @@ import userApi from "apis/userApi";
 import PaginationItems from "components/customComponents/PaginationItems/PaginationItems";
 import React, { useEffect, useState } from "react";
 import { Form, Table, Button } from "react-bootstrap";
+import { IoFastFood } from "react-icons/io5";
 
 import "./ViewResevation.scss";
 
@@ -27,7 +28,8 @@ function ViewReservation() {
   //Khi thay đổi trang
   useEffect(() => {
     getAllUserReservations();
-  }, [page, limitPage]);
+  }, [page, limitPage, name]);
+
   //Khi thay đổi trạng thái
   useEffect(() => {
     setPage(1);
@@ -104,6 +106,9 @@ function ViewReservation() {
 
   return (
     <div className="viewReservation">
+      <legend className="form_name">
+        Quản lý lịch hẹn sách của người dùng
+      </legend>
       <Form className="viewReservation_form" onSubmit={handleSearch}>
         <Form.Group className="viewReservation_form_items">
           <Form.Label className="label">Tên người dùng</Form.Label>
@@ -111,7 +116,13 @@ function ViewReservation() {
             className="control"
             type="text"
             placeholder="Nhập tên người dùng"
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => {
+              if (e.target.value) {
+                setName(e.target.value);
+              } else {
+                setName(" ");
+              }
+            }}
           />
         </Form.Group>
         <Form.Group className="viewReservation_form_items">

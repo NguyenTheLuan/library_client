@@ -73,7 +73,6 @@ $color_font: #fff;
         flex-direction: row;
 
         border-bottom: 1px solid rgb(255, 220, 235);
-        // padding-bottom: 10px;
         padding: 15px 0;
         td {
           flex: 2;
@@ -86,13 +85,7 @@ $color_font: #fff;
         }
         .btnClick {
           background: #3f51b5;
-          // &_icon {
-          //   font-size: 20px;
-          // }
-          // &_name {
-          //   margin-left: 10px;
-          //   line-height: 20px;
-          // }
+
           &:focus {
             box-shadow: none;
           }

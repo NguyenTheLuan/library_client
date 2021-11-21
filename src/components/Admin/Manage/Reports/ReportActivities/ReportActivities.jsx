@@ -81,7 +81,7 @@ function ReportActivities() {
   return (
     <div className="reportContainer">
       <div className="reportContainer_search">
-        <legend className="label">Thống kê hoạt động {renderTime()}</legend>
+        <legend className="label ">Thống kê hoạt động {renderTime()}</legend>
         <div className="date">
           <input type="date" onChange={(e) => handleStartDay(e.target.value)} />
           <input type="date" onChange={(e) => handleEndDay(e.target.value)} />

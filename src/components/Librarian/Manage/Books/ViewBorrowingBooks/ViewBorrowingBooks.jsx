@@ -1,14 +1,23 @@
 import productsApi from "apis/productsApi";
 import PaginationItems from "components/customComponents/PaginationItems/PaginationItems";
 import React, { useEffect, useState } from "react";
-import { Table } from "react-bootstrap";
+import { Form, Table, Button } from "react-bootstrap";
 
 import "../ViewReservation/ViewResevation.scss";
 
 function ViewBorrowingBooks() {
   document.title = "Sách đã cho mượn";
 
+  //Thông tin search
+  const [name, setName] = useState();
+  const [title, setTitle] = useState();
+  //Thông tin để render
   const [borrowing, setBorrowing] = useState([]);
+
+  const handleSearch = () => {
+    console.log("search với info là");
+  };
+
   //Phân trang
   const [totalProducts, setTotalProducts] = useState();
   const [page, setPage] = useState(1);
@@ -24,11 +33,13 @@ function ViewBorrowingBooks() {
 
   useEffect(() => {
     viewBorrowing();
-  }, [page, limitPage]);
+  }, [page, limitPage, name, title]);
 
   const viewBorrowing = async () => {
     try {
       const response = await productsApi.getCopiesBorrowing({
+        user: name,
+        title: title,
         page: page,
         limit: limitPage,
       });
@@ -49,12 +60,12 @@ function ViewBorrowingBooks() {
   const renderBorrowing = borrowing?.map((info, index) => {
     return (
       <tr key={index}>
-        <th>{index + 1 + (page - 1) * limitPage}</th>
-        <th>{info.user?.name}</th>
-        <th>{info.title}</th>
-        <th>{info.categories}</th>
+        <td>{index + 1 + (page - 1) * limitPage}</td>
+        <td>{info.user?.name}</td>
+        <td>{info.title}</td>
+        <td>{info.categories}</td>
         {/* <th>{renderDate(info.borrowedDate)}</th> */}
-        <th>{renderDate(info.dueDate)}</th>
+        <td>{renderDate(info.dueDate)}</td>
       </tr>
     );
   });
@@ -62,6 +73,42 @@ function ViewBorrowingBooks() {
   return (
     <div className="viewReservation">
       <legend className="form_name">Quản lý thông tin sách đã cho mượn</legend>
+      <Form className="viewReservation_form" onSubmit={handleSearch}>
+        <Form.Group className="viewReservation_form_items">
+          <Form.Label className="label">Tên người dùng</Form.Label>
+          <Form.Control
+            className="control"
+            type="text"
+            placeholder="Nhập tên người dùng"
+            onChange={(e) => {
+              if (e.target.value) {
+                setName(e.target.value);
+              } else {
+                setName(" ");
+              }
+            }}
+          />
+        </Form.Group>
+        <Form.Group className="viewReservation_form_items">
+          <Form.Label className="label">Tên sách</Form.Label>
+          <Form.Control
+            className="control"
+            type="text"
+            placeholder="Nhập tên sách đang mượn"
+            onChange={(e) => {
+              if (e.target.value) {
+                setTitle(e.target.value);
+              } else {
+                setTitle(" ");
+              }
+            }}
+          />
+        </Form.Group>
+
+        <Button className="btnSearch" type="submit">
+          Tìm kiếm
+        </Button>
+      </Form>
       <Table bordered hover striped className="viewReservation_table">
         <thead>
           <tr>

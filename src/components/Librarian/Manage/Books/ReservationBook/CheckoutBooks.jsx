@@ -166,6 +166,7 @@ function CheckoutBooks() {
 
   return (
     <div className="checkoutForm">
+      <legend className="form_name">Quản lý mượn sách người dùng</legend>
       {/* Search thông tin user */}
       <div className="checkoutForm_input">
         <FloatingLabel label="Nhập ID của người dùng">

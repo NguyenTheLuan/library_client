@@ -22,19 +22,19 @@ function ReservationReports({ reservationsChart }) {
   // }, [dataChart]);
 
   const renderObj = (reservation) => {
-    // console.log("lấy được", reservation);
+    console.log("lấy được", reservation);
     const {
-      cancelled, // Huỷ hẹn
+      canceled, // Huỷ hẹn
       fulfilled, // Thành công
       new: Tong, // Tổng cộng
       overdue, //QUá hạn
       pending, //Đang chờ
     } = reservation;
 
-    if (!cancelled || !fulfilled || !Tong || !overdue || !pending) {
+    if (!canceled || !fulfilled || !Tong || !overdue || !pending) {
       return;
     }
-    const keyCanceled = Object.keys(cancelled);
+    const keyCanceled = Object.keys(canceled);
     const keyFulfilled = Object.keys(fulfilled);
     const keyTong = Object.keys(Tong);
     const keyOverdue = Object.keys(overdue);
@@ -54,7 +54,7 @@ function ReservationReports({ reservationsChart }) {
     for (var date of set) {
       newObj.push({
         day: date,
-        "Huỷ hẹn": cancelled[date] ? cancelled[date] : 0,
+        "Huỷ hẹn": canceled[date] ? canceled[date] : 0,
         "Thành công": fulfilled[date] ? fulfilled[date] : 0,
         "Tổng cộng": Tong[date] ? Tong[date] : 0,
         "Quá hạn": overdue[date] ? overdue[date] : 0,
@@ -62,6 +62,7 @@ function ReservationReports({ reservationsChart }) {
       });
     }
     newObj.sort(day_sort);
+    // console.log("sau khi sắp xếp", newObj);
     setDataChart(newObj);
   };
 

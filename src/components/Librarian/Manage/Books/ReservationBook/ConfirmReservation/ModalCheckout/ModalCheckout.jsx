@@ -57,7 +57,12 @@ function ModalCheckout({ userId, isShow, onShow, update, onUpdate }) {
 
   const handleCheckout = () => {
     // console.log("Tiến hành cho mượn", book);
-    checkoutBooks();
+
+    if (book) {
+      checkoutBooks();
+    } else {
+      alert("Chưa có cuốn nào");
+    }
   };
 
   return (
