@@ -9,8 +9,6 @@ function ModalUpdateBookById({ isShow, onShow, bookDetails }) {
     return onShow(false);
   };
 
-  // console.log(bookDetails);
-
   //Tên sách
   const [title, setTitle] = useState(bookDetails.title);
   //Số ngày mượn
@@ -37,7 +35,11 @@ function ModalUpdateBookById({ isShow, onShow, bookDetails }) {
     const bookId = bookDetails.id;
 
     const formData = new FormData();
-    // formData.append("cover", postImage);
+
+    if (postImage) {
+      formData.append("cover", postImage);
+    }
+
     formData.append("title", title);
     formData.append("loanPeriodDays", loanPeriodDays);
     // formData.append("copies", copies);
@@ -69,6 +71,7 @@ function ModalUpdateBookById({ isShow, onShow, bookDetails }) {
         </Modal.Header>
         <Modal.Body>
           <Form className="formMenu">
+            {/* Tên sách */}
             <Form.Group className="formMenu_items">
               <Form.Label className="formMenu_items_label">Tên sách</Form.Label>
               <Form.Control
@@ -79,6 +82,7 @@ function ModalUpdateBookById({ isShow, onShow, bookDetails }) {
                 onChange={(e) => setTitle(e.target.value)}
               />
             </Form.Group>
+            {/* Ảnh bìa */}
             <Form.Group className="formMenu_items">
               <Form.Label className="formMenu_items_label">Ảnh bìa</Form.Label>
               <Form.Control
@@ -88,6 +92,7 @@ function ModalUpdateBookById({ isShow, onShow, bookDetails }) {
                 onChange={handleImgPost}
               />
             </Form.Group>
+            {/* Tác giả */}
             <Form.Group className="formMenu_items">
               <Form.Label className="formMenu_items_label">Tác giả</Form.Label>
               <Form.Control
@@ -98,6 +103,7 @@ function ModalUpdateBookById({ isShow, onShow, bookDetails }) {
                 onChange={(e) => setAuthors(e.target.value)}
               />
             </Form.Group>
+            {/* Thể loại */}
             <Form.Group className="formMenu_items">
               <Form.Label className="formMenu_items_label">Thể loại</Form.Label>
               <Form.Control
@@ -108,6 +114,7 @@ function ModalUpdateBookById({ isShow, onShow, bookDetails }) {
                 onChange={(e) => setCategories(e.target.value)}
               />
             </Form.Group>
+            {/* Mô tả */}
             <Form.Group className="formMenu_items">
               <Form.Label className="formMenu_items_label">Mô tả</Form.Label>
               <Form.Control
@@ -118,6 +125,7 @@ function ModalUpdateBookById({ isShow, onShow, bookDetails }) {
                 onChange={(e) => setDescription(e.target.value)}
               />
             </Form.Group>
+            {/* Số ngày mượn */}
             <Form.Group className="formMenu_items">
               <Form.Label className="formMenu_items_label">
                 Số ngày mượn sách

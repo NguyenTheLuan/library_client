@@ -18,7 +18,7 @@ import "components/Admin/Manage/ViewForm.scss";
 function ViewBooks() {
   document.title = "Thông tin sách thư viện";
 
-  const books = useSelector(selectBooks);
+  // const books = useSelector(selectBooks);
   //Để search
   const [searchInfo, setSearchInfo] = useState();
   //Để render
@@ -58,9 +58,9 @@ function ViewBooks() {
   }, [newPage, limitPage, searchInfo, update]);
 
   //Lần 2 reset sau khi search
-  useEffect(() => {
-    setProducts(books);
-  }, [books]);
+  // useEffect(() => {
+  //   setProducts(books);
+  // }, [books]);
 
   //render components
   const imgShow = (img) => {
@@ -123,7 +123,13 @@ function ViewBooks() {
           />
         </td>
         <td>
-          <DeleteBooks bookId={bookDetails.id} bookName={bookDetails.title} />
+          <DeleteBooks
+            bookId={bookDetails.id}
+            bookName={bookDetails.title}
+            onUpdate={handleUpdate}
+            update={update}
+            onChangePage={handleChangePage}
+          />
         </td>
         <td>
           <ViewBookDetails bookDetails={bookDetails} />

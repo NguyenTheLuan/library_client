@@ -1,5 +1,5 @@
 import productsApi from "apis/productsApi";
-import React, { useEffect, useState } from "react";
+import React, { useRef, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { GoSearch } from "react-icons/go";
 import { useDispatch } from "react-redux";
@@ -7,6 +7,9 @@ import { getBooks } from "reducers/bookSlice";
 import "./SearchForm.scss";
 
 function SearchForm() {
+  //Debounce typing
+  const typingRef = useRef(null);
+
   const [searchInfo, setSearchInfo] = useState("");
   const dispatch = useDispatch();
 
@@ -19,6 +22,19 @@ function SearchForm() {
     } catch (error) {
       console.log("lỗi tại search", { error });
     }
+  };
+
+  const handleSearchByName = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    if (typingRef.current) {
+      clearTimeout(typingRef.current);
+    }
+
+    typingRef.current = setTimeout(() => {
+      setSearchInfo({ [name]: value });
+    }, 500);
   };
 
   const resetValue = () => {
@@ -41,7 +57,7 @@ function SearchForm() {
             className="inputForm_items_control"
             type="input"
             placeholder="Nhập tên sách bạn muốn tìm"
-            onChange={(e) => setSearchInfo({ [e.target.name]: e.target.value })}
+            onChange={handleSearchByName}
           ></Form.Control>
           <Button className="inputForm_button" type="submit">
             <GoSearch />

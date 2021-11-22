@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { selectUser } from "reducers/authSlice";
@@ -8,6 +8,9 @@ import { FcSearch } from "react-icons/fc";
 import "./SearchForm.scss";
 
 function SearchUsersAdmin({ onChangeInfo }) {
+  //Debounce typing
+  const typingRef = useRef(null);
+
   //Search Form
   const [searchInfo, setSearchInfo] = useState({});
 
@@ -39,6 +42,26 @@ function SearchUsersAdmin({ onChangeInfo }) {
 
   const handleChangeInfo = () => {
     onChangeInfo(searchInfo);
+  };
+
+  const handleSearchByName = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    if (typingRef.current) {
+      clearTimeout(typingRef.current);
+    }
+
+    typingRef.current = setTimeout(() => {
+      if (value !== "") {
+        setSearchInfo({
+          ...searchInfo,
+          [name]: value,
+        });
+      } else {
+        setSearchInfo({ ...searchInfo, [name]: " " });
+      }
+    }, 500);
   };
 
   return (
@@ -103,19 +126,7 @@ function SearchUsersAdmin({ onChangeInfo }) {
             name="name"
             className="inputForm_items_control"
             placeholder="Nhập tên người dùng"
-            onChange={(e) => {
-              if (e.target.value !== "") {
-                setSearchInfo({
-                  ...searchInfo,
-                  [e.target.name]: e.target.value,
-                });
-              } else {
-                setSearchInfo({
-                  ...searchInfo,
-                  [e.target.name]: " ",
-                });
-              }
-            }}
+            onChange={handleSearchByName}
           />
         </Form.Group>
         <Button

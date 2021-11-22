@@ -1,17 +1,14 @@
 import productsApi from "apis/productsApi";
+import "components/Admin/Manage/AddForm.scss";
+import CheckBoxAuthor from "components/customComponents/CheckBoxItems/CheckBoxAuthor";
+import CheckBoxCategory from "components/customComponents/CheckBoxItems/CheckBoxCategory";
 import React, { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { addBookById, getBooks } from "reducers/bookSlice";
-import CheckBoxAuthor from "components/customComponents/CheckBoxItems/CheckBoxAuthor";
-import CheckBoxCategory from "components/customComponents/CheckBoxItems/CheckBoxCategory";
-
-import "components/Admin/Manage/AddForm.scss";
 
 function AddBooks({ isShow, onShow }) {
   // const [bookCreate, setBookCreate] = useState({});
 
-  const dispatch = useDispatch();
   //Tên sách
   const [title, setTitle] = useState("");
   //Số ngày mượn

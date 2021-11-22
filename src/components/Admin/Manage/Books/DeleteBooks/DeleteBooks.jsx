@@ -4,13 +4,15 @@ import { Button } from "react-bootstrap";
 
 import { GoTrashcan } from "react-icons/go";
 
-function DeleteBooks({ bookId, bookName }) {
+function DeleteBooks({ bookId, bookName, onUpdate, update, onChangePage }) {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
 
   //Nhận props từ con
   const onShow = (isShow) => {
     setShow(isShow);
+    onUpdate(!update);
+    onChangePage(1);
   };
 
   return (

@@ -2,7 +2,6 @@ import React from "react";
 import { Modal, Button } from "react-bootstrap";
 
 function ModalViewBookDetails({ isShow, onShow, bookDetails }) {
-  //   console.log(bookDetails);
   const handleClose = () => {
     return onShow(false);
   };
@@ -11,6 +10,15 @@ function ModalViewBookDetails({ isShow, onShow, bookDetails }) {
   const countCopies = (copies) => {
     return copies?.length;
   };
+  const checkCopiesBooks = (copies) => {
+    console.log(copies);
+    return copies.map((copy) => {
+      if (copy.status === "available") {
+        return <span> {copy._id}</span>;
+      }
+    });
+  };
+
   const renderImg = (img) => {
     return <img src={img} alt="img" />;
   };
@@ -40,6 +48,10 @@ function ModalViewBookDetails({ isShow, onShow, bookDetails }) {
           <div>
             <strong>Số lượng còn lại</strong> {bookDetails.availableCopies}/
             {countCopies(bookDetails.copies)}
+          </div>
+          <div>
+            <strong>Mã sách còn trống: </strong>
+            {checkCopiesBooks(bookDetails.copies)}
           </div>
         </div>
       </div>

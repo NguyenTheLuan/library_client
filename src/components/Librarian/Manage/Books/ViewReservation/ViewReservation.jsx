@@ -1,13 +1,14 @@
 import userApi from "apis/userApi";
 import PaginationItems from "components/customComponents/PaginationItems/PaginationItems";
-import React, { useEffect, useState } from "react";
-import { Form, Table, Button } from "react-bootstrap";
-import { IoFastFood } from "react-icons/io5";
-
+import React, { useEffect, useRef, useState } from "react";
+import { Button, Form, Table } from "react-bootstrap";
 import "./ViewResevation.scss";
 
 function ViewReservation() {
   document.title = "Lịch hẹn người dùng";
+
+  //Debounce typing
+  const typingRef = useRef(null);
 
   const [status, setStatus] = useState("pending");
   const [name, setName] = useState();
@@ -37,6 +38,7 @@ function ViewReservation() {
   }, [status]);
 
   const getAllUserReservations = async () => {
+    console.log(name);
     try {
       const response = await userApi.getUserReservation({
         status: status,
@@ -104,6 +106,22 @@ function ViewReservation() {
     getAllUserReservations();
   };
 
+  const handleSearchByName = (e) => {
+    const value = e.target.value;
+
+    if (typingRef.current) {
+      clearTimeout(typingRef.current);
+    }
+
+    typingRef.current = setTimeout(() => {
+      if (value !== "") {
+        setName(value);
+      } else {
+        setName(" ");
+      }
+    }, 500);
+  };
+
   return (
     <div className="viewReservation">
       <legend className="form_name">
@@ -116,13 +134,7 @@ function ViewReservation() {
             className="control"
             type="text"
             placeholder="Nhập tên người dùng"
-            onChange={(e) => {
-              if (e.target.value) {
-                setName(e.target.value);
-              } else {
-                setName(" ");
-              }
-            }}
+            onChange={handleSearchByName}
           />
         </Form.Group>
         <Form.Group className="viewReservation_form_items">

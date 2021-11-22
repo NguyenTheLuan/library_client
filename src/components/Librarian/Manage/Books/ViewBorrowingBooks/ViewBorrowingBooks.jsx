@@ -1,21 +1,24 @@
 import productsApi from "apis/productsApi";
 import PaginationItems from "components/customComponents/PaginationItems/PaginationItems";
-import React, { useEffect, useState } from "react";
-import { Form, Table, Button } from "react-bootstrap";
-
+import React, { useEffect, useRef, useState } from "react";
+import { Button, Form, Table } from "react-bootstrap";
 import "../ViewReservation/ViewResevation.scss";
 
 function ViewBorrowingBooks() {
   document.title = "Sách đã cho mượn";
 
+  //Debounce typing
+  const typingRef = useRef(null);
+
   //Thông tin search
-  const [name, setName] = useState();
-  const [title, setTitle] = useState();
+  const [searchInfo, setSearchInfo] = useState({});
+
   //Thông tin để render
   const [borrowing, setBorrowing] = useState([]);
 
-  const handleSearch = () => {
-    console.log("search với info là");
+  const handleSearch = (e) => {
+    e.preventDefault();
+    // console.log("search với info là");
   };
 
   //Phân trang
@@ -33,16 +36,17 @@ function ViewBorrowingBooks() {
 
   useEffect(() => {
     viewBorrowing();
-  }, [page, limitPage, name, title]);
+  }, [page, limitPage, searchInfo]);
 
   const viewBorrowing = async () => {
+    const params = {
+      ...searchInfo,
+      page: page,
+      limit: limitPage,
+    };
+
     try {
-      const response = await productsApi.getCopiesBorrowing({
-        user: name,
-        title: title,
-        page: page,
-        limit: limitPage,
-      });
+      const response = await productsApi.getCopiesBorrowing(params);
       console.log(response);
       setBorrowing(response.results);
       setTotalProducts(response.totalResults);
@@ -70,6 +74,29 @@ function ViewBorrowingBooks() {
     );
   });
 
+  const handleSearchByName = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    if (typingRef.current) {
+      clearTimeout(typingRef.current);
+    }
+
+    typingRef.current = setTimeout(() => {
+      if (value !== "") {
+        setSearchInfo({
+          ...searchInfo,
+          [name]: value,
+        });
+      } else {
+        setSearchInfo({
+          ...searchInfo,
+          [name]: " ",
+        });
+      }
+    }, 500);
+  };
+
   return (
     <div className="viewReservation">
       <legend className="form_name">Quản lý thông tin sách đã cho mượn</legend>
@@ -78,34 +105,24 @@ function ViewBorrowingBooks() {
           <Form.Label className="label">Tên người dùng</Form.Label>
           <Form.Control
             className="control"
+            name="user"
             type="text"
             placeholder="Nhập tên người dùng"
-            onChange={(e) => {
-              if (e.target.value) {
-                setName(e.target.value);
-              } else {
-                setName(" ");
-              }
-            }}
+            onChange={handleSearchByName}
           />
         </Form.Group>
         <Form.Group className="viewReservation_form_items">
           <Form.Label className="label">Tên sách</Form.Label>
           <Form.Control
+            name="title"
             className="control"
             type="text"
             placeholder="Nhập tên sách đang mượn"
-            onChange={(e) => {
-              if (e.target.value) {
-                setTitle(e.target.value);
-              } else {
-                setTitle(" ");
-              }
-            }}
+            onChange={handleSearchByName}
           />
         </Form.Group>
 
-        <Button className="btnSearch" type="submit">
+        <Button className="btnSearch" type="submit" onClick={viewBorrowing}>
           Tìm kiếm
         </Button>
       </Form>

@@ -1,7 +1,7 @@
 import AddBooks from "components/Admin/Manage/Books/AddBooks/AddBooks";
 import CheckBoxAuthor from "components/customComponents/CheckBoxItems/CheckBoxAuthor";
 import CheckBoxCategory from "components/customComponents/CheckBoxItems/CheckBoxCategory";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { BsPlusLg } from "react-icons/bs";
 import { GoSearch } from "react-icons/go";
@@ -9,6 +9,9 @@ import { GoSearch } from "react-icons/go";
 import "./SearchForm.scss";
 
 function SearchBooksAdmin({ onChangeInfo, onUpdate, update }) {
+  //Debounce typing
+  const typingRef = useRef(null);
+
   //Search Form
   const [searchInfo, setSearchInfo] = useState({});
 
@@ -46,6 +49,22 @@ function SearchBooksAdmin({ onChangeInfo, onUpdate, update }) {
     e.preventDefault();
   };
 
+  const handleSearchByName = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    if (typingRef.current) {
+      clearTimeout(typingRef.current);
+    }
+
+    typingRef.current = setTimeout(() => {
+      setSearchInfo({
+        ...searchInfo,
+        [name]: value,
+      });
+    }, 500);
+  };
+
   return (
     <>
       <Form className="formSearch" onSubmit={handleForm}>
@@ -57,12 +76,7 @@ function SearchBooksAdmin({ onChangeInfo, onUpdate, update }) {
               name="title"
               className="inputForm_items_control"
               placeholder="Nhập tên sách bạn muốn tìm"
-              onChange={(e) => {
-                setSearchInfo({
-                  ...searchInfo,
-                  [e.target.name]: e.target.value,
-                });
-              }}
+              onChange={handleSearchByName}
             />
           </Form.Group>
           {/* Nút tìm kiếm */}

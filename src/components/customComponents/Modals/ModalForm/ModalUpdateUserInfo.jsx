@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import adminApi from "apis/adminApi";
 import "./ModalsForm.scss";
@@ -7,7 +7,7 @@ function ModalUpdateUserInfo({ isShow, onShow, userInfo }) {
   const [email, setEmail] = useState(userInfo.email);
   const [name, setName] = useState(userInfo.name);
   const [status, setStatus] = useState(userInfo.status);
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState(null);
   const [show, setShow] = useState(false);
 
   //Thiết lập cho cha
@@ -15,15 +15,28 @@ function ModalUpdateUserInfo({ isShow, onShow, userInfo }) {
     return onShow(false);
   };
 
+  useEffect(() => {
+    handlePassWord();
+  }, [password]);
+
+  const handlePassWord = () => {
+    if (password) {
+      return { password: password };
+    } else {
+      return null;
+    }
+  };
+
   const updateUserInfo = async () => {
     //id user
     const userId = userInfo.id;
+    const password = handlePassWord();
     //data update
     const bookInfo = {
       name: name,
       email: email,
       status: status,
-      // password: password,
+      ...password,
     };
 
     try {
@@ -39,8 +52,7 @@ function ModalUpdateUserInfo({ isShow, onShow, userInfo }) {
   };
 
   const handleClick = () => {
-    console.log("update user", userInfo.id, { password, status, name });
-
+    // console.log("update user", userInfo.id, { password, status, name });
     updateUserInfo();
   };
 
@@ -101,8 +113,9 @@ function ModalUpdateUserInfo({ isShow, onShow, userInfo }) {
                 type="password"
                 placeholder="Nhập mật khẩu"
                 className="formMenu_items_control"
-                onChange={(e) => setPassword(e.target.value)}
-                disabled={show}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
               />
             </Form.Group>
           </Form>
