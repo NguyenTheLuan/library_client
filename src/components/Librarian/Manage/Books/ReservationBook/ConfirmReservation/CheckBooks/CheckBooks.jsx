@@ -4,7 +4,7 @@ import { Button, FloatingLabel, Form, Table } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { addCarts } from "reducers/librarianSlice";
 
-function CheckBooks({ userId }) {
+function CheckBooks({ userId, onHandleShow }) {
   const [bookId, setBookId] = useState("");
   //Set thông tin copies sách
   const [copies, setCopies] = useState();
@@ -12,6 +12,10 @@ function CheckBooks({ userId }) {
   const [bookIdInfo, setBookIdInfo] = useState();
 
   const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   console.log(bookId);
+  // }, [bookId]);
 
   // useEffect(() => {
   //   // console.log("đã search được thông tin bookInfoId", bookIdInfo);
@@ -23,7 +27,7 @@ function CheckBooks({ userId }) {
   const getInfoCopies = async () => {
     try {
       const response = await productsApi.getCheckCopies(bookId);
-      // console.log("đã lấy ra thông tin sách", response);
+      console.log("đã lấy ra thông tin sách", response);
       setCopies([response]);
     } catch (error) {
       console.log("lỗi rồi", { error });
@@ -41,6 +45,12 @@ function CheckBooks({ userId }) {
     }
   };
 
+  //btn handle
+  const handleAddCarts = (copiesId) => {
+    dispatch(addCarts(copiesId));
+    onHandleShow(false);
+  };
+
   //render components
   // const renderDate = (time) => {
   //   const date = new Date(time);
@@ -51,25 +61,34 @@ function CheckBooks({ userId }) {
     getInfoId(bookId);
   };
 
-  const renderBtnCopies = (status, copiesId, bookId) => {
-    console.log(copiesId);
-    if (status === "borrowed" || status === "reserved") {
-      return (
-        <>
-          <Button disabled>Không đặt được</Button>
-          <Button variant="secondary" onClick={() => checkBookById(bookId)}>
-            Tìm kiếm bằng ID
+  const renderBtnCopies = (status, copiesId, bookId, usersId) => {
+    const checkUser = usersId.every((user) => user.id !== userId);
+    if (checkUser) {
+      if (status === "borrowed" || status === "reserved") {
+        return (
+          <>
+            <Button disabled>Đã có người đặt</Button>
+            <Button variant="secondary" onClick={() => checkBookById(bookId)}>
+              Tìm kiếm bằng ID
+            </Button>
+            {checkBookById(bookId)}
+          </>
+        );
+      } else {
+        return (
+          <Button
+            variant="success"
+            type="checkbox"
+            onClick={() => handleAddCarts(copiesId)}
+          >
+            Chọn sách
           </Button>
-        </>
-      );
+        );
+      }
     } else {
       return (
-        <Button
-          variant="success"
-          type="checkbox"
-          onClick={() => dispatch(addCarts(copiesId))}
-        >
-          Chọn sách
+        <Button disabled variant="secondary">
+          Bạn đã đặt rồi
         </Button>
       );
     }
@@ -95,13 +114,20 @@ function CheckBooks({ userId }) {
     }
   };
   const renderUser = (user) => {
-    // console.log("user", user);
-    if (userId === user) {
-      return <>Bạn</>;
-    } else if (!user) {
-      return <></>;
-    } else {
-      return <> Đã có</>;
+    // console.log("user sdsad", user);
+    //Nếu không có user
+    if (!user) {
+      return <>Đang trống</>;
+    }
+    //Nếu đã có => checkId
+    else {
+      if (user._id === userId) {
+        return <>Bạn</>;
+      } else if (!user._id) {
+        return <></>;
+      } else {
+        return <> Đã có</>;
+      }
     }
   };
   const renderStatus = (status) => {
@@ -125,8 +151,8 @@ function CheckBooks({ userId }) {
         <td>{copy.title}</td>
         {/* <td>{copy.id}</td> */}
         {/* <td>{copy.book}</td> */}
-        <td>{renderUser(copy.user._id)}</td>
-        <td>{renderBtnCopies(copy.status, copy.id, copy.book)}</td>
+        <td>{renderUser(copy.user)}</td>
+        <td>{renderBtnCopies(copy.status, copy.id, copy.book, copy.users)}</td>
       </tr>
     );
   });
@@ -167,7 +193,8 @@ function CheckBooks({ userId }) {
                   <th>Tên sách</th>
 
                   <th>Người mượn</th>
-                  <th>Chọn sách</th>
+                  {/* <th>Chọn sách</th> */}
+                  <th></th>
                 </tr>
               </thead>
               <tbody>{renderCopies}</tbody>

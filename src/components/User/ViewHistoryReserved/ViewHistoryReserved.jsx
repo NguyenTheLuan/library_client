@@ -1,4 +1,5 @@
 import userApi from "apis/userApi";
+import { renderDate } from "constants/RenderDate";
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
@@ -23,10 +24,6 @@ function ViewHistoryReserved() {
       console.log("lỗi rồi", { error });
     }
   };
-  const renderTime = (time) => {
-    const date = new Date(time);
-    return date.toLocaleString();
-  };
 
   const renderReservation = () => {
     if (reservationInfo.length === 0) {
@@ -40,7 +37,7 @@ function ViewHistoryReserved() {
             <td>{info.title}</td>
             <td>{info.authors}</td>
             <td>{info.categories}</td>
-            <td>{renderTime(info.dueDate)}</td>
+            <td>{renderDate(info.dueDate)}</td>
           </tr>
         );
       });

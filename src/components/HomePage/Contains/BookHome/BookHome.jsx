@@ -38,8 +38,12 @@ export const BookHome = ({ searchInfo }) => {
   }, [bookUpdate]);
 
   const getAllBooks = async (searchInfo) => {
+    const params = {
+      ...searchInfo,
+      limit: 8,
+    };
     try {
-      const response = await productsApi.getBooks(searchInfo);
+      const response = await productsApi.getBooks(params);
       // console.log(response);
       setBooks(response.results);
     } catch (error) {
@@ -60,7 +64,8 @@ export const BookHome = ({ searchInfo }) => {
           <Card.Text>
             {/* Some quick example text to build on the card title and make up the
             bulk of the card's content. */}
-            Tác giả: <strong> {book.authors}</strong>
+            Tác giả: <strong> {book.authors}</strong> <br />
+            Thể loại: <strong> {book.categories}</strong>
           </Card.Text>
         </Card.Body>
         <Card.Footer>

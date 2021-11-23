@@ -14,6 +14,8 @@ function Login() {
     password: "12345678",
   });
   const [err, setErr] = useState("");
+  const [show, setShow] = useState(false);
+
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -36,7 +38,7 @@ function Login() {
       user && checkRoute(user);
     } catch (error) {
       console.log("err", { error });
-      // setErr(error.response.data.message);
+      setErr("Tài khoản hoặc mật khẩu không chính xác");
     }
   };
 
@@ -99,7 +101,7 @@ function Login() {
               value={userLogin.password}
               name="password"
               className="mb-3 formMenu_items_value"
-              type="password"
+              type={show ? "text" : "password"}
               placeholder="Nhập Mật Khẩu"
               onChange={(e) =>
                 setUserLogin({ ...userLogin, [e.target.name]: e.target.value })
@@ -114,7 +116,11 @@ function Login() {
             className="mb-3 formMenu_items"
             controlId="formBasicCheckbox"
           >
-            <Form.Check type="checkbox" label="Duy Trì Đăng Nhập" />
+            <Form.Check
+              type="checkbox"
+              label="Hiển thị mật khẩu"
+              onChange={() => setShow(!show)}
+            />
           </Form.Group>
           <Button
             className=" mb-3 formMenu_btn"

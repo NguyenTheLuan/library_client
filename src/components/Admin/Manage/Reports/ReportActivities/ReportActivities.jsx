@@ -1,4 +1,5 @@
 import reportsApi from "apis/reportsApi";
+import { renderDateSearch } from "constants/RenderDate";
 import React, { useEffect, useState } from "react";
 import BookReports from "./BookReports/BookReports";
 import BooksReportsOverall from "./BookReports/BooksReportsOverall";
@@ -6,7 +7,6 @@ import ReservationReports from "./ReservationReports/ReservationReports";
 import ReservationReportsOverall from "./ReservationReports/ReservationReportsOverall";
 import UserReports from "./UserReports/UserReports";
 import UserReportsOverall from "./UserReports/UserReportsOverall";
-
 import "./ReportActivities.scss";
 
 function ReportActivities() {
@@ -54,25 +54,20 @@ function ReportActivities() {
   const handleEndDay = (time) => {
     setEndDay(time);
   };
-  //render time
-  const renderDate = (time) => {
-    // console.log(time);
-    return time.split("-").reverse().join("-");
-  };
 
   const renderTime = () => {
     if (startDay) {
       if (endDay) {
         return (
           <>
-            từ ngày <strong>{renderDate(startDay)}</strong> đến ngày
-            <strong> {renderDate(endDay)}</strong>
+            từ ngày <strong>{renderDateSearch(startDay)}</strong> đến ngày
+            <strong> {renderDateSearch(endDay)}</strong>
           </>
         );
       }
       return (
         <>
-          từ ngày <strong>{renderDate(startDay)}</strong> đến nay
+          từ ngày <strong>{renderDateSearch(startDay)}</strong> đến nay
         </>
       );
     }

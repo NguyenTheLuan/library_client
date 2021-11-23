@@ -1,5 +1,6 @@
 import userApi from "apis/userApi";
 import PaginationItems from "components/customComponents/PaginationItems/PaginationItems";
+import { renderDate } from "constants/RenderDate";
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Form, Table } from "react-bootstrap";
 import "./ViewResevation.scss";
@@ -72,10 +73,7 @@ function ViewReservation() {
         return <>Đã huỷ </>;
     }
   };
-  const renderDate = (time) => {
-    const date = new Date(time);
-    return <>{date.toLocaleString()}</>;
-  };
+
   const renderBooks = (books) => {
     // console.log(books);
     return books?.map((book) => {

@@ -1,5 +1,6 @@
 import productsApi from "apis/productsApi";
 import PaginationItems from "components/customComponents/PaginationItems/PaginationItems";
+import { renderDate } from "constants/RenderDate";
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Form, Table } from "react-bootstrap";
 import "../ViewReservation/ViewResevation.scss";
@@ -12,6 +13,7 @@ function ViewBorrowingBooks() {
 
   //Thông tin search
   const [searchInfo, setSearchInfo] = useState({});
+  const [sortBy, setSortBy] = useState();
 
   //Thông tin để render
   const [borrowing, setBorrowing] = useState([]);
@@ -36,11 +38,12 @@ function ViewBorrowingBooks() {
 
   useEffect(() => {
     viewBorrowing();
-  }, [page, limitPage, searchInfo]);
+  }, [page, limitPage, searchInfo, sortBy]);
 
   const viewBorrowing = async () => {
     const params = {
       ...searchInfo,
+      sortBy: sortBy,
       page: page,
       limit: limitPage,
     };
@@ -55,17 +58,12 @@ function ViewBorrowingBooks() {
     }
   };
 
-  //render date
-  const renderDate = (time) => {
-    const date = new Date(time);
-    return date.toLocaleString();
-  };
-
   const renderBorrowing = borrowing?.map((info, index) => {
     return (
       <tr key={index}>
         <td>{index + 1 + (page - 1) * limitPage}</td>
         <td>{info.user?.name}</td>
+        <td>{info.id}</td>
         <td>{info.title}</td>
         <td>{info.categories}</td>
         {/* <th>{renderDate(info.borrowedDate)}</th> */}
@@ -121,6 +119,16 @@ function ViewBorrowingBooks() {
             onChange={handleSearchByName}
           />
         </Form.Group>
+        <Form.Group className="viewReservation_form_items">
+          <Form.Label className="label">Ngày mượn sách</Form.Label>
+          <Form.Select
+            className="control"
+            onChange={(e) => setSortBy(e.target.value)}
+          >
+            <option value="dueDate:asc">Tăng dần</option>
+            <option value="dueDate:desc">Giảm dần</option>
+          </Form.Select>
+        </Form.Group>
 
         <Button className="btnSearch" type="submit" onClick={viewBorrowing}>
           Tìm kiếm
@@ -130,7 +138,8 @@ function ViewBorrowingBooks() {
         <thead>
           <tr>
             <th>STT</th>
-            <th>Người mượn</th>
+            <th>Người đang mượn</th>
+            <th>Mã sách</th>
             <th>Tên sách</th>
             <th>Thể loại</th>
             {/* <th>Ngày mượn</th> */}

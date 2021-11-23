@@ -1,4 +1,5 @@
 import userApi from "apis/userApi";
+import { renderDate } from "constants/RenderDate";
 import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
@@ -17,11 +18,6 @@ function Reservation() {
     isUser && getReservation();
   }, [update]);
 
-  //render components
-  const timeDate = (time) => {
-    const date = new Date(time);
-    return <>{date.toLocaleString()}</>;
-  };
   const checkStatus = (status) => {
     switch (status) {
       case "expired":
@@ -94,10 +90,10 @@ function Reservation() {
           {showBooks(details.books)}
         </th>
         <th className="cartTable_contents_rows_times">
-          {timeDate(details.createdDate)}
+          {renderDate(details.createdDate)}
         </th>
         <th className="cartTable_contents_rows_times">
-          {timeDate(details.dueDate)}
+          {renderDate(details.dueDate)}
         </th>
         <th>{cancelButton(details.status, details.id)}</th>
       </tr>

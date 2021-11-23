@@ -24,7 +24,7 @@ function DanhMuc() {
     <div id="danh-muc-sach" className="pageContainer">
       <div className="pageContainer_contents danh-muc">
         <div className="categoriesForm">
-          <legend className="form_name">Danh mục sách</legend>
+          <legend className="form_name">Danh mục thông tin các sách</legend>
           <div className="categoriesForm_search">
             <div className="searchInput">
               <SearchForm />

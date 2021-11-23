@@ -11,15 +11,14 @@ import {
 function ModalCheckout({ userId, isShow, onShow, update, onUpdate }) {
   const dispatch = useDispatch();
 
+  const [book, setBook] = useState();
   const booksCart = useSelector(selectCartCheckout);
 
-  const [book, setBook] = useState();
   useEffect(() => {
     setBook(booksCart);
   }, [booksCart]);
 
   const handleClose = () => {
-    // onUpdate(!update);
     onShow(false);
   };
 
@@ -57,8 +56,7 @@ function ModalCheckout({ userId, isShow, onShow, update, onUpdate }) {
 
   const handleCheckout = () => {
     // console.log("Tiến hành cho mượn", book);
-
-    if (book) {
+    if (book.length > 0) {
       checkoutBooks();
     } else {
       alert("Chưa có cuốn nào");

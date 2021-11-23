@@ -57,24 +57,39 @@ function BookByAuthor({ authorName, bookId }) {
   const renderBooks = books?.map((book, index) => {
     if (book.id !== bookId) {
       return (
-        <Card key={index} onClick={() => handleViewDetail(book.id)}>
+        <Card key={index}>
           <Card.Img variant="top" src={book.cover} />
           <Card.Body>
             <Card.Title>{book.title}</Card.Title>
-            <Card.Text>{book.authors}</Card.Text>
+            <Card.Text>
+              <strong>Tác giả </strong>
+              {book.authors}
+              <br /> <strong>Thể loại </strong>
+              {book.categories}
+            </Card.Text>
           </Card.Body>
           <Card.Footer>
-            <Button>Xem chi tiết</Button>
+            <Button onClick={() => handleViewDetail(book.id)}>
+              Xem chi tiết
+            </Button>
           </Card.Footer>
         </Card>
       );
     }
   });
 
+  const renderCarousel = () => {
+    if (books.length > 1) {
+      return <Carousel breakPoints={breakPoints}>{renderBooks}</Carousel>;
+    } else {
+      return <span className="notFindRelate">Tạm thời chưa có cuốn nào</span>;
+    }
+  };
+
   return (
     <div className="carouselForm">
-      <legend>Cùng tác giả {authorName}</legend>
-      <Carousel breakPoints={breakPoints}>{renderBooks}</Carousel>
+      <legend>Những sách cùng chung tác giả: {authorName}</legend>
+      {renderCarousel()}
     </div>
   );
 }

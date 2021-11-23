@@ -1,4 +1,5 @@
 import productsApi from "apis/productsApi";
+import Footer from "components/HomePage/Header/Footer/Footer";
 import React, { useEffect, useState } from "react";
 import { Card, Button } from "react-bootstrap";
 import Carousel from "react-elastic-carousel";
@@ -57,25 +58,43 @@ function BookByCategories({ categoriesName, bookId }) {
   const renderBooks = books?.map((book, index) => {
     if (book.id !== bookId) {
       return (
-        <Card key={index} onClick={() => handleViewDetail(book.id)}>
+        <Card key={index}>
           <Card.Img variant="top" src={book.cover} />
           <Card.Body>
             <Card.Title>{book.title}</Card.Title>
-            <Card.Text>{book.categories}</Card.Text>
+            <Card.Text>
+              <strong>Tác giả </strong>
+              {book.authors}
+              <br /> <strong>Thể loại </strong>
+              {book.categories}
+            </Card.Text>
           </Card.Body>
           <Card.Footer>
-            <Button>Xem chi tiết</Button>
+            <Button onClick={() => handleViewDetail(book.id)}>
+              Xem chi tiết
+            </Button>
           </Card.Footer>
         </Card>
       );
     }
   });
 
+  const renderCarousel = () => {
+    if (books.length > 1) {
+      return <Carousel breakPoints={breakPoints}>{renderBooks}</Carousel>;
+    } else {
+      return <span className="notFindRelate">Tạm thời chưa có cuốn nào</span>;
+    }
+  };
+
   return (
-    <div className="carouselForm">
-      <legend>Cùng chung thể loại {categoriesName}</legend>
-      <Carousel breakPoints={breakPoints}>{renderBooks}</Carousel>
-    </div>
+    <>
+      <div className="carouselForm">
+        <legend>Những sách cùng chung thể loại: {categoriesName}</legend>
+        {renderCarousel()}
+      </div>
+      {/* <Footer /> */}
+    </>
   );
 }
 

@@ -24,18 +24,18 @@ function SearchForm() {
     }
   };
 
-  const handleSearchByName = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
+  // const handleSearchByName = (e) => {
+  //   const name = e.target.name;
+  //   const value = e.target.value;
 
-    if (typingRef.current) {
-      clearTimeout(typingRef.current);
-    }
+  //   if (typingRef.current) {
+  //     clearTimeout(typingRef.current);
+  //   }
 
-    typingRef.current = setTimeout(() => {
-      setSearchInfo({ [name]: value });
-    }, 500);
-  };
+  //   typingRef.current = setTimeout(() => {
+  //     setSearchInfo({ [name]: value });
+  //   }, 500);
+  // };
 
   const resetValue = () => {
     setSearchInfo({ title: "" });
@@ -57,7 +57,8 @@ function SearchForm() {
             className="inputForm_items_control"
             type="input"
             placeholder="Nhập tên sách bạn muốn tìm"
-            onChange={handleSearchByName}
+            // onChange={handleSearchByName}
+            onChange={(e) => setSearchInfo({ [e.target.name]: e.target.value })}
           ></Form.Control>
           <Button className="inputForm_button" type="submit">
             <GoSearch />

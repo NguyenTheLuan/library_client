@@ -33,7 +33,7 @@ function ModalDeleteBookId({ isShow, bookId, onShow, bookName }) {
     return onShow(false);
   };
   return (
-    <Modal show={isShow} onHide={handleClose}>
+    <Modal show={isShow} onHide={handleClose} dialogClassName="modal-30w">
       <Modal.Header>
         <Modal.Title>Tiến hành xoá sách</Modal.Title>
       </Modal.Header>

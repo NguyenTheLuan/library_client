@@ -11,7 +11,7 @@ function ModalViewBookDetails({ isShow, onShow, bookDetails }) {
     return copies?.length;
   };
   const checkCopiesBooks = (copies) => {
-    console.log(copies);
+    // console.log(copies);
     return copies.map((copy) => {
       if (copy.status === "available") {
         return <span> {copy._id}</span>;
@@ -49,9 +49,13 @@ function ModalViewBookDetails({ isShow, onShow, bookDetails }) {
             <strong>Số lượng còn lại</strong> {bookDetails.availableCopies}/
             {countCopies(bookDetails.copies)}
           </div>
-          <div>
-            <strong>Mã sách còn trống: </strong>
-            {checkCopiesBooks(bookDetails.copies)}
+          <div className="copies">
+            <div className="nameCopies">
+              <strong>Mã sách còn trống:</strong>
+            </div>
+            <div className="nameCopiesId">
+              {checkCopiesBooks(bookDetails.copies)}
+            </div>
           </div>
         </div>
       </div>

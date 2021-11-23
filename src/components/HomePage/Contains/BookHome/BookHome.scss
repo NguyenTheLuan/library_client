@@ -1,5 +1,5 @@
 .menuBooks {
-  width: 1000px;
+  width: 1300px;
 
   display: flex;
   flex-direction: row;
@@ -19,7 +19,9 @@
       height: 280px;
     }
     .card-footer {
-      width: fit-content;
+      // width: fit-content;
+      width: 100%;
+      text-align: center;
     }
     &:hover {
       box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;

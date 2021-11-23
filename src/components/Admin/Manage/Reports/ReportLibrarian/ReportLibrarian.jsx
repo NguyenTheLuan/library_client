@@ -1,20 +1,35 @@
 import reportsApi from "apis/reportsApi";
 import PaginationItems from "components/customComponents/PaginationItems/PaginationItems";
+import { renderDate, renderDateSearch } from "constants/RenderDate";
 import React, { useEffect, useState } from "react";
-import { Table } from "react-bootstrap";
+import { Form, Table } from "react-bootstrap";
 
 function ReportLibrarian() {
   document.title = "Hoạt động thủ thư";
 
   const [activities, setActivities] = useState();
+  //Search
+  const [startDay, setStartDay] = useState();
+  const [endDay, setEndDay] = useState();
+
   //Phân trang
   const [totalProducts, setTotalProducts] = useState();
   const [limitPage, setLimitPage] = useState(5);
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    getLibrarian();
-  }, [page, limitPage]);
+    getActivities();
+  }, [page, limitPage, startDay, endDay]);
+
+  //Handle time
+  const handleStartDay = (time) => {
+    setPage(1);
+    setStartDay(time);
+  };
+  const handleEndDay = (time) => {
+    setPage(1);
+    setEndDay(time);
+  };
 
   const handleChangePage = (newPage) => {
     setPage(newPage);
@@ -24,12 +39,15 @@ function ReportLibrarian() {
     setLimitPage(newLimit);
   };
 
-  const getLibrarian = async () => {
+  const getActivities = async () => {
+    const params = {
+      from: startDay,
+      to: endDay,
+      page: page,
+      limit: limitPage,
+    };
     try {
-      const response = await reportsApi.getLibrarianActivities({
-        page: page,
-        limit: limitPage,
-      });
+      const response = await reportsApi.getLibrarianActivities(params);
 
       console.log(response);
       setActivities(response.results);
@@ -37,12 +55,6 @@ function ReportLibrarian() {
     } catch (error) {
       console.log("lỗi rồi", { error });
     }
-  };
-
-  //render components
-  const renderDate = (time) => {
-    const date = new Date(time);
-    return date.toLocaleString();
   };
 
   const renderActivities = activities?.map((activity, index) => {
@@ -58,9 +70,52 @@ function ReportLibrarian() {
     );
   });
 
+  const showDate = () => {
+    if (startDay) {
+      if (endDay) {
+        return (
+          <>
+            từ ngày <strong>{renderDateSearch(startDay)}</strong> đến ngày
+            <strong> {renderDateSearch(endDay)}</strong>
+          </>
+        );
+      } else {
+        return (
+          <>
+            từ ngày <strong>{renderDateSearch(startDay)}</strong> đến nay
+          </>
+        );
+      }
+    } else {
+      return;
+    }
+  };
+
   return (
-    <div>
-      <Table>
+    <div className="viewReservation">
+      <legend className="form_name">
+        Thống kê hoạt động của thủ thư {showDate()}
+      </legend>
+      <Form className="viewReservation_form">
+        <Form.Group className="viewReservation_form_items">
+          <Form.Label className="label">Từ ngày</Form.Label>
+          <Form.Control
+            className="control"
+            type="date"
+            onChange={(e) => handleStartDay(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group className="viewReservation_form_items">
+          <Form.Label className="label">Đến ngày</Form.Label>
+          <Form.Control
+            className="control"
+            type="date"
+            onChange={(e) => handleEndDay(e.target.value)}
+          />
+        </Form.Group>
+      </Form>
+
+      <Table bordered hover striped className="viewReservation_table">
         <thead>
           <tr>
             <th>STT</th>

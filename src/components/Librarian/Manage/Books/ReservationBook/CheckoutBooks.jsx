@@ -1,8 +1,13 @@
 import userApi from "apis/userApi";
 import React, { useEffect, useState } from "react";
 import { Button, FloatingLabel, Form, Table } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { createCarts } from "reducers/librarianSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  createCarts,
+  deleteCarts,
+  selectCartCheckout,
+  selectCartUserId,
+} from "reducers/librarianSlice";
 import ModalCheckBooks from "./ConfirmReservation/ModalCheckBooks/ModalCheckBooks";
 import ModalCheckout from "./ConfirmReservation/ModalCheckout/ModalCheckout";
 
@@ -11,10 +16,18 @@ import "./CheckoutBooks.scss";
 function CheckoutBooks() {
   document.title = "Mượn sách";
 
+  const booksCart = useSelector(selectCartCheckout);
+
   const [userId, setUserId] = useState();
   const [hide, setHide] = useState(false);
   const [booksReserved, setBooksReserved] = useState();
   const [copies, setCopies] = useState([]);
+
+  const [cartsCheckout, setCartsCheckout] = useState();
+
+  useEffect(() => {
+    booksCart && setCartsCheckout(booksCart);
+  }, [booksCart]);
 
   //Để update
   const [update, setUpdate] = useState(false);
@@ -63,6 +76,10 @@ function CheckoutBooks() {
     } else {
       alert("Không có sản phẩm nào");
     }
+  };
+
+  const handleDelete = (bookId) => {
+    dispatch(deleteCarts(bookId));
   };
 
   const handleClick = (details) => {
@@ -120,6 +137,7 @@ function CheckoutBooks() {
     );
   });
 
+  //render form
   const renderReservation = () => {
     if (hide) {
       return (
@@ -154,9 +172,6 @@ function CheckoutBooks() {
           <Button variant="primary" onClick={handleShow}>
             Đặt thêm sách khác?
           </Button>
-          <Button variant="success" onClick={handleCheckout}>
-            Tiến hành mượn sách
-          </Button>
         </>
       );
     } else {
@@ -164,6 +179,39 @@ function CheckoutBooks() {
     }
   };
 
+  const renderCartsCheckout = cartsCheckout?.map((bookId, index) => {
+    return (
+      <tr key={index}>
+        <td>{index + 1}</td>
+        <td>{bookId}</td>
+        <td>
+          <Button onClick={() => handleDelete(bookId)}>Xoá</Button>
+        </td>
+      </tr>
+    );
+  });
+
+  const renderCartsCheckoutUser = () => {
+    if (booksCart?.length > 0) {
+      return (
+        <>
+          <legend className="form_name">Giỏ sách đã chọn</legend>
+          <Table striped hover bordered>
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>Mã sách</th>
+              </tr>
+            </thead>
+            <tbody>{renderCartsCheckout}</tbody>
+          </Table>
+          <Button variant="success" onClick={handleCheckout}>
+            Tiến hành mượn sách
+          </Button>
+        </>
+      );
+    }
+  };
   return (
     <div className="checkoutForm">
       <legend className="form_name">Quản lý mượn sách người dùng</legend>
@@ -180,6 +228,9 @@ function CheckoutBooks() {
 
       {/* Hiện thị nội dung */}
       {renderReservation()}
+
+      {/* Hiện thị sách đã chọn */}
+      {renderCartsCheckoutUser()}
 
       <ModalCheckBooks userId={userId} onShow={onShow} isShow={show} />
       <ModalCheckout
