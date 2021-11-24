@@ -1,6 +1,10 @@
 import reportsApi from "apis/reportsApi";
 import PaginationItems from "components/customComponents/PaginationItems/PaginationItems";
-import { renderDate, renderDateSearch } from "constants/RenderDate";
+import {
+  renderActions,
+  renderDate,
+  renderDateSearch,
+} from "constants/RenderDate";
 import React, { useEffect, useState } from "react";
 import { Form, Table } from "react-bootstrap";
 
@@ -62,7 +66,7 @@ function ReportLibrarian() {
       <tr key={index}>
         <td>{index + 1 + (page - 1) * limitPage}</td>
         <td>{activity.user?.name}</td>
-        <td>{activity.action}</td>
+        <td>{renderActions(activity.action)}</td>
         <td>{activity.book?.title}</td>
         <td>{activity.book?.id}</td>
         <td>{renderDate(activity.createdAt)}</td>

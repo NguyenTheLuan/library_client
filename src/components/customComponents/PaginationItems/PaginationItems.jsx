@@ -1,4 +1,5 @@
-import React from "react";
+import { renderPagination } from "constants/RenderDate";
+import React, { useState } from "react";
 import { Form, Pagination } from "react-bootstrap";
 
 import "./PaginationItems.scss";
@@ -13,25 +14,39 @@ function PaginationItems({
   //Tổng số trang
   const totalPage = Math.ceil(totalRows / limit);
 
-  const rowPage = () => {
-    const res = [];
-    for (var pages = 1; pages <= totalPage; pages++) {
-      res.push(pages);
-    }
-    return res;
-  };
+  // const rowPage = () => {
+  //   const res = [];
+  //   for (var pages = 1; pages <= totalPage; pages++) {
+  //     res.push(pages);
+  //   }
+  //   return res;
+  // };
 
-  const showPages = rowPage()?.map((pageIndex, index) => {
-    return (
-      <Pagination.Item
-        key={index}
-        active={pageIndex === activePage}
-        onClick={() => handlePageChange(pageIndex)}
-      >
-        {pageIndex}
-      </Pagination.Item>
-    );
-  });
+  // const showPages = rowPage()?.map((pageIndex, index) => {
+  //   return (
+  //     <Pagination.Item
+  //       key={index}
+  //       active={pageIndex === activePage}
+  //       onClick={() => handlePageChange(pageIndex)}
+  //     >
+  //       {pageIndex}
+  //     </Pagination.Item>
+  //   );
+  // });
+
+  const showPages = renderPagination(activePage, totalPage)?.map(
+    (pageIndex, index) => {
+      return (
+        <Pagination.Item
+          key={index}
+          active={pageIndex === activePage}
+          onClick={() => handlePageChange(pageIndex)}
+        >
+          {pageIndex}
+        </Pagination.Item>
+      );
+    }
+  );
 
   const handlePageChange = (pageIndex) => {
     //Truyền cho cha

@@ -9,6 +9,7 @@ import CheckoutBooks from "components/Librarian/Manage/Books/ReservationBook/Che
 import ReturnBooks from "components/Librarian/Manage/Books/ReturnBooks/ReturnBooks";
 import ViewBorrowingBooks from "components/Librarian/Manage/Books/ViewBorrowingBooks/ViewBorrowingBooks";
 import ViewReservation from "components/Librarian/Manage/Books/ViewReservation/ViewReservation";
+import ViewReturnBooks from "components/Librarian/Manage/Books/ViewReturnBooks/ViewReturnBooks";
 
 import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router";
@@ -72,6 +73,11 @@ function Librarian() {
               <Route
                 path={`${path}/books/borrowing`}
                 component={() => <ViewBorrowingBooks />}
+                // exact={true}
+              />
+              <Route
+                path={`${path}/books/returned`}
+                component={() => <ViewReturnBooks />}
                 // exact={true}
               />
 

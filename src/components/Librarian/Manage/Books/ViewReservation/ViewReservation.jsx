@@ -1,6 +1,6 @@
 import userApi from "apis/userApi";
 import PaginationItems from "components/customComponents/PaginationItems/PaginationItems";
-import { renderDate } from "constants/RenderDate";
+import { renderDate, renderDateNow, renderStatus } from "constants/RenderDate";
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Form, Table } from "react-bootstrap";
 import "./ViewResevation.scss";
@@ -58,21 +58,6 @@ function ViewReservation() {
   };
 
   //render components
-  const renderStatus = (status) => {
-    switch (status) {
-      case "pending":
-        return <>Đang hẹn</>;
-
-      case "fulfilled":
-        return <>Thành công</>;
-
-      case "expired":
-        return <>Hết hạn</>;
-
-      default:
-        return <>Đã huỷ </>;
-    }
-  };
 
   const renderBooks = (books) => {
     // console.log(books);
@@ -93,7 +78,7 @@ function ViewReservation() {
         <td>{renderStatus(info.status)}</td>
         <td>{info.user.name}</td>
         <td>{renderBooks(info.books)}</td>
-        <td>{renderDate(info.createdDate)}</td>
+        <td>{renderDateNow(info.createdDate)}</td>
         <td>{renderDate(info.dueDate)}</td>
       </tr>
     );

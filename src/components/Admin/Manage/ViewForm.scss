@@ -73,16 +73,5 @@
     justify-content: flex-end;
 
     padding-right: 10px;
-    .pagination {
-      .page-item {
-        .page-link {
-          &:focus {
-            box-shadow: none;
-            background: rgb(140, 0, 255);
-            color: white;
-          }
-        }
-      }
-    }
   }
 }

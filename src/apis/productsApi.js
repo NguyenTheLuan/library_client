@@ -69,6 +69,17 @@ const productsApi = {
     const url = `${PRODUCTS_API_ENDPOINT}/copies/borrowing`;
     return axiosClient.get(url, { params: infoBorrow });
   },
+  //Lấy các bản sao sách đã trả
+  getCopiesReturn: (infoReturn) => {
+    const url = `${PRODUCTS_API_ENDPOINT}/copies/returned`;
+    return axiosClient.get(url, { params: infoReturn });
+  },
+
+  //Cho người dùng trả sách
+  postCopiesReturn: (bookInfo) => {
+    const url = `${PRODUCTS_API_ENDPOINT}/copies/return`;
+    return axiosClient.post(url, bookInfo);
+  },
 };
 
 export default productsApi;

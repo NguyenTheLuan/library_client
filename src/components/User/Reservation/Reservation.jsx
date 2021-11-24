@@ -1,5 +1,5 @@
 import userApi from "apis/userApi";
-import { renderDate } from "constants/RenderDate";
+import { renderDate, renderDateNow, renderStatus } from "constants/RenderDate";
 import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
@@ -17,17 +17,6 @@ function Reservation() {
     // console.log("huỷ thành công");
     isUser && getReservation();
   }, [update]);
-
-  const checkStatus = (status) => {
-    switch (status) {
-      case "expired":
-        return <>Hết hạn</>;
-      case "fulfilled":
-        return <>Thành công</>;
-      default:
-        return <>Huỷ hẹn</>;
-    }
-  };
 
   const showBooks = (booksInfo) => {
     return booksInfo.map((details, index) => {
@@ -84,13 +73,13 @@ function Reservation() {
       <tr key={index} className="cartTable_contents_rows">
         <th className="cartTable_contents_rows_index">{index + 1}</th>
         <th className="cartTable_contents_rows_status">
-          {checkStatus(details.status)}
+          {renderStatus(details.status)}
         </th>
         <th className="cartTable_contents_rows_details">
           {showBooks(details.books)}
         </th>
         <th className="cartTable_contents_rows_times">
-          {renderDate(details.createdDate)}
+          {renderDateNow(details.createdDate)}
         </th>
         <th className="cartTable_contents_rows_times">
           {renderDate(details.dueDate)}

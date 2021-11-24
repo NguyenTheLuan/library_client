@@ -86,6 +86,15 @@ function LibrarianDashBoard({ url }) {
           </Accordion.Body>
           <Accordion.Body>
             <NavLink
+              to={`${url}/books/borrowing`}
+              exact={true}
+              activeClassName="active"
+            >
+              Lịch sử mượn sách
+            </NavLink>
+          </Accordion.Body>
+          <Accordion.Body>
+            <NavLink
               to={`${url}/books/return`}
               exact={true}
               activeClassName="active"
@@ -95,11 +104,11 @@ function LibrarianDashBoard({ url }) {
           </Accordion.Body>
           <Accordion.Body>
             <NavLink
-              to={`${url}/books/borrowing`}
+              to={`${url}/books/returned`}
               exact={true}
               activeClassName="active"
             >
-              Sách đã cho mượn
+              Lịch sử Trả sách
             </NavLink>
           </Accordion.Body>
         </Accordion.Item>

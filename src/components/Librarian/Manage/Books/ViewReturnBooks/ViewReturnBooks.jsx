@@ -1,11 +1,11 @@
 import productsApi from "apis/productsApi";
 import PaginationItems from "components/customComponents/PaginationItems/PaginationItems";
-import { renderDate, renderDateNow } from "constants/RenderDate";
+import { renderDateNow } from "constants/RenderDate";
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Form, Table } from "react-bootstrap";
 import "../ViewReservation/ViewResevation.scss";
 
-function ViewBorrowingBooks() {
+function ViewReturnBooks() {
   document.title = "Sách đã cho mượn";
 
   //Debounce typing
@@ -49,8 +49,8 @@ function ViewBorrowingBooks() {
     };
 
     try {
-      const response = await productsApi.getCopiesBorrowing(params);
-      console.log(response);
+      const response = await productsApi.getCopiesReturn(params);
+      // console.log(response);
       setBorrowing(response.results);
       setTotalProducts(response.totalResults);
     } catch (error) {
@@ -63,11 +63,10 @@ function ViewBorrowingBooks() {
       <tr key={index}>
         <td>{index + 1 + (page - 1) * limitPage}</td>
         <td>{info.user?.name}</td>
-        <td>{info.id}</td>
+        <td>{info._id}</td>
         <td>{info.title}</td>
-        <td>{info.categories}</td>
-        {/* <td>{renderDateNow(info.borrowedDate)}</td> */}
-        <td>{renderDate(info.dueDate)}</td>
+        {/* <th>{renderDate(info.borrowedDate)}</th> */}
+        <td>{renderDateNow(info.returnedDate)}</td>
       </tr>
     );
   });
@@ -97,7 +96,9 @@ function ViewBorrowingBooks() {
 
   return (
     <div className="viewReservation">
-      <legend className="form_name">Quản lý thông tin sách đã cho mượn</legend>
+      <legend className="form_name">
+        Quản lý thông tin sách người dùng đã trả
+      </legend>
       <Form className="viewReservation_form" onSubmit={handleSearch}>
         <Form.Group className="viewReservation_form_items">
           <Form.Label className="label">Tên người dùng</Form.Label>
@@ -115,12 +116,12 @@ function ViewBorrowingBooks() {
             name="title"
             className="control"
             type="text"
-            placeholder="Nhập tên sách đang mượn"
+            placeholder="Nhập tên sách đã trả"
             onChange={handleSearchByName}
           />
         </Form.Group>
         <Form.Group className="viewReservation_form_items">
-          <Form.Label className="label">Ngày mượn sách</Form.Label>
+          <Form.Label className="label">Ngày trả sách</Form.Label>
           <Form.Select
             className="control"
             onChange={(e) => setSortBy(e.target.value)}
@@ -138,12 +139,10 @@ function ViewBorrowingBooks() {
         <thead>
           <tr>
             <th>STT</th>
-            <th>Người đang mượn</th>
+            <th>Người trả sách</th>
             <th>Mã sách</th>
             <th>Tên sách</th>
-            <th>Thể loại</th>
-            {/* <th>Ngày mượn</th> */}
-            <th>Hạn trả</th>
+            <th>Ngày trả</th>
           </tr>
         </thead>
         <tbody>{renderBorrowing}</tbody>
@@ -159,4 +158,4 @@ function ViewBorrowingBooks() {
   );
 }
 
-export default ViewBorrowingBooks;
+export default ViewReturnBooks;

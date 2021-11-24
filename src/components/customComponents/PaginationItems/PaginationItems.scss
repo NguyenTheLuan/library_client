@@ -9,4 +9,16 @@
       }
     }
   }
+  .pagination {
+    .page-item {
+      .page-link {
+        &:focus {
+          box-shadow: none;
+          // background: rgb(140, 0, 255);
+          // color: white;
+          background: #fff;
+        }
+      }
+    }
+  }
 }
