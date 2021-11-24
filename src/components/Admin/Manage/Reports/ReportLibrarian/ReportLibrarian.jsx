@@ -2,7 +2,7 @@ import reportsApi from "apis/reportsApi";
 import PaginationItems from "components/customComponents/PaginationItems/PaginationItems";
 import {
   renderActions,
-  renderDate,
+  renderDateNow,
   renderDateSearch,
 } from "constants/RenderDate";
 import React, { useEffect, useState } from "react";
@@ -69,7 +69,7 @@ function ReportLibrarian() {
         <td>{renderActions(activity.action)}</td>
         <td>{activity.book?.title}</td>
         <td>{activity.book?.id}</td>
-        <td>{renderDate(activity.createdAt)}</td>
+        <td>{renderDateNow(activity.createdAt)}</td>
       </tr>
     );
   });

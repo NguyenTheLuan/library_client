@@ -1,6 +1,7 @@
 import productsApi from "apis/productsApi";
+import reportsApi from "apis/reportsApi";
 import PaginationItems from "components/customComponents/PaginationItems/PaginationItems";
-import { renderDate, renderDateNow } from "constants/RenderDate";
+import { renderDate } from "constants/RenderDate";
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Form, Table } from "react-bootstrap";
 import "../ViewReservation/ViewResevation.scss";
@@ -95,6 +96,16 @@ function ViewBorrowingBooks() {
     }, 500);
   };
 
+  //Xuât báo cáo
+  const exportBooks = async () => {
+    try {
+      const response = await reportsApi.exportBooksBorrowing();
+      window.location.href = "//" + response.path;
+    } catch (error) {
+      console.log("lỗi rồi", { error });
+    }
+  };
+
   return (
     <div className="viewReservation">
       <legend className="form_name">Quản lý thông tin sách đã cho mượn</legend>
@@ -129,10 +140,24 @@ function ViewBorrowingBooks() {
             <option value="dueDate:desc">Giảm dần</option>
           </Form.Select>
         </Form.Group>
-
-        <Button className="btnSearch" type="submit" onClick={viewBorrowing}>
-          Tìm kiếm
-        </Button>
+        <div style={{ marginLeft: "auto" }}>
+          <Button
+            style={{ marginRight: "10px" }}
+            className="btnSearch"
+            type="submit"
+            onClick={viewBorrowing}
+          >
+            Tìm kiếm
+          </Button>
+          <Button
+            variant="secondary"
+            className="btnSearch"
+            type="submit"
+            onClick={exportBooks}
+          >
+            Xuất báo cáo
+          </Button>
+        </div>
       </Form>
       <Table bordered hover striped className="viewReservation_table">
         <thead>
