@@ -24,7 +24,7 @@ function ReservationReportsOverall({ reservationsChart }) {
     const keys = Object.keys(reservedPie);
     const newKeys = keys.filter((key) => {
       if (
-        key !== "cancelled" &&
+        key !== "canceled" &&
         key !== "new" &&
         key !== "fulfilled" &&
         key !== "overdue" &&
@@ -37,6 +37,7 @@ function ReservationReportsOverall({ reservationsChart }) {
     // console.log(newKeys);
     //Tạo obj mới
     const newObj = [];
+
     newKeys.map((key) => {
       newObj.push({ name: key, value: reservedPie[key] });
     });

@@ -9,6 +9,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import ReservationReportstoExcel from "./ReservationReportstoExcel";
 
 function ReservationReports({ reservationsChart }) {
   const [dataChart, setDataChart] = useState();
@@ -78,6 +79,7 @@ function ReservationReports({ reservationsChart }) {
   };
   return (
     <div>
+      <ReservationReportstoExcel dataChart={dataChart} />
       <ComposedChart width={700} height={300} data={dataChart}>
         <XAxis dataKey="day" stroke="#8884d8" />
         <YAxis />
@@ -92,7 +94,7 @@ function ReservationReports({ reservationsChart }) {
         <Bar dataKey="Quá hạn" fill="#FF8042" barSize={30} />
         {/* <Bar dataKey="Tổng cộng" fill="rgb(227, 119, 194)" barSize={30} /> */}
         {/* Dòng tỉ lệ */}
-        <Line type="monotone" dataKey="Tổng cộng" stroke="#ff7300" />
+        {/* <Line type="monotone" dataKey="Tổng cộng" stroke="#ff7300" /> */}
       </ComposedChart>
     </div>
   );

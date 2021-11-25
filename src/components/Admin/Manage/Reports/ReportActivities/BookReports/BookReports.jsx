@@ -9,9 +9,9 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import BooksReportstoExcel from "./BooksReportstoExcel";
 
 function BookReports({ booksChart }) {
-  // console.log(booksChart);
   const [dataChart, setDataChart] = useState();
 
   useEffect(() => {
@@ -37,6 +37,7 @@ function BookReports({ booksChart }) {
 
   return (
     <div>
+      <BooksReportstoExcel dataChart={dataChart} />
       <ComposedChart cộng width={700} height={300} data={dataChart}>
         <XAxis dataKey="name" stroke="#8884d8" />
         <YAxis />
@@ -47,7 +48,7 @@ function BookReports({ booksChart }) {
         {/* Của user */}
         <Bar dataKey="Số lượng sách mới" fill="#8884d8" barSize={30} />
         {/* Dòng tỉ lệ */}
-        <Line type="monotone" dataKey="Số lượng sách mới" stroke="#ff7300" />
+        {/* <Line type="monotone" dataKey="Số lượng sách mới" stroke="#ff7300" /> */}
       </ComposedChart>
     </div>
   );

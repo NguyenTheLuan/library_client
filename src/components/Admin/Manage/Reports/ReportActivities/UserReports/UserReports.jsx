@@ -9,6 +9,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import UserReportstoExcel from "./UserReportstoExcel";
 
 function UserReports({ usersChart }) {
   const [dataChart, setDataChart] = useState();
@@ -61,6 +62,7 @@ function UserReports({ usersChart }) {
 
   return (
     <div>
+      <UserReportstoExcel dataChart={dataChart} />
       <ComposedChart
         width={700}
         height={300}

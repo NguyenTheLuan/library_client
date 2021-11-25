@@ -2,47 +2,29 @@ import productsApi from "apis/productsApi";
 import { renderStatus } from "constants/RenderDate";
 import React, { useEffect, useState } from "react";
 import { Button, FloatingLabel, Form, Table } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  createCarts,
-  deleteCarts,
-  selectCartCheckout,
-  selectCartUserId,
-} from "reducers/librarianSlice";
 
 function ReturnBooks() {
   document.title = "Trả sách";
-
-  const booksCart = useSelector(selectCartCheckout);
 
   const [bookId, setBookId] = useState();
   const [hide, setHide] = useState(false);
   const [booksReserved, setBooksReserved] = useState();
 
-  const [cartsCheckout, setCartsCheckout] = useState();
-
-  useEffect(() => {
-    booksCart && setCartsCheckout(booksCart);
-  }, [booksCart]);
-
-  //Để update
-  const [update, setUpdate] = useState(false);
-
-  const handleUpdate = (status) => {
-    setUpdate(status);
-  };
-
-  const dispatch = useDispatch();
-
+  //sau khi check id
   useEffect(() => {
     bookId && getCheckBookCopies();
-  }, [update, bookId]);
+  }, [bookId]);
+
+  //sau khi trả sách
+  useEffect(() => {
+    renderReservation();
+  }, [booksReserved]);
 
   const getCheckBookCopies = async () => {
     try {
       const response = await productsApi.getCheckCopies(bookId);
       setHide(true);
-      console.log(response);
+      // console.log(response);
       setBooksReserved([response]);
     } catch (error) {
       alert("Hãy nhập đúng mã Copies sách");
@@ -55,7 +37,7 @@ function ReturnBooks() {
     try {
       await productsApi.postCopiesReturn({ copies: [bookId] });
       alert("Trả sách thành công");
-      setBookId();
+      setBooksReserved([]);
     } catch (error) {
       console.log("lỗi rồi", { error });
       alert("Trả sách thất bại");
@@ -66,6 +48,21 @@ function ReturnBooks() {
   const setImg = (img) => {
     return <img style={{ width: "40px" }} src={img} alt="img" />;
   };
+  const renderButton = (status, bookid) => {
+    if (status === "borrowed") {
+      return (
+        <Button variant="success" onClick={() => handleReturnBooks(bookid)}>
+          Trả sách
+        </Button>
+      );
+    } else {
+      return (
+        <Button variant="success" disabled>
+          Không thể trả
+        </Button>
+      );
+    }
+  };
 
   const renderCarts = booksReserved?.map((books, index) => {
     return (
@@ -73,18 +70,12 @@ function ReturnBooks() {
         <tr key={index}>
           <td>{setImg(books.cover)}</td>
           <td>{renderStatus(books.status)}</td>
-          <td>{books.user.name}</td>
-          <td>{books.id}</td>
+          <td>{books.user?.name}</td>
+          {/* <td>{books.id}</td> */}
+          <td>{books.barcode}</td>
           <td>{books.title}</td>
           <td>{books.categories}</td>
-          <td>
-            <Button
-              variant="success"
-              onClick={() => handleReturnBooks(books.id)}
-            >
-              Trả sách
-            </Button>
-          </td>
+          <td>{renderButton(books.status, books.id)}</td>
         </tr>
       </>
     );

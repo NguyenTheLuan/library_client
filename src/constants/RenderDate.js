@@ -85,6 +85,8 @@ export const renderStatus = (status) => {
     //Trạng thái sách
     case "returned":
       return <>Đã trả</>;
+    case "available":
+      return <>Đang trống</>;
     case "borrowing":
       return <>Đang mượn</>;
     case "borrowed":

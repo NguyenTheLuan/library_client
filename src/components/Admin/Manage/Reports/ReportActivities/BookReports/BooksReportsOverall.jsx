@@ -41,7 +41,6 @@ function BooksReportsOverall({ booksPie }) {
       newObj.push({ name: key, value: booksPie[key] });
     });
 
-    // console.log(newObj);
     //Add vô Pie
     setDataPie(newObj);
   };

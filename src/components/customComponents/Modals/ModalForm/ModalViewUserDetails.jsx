@@ -37,7 +37,8 @@ function ModalViewUserDetails({ isShow, onShow, userDetails }) {
         </div>
         <div>
           <strong>Mã ID người dùng: </strong>
-          {userDetails.id}
+          {/* {userDetails.id} */}
+          {userDetails.uid}
         </div>
         <div>
           <strong>Địa chỉ email: </strong>

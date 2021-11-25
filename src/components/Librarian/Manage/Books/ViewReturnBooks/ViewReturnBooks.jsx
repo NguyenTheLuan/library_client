@@ -50,7 +50,7 @@ function ViewReturnBooks() {
 
     try {
       const response = await productsApi.getCopiesReturn(params);
-      // console.log(response);
+      console.log(response);
       setBorrowing(response.results);
       setTotalProducts(response.totalResults);
     } catch (error) {

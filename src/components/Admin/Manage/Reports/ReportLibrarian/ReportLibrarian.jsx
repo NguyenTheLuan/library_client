@@ -7,6 +7,7 @@ import {
 } from "constants/RenderDate";
 import React, { useEffect, useState } from "react";
 import { Form, Table } from "react-bootstrap";
+import ReportLibrarianExcel from "./ReportLibrarianExcel";
 
 function ReportLibrarian() {
   document.title = "Hoạt động thủ thư";
@@ -15,6 +16,7 @@ function ReportLibrarian() {
   //Search
   const [startDay, setStartDay] = useState();
   const [endDay, setEndDay] = useState();
+  const [sortBy, setSortBy] = useState("createdAt:desc");
 
   //Phân trang
   const [totalProducts, setTotalProducts] = useState();
@@ -23,7 +25,7 @@ function ReportLibrarian() {
 
   useEffect(() => {
     getActivities();
-  }, [page, limitPage, startDay, endDay]);
+  }, [page, limitPage, startDay, endDay, sortBy]);
 
   //Handle time
   const handleStartDay = (time) => {
@@ -49,6 +51,7 @@ function ReportLibrarian() {
       to: endDay,
       page: page,
       limit: limitPage,
+      sortBy,
     };
     try {
       const response = await reportsApi.getLibrarianActivities(params);
@@ -61,14 +64,25 @@ function ReportLibrarian() {
     }
   };
 
+  //render components
+  const renderName = (user, book) => {
+    if (user && user.name) {
+      return user.name;
+    }
+    if (book && book.title) {
+      return book.title;
+    } else {
+      return;
+    }
+  };
+
   const renderActivities = activities?.map((activity, index) => {
     return (
       <tr key={index}>
         <td>{index + 1 + (page - 1) * limitPage}</td>
-        <td>{activity.user?.name}</td>
+        <td>{activity.librarian?.name}</td>
         <td>{renderActions(activity.action)}</td>
-        <td>{activity.book?.title}</td>
-        <td>{activity.book?.id}</td>
+        <td>{renderName(activity.user, activity.book)}</td>
         <td>{renderDateNow(activity.createdAt)}</td>
       </tr>
     );
@@ -76,7 +90,9 @@ function ReportLibrarian() {
 
   const showDate = () => {
     if (startDay) {
-      if (endDay) {
+      if (endDay < startDay) {
+        return <>chọn thời gian sai</>;
+      } else if (endDay) {
         return (
           <>
             từ ngày <strong>{renderDateSearch(startDay)}</strong> đến ngày
@@ -117,16 +133,27 @@ function ReportLibrarian() {
             onChange={(e) => handleEndDay(e.target.value)}
           />
         </Form.Group>
+        <Form.Group className="viewReservation_form_items">
+          <Form.Label className="label">Ngày mượn sách</Form.Label>
+          <Form.Select
+            className="control"
+            onChange={(e) => setSortBy(e.target.value)}
+          >
+            <option value="createdAt:desc">Giảm dần</option>
+            <option value="createdAt:asc">Tăng dần</option>
+          </Form.Select>
+        </Form.Group>
       </Form>
-
+      {/* <ReportLibrarianExcel /> */}
       <Table bordered hover striped className="viewReservation_table">
         <thead>
           <tr>
             <th>STT</th>
-            <th>Tên </th>
+            <th>Người thay đổi</th>
+            {/* <th>Tên người dùng </th> */}
             <th>Hành động</th>
-            <th>Tên sách</th>
-            <th>Mã sách</th>
+            <th>Tên sách( tên người dùng)</th>
+            {/* <th>Mã sách</th> */}
             <th>Ngày tạo</th>
           </tr>
         </thead>
