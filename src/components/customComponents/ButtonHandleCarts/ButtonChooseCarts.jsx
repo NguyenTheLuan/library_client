@@ -26,6 +26,7 @@ function ButtonChooseCarts({ selectBooks }) {
       alert("Đặt thành công, hãy kiểm tra lịch hẹn");
     } catch (error) {
       console.log({ error });
+      alert(error.response.data.message);
     }
   };
 

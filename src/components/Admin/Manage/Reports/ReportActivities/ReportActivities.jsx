@@ -57,7 +57,9 @@ function ReportActivities() {
 
   const renderTime = () => {
     if (startDay) {
-      if (endDay) {
+      if (endDay < startDay) {
+        return <span style={{ color: "red" }}>chọn thời gian sai</span>;
+      } else if (endDay) {
         return (
           <>
             từ ngày <strong>{renderDateSearch(startDay)}</strong> đến ngày

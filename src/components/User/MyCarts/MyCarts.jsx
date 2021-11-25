@@ -77,7 +77,7 @@ function MyCarts() {
 
   return (
     <>
-      <legend className="form_name">Những sách đang có trong giỏ</legend>
+      <legend className="form_name">Những sách đang có trong giỏ </legend>
       <Table className="cartTable" striped bordered hover>
         <thead className="cartTable_header">
           <tr>

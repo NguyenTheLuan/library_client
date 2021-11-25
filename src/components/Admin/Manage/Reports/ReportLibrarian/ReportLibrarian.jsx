@@ -7,7 +7,6 @@ import {
 } from "constants/RenderDate";
 import React, { useEffect, useState } from "react";
 import { Form, Table } from "react-bootstrap";
-import ReportLibrarianExcel from "./ReportLibrarianExcel";
 
 function ReportLibrarian() {
   document.title = "Hoạt động thủ thư";
@@ -91,7 +90,7 @@ function ReportLibrarian() {
   const showDate = () => {
     if (startDay) {
       if (endDay < startDay) {
-        return <>chọn thời gian sai</>;
+        return <span style={{ color: "red" }}>chọn thời gian sai</span>;
       } else if (endDay) {
         return (
           <>
@@ -152,7 +151,7 @@ function ReportLibrarian() {
             <th>Người thay đổi</th>
             {/* <th>Tên người dùng </th> */}
             <th>Hành động</th>
-            <th>Tên sách( tên người dùng)</th>
+            <th>Tên sách(Tên người dùng)</th>
             {/* <th>Mã sách</th> */}
             <th>Ngày tạo</th>
           </tr>

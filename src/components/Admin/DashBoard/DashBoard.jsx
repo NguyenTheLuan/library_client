@@ -1,3 +1,4 @@
+import Logout from "components/Auth/Logout/Logout";
 import React, { useEffect } from "react";
 import { Accordion } from "react-bootstrap";
 import { AiFillFileExcel } from "react-icons/ai";
@@ -22,22 +23,12 @@ function DashBoard({ url }) {
   return (
     <div>
       <div className="homeMenu">
-        {/* <div className="homeMenu_link">
-          
-          <Link to="/" exact={true}>
-            <ImHome className="iconItem" />
-            <span className="iconName">Trở lại trang chủ</span>
-          </Link>
-          
-        </div> */}
         <div className="homeMenu_link">
-          {/* <div className="homeNav"> */}
           <Link to="/admin" exact={true}>
             {/* <ImHome className="iconItem" /> */}
             <MdOutlineAdminPanelSettings className="iconItem" />
             <span className="iconName">Admin dashboard</span>
           </Link>
-          {/* </div> */}
         </div>
       </div>
       <Accordion
@@ -94,6 +85,10 @@ function DashBoard({ url }) {
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
+
+      <div className="logout">
+        <Logout />
+      </div>
     </div>
   );
 }

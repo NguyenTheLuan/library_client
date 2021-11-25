@@ -7,6 +7,7 @@ import { AiFillFileExcel } from "react-icons/ai";
 import { FaBook, FaUserCog } from "react-icons/fa";
 import { IoLibrarySharp } from "react-icons/io5";
 import "./DashBoard.scss";
+import Logout from "components/Auth/Logout/Logout";
 
 function LibrarianDashBoard({ url }) {
   // console.log("dashboard", url);
@@ -130,6 +131,9 @@ function LibrarianDashBoard({ url }) {
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
+      <div className="logout">
+        <Logout />
+      </div>
     </div>
   );
 }

@@ -34,9 +34,9 @@ function HomeLibrarian() {
             </span>
             <span>"Ngày chưa thiết lập"</span>
           </div>
-          <div className="adminMenu_menu_contents_items">
+          {/* <div className="adminMenu_menu_contents_items">
             <Logout />
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
