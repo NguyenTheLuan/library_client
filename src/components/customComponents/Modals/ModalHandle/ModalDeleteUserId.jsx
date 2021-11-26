@@ -12,7 +12,6 @@ function ModalDeleteUserId({ userId, isShow, onShow, userEmail }) {
   //Delete books by id
   const deleteUserId = async () => {
     const id = userId;
-    // console.log(id);
     try {
       await adminApi.deleteUser(id);
       alert("Xoá người dùng hoàn tất");
@@ -24,7 +23,6 @@ function ModalDeleteUserId({ userId, isShow, onShow, userEmail }) {
     }
   };
   const handleClick = () => {
-    // console.log("đã lấy được Id", userId);
     deleteUserId();
   };
 
@@ -33,23 +31,25 @@ function ModalDeleteUserId({ userId, isShow, onShow, userEmail }) {
     return onShow(false);
   };
   return (
-    <Modal show={isShow} onHide={handleClose}>
-      <Modal.Header>
-        <Modal.Title>Xoá người dùng</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        Xoá người dùng có gmail là <strong> {userEmail}</strong>, bạn có chắc
-        chắn xoá không?
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="danger" onClick={handleClick}>
-          Xoá người dùng
-        </Button>
-        <Button variant="secondary" onClick={handleClose}>
-          Quay lại
-        </Button>
-      </Modal.Footer>
-    </Modal>
+    <>
+      <Modal show={isShow} onHide={handleClose}>
+        <Modal.Header>
+          <Modal.Title>Xoá người dùng</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Xoá người dùng có gmail là <strong> {userEmail}</strong>, bạn có chắc
+          chắn xoá không?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={handleClick}>
+            Xoá người dùng
+          </Button>
+          <Button variant="secondary" onClick={handleClose}>
+            Quay lại
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
   );
 }
 

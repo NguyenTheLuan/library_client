@@ -4,10 +4,19 @@ import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { selectUser } from "reducers/authSlice";
+
+//Toast
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import "./Reservation.scss";
 
 function Reservation() {
   document.title = "Xem lịch hẹn";
+
+  //Custom alert
+  const notify = (status, info) =>
+    toast[status](info, { position: toast.POSITION.BOTTOM_LEFT });
 
   const isUser = useSelector(selectUser);
   const [reservation, setReservation] = useState([]);
@@ -61,10 +70,12 @@ function Reservation() {
     const userId = isUser.id;
     try {
       await userApi.postDeleteReservation(userId, reservedId);
-      alert("Huỷ lịch thành công");
+      // alert("Huỷ lịch thành công");
+      notify("success", "Huỷ lịch thành công");
       setUpdate(!update);
     } catch (error) {
       console.log("lỗi rồi", { error });
+      notify("warn", ` Thất bại, ${error.response.data.message}`);
     }
   };
 
@@ -105,6 +116,7 @@ function Reservation() {
         </thead>
         <tbody className="cartTable_contents">{showReservation}</tbody>
       </Table>
+      <ToastContainer />
     </>
   );
 }
