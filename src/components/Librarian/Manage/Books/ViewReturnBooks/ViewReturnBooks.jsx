@@ -13,7 +13,7 @@ function ViewReturnBooks() {
 
   //Thông tin search
   const [searchInfo, setSearchInfo] = useState({});
-  const [sortBy, setSortBy] = useState();
+  const [sortBy, setSortBy] = useState("returnedDate:desc");
 
   //Thông tin để render
   const [borrowing, setBorrowing] = useState([]);
@@ -134,8 +134,8 @@ function ViewReturnBooks() {
             className="control"
             onChange={(e) => setSortBy(e.target.value)}
           >
-            <option value="dueDate:asc">Tăng dần</option>
-            <option value="dueDate:desc">Giảm dần</option>
+            <option value="returnedDate:asc">Tăng dần</option>
+            <option value="returnedDate:desc">Giảm dần</option>
           </Form.Select>
         </Form.Group>
 

@@ -4,7 +4,6 @@ import {
   CartesianGrid,
   ComposedChart,
   Legend,
-  Line,
   Tooltip,
   XAxis,
   YAxis,
@@ -61,7 +60,7 @@ function UserReports({ usersChart }) {
   };
 
   return (
-    <div>
+    <div className="formReports">
       <UserReportstoExcel dataChart={dataChart} />
       <ComposedChart
         width={700}

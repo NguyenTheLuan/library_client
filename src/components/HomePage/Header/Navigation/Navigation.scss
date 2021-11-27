@@ -31,3 +31,27 @@
     }
   }
 }
+
+//responsive
+@media screen and (max-width: 870px) {
+  .navMenu {
+    .navMenuItems {
+      .navMenuItem {
+        a {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 576px) {
+  .navMenu {
+    .navMenuItems {
+      .navMenuItem {
+        a {
+          font-size: 10px;
+        }
+      }
+    }
+  }
+}

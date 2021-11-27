@@ -42,3 +42,29 @@
     width: 900px;
   }
 }
+
+//responsive
+@media screen and (max-width: 1300px) {
+  .categoriesForm {
+    &_search {
+      width: 700px;
+    }
+    .searchChecbox {
+      width: 580px;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .categoriesForm {
+    &_search {
+      width: 500px;
+      button {
+        font-size: 12px;
+      }
+    }
+    .searchChecbox {
+      width: 420px;
+    }
+  }
+}

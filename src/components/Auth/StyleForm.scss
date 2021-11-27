@@ -19,7 +19,7 @@ $colorForm: #ffffff;
 
   &_container {
     width: 40%;
-    width: 40%;
+
     background: $colorForm;
     border-radius: 10px;
 
@@ -27,14 +27,8 @@ $colorForm: #ffffff;
       rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
     .formMenu {
       width: 100%;
-      height: 100%;
+      // height: 100%;
       padding: 20px;
-
-      // box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-
-      // box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
-      //   rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
-      //   rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 
       &_title {
         font-weight: 700;
@@ -127,10 +121,19 @@ $colorForm: #ffffff;
   }
 }
 
-// #formBasicEmail,
-// #formBasicPassword,
-// #formBasicName {
-//   &:focus {
-//     border: none;
-//   }
-// }
+//responsive
+@media screen and (max-width: 1300px) {
+  .formMain {
+    height: 600px;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .title,
+  .formMenu_items_name,
+  a,
+  span,
+  label {
+    font-size: 15px;
+  }
+}

@@ -78,7 +78,7 @@ function ReservationReports({ reservationsChart }) {
     );
   };
   return (
-    <div>
+    <div className="formReports">
       <ReservationReportstoExcel dataChart={dataChart} />
       <ComposedChart width={700} height={300} data={dataChart}>
         <XAxis dataKey="day" stroke="#8884d8" />

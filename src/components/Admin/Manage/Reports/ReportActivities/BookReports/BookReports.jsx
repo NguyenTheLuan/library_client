@@ -36,7 +36,7 @@ function BookReports({ booksChart }) {
   };
 
   return (
-    <div>
+    <div className="formReports">
       <BooksReportstoExcel dataChart={dataChart} />
       <ComposedChart cộng width={700} height={300} data={dataChart}>
         <XAxis dataKey="name" stroke="#8884d8" />

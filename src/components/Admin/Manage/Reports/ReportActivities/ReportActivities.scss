@@ -41,4 +41,35 @@
       }
     }
   }
+
+  &:last-child {
+    padding-bottom: 50px;
+  }
+}
+
+///cssss
+.btnExcel {
+  button {
+    background: rgba(12, 133, 245, 0.521);
+    padding: 5px;
+    border-radius: 10px;
+    font-weight: bold;
+
+    &:hover {
+      background: rgba(12, 55, 95, 0.521);
+      color: white;
+      transform: scale(1.01);
+    }
+  }
+}
+.formReports {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 5px;
+}
+
+.formReportsOverall {
+  display: flex;
+  align-items: center;
 }

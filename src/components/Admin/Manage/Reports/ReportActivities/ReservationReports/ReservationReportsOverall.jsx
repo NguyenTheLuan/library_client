@@ -80,7 +80,7 @@ function ReservationReportsOverall({ reservationsChart }) {
     setActiveIndex(index);
   };
   return (
-    <div>
+    <div className="formReportsOverall">
       <PieChart width={200} height={200}>
         <Pie
           data={dataPie}

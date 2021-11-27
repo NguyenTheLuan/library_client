@@ -24,11 +24,11 @@ function Header() {
     //Đăng nhập
     if (isUser && isUser.status === "active") {
       return (
-        <>
+        <div className="header_btn">
           <span className="nameUser">Xin chào, {showName(isUser.name)}</span>
           <Carts />
           <DropdownItems />
-        </>
+        </div>
       );
     }
     //Chưa đăng nhập
@@ -36,7 +36,9 @@ function Header() {
       return (
         <div className="header_btn" onClick={() => history.push("/login")}>
           <Carts />
-          <Button variant="primary">Đăng Nhập</Button>
+          <Button className="btnLogin" variant="primary">
+            Đăng Nhập
+          </Button>
         </div>
       );
     }
@@ -47,7 +49,7 @@ function Header() {
       <div className="header_logo">
         <Link smooth={true} to="/home/#about">
           <img alt="logoMenu" src={LogoMenu} />
-          <span>Geny Library</span>
+          <span className="nameLogo">Geny Library</span>
         </Link>
       </div>
       <div className="header_navigation">
@@ -56,9 +58,9 @@ function Header() {
       {/* <div className="header_search">
         <SearchForm />
       </div> */}
-      <div className="header_btn">
-        <UserForm />
-      </div>
+      {/* <div className="header_btn"> */}
+      <UserForm />
+      {/* </div> */}
     </div>
   );
 }

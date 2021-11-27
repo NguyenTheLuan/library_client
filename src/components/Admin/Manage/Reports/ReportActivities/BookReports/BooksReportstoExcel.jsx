@@ -14,7 +14,7 @@ function BooksReportstoExcel({ dataChart }) {
   });
 
   return (
-    <div>
+    <div className="btnExcel">
       <ReactHTMLTableToExcel
         id="test-table-xls-button"
         className="download-table-xls-button"

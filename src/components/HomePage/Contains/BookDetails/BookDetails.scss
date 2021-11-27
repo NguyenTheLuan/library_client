@@ -94,3 +94,39 @@ $color_font: #fff;
     }
   }
 }
+
+//responsive
+@media screen and (max-width: 1300px) {
+  .containProducts {
+    padding-top: 20px;
+    width: 900px;
+  }
+  .carouselForm {
+    width: 800px;
+    .legend {
+      width: 60%;
+    }
+    .card {
+      width: 80%;
+    }
+  }
+}
+@media screen and (max-width: 720px) {
+  .containProducts {
+    padding-top: 50px;
+    width: 700px;
+  }
+  .header_logo {
+    display: none;
+  }
+
+  .carouselForm {
+    width: 600px;
+    .legend {
+      width: 60%;
+    }
+    .card {
+      width: 80%;
+    }
+  }
+}
