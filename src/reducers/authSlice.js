@@ -16,20 +16,10 @@ const authSlice = createSlice({
     logOut(state) {
       state.auth = null;
     },
-    //refresh token
-    refreshTokenAuth(state, action) {
-      const { access, refresh } = action.payload;
-
-      localStorage.setItem("access", JSON.stringify(access));
-      //Thiết lập lại refresh token
-      localStorage.setItem("refresh", JSON.stringify(refresh));
-
-      alert("Refresh token thành công");
-    },
   },
 });
 
-export const { loginIn, logOut, refreshTokenAuth } = authSlice.actions;
+export const { loginIn, logOut } = authSlice.actions;
 
 export const selectUser = (state) => state.auth.auth;
 
