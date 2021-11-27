@@ -7,6 +7,8 @@ import BookByCategories from "../BookRelate/BookByCategories";
 import "./BookDetails.scss";
 
 function BookDetails() {
+  document.title = "Thông tin chi tiết sách";
+
   const [productDetails, setProductDetails] = useState([]);
 
   //Relate

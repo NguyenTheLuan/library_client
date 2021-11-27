@@ -27,7 +27,7 @@ function CheckBooks({ userId, onHandleShow }) {
   const getInfoCopies = async () => {
     try {
       const response = await productsApi.getCheckCopies(bookId);
-      console.log("đã lấy ra thông tin sách", response);
+      // console.log("đã lấy ra thông tin sách", response);
       setCopies([response]);
     } catch (error) {
       console.log("lỗi rồi", { error });
@@ -144,6 +144,7 @@ function CheckBooks({ userId, onHandleShow }) {
 
   // render copies books
   const renderCopies = copies?.map((copy, index) => {
+    console.log(copy.id);
     return (
       <tr key={index}>
         <td>{index + 1}</td>
@@ -152,7 +153,9 @@ function CheckBooks({ userId, onHandleShow }) {
         {/* <td>{copy.id}</td> */}
         {/* <td>{copy.book}</td> */}
         <td>{renderUser(copy.user)}</td>
-        <td>{renderBtnCopies(copy.status, copy.id, copy.book, copy.users)}</td>
+        <td>
+          {renderBtnCopies(copy.status, copy.barcode, copy.book, copy.users)}
+        </td>
       </tr>
     );
   });
@@ -165,7 +168,7 @@ function CheckBooks({ userId, onHandleShow }) {
         <td>{renderStatus(copy.status)}</td>
         <td>{copies[0].title}</td>
         <td>{renderUser(copy.user)}</td>
-        <td>{renderBtnBookId(copy.status, copy._id)}</td>
+        <td>{renderBtnBookId(copy.status, copy.barcode)}</td>
       </tr>
     );
   });

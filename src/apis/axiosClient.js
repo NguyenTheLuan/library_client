@@ -1,12 +1,10 @@
 // api/axiosClient.js
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { refreshTokenAuth } from "reducers/authSlice";
 import accountApi from "./authApi";
 // import queryString from "query-string";
 
-function getAccessToken() {
-  const accessToken = JSON.parse(localStorage.getItem("access")).token;
-  return accessToken;
-}
 function refreshToken() {
   const refreshToken = JSON.parse(localStorage.getItem("refresh")).token;
   return accountApi.postRefreshToken({ refreshToken: refreshToken });
@@ -74,9 +72,13 @@ axiosClient.interceptors.response.use(
         try {
           const response = await refreshToken();
           //Thiết lập lại access token
-          localStorage.setItem("access", JSON.stringify(response.access));
-          //Thiết lập lại refresh token
-          localStorage.setItem("refresh", JSON.stringify(response.refresh));
+
+          const dispatch = useDispatch();
+
+          dispatch(refreshTokenAuth(response));
+          // localStorage.setItem("access", JSON.stringify(response.access));
+          // //Thiết lập lại refresh token
+          // localStorage.setItem("refresh", JSON.stringify(response.refresh));
 
           //Test thử
           // alert("refreshToken thành công");

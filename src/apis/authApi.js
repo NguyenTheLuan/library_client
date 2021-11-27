@@ -45,8 +45,6 @@ const accountApi = {
   //fn: Xác thực email
   verificationEmail: (token) => {
     const url = ACCOUNT_API_ENDPOINT + "/verify-email";
-    // console.log("đây là url", url);
-    // console.log("đây là token", token);
     return axiosClient.post(`${url}?token=${token}`);
   },
   //fn: refresh-tokens
