@@ -15,8 +15,10 @@
     margin-bottom: 50px;
     img {
       margin-top: 20px;
-      width: 200px;
-      height: 280px;
+      // width: 200px;
+      // height: 280px;
+      width: 80%;
+      height: 80%;
     }
     .card-footer {
       // width: fit-content;
@@ -29,5 +31,36 @@
 
       cursor: pointer;
     }
+  }
+}
+
+//responsive
+@media screen and (max-width: 1300px) {
+  .menuBooks {
+    max-width: 800px;
+    &_items {
+      width: 31%;
+    }
+  }
+}
+@media screen and (max-width: 900px) {
+  .menuBooks {
+    max-width: 600px;
+    &_items {
+      width: 45%;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .menuBooks {
+    max-width: 400px;
+    &_items {
+      width: 100%;
+    }
+  }
+  .header_logo,
+  .footer {
+    display: none;
   }
 }
