@@ -51,9 +51,9 @@ export const BookHome = ({ searchInfo }) => {
     }
   };
 
-  const renderBook = books?.map((book) => {
+  const renderBook = books?.map((book, index) => {
     return (
-      <Card className="menuBooks_items">
+      <Card className="menuBooks_items" key={index}>
         <Card.Img
           variant="top"
           src={book.cover}

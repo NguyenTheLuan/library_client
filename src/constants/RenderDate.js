@@ -123,3 +123,11 @@ export const renderActions = (actions) => {
       return <>{actions}</>;
   }
 };
+
+export const renderBarCode = (barCode, id) => {
+  if (barCode) {
+    return <>{barCode}</>;
+  } else {
+    return <>{id}</>;
+  }
+};

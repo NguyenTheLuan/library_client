@@ -1,7 +1,7 @@
 import productsApi from "apis/productsApi";
 import reportsApi from "apis/reportsApi";
 import PaginationItems from "components/customComponents/PaginationItems/PaginationItems";
-import { renderDate } from "constants/RenderDate";
+import { renderBarCode, renderDate } from "constants/RenderDate";
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Form, Table } from "react-bootstrap";
 import "../ViewReservation/ViewResevation.scss";
@@ -64,7 +64,7 @@ function ViewBorrowingBooks() {
       <tr key={index}>
         <td>{index + 1 + (page - 1) * limitPage}</td>
         <td>{info.user?.name}</td>
-        <td>{info.id}</td>
+        <td>{renderBarCode(info.barcode, info.id)}</td>
         <td>{info.title}</td>
         <td>{info.categories}</td>
         {/* <td>{renderDateNow(info.borrowedDate)}</td> */}

@@ -61,6 +61,7 @@ function CheckoutBooks() {
   const getBookReservation = async () => {
     try {
       const response = await userApi.getBookReserved(userId);
+      console.log(response);
       setHide(true);
       setBooksReserved(response.results);
     } catch (error) {

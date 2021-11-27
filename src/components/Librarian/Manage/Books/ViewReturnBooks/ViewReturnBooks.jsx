@@ -1,6 +1,6 @@
 import productsApi from "apis/productsApi";
 import PaginationItems from "components/customComponents/PaginationItems/PaginationItems";
-import { renderDateNow } from "constants/RenderDate";
+import { renderBarCode, renderDateNow } from "constants/RenderDate";
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Form, Table } from "react-bootstrap";
 import "../ViewReservation/ViewResevation.scss";
@@ -58,12 +58,20 @@ function ViewReturnBooks() {
     }
   };
 
+  // const renderBarCode = (barCode, id) => {
+  //   if (barCode) {
+  //     return <>{barCode}</>;
+  //   } else {
+  //     return <>{id}</>;
+  //   }
+  // };
+
   const renderBorrowing = borrowing?.map((info, index) => {
     return (
       <tr key={index}>
         <td>{index + 1 + (page - 1) * limitPage}</td>
         <td>{info.user?.name}</td>
-        <td>{info._id}</td>
+        <td>{renderBarCode(info.barcode, info._id)}</td>
         <td>{info.title}</td>
         {/* <th>{renderDate(info.borrowedDate)}</th> */}
         <td>{renderDateNow(info.returnedDate)}</td>

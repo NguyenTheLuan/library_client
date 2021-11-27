@@ -1,16 +1,13 @@
 import LogoMenu from "assets/icons/logo.png";
 import Carts from "components/customComponents/Carts/Carts";
 import DropdownItems from "components/customComponents/DropdownItems/DropdownItems";
-import SearchForm from "components/customComponents/InputForms/SearchForm/SearchForm";
 import React from "react";
 import { Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { HashLink as Link } from "react-router-hash-link";
-
 import { selectUser } from "reducers/authSlice";
 import Navigation from "../Navigation/Navigation";
-
 import "./Header.scss";
 
 function Header() {

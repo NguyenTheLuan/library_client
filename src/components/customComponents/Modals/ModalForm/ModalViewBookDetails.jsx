@@ -2,7 +2,7 @@ import React from "react";
 import { Modal, Button } from "react-bootstrap";
 
 function ModalViewBookDetails({ isShow, onShow, bookDetails }) {
-  console.log(bookDetails);
+  // console.log(bookDetails);
   const handleClose = () => {
     return onShow(false);
   };
