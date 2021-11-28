@@ -64,3 +64,15 @@
     display: none;
   }
 }
+@media screen and (max-width: 400px) {
+  .menuBooks {
+    max-width: 250px;
+    &_items {
+      width: 100%;
+    }
+  }
+  .header_logo,
+  .footer {
+    display: none;
+  }
+}

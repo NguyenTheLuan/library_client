@@ -76,8 +76,18 @@
 }
 
 //responsive
-@media screen and (max-width: 1200px) {
-  .nameLogo {
-    display: none;
+@media screen and (max-width: 540px) {
+  .header_btn {
+    .btnLogin {
+      font-size: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .header_btn {
+    .btnLogin {
+      font-size: 8px;
+    }
   }
 }

@@ -104,9 +104,7 @@ function BookDetails() {
             </tr>
 
             <tr className="containProducts_details_contents_rows">
-              <td>
-                <ButtonAddCarts product={details} />
-              </td>
+              <ButtonAddCarts product={details} />
             </tr>
           </tbody>
         </table>

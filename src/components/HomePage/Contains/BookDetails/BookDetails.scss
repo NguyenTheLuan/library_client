@@ -130,3 +130,65 @@ $color_font: #fff;
     }
   }
 }
+
+@media screen and (max-width: 570px) {
+  .containProducts {
+    padding-top: 50px;
+    width: 550px;
+    span {
+      font-size: 15px;
+    }
+    &_details {
+      tr {
+        font-size: 10px;
+        td,
+        th {
+          // font-size: 5px;
+          &:last-child {
+            display: none;
+          }
+        }
+        button {
+          .btnClick_name {
+            font-size: 10px;
+          }
+        }
+      }
+    }
+  }
+  .carouselForm {
+    width: 400px;
+    legend {
+      font-size: 10px;
+      text-align: center;
+    }
+    .card {
+      width: 80%;
+    }
+  }
+}
+@media screen and (max-width: 440px) {
+  .containProducts {
+    padding-top: 50px;
+    width: 380px;
+
+    &_details {
+      tr {
+        font-size: 6px;
+        button {
+          .btnClick_name {
+            font-size: 6px;
+          }
+        }
+      }
+    }
+  }
+
+  .carouselForm {
+    width: 420px;
+
+    .card {
+      width: 80%;
+    }
+  }
+}

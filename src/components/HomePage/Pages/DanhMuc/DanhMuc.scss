@@ -68,3 +68,19 @@
     }
   }
 }
+@media screen and (max-width: 400px) {
+  .categoriesForm {
+    legend {
+      font-size: 20px;
+    }
+    &_search {
+      width: 350px;
+      button {
+        font-size: 8px;
+      }
+    }
+    .searchChecbox {
+      width: 300px;
+    }
+  }
+}

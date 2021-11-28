@@ -1,6 +1,5 @@
 $bg: #883cdc;
 $colorForm: #ffffff;
-
 .formMain {
   width: 100vw;
   height: 100vh;
@@ -19,7 +18,6 @@ $colorForm: #ffffff;
 
   &_container {
     width: 40%;
-
     background: $colorForm;
     border-radius: 10px;
 
@@ -122,13 +120,12 @@ $colorForm: #ffffff;
 }
 
 //responsive
-@media screen and (max-width: 1300px) {
-  .formMain {
-    height: 600px;
-  }
-}
-
 @media screen and (max-width: 750px) {
+  .formMenu {
+    &_title {
+      padding: 0;
+    }
+  }
   .title,
   .formMenu_items_name,
   a,
@@ -136,4 +133,29 @@ $colorForm: #ffffff;
   label {
     font-size: 15px;
   }
+
+  // .formMenu_extraLinks {
+  //   a {
+  //     font-size: 15px;
+  //   }
+  // }
+}
+
+@media screen and (max-width: 400px) {
+  .formMenu {
+    padding: 0;
+  }
+
+  .title,
+  .formMenu_items_name,
+  a,
+  span,
+  label {
+    font-size: 8px;
+  }
+  // .formMenu_extraLinks {
+  //   a {
+  //     font-size: 8px;
+  //   }
+  // }
 }
