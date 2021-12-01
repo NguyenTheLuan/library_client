@@ -3,6 +3,7 @@ import PaginationItems from "components/customComponents/PaginationItems/Paginat
 import { renderDate, renderDateNow, renderStatus } from "constants/RenderDate";
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Form, Table } from "react-bootstrap";
+import ViewReservationDetails from "./ViewReservationDetails/ViewReservationDetails";
 import "./ViewResevation.scss";
 
 function ViewReservation() {
@@ -38,8 +39,12 @@ function ViewReservation() {
     getAllUserReservations();
   }, [status]);
 
+
+
+
+
   const getAllUserReservations = async () => {
-    console.log(name);
+    // console.log(name);
     try {
       const response = await userApi.getUserReservation({
         status: status,
@@ -47,9 +52,10 @@ function ViewReservation() {
         limit: limitPage,
         page: page,
       });
-      // console.log("lịch hẹn", response);
+      // console.log("lịch hẹn", response.results);
       //Set pagination
       setTotalProducts(response.totalResults);
+      setReservationInfo()
       //Set info
       setReservationInfo(response.results);
     } catch (error) {
@@ -57,29 +63,21 @@ function ViewReservation() {
     }
   };
 
-  //render components
 
-  const renderBooks = (books) => {
-    // console.log(books);
-    return books?.map((book) => {
-      return (
-        <div className="bookItems">
-          {/* <span className="title">Tên sách</span> */}
-          <span className="value">{book.book?.title}</span>
-        </div>
-      );
-    });
-  };
 
   const renderReservation = reservationInfo?.map((info, index) => {
     return (
+
       <tr key={index}>
         <td>{index + 1 + (page - 1) * limitPage}</td>
         <td>{renderStatus(info.status)}</td>
         <td>{info.user.name}</td>
-        <td>{renderBooks(info.books)}</td>
+        {/* <td>{renderBooks(info.books)}</td> */}
         <td>{renderDateNow(info.createdDate)}</td>
         <td>{renderDate(info.dueDate)}</td>
+        <td>
+          <ViewReservationDetails reservationDetails={info} />
+        </td>
       </tr>
     );
   });
@@ -104,6 +102,10 @@ function ViewReservation() {
       }
     }, 500);
   };
+
+
+
+
 
   return (
     <div className="viewReservation">
@@ -143,9 +145,10 @@ function ViewReservation() {
             <th>STT</th>
             <th>Trạng thái</th>
             <th>Người mượn</th>
-            <th>Thông tin sách mượn</th>
+            {/* <th>Thông tin sách mượn</th> */}
             <th>Ngày bắt đầu hẹn</th>
             <th>Ngày kết thúc hẹn</th>
+            <th>Xem chi tiết</th>
           </tr>
         </thead>
         <tbody>{renderReservation}</tbody>
@@ -157,6 +160,7 @@ function ViewReservation() {
         onChangePage={handleChangePage}
         activePage={page}
       />
+
     </div>
   );
 }

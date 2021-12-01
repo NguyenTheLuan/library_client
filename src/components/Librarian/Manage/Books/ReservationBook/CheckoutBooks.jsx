@@ -61,7 +61,7 @@ function CheckoutBooks() {
   const getBookReservation = async () => {
     try {
       const response = await userApi.getBookReserved(userId);
-      // console.log(response);
+      console.log(response);
       setHide(true);
       setBooksReserved(response.results);
     } catch (error) {
@@ -130,7 +130,7 @@ function CheckoutBooks() {
               name={index}
               type="checkbox"
               onChange={() => handleClick(books.copy)}
-              // onClick={(e) => setCopies([...copies, books.copy])}
+            // onClick={(e) => setCopies([...copies, books.copy])}
             />
           </td>
         </tr>

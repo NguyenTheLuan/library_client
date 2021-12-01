@@ -92,3 +92,22 @@
     }
   }
 }
+
+//dành cho details reservation
+.booksReservation {
+  display: flex;
+  flex-direction: column;
+  &_item {
+    font-size: 15px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    span {
+      flex: 1;
+      &:first-child {
+        margin-left: 100px;
+      }
+    }
+  }
+}
