@@ -3,15 +3,17 @@ import PaginationItems from "components/customComponents/PaginationItems/Paginat
 import {
   renderActions,
   renderDateNow,
-  renderDateSearch,
+  renderDateSearch
 } from "constants/RenderDate";
 import React, { useEffect, useState } from "react";
 import { Form, Table } from "react-bootstrap";
+import ReportLibrarianToExcel from "./ReportLibrarianToExcel";
 
 function ReportLibrarian() {
   document.title = "Hoạt động thủ thư";
 
   const [activities, setActivities] = useState();
+  const [activitiesToExcel, setActivitiesToExcel] = useState();
   //Search
   const [startDay, setStartDay] = useState();
   const [endDay, setEndDay] = useState();
@@ -25,6 +27,13 @@ function ReportLibrarian() {
   useEffect(() => {
     getActivities();
   }, [page, limitPage, startDay, endDay, sortBy]);
+
+
+  //Để xuất excel
+  useEffect(() => {
+    totalProducts && renderFullActivity(totalProducts);
+  }, [totalProducts, startDay, endDay, sortBy])
+
 
   //Handle time
   const handleStartDay = (time) => {
@@ -44,6 +53,7 @@ function ReportLibrarian() {
     setLimitPage(newLimit);
   };
 
+  //call api cho để hiện danh sách
   const getActivities = async () => {
     const params = {
       from: startDay,
@@ -55,9 +65,26 @@ function ReportLibrarian() {
     try {
       const response = await reportsApi.getLibrarianActivities(params);
 
-      console.log(response);
+      // console.log(response);
       setActivities(response.results);
       setTotalProducts(response.totalResults);
+    } catch (error) {
+      console.log("lỗi rồi", { error });
+    }
+  };
+
+  //call api để xuất excel
+  const renderFullActivity = async (totals) => {
+    const params = {
+      from: startDay,
+      to: endDay,
+      page: page,
+      limit: totals,
+      sortBy,
+    };
+    try {
+      const response = await reportsApi.getLibrarianActivities(params);
+      setActivitiesToExcel(response.results);
     } catch (error) {
       console.log("lỗi rồi", { error });
     }
@@ -142,8 +169,9 @@ function ReportLibrarian() {
             <option value="createdAt:asc">Tăng dần</option>
           </Form.Select>
         </Form.Group>
+        <ReportLibrarianToExcel activitiesData={activitiesToExcel} />
       </Form>
-      {/* <ReportLibrarianExcel /> */}
+
       <Table bordered hover striped className="viewReservation_table">
         <thead>
           <tr>
@@ -151,7 +179,7 @@ function ReportLibrarian() {
             <th>Người thay đổi</th>
             {/* <th>Tên người dùng </th> */}
             <th>Hành động</th>
-            <th>Tên sách(Tên người dùng)</th>
+            <th>Tên sách-Tên người dùng</th>
             {/* <th>Mã sách</th> */}
             <th>Ngày tạo</th>
           </tr>

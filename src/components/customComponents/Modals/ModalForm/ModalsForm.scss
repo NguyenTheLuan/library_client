@@ -96,18 +96,15 @@
 //dành cho details reservation
 .booksReservation {
   display: flex;
-  flex-direction: column;
-  &_item {
-    font-size: 15px;
-
+  flex-direction: row;
+  .name {
+  }
+  .bookName {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
     span {
-      flex: 1;
-      &:first-child {
-        margin-left: 100px;
-      }
+      margin-left: 130px;
+      font-size: 15px;
     }
   }
 }

@@ -24,7 +24,7 @@ function BookReports({ booksChart }) {
   // }, [dataChart]);
 
   const renderObj = (booksChart) => {
-    // console.log("booksChart nè", booksChart);
+    // console.log("của biểu đồ", booksChart);
     const { deleted, new: SachMoi } = booksChart;
     // console.log("new đã lấy", SachMoi);
     if (!deleted || !SachMoi) {
@@ -45,7 +45,7 @@ function BookReports({ booksChart }) {
     }
     // console.log("new Obj nè", newObj);
     newObj.sort(day_sort);
-    // console.log("sau khi sắp xếp", newObj);
+    // console.log("sau khi sắp xếp của biểu đồ", newObj);
     setDataChart(newObj);
   };
 

@@ -25,7 +25,7 @@ function BooksReportsOverall({ booksPie }) {
 
 
   const renderObj = (booksPie) => {
-    // console.log(booksPie);
+    // console.log("của hình tròn", booksPie);
     if (!booksPie) {
       return;
     }
@@ -49,7 +49,7 @@ function BooksReportsOverall({ booksPie }) {
         name: renderStatus(key).props.children, value: booksPie[key]
       });
     });
-    // console.log(newObj);
+    // console.log("của hình tròn", newObj);
 
     //Add vô Pie
     setDataPie(newObj);

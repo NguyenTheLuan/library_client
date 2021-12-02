@@ -5,7 +5,7 @@ import ReactHTMLTableToExcel from "react-html-table-to-excel";
 function UserReportstoExcel({ dataChart }) {
   const renderDataUser = dataChart?.map((userDate, index) => {
     return (
-      <tr>
+      <tr key={index}>
         <td>{index + 1}</td>
         <td>{userDate.day}</td>
         <td>{userDate["Tài khoản mới"]}</td>

@@ -18,10 +18,9 @@ function ModalReservationDetails({ isShow, onShow, reservationDetails }) {
     else {
       return books.map(book => {
         return (
-          <div className="booksReservation_item">
-            <span>Tên sách: {book.book.title}</span>
-            <span>Mã copies sách: {renderBarCode(book.barcode, book.copy)}</span>
-          </div>
+          <span>
+            Tên sách: {book.book.title} - Mã copies: {renderBarCode(book.barcode, book.copy)}
+          </span>
         )
       })
     }
@@ -39,8 +38,9 @@ function ModalReservationDetails({ isShow, onShow, reservationDetails }) {
           <strong>Người mượn: </strong>
           {reservationDetails.user.name}</div>
         <div className="booksReservation">
-          <strong>Sách đã mượn: </strong>
-          {renderBooks(reservationDetails.books)}</div>
+          <div className="name"><strong>Sách đã mượn: </strong></div>
+          <div className="bookName" >{renderBooks(reservationDetails.books)}</div>
+        </div>
         <div>
           <strong>Ngày bắt đầu hẹn: </strong>
           {renderDateNow(reservationDetails.createdDate)}</div>
