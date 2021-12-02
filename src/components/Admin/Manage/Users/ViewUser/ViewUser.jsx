@@ -11,6 +11,7 @@ import UpdateUser from "../UpdateUser/UpdateUser";
 import UserDetails from "../UserDetails/UserDetails";
 
 import "components/Admin/Manage/ViewForm.scss";
+import { renderCheckActive } from "constants/RenderDate";
 
 function ViewUser() {
   document.title = "Danh sách người dùng";
@@ -104,7 +105,7 @@ function ViewUser() {
         </td>
         <td>{user.name}</td>
         <td>{user.role}</td>
-        <td>{user.status}</td>
+        <td>{renderCheckActive(user.status)}</td>
 
         {/* custom td */}
         <td>

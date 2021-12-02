@@ -14,8 +14,26 @@ function ReservationReportsOverall({ reservationsChart }) {
   //   console.log("new nè", dataPie);
   // }, [dataPie]);
 
+  const renderStatus = (status) => {
+    if (status === "totalPending") {
+      return <>Tổng số lượng lịch hẹn đang chờ </>
+    }
+    if (status === "totalCanceled") {
+      return <>Tổng số lượng lịch hẹn đã huỷ </>
+    }
+    if (status === "totalOverdue") {
+      return <>Tổng số lượng lịch hẹn quá hạn </>
+    }
+    if (status === "totalFulfilled") {
+      return <>Tổng số lượng lịch hẹn thành công </>
+    }
+
+  }
+
+
+
   const renderObj = (reservedPie) => {
-    console.log(reservedPie);
+    // console.log(reservedPie);
     if (!reservedPie) {
       return;
     }
@@ -29,7 +47,9 @@ function ReservationReportsOverall({ reservationsChart }) {
         key !== "fulfilled" &&
         key !== "overdue" &&
         key !== "pending" &&
-        key !== "total"
+        key !== "total" &&
+        key !== "totalNew"
+
       ) {
         return key;
       }
@@ -39,7 +59,9 @@ function ReservationReportsOverall({ reservationsChart }) {
     const newObj = [];
 
     newKeys.map((key) => {
-      newObj.push({ name: key, value: reservedPie[key] });
+      newObj.push({
+        name: renderStatus(key).props.children, value: reservedPie[key]
+      });
     });
 
     // console.log(newObj);
@@ -47,7 +69,7 @@ function ReservationReportsOverall({ reservationsChart }) {
     setDataPie(newObj);
   };
 
-  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#ff7300"];
+  const COLORS = ["#FF8042", "#00C49F", "#FFBB28", "#0088FE"];
 
   const RADIAN = Math.PI / 180;
   const renderCustomizedLabel = ({

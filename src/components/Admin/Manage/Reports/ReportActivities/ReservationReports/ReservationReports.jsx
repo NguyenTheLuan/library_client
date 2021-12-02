@@ -23,7 +23,7 @@ function ReservationReports({ reservationsChart }) {
   // }, [dataChart]);
 
   const renderObj = (reservation) => {
-    console.log("lấy được", reservation);
+    // console.log("lấy được", reservation);
     const {
       canceled, // Huỷ hẹn
       fulfilled, // Thành công

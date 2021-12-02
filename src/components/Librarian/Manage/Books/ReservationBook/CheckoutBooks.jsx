@@ -12,6 +12,7 @@ import ModalCheckBooks from "./ConfirmReservation/ModalCheckBooks/ModalCheckBook
 import ModalCheckout from "./ConfirmReservation/ModalCheckout/ModalCheckout";
 
 import "./CheckoutBooks.scss";
+import { renderBarCode } from "constants/RenderDate";
 
 function CheckoutBooks() {
   document.title = "Mượn sách";
@@ -61,7 +62,7 @@ function CheckoutBooks() {
   const getBookReservation = async () => {
     try {
       const response = await userApi.getBookReserved(userId);
-      console.log(response);
+      console.log("cho mượn sách", response);
       setHide(true);
       setBooksReserved(response.results);
     } catch (error) {
@@ -119,7 +120,7 @@ function CheckoutBooks() {
           {/* <td>{cart.id}</td> */}
           <td>{index + 1}</td>
           <td>{setImg(books.cover)}</td>
-          <td>{books.copy}</td>
+          <td>{renderBarCode(books.barcode, books.copy)}</td>
           <td>{books.title}</td>
           <td>{books.categories}</td>
           <td>{books.authors}</td>
@@ -129,7 +130,8 @@ function CheckoutBooks() {
             <input
               name={index}
               type="checkbox"
-              onChange={() => handleClick(books.copy)}
+              // onChange={() => handleClick(books.copy)}
+              onChange={() => handleClick(books.barcode)}
             // onClick={(e) => setCopies([...copies, books.copy])}
             />
           </td>

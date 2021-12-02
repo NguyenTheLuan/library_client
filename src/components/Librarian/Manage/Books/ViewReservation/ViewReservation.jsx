@@ -41,8 +41,6 @@ function ViewReservation() {
 
 
 
-
-
   const getAllUserReservations = async () => {
     // console.log(name);
     try {
@@ -52,7 +50,7 @@ function ViewReservation() {
         limit: limitPage,
         page: page,
       });
-      // console.log("lịch hẹn", response.results);
+      console.log("lịch hẹn", response.results);
       //Set pagination
       setTotalProducts(response.totalResults);
       setReservationInfo()

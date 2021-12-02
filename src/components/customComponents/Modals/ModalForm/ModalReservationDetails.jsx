@@ -1,4 +1,4 @@
-import { renderDate, renderDateNow, renderStatus } from "constants/RenderDate";
+import { renderBarCode, renderDate, renderDateNow, renderStatus } from "constants/RenderDate";
 import React from "react";
 import { Button, Modal } from "react-bootstrap";
 import "./ModalsForm.scss";
@@ -20,7 +20,7 @@ function ModalReservationDetails({ isShow, onShow, reservationDetails }) {
         return (
           <div className="booksReservation_item">
             <span>Tên sách: {book.book.title}</span>
-            <span>Mã copies sách: {book.copy}</span>
+            <span>Mã copies sách: {renderBarCode(book.barcode, book.copy)}</span>
           </div>
         )
       })

@@ -131,3 +131,13 @@ export const renderBarCode = (barCode, id) => {
     return <>{id}</>;
   }
 };
+
+
+export const renderCheckActive = (active) => {
+  if (active === "active") {
+    return <> Kích hoạt </>
+  }
+  if (active === "inactive") {
+    return <> Không kích hoạt </>
+  }
+}

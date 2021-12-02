@@ -14,6 +14,16 @@ function BooksReportsOverall({ booksPie }) {
   //   console.log("new nè", dataPie);
   // }, [dataPie]);
 
+  const renderStatus = (status) => {
+    if (status === "totalNew") {
+      return <>Tổng số lượng sách mới </>
+    }
+    if (status === "totalDeleted") {
+      return <>Tổng số lượng sách đã xoá </>
+    }
+  }
+
+
   const renderObj = (booksPie) => {
     // console.log(booksPie);
     if (!booksPie) {
@@ -24,11 +34,8 @@ function BooksReportsOverall({ booksPie }) {
     const keys = Object.keys(booksPie);
     const newKeys = keys.filter((key) => {
       if (
-        key !== "cancelled" &&
         key !== "new" &&
-        key !== "fulfilled" &&
-        key !== "overdue" &&
-        key !== "pending" &&
+        key !== "deleted" &&
         key !== "total"
       ) {
         return key;
@@ -38,8 +45,11 @@ function BooksReportsOverall({ booksPie }) {
     //Tạo obj mới
     const newObj = [];
     newKeys.map((key) => {
-      newObj.push({ name: key, value: booksPie[key] });
+      newObj.push({
+        name: renderStatus(key).props.children, value: booksPie[key]
+      });
     });
+    // console.log(newObj);
 
     //Add vô Pie
     setDataPie(newObj);

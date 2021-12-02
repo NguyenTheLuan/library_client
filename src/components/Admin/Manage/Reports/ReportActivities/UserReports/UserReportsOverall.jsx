@@ -14,6 +14,15 @@ function UserReportsOverall({ usersPie }) {
   //   console.log("new nè", dataPie);
   // }, [dataPie]);
 
+  const renderStatus = (status) => {
+    if (status === "totalNew") {
+      return <>Tổng số lượng tài khoản mới </>
+    }
+    if (status === "totalDeleted") {
+      return <>Tổng số lượng tài khoản đã xoá </>
+    }
+  }
+
   const renderObj = (usersPie) => {
     if (!usersPie) {
       return;
@@ -30,7 +39,7 @@ function UserReportsOverall({ usersPie }) {
     //Tạo obj mới
     const newObj = [];
     newKeys.map((key) => {
-      newObj.push({ name: key, value: usersPie[key] });
+      newObj.push({ name: renderStatus(key).props.children, value: usersPie[key] });
     });
 
     //Add vô Pie

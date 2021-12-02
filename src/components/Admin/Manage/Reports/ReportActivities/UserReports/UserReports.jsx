@@ -39,8 +39,8 @@ function UserReports({ usersChart }) {
     for (var date of set) {
       newObj.push({
         day: date,
-        "Tài khoản mới": deleted[date] ? deleted[date] : 0,
-        "Tài khoản bị xoá": NguoiDungMoi[date] ? NguoiDungMoi[date] : 0,
+        "Tài khoản bị xoá": deleted[date] ? deleted[date] : 0,
+        "Tài khoản mới": NguoiDungMoi[date] ? NguoiDungMoi[date] : 0,
       });
     }
     newObj.sort(day_sort);
