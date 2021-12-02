@@ -36,7 +36,7 @@ function ModalReservationDetails({ isShow, onShow, reservationDetails }) {
           {renderStatus(reservationDetails.status)}</div>
         <div>
           <strong>Người mượn: </strong>
-          {reservationDetails.user.name}</div>
+          {reservationDetails.user.name} - <strong>Mã số: </strong>{reservationDetails.user.uid} </div>
         <div className="booksReservation">
           <div className="name"><strong>Sách đã mượn: </strong></div>
           <div className="bookName" >{renderBooks(reservationDetails.books)}</div>
