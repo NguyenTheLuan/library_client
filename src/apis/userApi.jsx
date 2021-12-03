@@ -16,6 +16,11 @@ const userApi = {
     const url = `${USER_API_ENDPOINT}/${idUser}`;
     return axiosClient.patch(url, { params: infoUpdate });
   },
+  //người dùng thay đôie
+  userUpdateInfo: (idUser, infoUpdate) => {
+    const url = `${USER_API_ENDPOINT}/${idUser}`;
+    return axiosClient.patch(url, infoUpdate);
+  },
   // fn: lấy danh sách trong giỏ hàng
   getCarts: (id) => {
     const url = `${USER_API_ENDPOINT}/${id}/cart`;

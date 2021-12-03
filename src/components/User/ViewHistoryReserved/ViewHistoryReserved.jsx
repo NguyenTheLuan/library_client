@@ -69,7 +69,7 @@ function ViewHistoryReserved() {
   return (
     <div>
       <legend className="form_name">Những sách đang mượn</legend>
-      <Table striped bordered hover>
+      <Table striped bordered hover style={{ textAlign: "center" }}>
         <thead>
           <tr>
             <th>STT</th>
@@ -83,7 +83,7 @@ function ViewHistoryReserved() {
         <tbody>{renderReservation()}</tbody>
       </Table>
       <legend className="form_name">Những sách đã trả</legend>
-      <Table striped bordered hover>
+      <Table striped bordered hover style={{ textAlign: "center" }}>
         <thead>
           <tr>
             <th>STT</th>

@@ -55,7 +55,7 @@ function ButtonDeleteCarts({ product }) {
     <>
       <Button
         variant="danger"
-        className="btnClick"
+        className="btnClickDeleted"
         onClick={() => handleClick()}
       >
         <MdDeleteForever className="btnClick_icon" />
