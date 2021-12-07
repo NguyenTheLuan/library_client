@@ -13,13 +13,20 @@ function ForgotPassword() {
   const [email, setEmail] = useState("");
   const [err, setErr] = useState("");
 
+  //url
+  const currentURL = window.location.href;
+
   const Forgot_Password = async () => {
-    const dataResetPassword = { ...email };
+    const dataResetPassword = {
+      ...email,
+      redirectUrl: `${currentURL}/renew-password`,
+    };
     try {
       await accountApi.postForgotPasword(dataResetPassword);
       setErr("Lấy mật khẩu thành công, vui lòng kiểm tra email");
     } catch (error) {
       setErr(error.response.data.message);
+      setErr("Lỗi thao tác, tiến hành lại sau");
     }
   };
 

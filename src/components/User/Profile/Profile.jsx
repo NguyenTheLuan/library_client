@@ -1,7 +1,7 @@
 import accountApi from "apis/authApi";
 import ActiveEmail from "components/Auth/ActiveEmail/ActiveEmail";
 import React, { useEffect, useState } from "react";
-import { Alert, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { selectUser } from "reducers/authSlice";
 import "./Profile.scss";
@@ -13,7 +13,6 @@ function Profile() {
   // console.log(path);
   const user = useSelector(selectUser);
   const [userInfo, setUserInfo] = useState([]);
-  const [error, setError] = useState("");
 
   useEffect(() => {
     getInfo();

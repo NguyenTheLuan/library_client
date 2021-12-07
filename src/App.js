@@ -1,6 +1,7 @@
 import ForgotPassword from "components/Auth/ForgotPassword/ForgotPassword";
 import Login from "components/Auth/Login/Login";
 import Register from "components/Auth/Register/Register";
+import RenewPassword from "components/Auth/RenewPassword/RenewPassword";
 import Admin from "containers/Admin/Admin";
 import HomePage from "containers/HomePage/MainHome/MainHome";
 import NotFound from "containers/HomePage/NotFound/NotFound";
@@ -15,7 +16,7 @@ import UserRoute from "routes/customRoutes/UserRoute";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/">
       <Switch>
         <Redirect from="/" to="/home" exact={true} />
 
@@ -46,8 +47,11 @@ function App() {
         <AuthRoute path="/register">
           <Register />
         </AuthRoute>
-        <AuthRoute path="/forgot-password">
+        <AuthRoute path="/forgot-password" exact={true}>
           <ForgotPassword />
+        </AuthRoute>
+        <AuthRoute path="/forgot-password/renew-password">
+          <RenewPassword />
         </AuthRoute>
 
         <Route>

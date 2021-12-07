@@ -27,10 +27,15 @@ const accountApi = {
   },
 
   //fn: reset password
-  postResetPasword: (password) => {
+  postResetPasword: (token, password) => {
     const url = ACCOUNT_API_ENDPOINT + "/reset-password";
-    return axiosClient.post(url, password);
+    return axiosClient.post(`${url}?token=${token}`, password);
   },
+  // //fn: reset password
+  // postResetPasword: (password) => {
+  //   const url = ACCOUNT_API_ENDPOINT + "/reset-password";
+  //   return axiosClient.post(url, password);
+  // },
   //fn: forgot password
   postForgotPasword: (email) => {
     const url = ACCOUNT_API_ENDPOINT + "/forgot-password";
